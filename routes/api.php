@@ -30,3 +30,11 @@ Route::get('/room/{id}','api\RoomController@show');
 Route::get('/room/edit/{id}','api\RoomController@edit');
 Route::post('/room/update/{id}','api\RoomController@update');
 Route::delete('/room/delete/{id}', 'api\RoomController@destroy');
+
+
+Route::get('/sessions','api\SessionDataController@index');
+Route::post('/session/create','api\SessionDataController@store');
+Route::get('/session/{id}','api\SessionDataController@show');
+Route::get('/session/edit/{id}','api\SessionDataController@edit');
+Route::post('/session/update/{id}','api\SessionDataController@update');
+Route::delete('/session/delete/{id}', 'api\SessionDataController@destroy');
