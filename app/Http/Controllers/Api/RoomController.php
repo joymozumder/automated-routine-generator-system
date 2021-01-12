@@ -82,7 +82,10 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $room = Room::find($id);        
+        $room = Room::find($id);   
+        if($room->number != $request->roomnumber){
+            $room->number = $request->roomnumber;     
+        }
         $room->name = $request->roomname;
         $room->type = $request->type;
         $room->capacity = $request->capacity;

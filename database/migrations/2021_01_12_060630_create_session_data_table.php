@@ -15,7 +15,7 @@ class CreateSessionDataTable extends Migration
     {
         Schema::create('session_data', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('session_name');
+            $table->string('session_name')->unique();
             $table->integer('semester');
             $table->string('section');
             $table->integer('total_student');
