@@ -22,3 +22,11 @@ Route::get('/course/{id}','api\CourseController@show');
 Route::get('/course/edit/{id}','api\CourseController@edit');
 Route::post('/course/update/{id}','api\CourseController@update');
 Route::delete('/course/delete/{id}', 'api\CourseController@destroy');
+
+
+Route::get('/rooms','api\RoomController@index');
+Route::post('/room/create','api\RoomController@store');
+Route::get('/room/{id}','api\RoomController@show');
+Route::get('/room/edit/{id}','api\RoomController@edit');
+Route::post('/room/update/{id}','api\RoomController@update');
+Route::delete('/room/delete/{id}', 'api\RoomController@destroy');
