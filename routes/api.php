@@ -32,6 +32,14 @@ Route::post('/room/update/{id}','api\RoomController@update');
 Route::delete('/room/delete/{id}', 'api\RoomController@destroy');
 
 
+Route::get('/sessions','api\SessionDataController@index');
+Route::post('/session/create','api\SessionDataController@store');
+Route::get('/session/{id}','api\SessionDataController@show');
+Route::get('/session/edit/{id}','api\SessionDataController@edit');
+Route::post('/session/update/{id}','api\SessionDataController@update');
+Route::delete('/session/delete/{id}', 'api\SessionDataController@destroy');
+
+
 Route::get('/teachers','api\UserController@index');
 Route::post('/teacher/create','api\UserController@store');
 Route::get('/teacher/{id}','api\UserController@show');
