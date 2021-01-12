@@ -83,7 +83,10 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $course = Course::find($id);        
+        $course = Course::find($id); 
+        if($course->code != $request->coursecode){
+            $course->code = $request->coursecode;     
+        }  
         $course->name = $request->coursename;
         $course->credit = $request->credit;
         $course->type = $request->type;

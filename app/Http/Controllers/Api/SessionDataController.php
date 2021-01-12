@@ -83,7 +83,9 @@ class SessionDataController extends Controller
     public function update(Request $request, $id)
     {
         $ses = SessionData::find($id);
-        $ses->session_name = $request->sessionname;
+        if($ses->session_name = $request->sessionname){
+            $ses->session_name = $request->sessionname;
+        }
         $ses->semester = $request->semester;
         $ses->section = $request->section;
         $ses->total_student = $request->total_student;
