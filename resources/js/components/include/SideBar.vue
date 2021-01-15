@@ -9,7 +9,7 @@
                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                             <i class="fas fa-tachometer-alt float-left mx-2"></i>
                             
-                            <router-link to="/">Dashboard</router-link>
+                            <router-link to="/user">Dashboard</router-link>
                             <span><i class="fas fa-angle-right float-right"></i></span>
                         </a>
                     </li>
@@ -18,7 +18,7 @@
                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                             <i class="fab fa-wpforms float-left mx-2"></i>
                             
-                            <router-link to="/addcourse">Add Course</router-link>
+                            <router-link to="/user/addcourse">Add Course</router-link>
                             <span><i class="fa fa-angle-right float-right"></i></span>
                         </a>
                     </li>
@@ -92,4 +92,7 @@
                 </ul>
 
             </aside>
+
+            
+            <!--  -->
 </template>

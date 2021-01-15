@@ -43,7 +43,7 @@ class UserController extends Controller
         $user->password=md5($request->password);
         $user->code = $request->code;
         $user->role = 1;
-        $user->status = $request->status;
+        $user->status = 1;
         if($user->save()){
             return new UserResource($user);
         }

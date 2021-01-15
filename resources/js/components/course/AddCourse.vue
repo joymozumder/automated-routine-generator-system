@@ -82,15 +82,7 @@
 
 
 
-
-
-
-
-
-
-
-                                        
-                                        <div class="md:flex md:items-center mb-6">
+                                   <div class="md:flex md:items-center mb-6">
                                             <div class="md:w-1/3"></div>
                                             <label class="md:w-2/3 block text-grey font-regular">
                                                 <input class="mr-2 leading-tight" value="true" v-model="course.status" type="checkbox">
@@ -141,12 +133,11 @@
     },
     methods: {
       addCourse(){
-        console.log(this.course);
-        
-         let uri = '/api/course/create';
-          this.axios.post(uri, this.course).then((response) => {
-            this.$router.push({name: 'courses'});
-         });
+            console.log(this.course);
+            let uri = '/api/course/create';
+            this.axios.post(uri, this.course).then((response) => {
+                this.$router.push({name: 'courses'});
+            });
       }
     }
   }

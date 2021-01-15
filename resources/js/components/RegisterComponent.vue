@@ -26,15 +26,6 @@
 
                 
 
-                <div class="md:flex md:items-center mb-6">
-                    <div class="md:w-1/3"></div>
-                        
-                                <input class="mr-2 leading-tight"  v-model="user.status" type="checkbox">
-                                        <span class="text-sm">
-                                            Status
-                                        </span>
-                        
-                </div>
                 
 
                 <div class="mt-4">
@@ -59,8 +50,8 @@
                 name:"",
                 email:"",
                 password:"",
-                code:"",
-                status:false
+                code:""
+                
           }
         }
     },

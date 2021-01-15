@@ -30,6 +30,11 @@ import compAddRoom from './components/room/AddRoom.vue';
 import compEditRoom from './components/room/EditRoom.vue';
 import compRoomTable from './components/room/RoomTable.vue';
 
+import compCreateSession from './components/session/createSession.vue';
+import compSelectSession from './components/session/SelectSession.vue';
+import compAddSemester from './components/session/AddSemester.vue';
+import compAssignCourse from './components/session/AssignCourse.vue';
+
 const routes = [
     {
         name: 'login',
@@ -80,71 +85,37 @@ const routes = [
                     name: 'rooms',
                     path: 'rooms',
                     component: compRoomTable
+                },
+                {
+                    name: 'createsession',
+                    path: 'createsession',
+                    component: compCreateSession
+                },
+                {
+                    name: 'selectsession',
+                    path: 'selectsession',
+                    component: compSelectSession
+                },
+                {
+                    name: 'addsemester',
+                    path: 'addsemester/:id',
+                    component: compAddSemester
+                },
+                {
+                    name: 'assigncourse',
+                    path: 'assigncourse/:id',
+                    component: compAssignCourse
                 }
+                
+
+                
 
         ]
     }
   ];
 
 
-/*
-import compHomeComponent from './components/HomeComponent.vue';
-import compAddCourse from './components/course/AddCourse.vue';
-import compCourseTable from './components/course/CourseTable.vue';
-import compEditCourse from './components/course/EditCourse.vue';
 
-
-import compAddRoom from './components/room/AddRoom.vue';
-import compEditRoom from './components/room/EditRoom.vue';
-import compRoomTable from './components/room/RoomTable.vue';
-
-import compTest from './components/Test.vue';
-
-
-const routes = [
-    {
-        name: 'home',
-        path: '/',
-        component: compHomeComponent
-    },
-    {
-        name: 'addcourse',
-        path: '/addcourse',
-        component: compAddCourse
-    },
-    {
-        name: 'editcourse',
-        path: '/editcourse/:id',
-        component: compEditCourse
-    },
-    {
-        name: 'addroom',
-        path: '/addroom',
-        component: compAddRoom
-    },
-    {
-        name: 'editroom',
-        path: '/editroom/:id',
-        component: compEditRoom
-    },
-    {
-        name: 'courses',
-        path: '/courses',
-        component: compCourseTable
-    },
-    {
-        name: 'rooms',
-        path: '/rooms',
-        component: compRoomTable
-    },
-    {
-        name: 'test',
-        path: '/test',
-        component: compTest
-    }
-  ];
-
-*/
 
 const router = new VueRouter({ mode: 'history', routes: routes});
 const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app');
