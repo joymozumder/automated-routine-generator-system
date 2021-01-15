@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\SessionData;
-use App\Http\Resources\SessionDataResource;
+use App\SemesterSection;
+use App\Http\Resources\SemesterSectionResource;
 
-class SessionDataController extends Controller
+class SemesterSectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class SessionDataController extends Controller
      */
     public function index()
     {
-        $ses = SessionData::paginate(15);
-        return SessionDataResource::collection($ses);
+        $sem_secs = SemesterSection::all();
+        return SemesterSectionResource::collection($sem_secs);
     }
 
     /**
@@ -38,11 +38,17 @@ class SessionDataController extends Controller
      */
     public function store(Request $request)
     {
-        $ses = new SessionData();
-        $ses->session_name = $request->session_name;
-        $ses->status = $request->status;
-        if($ses->save()){
-            return new SessionDataResource($ses);
+
+        $sem_sec = new SemesterSection();
+        $str = (String)$request->semester;
+        $sem =$str . $request->section;
+
+        $sem_sec->semester = $sem;
+        $sem_sec->total_student = $request->total_student;
+        $sem_sec->session_name = $request->session_name;
+        $sem_sec->status = $request->status;
+        if($sem_sec->save()){
+            return new SemesterSectionResource($sem_sec);
         }
     }
 
@@ -54,8 +60,8 @@ class SessionDataController extends Controller
      */
     public function show($id)
     {
-        $ses = SessionData::find($id);
-        return new SessionDataResource($ses);
+        $sem_sec = SemesterSection::find($id);
+        return new SemesterSectionResource($sem_sec);
     }
 
     /**
@@ -66,8 +72,8 @@ class SessionDataController extends Controller
      */
     public function edit($id)
     {
-        $ses = SessionData::find($id);
-        return new SessionDataResource($ses);
+        $sem_sec = SemesterSection::find($id);
+        return new SemesterSectionResource($sem_sec);
     }
 
     /**
@@ -79,11 +85,18 @@ class SessionDataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ses = SessionData::find($id);
-        $ses->session_name = $request->session_name;
-        $ses->status = $request->status;
-        if($ses->save()){
-            return new SessionDataResource($ses);
+        $sem_sec = SemesterSection::find($id);
+        
+        $str = (String)$request->semester;
+        $sem =$str . $request->section;
+
+        $sem_sec->semester = $sem;
+
+        $sem_sec->total_student = $request->total_student;
+        $sem_sec->session_name = $request->session_name;
+        $sem_sec->status = $request->status;
+        if($sem_sec->save()){
+            return new SemesterSectionResource($sem_sec);
         }
     }
 
@@ -95,9 +108,9 @@ class SessionDataController extends Controller
      */
     public function destroy($id)
     {
-        $ses = SessionData::find($id);
-        if($ses->delete()){
-            return new SessionDataResource($ses);
+        $sem_sec = SemesterSection::find($id);
+        if($sem_sec->delete()){
+            return new SemesterSectionResource($sem_sec);
         }
     }
 }
