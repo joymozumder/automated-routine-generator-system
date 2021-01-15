@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEnrollmentsTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateEnrollmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('enrollments', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('course_id')->unsigned()->index();
-            $table->integer('teacher_id')->unsigned()->index();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('code')->unique();
+            $table->integer('role')->comment('0=>admin, 1=teacher');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateEnrollmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enrollments');
+        Schema::dropIfExists('users');
     }
 }
