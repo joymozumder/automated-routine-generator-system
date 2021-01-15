@@ -39,10 +39,7 @@ class SessionDataController extends Controller
     public function store(Request $request)
     {
         $ses = new SessionData();
-        $ses->session_name = $request->sessionname;
-        $ses->semester = $request->semester;
-        $ses->section = $request->section;
-        $ses->total_student = $request->total_student;
+        $ses->session_name = $request->session_name;
         $ses->status = $request->status;
         if($ses->save()){
             return new SessionDataResource($ses);
@@ -83,12 +80,7 @@ class SessionDataController extends Controller
     public function update(Request $request, $id)
     {
         $ses = SessionData::find($id);
-        if($ses->session_name = $request->sessionname){
-            $ses->session_name = $request->sessionname;
-        }
-        $ses->semester = $request->semester;
-        $ses->section = $request->section;
-        $ses->total_student = $request->total_student;
+        $ses->session_name = $request->session_name;
         $ses->status = $request->status;
         if($ses->save()){
             return new SessionDataResource($ses);

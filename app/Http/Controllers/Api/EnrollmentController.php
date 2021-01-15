@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Enrollment;
+use App\Http\Resources\EnrollmentResource;
 
 class EnrollmentController extends Controller
 {
@@ -14,7 +16,8 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        //
+        $enrollments = Enrollment::paginate(15);
+        return EnrollmentResource::collection($enrollments);
     }
 
     /**
@@ -35,7 +38,19 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $enrollment = new Enrollment();
+        $enrollment->session_name = $request->session_name;
+        $enrollment->semester = $request->semester;
+        $enrollment->teacher_code = $request->teacher_code;
+        $enrollment->course_code = $request->course_code;
+        $enrollment->room_number = $request->room_number;
+        $enrollment->group = $request->group;
+        $enrollment->duration = $request->duration;
+        $enrollment->start = 0;
+        $enrollment->end = 0;
+        if($enrollment->save()){
+            return new EnrollmentResource($enrollment);
+        }
     }
 
     /**
@@ -46,7 +61,8 @@ class EnrollmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $enrollment = Enrollment::find($id);
+        return new EnrollmentResource($enrollment);
     }
 
     /**
@@ -57,7 +73,8 @@ class EnrollmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $enrollment = Enrollment::find($id);
+        return new EnrollmentResource($enrollment);
     }
 
     /**
@@ -69,7 +86,19 @@ class EnrollmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $enrollment = Enrollment::find($id);
+        $enrollment->session_name = $request->session_name;
+        $enrollment->semester = $request->semester;
+        $enrollment->teacher_code = $request->teacher_code;
+        $enrollment->course_code = $request->course_code;
+        $enrollment->room_number = $request->room_number;
+        $enrollment->group = $request->group;
+        $enrollment->duration = $request->duration;
+        $enrollment->start = 0;
+        $enrollment->end = 0;
+        if($enrollment->save()){
+            return new EnrollmentResource($enrollment);
+        }
     }
 
     /**
@@ -80,6 +109,9 @@ class EnrollmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $enrollment = Enrollment::find($id);
+        if($enrollment->delete()){
+            return new EnrollmentResource($enrollment);
+        }
     }
 }

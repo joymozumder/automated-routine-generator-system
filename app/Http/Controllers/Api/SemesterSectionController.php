@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Room;
-use App\Http\Resources\RoomResource;
+use App\SemesterSection;
+use App\Http\Resources\SemesterSectionResource;
 
-class RoomController extends Controller
+class SemesterSectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::paginate(15);
-        return RoomResource::collection($rooms);
+        $sem_secs = SemesterSection::all();
+        return SemesterSectionResource::collection($sem_secs);
     }
 
     /**
@@ -38,14 +38,17 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        $room = new Room();
-        $room->number = $request->number;
-        $room->name = $request->name;
-        $room->type = $request->type;
-        $room->capacity = $request->capacity;
-        $room->status = $request->status;
-        if($room->save()){
-            return new RoomResource($room);
+
+        $sem_sec = new SemesterSection();
+        $str = (String)$request->semester;
+        $sem =$str . $request->section;
+
+        $sem_sec->semester = $sem;
+        $sem_sec->total_student = $request->total_student;
+        $sem_sec->session_name = $request->session_name;
+        $sem_sec->status = $request->status;
+        if($sem_sec->save()){
+            return new SemesterSectionResource($sem_sec);
         }
     }
 
@@ -57,8 +60,8 @@ class RoomController extends Controller
      */
     public function show($id)
     {
-        $room = Room::find($id);
-        return new RoomResource($room);
+        $sem_sec = SemesterSection::find($id);
+        return new SemesterSectionResource($sem_sec);
     }
 
     /**
@@ -69,8 +72,8 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
-        $room = Room::find($id);
-        return new RoomResource($room);
+        $sem_sec = SemesterSection::find($id);
+        return new SemesterSectionResource($sem_sec);
     }
 
     /**
@@ -82,17 +85,18 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $room = Room::find($id);   
-        if($room->number != $request->number){
-            $room->number = $request->number;     
-        }
-        $room->name = $request->name;
-        $room->type = $request->type;
-        $room->capacity = $request->capacity;
-        $room->status = $request->status;
+        $sem_sec = SemesterSection::find($id);
+        
+        $str = (String)$request->semester;
+        $sem =$str . $request->section;
 
-        if($room->save()){
-            return new RoomResource($room);
+        $sem_sec->semester = $sem;
+
+        $sem_sec->total_student = $request->total_student;
+        $sem_sec->session_name = $request->session_name;
+        $sem_sec->status = $request->status;
+        if($sem_sec->save()){
+            return new SemesterSectionResource($sem_sec);
         }
     }
 
@@ -104,10 +108,9 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        $room = Room::find($id);
-        if($room->delete()){
-            return new RoomResource($room);
+        $sem_sec = SemesterSection::find($id);
+        if($sem_sec->delete()){
+            return new SemesterSectionResource($sem_sec);
         }
     }
 }
-
