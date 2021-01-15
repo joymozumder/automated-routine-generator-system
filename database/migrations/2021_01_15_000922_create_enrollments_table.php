@@ -19,7 +19,7 @@ class CreateEnrollmentsTable extends Migration
             $table->string('semester');
             $table->string('teacher_code');
             $table->string('course_code');
-            $table->string('room_number');
+            $table->integer('room_number');
             $table->integer('group');
             $table->double('duration');
             $table->integer('start');
@@ -41,10 +41,7 @@ class CreateEnrollmentsTable extends Migration
                ->references ('code')->on('courses')
                ->onDelete('cascade');
 
-            $table->foreign('room_number')
-               ->references ('number')->on('rooms')
-               ->onDelete('cascade');
-
+            
             $table->timestamps();
         });
     }
