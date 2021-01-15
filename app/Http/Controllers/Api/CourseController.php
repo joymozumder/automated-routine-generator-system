@@ -17,7 +17,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::paginate(15);
+        $courses = Course::all();
         return CourseResource::collection($courses);
     }
 
@@ -40,8 +40,8 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $course = new Course();
-        $course->code = $request->coursecode;
-        $course->name = $request->coursename;
+        $course->code = $request->code;
+        $course->name = $request->name;
         $course->credit = $request->credit;
         $course->type = $request->type;
         $course->status = $request->status;
@@ -84,10 +84,10 @@ class CourseController extends Controller
     public function update(Request $request, $id)
     {
         $course = Course::find($id); 
-        if($course->code != $request->coursecode){
-            $course->code = $request->coursecode;     
+        if($course->code != $request->code){
+            $course->code = $request->code;     
         }  
-        $course->name = $request->coursename;
+        $course->name = $request->name;
         $course->credit = $request->credit;
         $course->type = $request->type;
         $course->status = $request->status;

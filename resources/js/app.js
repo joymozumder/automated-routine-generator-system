@@ -12,13 +12,61 @@ import axios from 'axios';
 
 import App from './App.vue';
 Vue.use(VueAxios, axios);
-import compExampleComponent from './components/ExampleComponent.vue';
+
+
+import compHomeComponent from './components/HomeComponent.vue';
+import compAddCourse from './components/course/AddCourse.vue';
+import compCourseTable from './components/course/CourseTable.vue';
+import compEditCourse from './components/course/EditCourse.vue';
+
+
+import compAddRoom from './components/room/AddRoom.vue';
+import compEditRoom from './components/room/EditRoom.vue';
+import compRoomTable from './components/room/RoomTable.vue';
+
+import compTest from './components/Test.vue';
+//import compDataTable from './components/DataTable.vue';
 
 const routes = [
     {
         name: 'home',
         path: '/',
-        component: compExampleComponent
+        component: compHomeComponent
+    },
+    {
+        name: 'addcourse',
+        path: '/addcourse',
+        component: compAddCourse
+    },
+    {
+        name: 'editcourse',
+        path: '/editcourse/:id',
+        component: compEditCourse
+    },
+    {
+        name: 'addroom',
+        path: '/addroom',
+        component: compAddRoom
+    },
+    {
+        name: 'editroom',
+        path: '/editroom/:id',
+        component: compEditRoom
+    },
+    {
+        name: 'courses',
+        path: '/courses',
+        component: compCourseTable
+    },
+    {
+        name: 'rooms',
+        path: '/rooms',
+        component: compRoomTable
+    },
+    {
+        name: 'test',
+        path: '/test',
+        component: compTest
     }
   ];
 

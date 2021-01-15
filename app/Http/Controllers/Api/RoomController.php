@@ -39,8 +39,8 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $room = new Room();
-        $room->number = $request->roomnumber;
-        $room->name = $request->roomname;
+        $room->number = $request->number;
+        $room->name = $request->name;
         $room->type = $request->type;
         $room->capacity = $request->capacity;
         $room->status = $request->status;
@@ -83,10 +83,10 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         $room = Room::find($id);   
-        if($room->number != $request->roomnumber){
-            $room->number = $request->roomnumber;     
+        if($room->number != $request->number){
+            $room->number = $request->number;     
         }
-        $room->name = $request->roomname;
+        $room->name = $request->name;
         $room->type = $request->type;
         $room->capacity = $request->capacity;
         $room->status = $request->status;
