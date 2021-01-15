@@ -15,7 +15,7 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('number')->unique();
+            $table->integer('number')->unique();
             $table->string('name');
             $table->integer('type')->comment('0=>Theory_Class, 1=>CSE_Lab, 2=>EEE_Lab, 3=>Communication_Lab, 4=>Mechanical_Lab, 5 => Physics_Lab');
             $table->integer('capacity');
