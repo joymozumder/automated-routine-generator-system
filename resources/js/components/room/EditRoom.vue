@@ -20,7 +20,7 @@
                                         </div>
                                         <div class="md:w-3/4">
                                             <input class="bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light"
-                                                   id="inline-full-name" type="text" v-model="room.number">
+                                                   id="inline-full-name" type="number" v-model="room.number">
                                         </div>
                                     </div>
                                      
