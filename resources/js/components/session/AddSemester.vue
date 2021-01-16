@@ -120,7 +120,6 @@
 
 <script>
     export default {
-
       data() {
         return {
           session:{},
@@ -134,13 +133,9 @@
         }
       },
       created() {
-        let uri = `/api/session/${this.$route.params.id}`;
-        //console.log(this.$route.params.id);
-         this.axios.get(uri).then((response) => {
-             this.session = response.data.data;
-             this.semester.session_name=this.session.session_name; 
-              
-         });
+       
+             this.semester.session_name=this.$route.params.id; 
+ 
       },
       methods: {
           addSemester(){

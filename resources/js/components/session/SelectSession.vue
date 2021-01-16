@@ -6,7 +6,7 @@
                             <!--Horizontal form-->
                             <div class="mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2">
                                 <div class="bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b">
-                                    Create Session
+                                    Select Session
                                 </div>
                                 <div class="p-3">
                                     <form class="w-full">
@@ -20,7 +20,7 @@
                                             <div class="md:w-3/4">
                                                 <select  class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                           v-model="select"  id="grid-state">
-                                                        <option :value="session.id" v-for="session in sessions" :key="session.id">{{session.session_name}}</option>
+                                                        <option v-for="session in sessions" :key="session.id">{{session.session_name}}</option>
                                                        
                                                     </select>
                                             </div>
@@ -73,6 +73,7 @@
         return {
           select:"",
           sessions:{
+                
                 session_name:"",
                 status:false
           }
