@@ -84,22 +84,7 @@
 
 
 
-                                        <div class="md:flex md:items-center mb-6">
-                                            <div class="md:w-1/4">
-                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
-                                                    for="inline-course-code">
-                                                    Room Number
-                                                </label>
-                                            </div>
-                                            <div class="md:w-3/4">
-                                                <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                         v-model="assigncourse.room_number"   id="grid-state">
-                                                        
-                                                        <option v-for="room in rooms" :key="room.id">{{room.number}}</option>
-                                                    </select>
-                                                    
-                                            </div>
-                                        </div>
+                                       
 
 
 
@@ -122,7 +107,7 @@
                                         </div>
 
 
-                                         <div v-if="numberofclass=='One' || numberofclass=='Two'" class="md:flex md:items-center mb-6">
+                                         <!--<div v-if="numberofclass=='One' || numberofclass=='Two'" class="md:flex md:items-center mb-6">
                                             <div class="md:w-1/4">
                                                 <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
@@ -132,6 +117,32 @@
                                             <div class="md:w-3/4">
                                                 <input class="bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light"
                                                     v-model="assigncourse.duration[0]" id="inline-full-name" type="number" placeholder="Enter Duration 1">
+                                            </div>
+                                        </div>-->
+
+
+                                        <div v-if="numberofclass=='One' || numberofclass=='Two'" class="md:flex md:items-center mb-6">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Duration 1
+                                                </label>
+                                            </div>
+                                            <div class="md:w-3/4">
+                                                <select  v-model="assigncourse.duration[0].hr" name="hours" class="bg-grey-200 appearance-none border-2 border-grey-200 text-grey-darker py-2 px-4 appearance-none outline-none mr-4">
+                                                <option value=1>1</option>
+                                                <option value=2>2</option>
+                                                <option value=3>3</option>
+                                                <option value=4>4</option>
+                                                <option value=5>5</option>
+                                
+                                                </select>
+                                                <span class="text-xl mr-3">:</span>
+                                                <select v-model="assigncourse.duration[0].min" name="minutes" class="bg-grey-200 appearance-none border-2 border-grey-200 text-grey-darker py-2 px-4 appearance-none outline-none mr-4">
+                                                <option value=0.0 selected=true>00</option>
+                                                <option value=0.5>30</option>
+                                                </select>
+                                               
                                             </div>
                                         </div>
 
@@ -145,9 +156,25 @@
                                                     Duration 2
                                                 </label>
                                             </div>
-                                            <div class="md:w-3/4">
+                                            <!--<div class="md:w-3/4">
                                                 <input class="bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light"
                                                    v-model="assigncourse.duration[1]" id="inline-full-name" type="number" placeholder="Enter Duration 2">
+                                            </div>-->
+                                            <div class="md:w-3/4">
+                                                <select  v-model="assigncourse.duration[1].hr" name="hours" class="bg-grey-200 appearance-none border-2 border-grey-200 text-grey-darker py-2 px-4 appearance-none outline-none mr-4">
+                                                <option value=1>1</option>
+                                                <option value=2>2</option>
+                                                <option value=3>3</option>
+                                                <option value=4>4</option>
+                                                <option value=5>5</option>
+                                
+                                                </select>
+                                                <span class="text-xl mr-3">:</span>
+                                                <select v-model="assigncourse.duration[1].min" name="minutes"  class="bg-grey-200 appearance-none border-2 border-grey-200 text-grey-darker py-2 px-4 appearance-none outline-none mr-4">
+                                                <option value=0.0 selected=true>00</option>
+                                                <option value=0.5>30</option>
+                                                </select>
+                                               
                                             </div>
                                         </div>
 
@@ -251,7 +278,15 @@
               course_code:"",
               room_number:0,
               group:[],
-              duration:[]
+              duration:[{
+                  hr : 0,
+                  min : 0.0
+              },
+              {
+                  hr : 0,
+                  min : 0.0
+              }
+              ]
           },
           savecourse:{
               session_name:"",
@@ -260,8 +295,11 @@
               course_code:"",
               room_number:0,
               group:0,
-              duration:0,
-              totalstudent:0
+              //group2:0,
+              duration1:0,
+              duration2:0,
+              total_student1:0,
+              total_student2:0
           }
          
         }
@@ -271,9 +309,9 @@
         this.assigncourse.session_name=this.$route.params.id;
        
 
-        let uri = `/api/semester-sections`;
+        let uri = '/api/request-sections';
             
-        this.axios.get(uri).then((response) => {
+        this.axios.post(uri, this.assigncourse).then((response) => {
             this.semesters = response.data.data;
             //console.log(this.semesters);
         });
@@ -301,17 +339,53 @@
       },
 
       methods:{
-          assignCourse(){
-              //console.log(this.assigncourse);
-              var i;
-              if(this.assigncourse.group.length==1){
-
+          assignCourse()
+          {
+              
+              //console.log(this.assigncourse.group[0]);
+              this.savecourse.session_name    =   this.assigncourse.session_name;
+              this.savecourse.semester        =   this.assigncourse.semester;
+              this.savecourse.teacher_code    =   this.assigncourse.teacher_code;
+              this.savecourse.course_code     =   this.assigncourse.course_code;
+              //this.savecourse.room_number     =   this.assigncourse.room_number;
+              //this.savecourse.group           =   this.assigncourse.group[i]; /** */
+              //this.savecourse.duration        =   this.assigncourse.duration; /** */
+              //this.savecourse.totalstudent    =   this.assigncourse.totalstudent;
+              this.savecourse.group = 0;
+              this.savecourse.total_student1 = 0;
+              this.savecourse.total_student2 = 0;
+              this.savecourse.duration1 = 0;
+              this.savecourse.duration2 = 0;
+              
+              if(this.assigncourse.group.length == 1)
+              {
+                  this.savecourse.group = 1;
+                  this.savecourse.total_student1 = Number(this.assigncourse.group[0]);
               }
-                for (i = 0; i < this.assigncourse.group.length; i++) {
-                    console.log(this.assigncourse.group[i]);
-                }
-          }
-      }
+              else
+              {
+                  this.savecourse.group = 2;
+                  this.savecourse.total_student1 = Number(this.assigncourse.group[0]);
+                  this.savecourse.total_student2 = Number(this.assigncourse.group[1]);
+              }
+              if(this.assigncourse.duration.length == 1)
+              {
+                  this.savecourse.duration1 = Number(this.assigncourse.duration[0].hr) + Number(this.assigncourse.duration[0].min);
+                  this.savecourse.duration2 = 0;
+              }
+              else
+              {
+                 this.savecourse.duration1 = Number(this.assigncourse.duration[0].hr) + Number(this.assigncourse.duration[0].min);
+                 this.savecourse.duration2 = Number(this.assigncourse.duration[1].hr) + Number(this.assigncourse.duration[1].min);
+              }
+              
+                //console.log(this.savecourse);
+                let uri = '/api/enrollment/create';
+                this.axios.post(uri, this.savecourse).then((response) => {
+                this.$router.push({name: 'selectsession'});
+          });
+            }
+        }
 
     //   methods: {
     //       addSemester(){

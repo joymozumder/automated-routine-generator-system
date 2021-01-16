@@ -38,7 +38,51 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        $enrollment = new Enrollment();
+        $duration1 = (double)$request->duration1;
+        $duration2 = (double)$request->duration2;
+        $group = $request->group;
+
+        
+        for ($i = 1; $i <= $group; $i++)
+        {
+           
+            if($duration1 != 0)
+            {
+               
+                if($group == 1 )
+                    $gr = 0;
+                else
+                    $gr = $i;
+               
+
+                $enrollment = new Enrollment();
+                $enrollment->session_name = $request->session_name;
+                $enrollment->semester = $request->semester;
+                $enrollment->teacher_code = $request->teacher_code;
+                $enrollment->course_code = $request->course_code;
+                $enrollment->room_number = 0;
+                $enrollment->group = $gr;
+                $enrollment->duration = $duration1;
+                $enrollment->start = 0;
+                $enrollment->end = 0;
+                $enrollment->save();
+            }
+            if($duration2!=0)
+            {
+                $enrollment = new Enrollment();
+                $enrollment->session_name = $request->session_name;
+                $enrollment->semester = $request->semester;
+                $enrollment->teacher_code = $request->teacher_code;
+                $enrollment->course_code = $request->course_code;
+                $enrollment->room_number = 0;
+                $enrollment->group = $i;
+                $enrollment->duration = $duration2;
+                $enrollment->start = 0;
+                $enrollment->end = 0;
+                $enrollment->save();
+            }
+        }
+        /*$enrollment = new Enrollment();
         $enrollment->session_name = $request->session_name;
         $enrollment->semester = $request->semester;
         $enrollment->teacher_code = $request->teacher_code;
@@ -50,7 +94,7 @@ class EnrollmentController extends Controller
         $enrollment->end = 0;
         if($enrollment->save()){
             return new EnrollmentResource($enrollment);
-        }
+        }*/
     }
 
     /**

@@ -20,6 +20,14 @@ class SemesterSectionController extends Controller
         return SemesterSectionResource::collection($sem_secs);
     }
 
+    public function request_index(Request $request)
+    {
+        $sem_secs = SemesterSection::select()
+                    ->where('session_name','=',$request->session_name)
+                    ->paginate(500);
+        return SemesterSectionResource::collection($sem_secs);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
