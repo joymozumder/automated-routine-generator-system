@@ -35,6 +35,8 @@ import compSelectSession from './components/session/SelectSession.vue';
 import compAddSemester from './components/session/AddSemester.vue';
 import compAssignCourse from './components/session/AssignCourse.vue';
 
+import compManualAssign from './components/session/ManualAssign.vue';
+
 const routes = [
     {
         name: 'login',
@@ -105,6 +107,11 @@ const routes = [
                     name: 'assigncourse',
                     path: 'assigncourse/:id',
                     component: compAssignCourse
+                },
+                {
+                    name: 'manualassign',
+                    path: 'manualassign/:id',
+                    component: compManualAssign
                 }
                 
 
