@@ -40,15 +40,23 @@
                                         <div class="md:flex md:items-center">
                                             <div class="md:w-1/3"></div>
                                             <div class="md:w-2/3">
-                                                <div class="p-3">
-                                <button class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full">
-                                    <router-link :to="{name: 'addsemester', params: { id: select }}" >Add Semester</router-link>
-                                </button>
-                                <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded-full">
-                                    <router-link :to="{name: 'assigncourse', params: { id: select }}" >Assign Course</router-link>
-                                </button>
+                                               
+                               
+
+                                                    <button class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
+                                                        <router-link :to="{name: 'manualassign', params: { id: select }}" >ManualAssign</router-link>
+                                                    </button>
+                                                    <button class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full">
+                                                        <router-link :to="{name: 'addsemester', params: { id: select }}" >Semester</router-link>
+                                                    </button>
+                                                    <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded-full">
+                                                        <router-link :to="{name: 'assigncourse', params: { id: select }}" >Course</router-link>
+                                                    </button>
                                 
-                            </div>
+
+                                
+                                
+                            
                                             </div>
                                         </div>
                                     </form>
