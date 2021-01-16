@@ -1,9 +1,5 @@
 <template>
-    <div class="mx-auto bg-grey-lightest">
-    <!--Screen-->
-    <div class="min-h-screen flex flex-col">
-        <!--Header Section Starts Here-->
-        <header class="bg-nav">
+    <header class="bg-nav">
             <div class="flex justify-between">
                 <div class="p-1 mx-3 inline-flex items-center">
                     <i class="fas fa-bars pr-2 text-white" onclick="sidebarToggle()"></i>
@@ -23,45 +19,4 @@
                 </div>
             </div>
         </header>
-        <!--/Header-->
-        <!-- 
-            ______________________________________________________________________________________-
-         -->
-
-        <div class="flex flex-1">
-            <!--Sidebar-->
-            <compSideBar/>
-            <!--/Sidebar-->
-
-            
-            <!--Main-->
-            <main class="bg-white-500 flex-1 p-3 overflow-hidden">
-
-               <compAddCourse/>
-            </main>
-            <!--/Main-->
-        </div>
-        <!--Footer-->
-        <footer class="bg-grey-darkest text-white p-2">
-            <div class="flex flex-1 mx-auto">&copy; My Design</div>
-        </footer>
-        <!--/footer-->
-
-    </div>
-
-</div>
 </template>
-
-<script>
-    import compSideBar from './include/SideBar';
-    import compAddCourse from './course/AddCourse';
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        },
-        components:{
-            compSideBar,
-            compAddCourse
-        }
-    }
-</script>
