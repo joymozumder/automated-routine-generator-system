@@ -1,32 +1,124 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+// App.js
 
 require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+import VueAxios from 'vue-axios';
+import axios from 'axios';
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+import App from './App.vue';
+Vue.use(VueAxios, axios);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
-const app = new Vue({
-    el: '#app',
-});
+import compLoginComponent from './components/LoginComponent.vue';
+import compRegisterComponent from './components/RegisterComponent.vue';
+import compUserComponent from './components/UserComponent.vue';
+
+import compHomeComponent from './components/HomeComponent.vue';
+
+
+import compAddCourse from './components/course/AddCourse.vue';
+import compCourseTable from './components/course/CourseTable.vue';
+import compEditCourse from './components/course/EditCourse.vue';
+
+
+import compAddRoom from './components/room/AddRoom.vue';
+import compEditRoom from './components/room/EditRoom.vue';
+import compRoomTable from './components/room/RoomTable.vue';
+
+import compCreateSession from './components/session/createSession.vue';
+import compSelectSession from './components/session/SelectSession.vue';
+import compAddSemester from './components/session/AddSemester.vue';
+import compAssignCourse from './components/session/AssignCourse.vue';
+
+const routes = [
+    {
+        name: 'login',
+        path: '/',
+        component: compLoginComponent
+    },
+    {
+        name: 'register',
+        path: '/register',
+        component: compRegisterComponent
+    },
+    {
+        name: 'user',
+        path: '/user',
+        component: compUserComponent,
+        children:[
+                {
+                    name: 'home',
+                    path: '/',
+                    component: compHomeComponent
+                },
+                {
+                    name: 'addcourse',
+                    path: 'addcourse',
+                    component: compAddCourse
+                },
+                {
+                    name: 'editcourse',
+                    path: 'editcourse/:id',
+                    component: compEditCourse
+                },
+                {
+                    name: 'addroom',
+                    path: 'addroom',
+                    component: compAddRoom
+                },
+                {
+                    name: 'editroom',
+                    path: 'editroom/:id',
+                    component: compEditRoom
+                },
+                {
+                    name: 'courses',
+                    path: 'courses',
+                    component: compCourseTable
+                },
+                {
+                    name: 'rooms',
+                    path: 'rooms',
+                    component: compRoomTable
+                },
+                {
+                    name: 'createsession',
+                    path: 'createsession',
+                    component: compCreateSession
+                },
+                {
+                    name: 'selectsession',
+                    path: 'selectsession',
+                    component: compSelectSession
+                },
+                {
+                    name: 'addsemester',
+                    path: 'addsemester/:id',
+                    component: compAddSemester
+                },
+                {
+                    name: 'assigncourse',
+                    path: 'assigncourse/:id',
+                    component: compAssignCourse
+                }
+                
+
+                
+
+        ]
+    }
+  ];
+
+
+
+
+const router = new VueRouter({ mode: 'history', routes: routes});
+const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app');
+
+
+//import compDataTable from './components/DataTable.vue';

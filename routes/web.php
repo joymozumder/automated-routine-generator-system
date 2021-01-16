@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,3 +16,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+=======
+Route::get('/{any}', function () {
+  return view('welcome'); 
+})->where('any', '.*');
+>>>>>>> 98a7904fa1f9284956473f2402ba0f2ef9bb1b86
