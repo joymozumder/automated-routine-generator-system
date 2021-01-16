@@ -267,14 +267,11 @@
         }
       },
       created() {
-        let uri = `/api/session/${this.$route.params.id}`;
-        
-        this.axios.get(uri).then((response) => {
-            this.session = response.data.data;
-            this.assigncourse.session_name=this.session.session_name; //ei line edit korte hobe
-         });
 
-         uri = `/api/semester-sections`;
+        this.assigncourse.session_name=this.$route.params.id;
+       
+
+        let uri = `/api/semester-sections`;
             
         this.axios.get(uri).then((response) => {
             this.semesters = response.data.data;

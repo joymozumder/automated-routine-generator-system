@@ -3069,23 +3069,16 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    var _this = this;
-
-    var uri = "/api/session/".concat(this.$route.params.id); //console.log(this.$route.params.id);
-
-    this.axios.get(uri).then(function (response) {
-      _this.session = response.data.data;
-      _this.semester.session_name = _this.session.session_name;
-    });
+    this.semester.session_name = this.$route.params.id;
   },
   methods: {
     addSemester: function addSemester() {
-      var _this2 = this;
+      var _this = this;
 
       console.log(this.semester);
       var uri = '/api/semester-section/create';
       this.axios.post(uri, this.semester).then(function (response) {
-        _this2.$router.push({
+        _this.$router.push({
           name: 'selectsession'
         });
       });
@@ -3372,12 +3365,8 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var uri = "/api/session/".concat(this.$route.params.id);
-    this.axios.get(uri).then(function (response) {
-      _this.session = response.data.data;
-      _this.assigncourse.session_name = _this.session.session_name; //ei line edit korte hobe
-    });
-    uri = "/api/semester-sections";
+    this.assigncourse.session_name = this.$route.params.id;
+    var uri = "/api/semester-sections";
     this.axios.get(uri).then(function (response) {
       _this.semesters = response.data.data; //console.log(this.semesters);
     });
@@ -43421,7 +43410,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                                Create Session\n                            "
+                      "\n                                Select Session\n                            "
                     )
                   ]
                 ),
@@ -43463,14 +43452,9 @@ var render = function() {
                             }
                           },
                           _vm._l(_vm.sessions, function(session) {
-                            return _c(
-                              "option",
-                              {
-                                key: session.id,
-                                domProps: { value: session.id }
-                              },
-                              [_vm._v(_vm._s(session.session_name))]
-                            )
+                            return _c("option", { key: session.id }, [
+                              _vm._v(_vm._s(session.session_name))
+                            ])
                           }),
                           0
                         )
