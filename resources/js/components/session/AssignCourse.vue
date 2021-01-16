@@ -69,14 +69,14 @@
                                             <div class="md:w-1/4">
                                                 <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
-                                                    Course Code
+                                                    Course
                                                 </label>
                                             </div>
                                             <div class="md:w-3/4">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                           v-model="assigncourse.course_code"  id="grid-state">
                                                         
-                                                        <option v-for="course in courses" :key="course.id">{{course.name}}</option>
+                                                        <option v-for="course in courses" :value="course.code" :key="course.id">{{course.name}} - {{course.code}}</option>
                                                     </select>
                                                     
                                             </div>
@@ -252,6 +252,16 @@
               room_number:0,
               group:[],
               duration:[]
+          },
+          savecourse:{
+              session_name:"",
+              semester:"",
+              teacher_code:"",
+              course_code:"",
+              room_number:0,
+              group:0,
+              duration:0,
+              totalstudent:0
           }
          
         }
@@ -295,7 +305,14 @@
 
       methods:{
           assignCourse(){
-              console.log(this.assigncourse);
+              //console.log(this.assigncourse);
+              var i;
+              if(this.assigncourse.group.length==1){
+
+              }
+                for (i = 0; i < this.assigncourse.group.length; i++) {
+                    console.log(this.assigncourse.group[i]);
+                }
           }
       }
 

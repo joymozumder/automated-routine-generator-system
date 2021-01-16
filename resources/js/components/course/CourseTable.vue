@@ -18,7 +18,7 @@
 					<tbody>
 						<tr  v-for="course in courses" :key="course.id">
 							<td>{{ course.id }}</td>
-              				<td>{{ course.code }}</td>
+              <td>{{ course.code }}</td>
 							<td>{{ course.name }}</td>
 							<td>{{ course.credit }}</td>
 							<td>{{ course.type }}</td>
@@ -90,3 +90,5 @@
     }
   }
 </script>
+
+

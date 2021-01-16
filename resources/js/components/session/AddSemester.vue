@@ -148,7 +148,7 @@
         
          let uri = '/api/semester-section/create';
           this.axios.post(uri, this.semester).then((response) => {
-            this.$router.push({name: 'home'});
+            this.$router.push({name: 'selectsession'});
          });
       }
          
