@@ -43,7 +43,7 @@ class EnrollmentController extends Controller
         $enrollment->semester = $request->semester;
         $enrollment->teacher_code = $request->teacher_code;
         $enrollment->course_code = $request->course_code;
-        $enrollment->room_number = $request->room_number;
+        $enrollment->room_number = 0;
         $enrollment->group = $request->group;
         $enrollment->duration = $request->duration;
         $enrollment->start = 0;
