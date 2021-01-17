@@ -97,6 +97,51 @@ class EnrollmentController extends Controller
         }*/
     }
 
+    public function manualStore(Request $request)
+    {
+        $duration1 = (double)$request->duration1;
+        $duration2 = (double)$request->duration2;
+        $group = $request->group;
+        //for ($i = 1; $i <= $group; $i++)
+        {
+           /* if($group == 1 )
+                    $gr = 0;
+                else
+                    $gr = $i;*/
+
+            if($duration1 != 0)
+            {
+                
+
+                $enrollment = new Enrollment();
+                $enrollment->session_name = $request->session_name;
+                $enrollment->semester = $request->semester;
+                $enrollment->teacher_code = $request->teacher_code;
+                $enrollment->course_code = $request->course_code;
+                $enrollment->room_number = 0;
+                $enrollment->group = $request->group;
+                $enrollment->duration = $duration1;
+                $enrollment->start = $request->start1;
+                $enrollment->end = $request->end1;
+                $enrollment->save();
+            }
+            if($duration2!=0)
+            {
+                $enrollment = new Enrollment();
+                $enrollment->session_name = $request->session_name;
+                $enrollment->semester = $request->semester;
+                $enrollment->teacher_code = $request->teacher_code;
+                $enrollment->course_code = $request->course_code;
+                $enrollment->room_number = 0;
+                $enrollment->group = $request->group;
+                $enrollment->duration = $duration2;
+                $enrollment->start = $request->start2;
+                $enrollment->end = $request->end2;
+                $enrollment->save();
+            }
+        }
+    }
+
     /**
      * Display the specified resource.
      *

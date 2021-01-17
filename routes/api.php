@@ -58,6 +58,7 @@ Route::delete('/teacher/delete/{id}', 'api\UserController@destroy');
 
 Route::get('/enrollments','api\EnrollmentController@index');
 Route::post('/enrollment/create','api\EnrollmentController@store');
+Route::post('/enrollment/manual-create','api\EnrollmentController@manualStore');
 Route::get('/enrollment/{id}','api\EnrollmentController@show');
 Route::get('/enrollment/edit/{id}','api\EnrollmentController@edit');
 Route::post('/enrollment/update/{id}','api\EnrollmentController@update');
