@@ -39,7 +39,7 @@
                         <a href="tables.html"
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                             <i class="fas fa-table float-left mx-2"></i>
-                            <router-link to="/user/">Teacher</router-link>
+                            <router-link to="/user/teachers">Teacher</router-link>
                             <span><i class="fa fa-angle-right float-right"></i></span>
                         </a>
                     </li>
