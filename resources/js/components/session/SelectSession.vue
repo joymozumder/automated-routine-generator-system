@@ -1,8 +1,8 @@
 <template>
     <main class="bg-white-500 flex-1 p-3 overflow-hidden">
-        <div class="flex flex-col">
+        <div class="flex flex-1">
                         <!-- Card Sextion Starts Here -->
-                        <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
+                        <div class="container mx-auto h-full flex flex-1 justify-center items-center">
                             <!--Horizontal form-->
                             <div class="mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2">
                                 <div class="bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b">
@@ -43,15 +43,11 @@
                                                
                                
 
-                                                    <button class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
-                                                        <router-link :to="{name: 'manualassign', params: { id: select }}" >ManualAssign</router-link>
-                                                    </button>
-                                                    <button class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full">
-                                                        <router-link :to="{name: 'addsemester', params: { id: select }}" >Add Semester</router-link>
-                                                    </button>
-                                                    <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded-full">
-                                                        <router-link :to="{name: 'assigncourse', params: { id: select }}" >Assign Course</router-link>
-                                                    </button>
+                                                    <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-full" :to="{name: 'manualassign', params: { id: select }}" >ManualAssign</router-link>
+                                                    <router-link tag="button" class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-3 rounded-full" :to="{name: 'addsemester', params: { id: select }}" >Add Semester</router-link>
+                                                    <router-link tag="button" class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-3 rounded-full" :to="{name: 'assigncourse', params: { id: select }}" >Assign Course</router-link>
+                                                    <router-link tag="button" class="bg-red-500 hover:bg-orange-800 text-white font-bold py-2 px-3 rounded-full" :to="{name: 'assigncourse', params: { id: select }}" >Generate Routine</router-link>
+                                                   
                                                     
 
                                 

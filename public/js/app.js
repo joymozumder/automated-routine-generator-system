@@ -3358,6 +3358,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3949,10 +3957,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
 //
 //
 //
@@ -40235,7 +40239,10 @@ var render = function() {
       _c("div", { staticClass: "flex flex-col" }, [
         _c(
           "div",
-          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
+          {
+            staticClass:
+              "container mx-auto h-full flex flex-1 justify-center items-center"
+          },
           [
             _c(
               "div",
@@ -40273,7 +40280,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: {
                             id: "inline-full-name",
                             type: "text",
@@ -40306,7 +40313,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: {
                             id: "inline-full-name",
                             type: "text",
@@ -40834,7 +40841,10 @@ var render = function() {
       _c("div", { staticClass: "flex flex-col" }, [
         _c(
           "div",
-          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
+          {
+            staticClass:
+              "container mx-auto h-full flex flex-1 justify-center items-center"
+          },
           [
             _c(
               "div",
@@ -40872,7 +40882,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: { id: "inline-full-name", type: "text" },
                           domProps: { value: _vm.course.code },
                           on: {
@@ -40901,7 +40911,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: { id: "inline-full-name", type: "text" },
                           domProps: { value: _vm.course.name },
                           on: {
@@ -41706,7 +41716,10 @@ var render = function() {
       _c("div", { staticClass: "flex flex-col" }, [
         _c(
           "div",
-          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
+          {
+            staticClass:
+              "container mx-auto h-full flex flex-1 justify-center items-center"
+          },
           [
             _c(
               "div",
@@ -41744,7 +41757,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: {
                             id: "inline-full-name",
                             type: "number",
@@ -41777,7 +41790,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: {
                             id: "inline-full-name",
                             type: "text",
@@ -41877,7 +41890,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: {
                             id: "inline-full-name",
                             type: "number",
@@ -42110,7 +42123,10 @@ var render = function() {
       _c("div", { staticClass: "flex flex-col" }, [
         _c(
           "div",
-          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
+          {
+            staticClass:
+              "container mx-auto h-full flex flex-1 justify-center items-center"
+          },
           [
             _c(
               "div",
@@ -42148,7 +42164,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: { id: "inline-full-name", type: "number" },
                           domProps: { value: _vm.room.number },
                           on: {
@@ -42177,7 +42193,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: { id: "inline-full-name", type: "text" },
                           domProps: { value: _vm.room.name },
                           on: {
@@ -42273,7 +42289,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: { id: "inline-full-name", type: "number" },
                           domProps: { value: _vm.room.capacity },
                           on: {
@@ -42667,7 +42683,10 @@ var render = function() {
       _c("div", { staticClass: "flex flex-col" }, [
         _c(
           "div",
-          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
+          {
+            staticClass:
+              "container mx-auto h-full flex flex-1 justify-center items-center"
+          },
           [
             _c(
               "div",
@@ -42705,7 +42724,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: {
                             id: "inline-full-name",
                             readonly: "",
@@ -42892,7 +42911,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: { id: "inline-full-name", type: "number" },
                           domProps: { value: _vm.semester.total_student },
                           on: {
@@ -43121,7 +43140,10 @@ var render = function() {
       _c("div", { staticClass: "flex flex-col" }, [
         _c(
           "div",
-          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
+          {
+            staticClass:
+              "container mx-auto h-full flex flex-1 justify-center items-center"
+          },
           [
             _c(
               "div",
@@ -43159,7 +43181,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: {
                             id: "inline-full-name",
                             type: "text",
@@ -43739,7 +43761,7 @@ var render = function() {
                                   }
                                 ],
                                 staticClass:
-                                  "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                                  "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                                 attrs: {
                                   id: "inline-full-name",
                                   type: "number",
@@ -43782,7 +43804,7 @@ var render = function() {
                                   }
                                 ],
                                 staticClass:
-                                  "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                                  "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                                 attrs: {
                                   id: "inline-full-name",
                                   type: "number",
@@ -44031,7 +44053,10 @@ var render = function() {
       _c("div", { staticClass: "flex flex-col" }, [
         _c(
           "div",
-          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
+          {
+            staticClass:
+              "container mx-auto h-full flex flex-1 justify-center items-center"
+          },
           [
             _c(
               "div",
@@ -44048,7 +44073,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                                   Assign Course\n                               "
+                      "\n                                   Manual Assign\n                               "
                     )
                   ]
                 ),
@@ -44069,7 +44094,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: {
                             id: "inline-full-name",
                             type: "text",
@@ -45221,10 +45246,13 @@ var render = function() {
     "main",
     { staticClass: "bg-white-500 flex-1 p-3 overflow-hidden" },
     [
-      _c("div", { staticClass: "flex flex-col" }, [
+      _c("div", { staticClass: "flex flex-1" }, [
         _c(
           "div",
-          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
+          {
+            staticClass:
+              "container mx-auto h-full flex flex-1 justify-center items-center"
+          },
           [
             _c(
               "div",
@@ -45359,76 +45387,76 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "md:flex md:items-center" }, [
-                      _c("div", { staticClass: "md:w-full" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full"
-                          },
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "manualassign",
-                                    params: { id: _vm.select }
-                                  }
+                      _c(
+                        "div",
+                        { staticClass: "md:w-full" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass:
+                                "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-full",
+                              attrs: {
+                                tag: "button",
+                                to: {
+                                  name: "manualassign",
+                                  params: { id: _vm.select }
                                 }
-                              },
-                              [_vm._v("ManualAssign")]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full"
-                          },
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "addsemester",
-                                    params: { id: _vm.select }
-                                  }
+                              }
+                            },
+                            [_vm._v("ManualAssign")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass:
+                                "bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-3 rounded-full",
+                              attrs: {
+                                tag: "button",
+                                to: {
+                                  name: "addsemester",
+                                  params: { id: _vm.select }
                                 }
-                              },
-                              [_vm._v("Add Semester")]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded-full"
-                          },
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                attrs: {
-                                  to: {
-                                    name: "assigncourse",
-                                    params: { id: _vm.select }
-                                  }
+                              }
+                            },
+                            [_vm._v("Add Semester")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass:
+                                "bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-3 rounded-full",
+                              attrs: {
+                                tag: "button",
+                                to: {
+                                  name: "assigncourse",
+                                  params: { id: _vm.select }
                                 }
-                              },
-                              [_vm._v("Assign Course")]
-                            )
-                          ],
-                          1
-                        )
-                      ])
+                              }
+                            },
+                            [_vm._v("Assign Course")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass:
+                                "bg-red-500 hover:bg-orange-800 text-white font-bold py-2 px-3 rounded-full",
+                              attrs: {
+                                tag: "button",
+                                to: {
+                                  name: "assigncourse",
+                                  params: { id: _vm.select }
+                                }
+                              }
+                            },
+                            [_vm._v("Generate Routine")]
+                          )
+                        ],
+                        1
+                      )
                     ])
                   ])
                 ])
@@ -45490,7 +45518,10 @@ var render = function() {
       _c("div", { staticClass: "flex flex-col" }, [
         _c(
           "div",
-          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
+          {
+            staticClass:
+              "container mx-auto h-full flex flex-1 justify-center items-center"
+          },
           [
             _c(
               "div",
@@ -45528,7 +45559,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light",
+                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
                           attrs: {
                             id: "inline-full-name",
                             type: "text",
@@ -62288,8 +62319,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! I:\final project\automated-routine-generator-system\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! I:\final project\automated-routine-generator-system\resources\css\main.css */"./resources/css/main.css");
+__webpack_require__(/*! C:\Users\Jitun\Desktop\automated-routine-generator-system\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Jitun\Desktop\automated-routine-generator-system\resources\css\main.css */"./resources/css/main.css");
 
 
 /***/ })
