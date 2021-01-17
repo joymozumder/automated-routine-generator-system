@@ -41436,8 +41436,8 @@ var render = function() {
               [
                 _c("i", { staticClass: "fab fa-wpforms float-left mx-2" }),
                 _vm._v(" "),
-                _c("router-link", { attrs: { to: "/user/addcourse" } }, [
-                  _vm._v("Add Course")
+                _c("router-link", { attrs: { to: "/user/selectsession" } }, [
+                  _vm._v("Session")
                 ]),
                 _vm._v(" "),
                 _vm._m(1)
@@ -41447,15 +41447,61 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm._m(2),
+        _c(
+          "li",
+          {
+            staticClass: "w-full h-full py-3 px-2 border-b border-light-border"
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
+                attrs: { href: "buttons.html" }
+              },
+              [
+                _c("i", {
+                  staticClass: "fas fa-grip-horizontal float-left mx-2"
+                }),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: "/user/courses" } }, [
+                  _vm._v("Course")
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ],
+              1
+            )
+          ]
+        ),
         _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _vm._m(4),
-        _vm._v(" "),
-        _vm._m(5),
-        _vm._v(" "),
-        _vm._m(6)
+        _c(
+          "li",
+          {
+            staticClass: "w-full h-full py-3 px-2 border-b border-light-border"
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
+                attrs: { href: "tables.html" }
+              },
+              [
+                _c("i", { staticClass: "fas fa-table float-left mx-2" }),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: "/user/" } }, [
+                  _vm._v("Teacher")
+                ]),
+                _vm._v(" "),
+                _vm._m(3)
+              ],
+              1
+            )
+          ]
+        )
       ])
     ]
   )
@@ -41481,210 +41527,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "li",
-      { staticClass: "w-full h-full py-3 px-2 border-b border-light-border" },
-      [
-        _c(
-          "a",
-          {
-            staticClass:
-              "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-            attrs: { href: "buttons.html" }
-          },
-          [
-            _c("i", { staticClass: "fas fa-grip-horizontal float-left mx-2" }),
-            _vm._v(
-              "\n                        Buttons\n                        "
-            ),
-            _c("span", [
-              _c("i", { staticClass: "fa fa-angle-right float-right" })
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("span", [
+      _c("i", { staticClass: "fa fa-angle-right float-right" })
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "li",
-      { staticClass: "w-full h-full py-3 px-2 border-b border-light-border" },
-      [
-        _c(
-          "a",
-          {
-            staticClass:
-              "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-            attrs: { href: "tables.html" }
-          },
-          [
-            _c("i", { staticClass: "fas fa-table float-left mx-2" }),
-            _vm._v(
-              "\n                        Tables\n                        "
-            ),
-            _c("span", [
-              _c("i", { staticClass: "fa fa-angle-right float-right" })
-            ])
-          ]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "li",
-      { staticClass: "w-full h-full py-3 px-2 border-b border-light-border" },
-      [
-        _c(
-          "a",
-          {
-            staticClass:
-              "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-            attrs: { href: "ui.html" }
-          },
-          [
-            _c("i", { staticClass: "fab fa-uikit float-left mx-2" }),
-            _vm._v(
-              "\n                        Ui components\n                        "
-            ),
-            _c("span", [
-              _c("i", { staticClass: "fa fa-angle-right float-right" })
-            ])
-          ]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "li",
-      { staticClass: "w-full h-full py-3 px-2 border-b border-300-border" },
-      [
-        _c(
-          "a",
-          {
-            staticClass:
-              "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-            attrs: { href: "modals.html" }
-          },
-          [
-            _c("i", { staticClass: "fas fa-square-full float-left mx-2" }),
-            _vm._v(
-              "\n                        Modals\n                        "
-            ),
-            _c("span", [
-              _c("i", { staticClass: "fa fa-angle-right float-right" })
-            ])
-          ]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "w-full h-full py-3 px-2" }, [
-      _c(
-        "a",
-        {
-          staticClass:
-            "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-          attrs: { href: "#" }
-        },
-        [
-          _c("i", { staticClass: "far fa-file float-left mx-2" }),
-          _vm._v("\n                        Pages\n                        "),
-          _c("span", [_c("i", { staticClass: "fa fa-angle-down float-right" })])
-        ]
-      ),
-      _vm._v(" "),
-      _c("ul", { staticClass: "list-reset -mx-2 bg-white-medium-dark" }, [
-        _c(
-          "li",
-          {
-            staticClass:
-              "border-t mt-2 border-light-border w-full h-full px-2 py-3"
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "mx-4 font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-                attrs: { href: "login.html" }
-              },
-              [
-                _vm._v(
-                  "\n                                Login Page\n                                "
-                ),
-                _c("span", [
-                  _c("i", { staticClass: "fa fa-angle-right float-right" })
-                ])
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          {
-            staticClass: "border-t border-light-border w-full h-full px-2 py-3"
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "mx-4 font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-                attrs: { href: "register.html" }
-              },
-              [
-                _vm._v(
-                  "\n                                Register Page\n                                "
-                ),
-                _c("span", [
-                  _c("i", { staticClass: "fa fa-angle-right float-right" })
-                ])
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          {
-            staticClass: "border-t border-light-border w-full h-full px-2 py-3"
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "mx-4 font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-                attrs: { href: "404.html" }
-              },
-              [
-                _vm._v(
-                  "\n                                404 Page\n                                "
-                ),
-                _c("span", [
-                  _c("i", { staticClass: "fa fa-angle-right float-right" })
-                ])
-              ]
-            )
-          ]
-        )
-      ])
+    return _c("span", [
+      _c("i", { staticClass: "fa fa-angle-right float-right" })
     ])
   }
 ]
