@@ -46,7 +46,7 @@
                                                     <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-full" :to="{name: 'manualassign', params: { id: select }}" >ManualAssign</router-link>
                                                     <router-link tag="button" class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-3 rounded-full" :to="{name: 'addsemester', params: { id: select }}" >Add Semester</router-link>
                                                     <router-link tag="button" class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-3 rounded-full" :to="{name: 'assigncourse', params: { id: select }}" >Assign Course</router-link>
-                                                    <router-link tag="button" class="bg-red-500 hover:bg-orange-800 text-white font-bold py-2 px-3 rounded-full" :to="{name: 'assigncourse', params: { id: select }}" >Generate Routine</router-link>
+                                                    <button class="bg-red-500 hover:bg-orange-800 text-white font-bold py-2 px-3 rounded-full" @click.prevent="generateRoutine" >Generate Routine </button>
                                                    
                                                     
 
@@ -91,7 +91,20 @@
           this.sessions = response.data.data;
           console.log(this.sessions);
         });
-    }
+    },
+    methods:{
+          generateRoutine(){
+              console.log("hello")
+             let uri = `/api/routine/generate/${this.select}`;
+             console.log(uri);
+        this.axios.get(uri).then(response => {
+          		  
+		});
+             
+          },
+
+     
+      }
    
   }
 </script>

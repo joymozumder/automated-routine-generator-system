@@ -3948,6 +3948,253 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/session/Routine.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/session/Routine.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      enrollments: [],
+      group1: [],
+      group2: [],
+      row1: [],
+      row2: [],
+      day: "",
+      dayspan: 0
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var uri = "/api/print/".concat(this.$route.params.session, "/").concat(this.$route.params.day);
+    this.axios.get(uri).then(function (response) {
+      _this.enrollments = response.data.data;
+      console.log(_this.enrollments);
+
+      _this.checkTd();
+
+      _this.checkDay();
+    });
+  },
+  methods: {
+    checkTd: function checkTd() {
+      //console.log(this.enrollments);
+      for (var y in this.enrollments) {
+        this.dayspan++;
+        this.row1[y] = [];
+        this.row2[y] = [];
+        this.group1[y] = [];
+        this.group2[y] = [];
+
+        for (var tm = 0; tm < 20; tm++) {
+          this.row1[y][tm] = 1;
+          this.row2[y][tm] = 1;
+          this.group1[y].push({});
+          this.group2[y].push({});
+        }
+
+        for (var i = 0; i < this.enrollments[y].length; i++) {
+          //console.log(this.enrollments[y][i].course_code);
+          var st = this.enrollments[y][i].start;
+          var et = this.enrollments[y][i].end;
+          var grp = this.enrollments[y][i].group; //console.log(st +" "+et+" "+grp);
+
+          if (grp === 0) {
+            this.group1[y][st] = this.enrollments[y][i];
+            this.row1[y][st] = 5;
+            this.row2[y][st] = 0;
+
+            for (var tm = st + 1; tm <= et; tm++) {
+              this.row1[y][tm] = 0;
+              this.row2[y][tm] = 0;
+            }
+
+            for (var tm = st; tm <= et; tm++) {//this.row2[y][tm]=0;
+            }
+          } else if (grp === 1) {
+            this.group1[y][st] = this.enrollments[y][i];
+            this.row1[y][st] = 5;
+
+            for (var tm = st + 1; tm <= et; tm++) {
+              this.row1[y][tm] = 0;
+            }
+          } else if (grp === 2) {
+            this.group2[y][st] = this.enrollments[y][i];
+            this.row2[y][st] = 5;
+
+            for (var tm = st + 1; tm <= et; tm++) {
+              this.row2[y][tm] = 0;
+            }
+          }
+        }
+      }
+
+      console.log(this.row1);
+      console.log(this.row2);
+      console.log("vai");
+      console.log(this.group1);
+      console.log(this.group2);
+    },
+    checkDay: function checkDay() {
+      var dy = this.$route.params.day;
+      if (dy == 1) this.day = "Saturday";else if (dy == 2) this.day = "Sunday";else if (dy == 3) this.day = "Monday";else if (dy == 4) this.day = "Tuesday";else if (dy == 5) this.day = "Wednesday"; //console.log("day name = "+this.day);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/session/SelectSession.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/session/SelectSession.vue?vue&type=script&lang=js& ***!
@@ -4048,6 +4295,14 @@ __webpack_require__.r(__webpack_exports__);
       _this.sessions = response.data.data;
       console.log(_this.sessions);
     });
+  },
+  methods: {
+    generateRoutine: function generateRoutine() {
+      console.log("hello");
+      var uri = "/api/routine/generate/".concat(this.select);
+      console.log(uri);
+      this.axios.get(uri).then(function (response) {});
+    }
   }
 });
 
@@ -45318,6 +45573,1842 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/session/Routine.vue?vue&type=template&id=7d03f930&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/session/Routine.vue?vue&type=template&id=7d03f930& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "mb-2 border-solid border-gray-300 rounded border shadow-sm w-full"
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b"
+            },
+            [
+              _vm._v(
+                "\n                                Full Table\n                            "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-3" }, [
+            _c(
+              "table",
+              { staticClass: "table-responsive w-full rounded" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._l(_vm.enrollments, function(enrollment, sem, index) {
+                  return _c("tbody", { key: index }, [
+                    _c("tr", [
+                      _c(
+                        "td",
+                        {
+                          staticClass: "border-2 px-4 py-2",
+                          staticStyle: { "text-align": "center" },
+                          attrs: { rowspan: "2" }
+                        },
+                        [_vm._v(_vm._s(sem))]
+                      ),
+                      _vm._v(" "),
+                      _vm.group1[sem][1].group === 0 && _vm.row1[sem][1] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][1].end -
+                                  _vm.group1[sem][1].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][1].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][1].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][1].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][1].group === 1 &&
+                          _vm.row1[sem][1] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][1].end -
+                                  _vm.group1[sem][1].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][1].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][1].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][1].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][1] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][2].group === 0 && _vm.row1[sem][2] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][2].end -
+                                  _vm.group1[sem][2].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][2].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][2].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][2].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][2].group === 1 &&
+                          _vm.row1[sem][2] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][2].end -
+                                  _vm.group1[sem][2].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][2].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][2].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][2].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][2] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][3].group === 0 && _vm.row1[sem][3] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][3].end -
+                                  _vm.group1[sem][3].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][3].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][3].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][3].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][3].group === 1 &&
+                          _vm.row1[sem][3] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][3].end -
+                                  _vm.group1[sem][3].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][3].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][3].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][3].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][3] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][4].group === 0 && _vm.row1[sem][4] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][4].end -
+                                  _vm.group1[sem][4].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][4].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][4].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][4].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][4].group === 1 &&
+                          _vm.row1[sem][4] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][4].end -
+                                  _vm.group1[sem][4].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][4].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][4].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][4].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][4] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][5].group === 0 && _vm.row1[sem][5] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][5].end -
+                                  _vm.group1[sem][5].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][5].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][5].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][5].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][5].group === 1 &&
+                          _vm.row1[sem][5] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][5].end -
+                                  _vm.group1[sem][5].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][5].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][5].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][5].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][5] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][6].group === 0 && _vm.row1[sem][6] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][6].end -
+                                  _vm.group1[sem][6].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][6].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][6].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][6].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][6].group === 1 &&
+                          _vm.row1[sem][6] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][6].end -
+                                  _vm.group1[sem][6].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][6].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][6].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][6].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][6] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][7].group === 0 && _vm.row1[sem][7] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][7].end -
+                                  _vm.group1[sem][7].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][7].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][7].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][7].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][7].group === 1 &&
+                          _vm.row1[sem][7] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][7].end -
+                                  _vm.group1[sem][7].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][7].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][7].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][7].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][7] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][8].group === 0 && _vm.row1[sem][8] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][8].end -
+                                  _vm.group1[sem][8].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][8].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][8].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][8].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][8].group === 1 &&
+                          _vm.row1[sem][8] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][8].end -
+                                  _vm.group1[sem][8].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][8].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][8].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][8].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][8] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][9].group === 0 && _vm.row1[sem][9] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][9].end -
+                                  _vm.group1[sem][9].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][9].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][9].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][9].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][9].group === 1 &&
+                          _vm.row1[sem][9] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][9].end -
+                                  _vm.group1[sem][9].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][9].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][9].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][9].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][9] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][10].group === 0 && _vm.row1[sem][10] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][10].end -
+                                  _vm.group1[sem][10].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][10].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][10].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][10].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][10].group === 1 &&
+                          _vm.row1[sem][10] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][10].end -
+                                  _vm.group1[sem][10].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][10].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][10].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][10].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][10] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][11].group === 0 && _vm.row1[sem][11] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][11].end -
+                                  _vm.group1[sem][11].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][11].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][11].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][11].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][11].group === 1 &&
+                          _vm.row1[sem][11] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][11].end -
+                                  _vm.group1[sem][11].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][11].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][11].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group11[sem][11].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][11] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][12].group === 0 && _vm.row1[sem][12] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][12].end -
+                                  _vm.group1[sem][12].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][12].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][12].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][12].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][12].group === 1 &&
+                          _vm.row1[sem][12] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][12].end -
+                                  _vm.group1[sem][12].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][12].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][12].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][12].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][12] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][13].group === 0 && _vm.row1[sem][13] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][13].end -
+                                  _vm.group1[sem][13].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][13].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][13].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][13].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][13].group === 1 &&
+                          _vm.row1[sem][13] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][13].end -
+                                  _vm.group1[sem][13].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][13].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][13].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][13].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][13] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][14].group === 0 && _vm.row1[sem][14] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][14].end -
+                                  _vm.group1[sem][14].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][14].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][14].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][14].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][14].group === 1 &&
+                          _vm.row1[sem][14] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][14].end -
+                                  _vm.group1[sem][14].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][14].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][14].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][14].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][14] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][15].group === 0 && _vm.row1[sem][15] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][15].end -
+                                  _vm.group1[sem][15].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][15].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][15].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][15].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][15].group === 1 &&
+                          _vm.row1[sem][15] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][15].end -
+                                  _vm.group1[sem][15].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][15].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][15].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][15].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][15] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][16].group === 0 && _vm.row1[sem][16] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][16].end -
+                                  _vm.group1[sem][16].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][16].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][16].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][16].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][16].group === 1 &&
+                          _vm.row1[sem][16] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][16].end -
+                                  _vm.group1[sem][16].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][16].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][16].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][16].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][16] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][17].group === 0 && _vm.row1[sem][17] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][17].end -
+                                  _vm.group1[sem][17].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][17].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][17].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][17].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][17].group === 1 &&
+                          _vm.row1[sem][17] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][17].end -
+                                  _vm.group1[sem][17].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][17].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][17].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][17].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][17] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group1[sem][18].group === 0 && _vm.row1[sem][18] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][18].end -
+                                  _vm.group1[sem][18].start +
+                                  1,
+                                rowspan: "2"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][18].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][18].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][18].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.group1[sem][18].group === 1 &&
+                          _vm.row1[sem][18] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group1[sem][18].end -
+                                  _vm.group1[sem][18].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group1[sem][18].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][18].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group1[sem][18].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row1[sem][18] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _vm.group2[sem][1].group === 2 && _vm.row2[sem][1] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][1].end -
+                                  _vm.group2[sem][1].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][1].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][1].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][1].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][1] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][2].group === 2 && _vm.row2[sem][2] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][2].end -
+                                  _vm.group2[sem][2].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][2].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][2].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][2].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][2] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][3].group === 2 && _vm.row2[sem][3] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][3].end -
+                                  _vm.group2[sem][3].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][3].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][3].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][3].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][3] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][4].group === 2 && _vm.row2[sem][4] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][4].end -
+                                  _vm.group2[sem][4].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][4].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][4].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][4].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][4] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][5].group === 2 && _vm.row2[sem][5] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][5].end -
+                                  _vm.group2[sem][5].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][5].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][5].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][5].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][5] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][6].group === 2 && _vm.row2[sem][6] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][6].end -
+                                  _vm.group2[sem][6].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][6].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][6].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][6].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][6] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][7].group === 2 && _vm.row2[sem][7] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][7].end -
+                                  _vm.group2[sem][7].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][7].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][7].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][7].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][7] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][8].group === 2 && _vm.row2[sem][8] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][8].end -
+                                  _vm.group2[sem][8].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][8].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][8].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][8].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][8] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][9].group === 2 && _vm.row2[sem][9] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][9].end -
+                                  _vm.group2[sem][9].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][9].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][9].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][9].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][9] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][10].group === 2 && _vm.row2[sem][10] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][10].end -
+                                  _vm.group2[sem][10].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][10].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][10].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][10].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][10] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][11].group === 2 && _vm.row2[sem][11] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][11].end -
+                                  _vm.group2[sem][11].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][11].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][11].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][11].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][11] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][12].group === 2 && _vm.row2[sem][12] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][12].end -
+                                  _vm.group2[sem][12].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][12].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][12].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][12].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][12] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][13].group === 2 && _vm.row2[sem][13] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][13].end -
+                                  _vm.group2[sem][13].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][13].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][13].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][13].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][13] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][14].group === 2 && _vm.row2[sem][14] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][14].end -
+                                  _vm.group2[sem][14].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][14].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][14].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][14].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][14] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][15].group === 2 && _vm.row2[sem][15] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][15].end -
+                                  _vm.group2[sem][15].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][15].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][15].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][15].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][15] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][16].group === 2 && _vm.row2[sem][16] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][16].end -
+                                  _vm.group2[sem][16].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][16].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][16].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][16].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][16] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][17].group === 2 && _vm.row2[sem][17] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][17].end -
+                                  _vm.group2[sem][17].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][17].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][17].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][17].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][17] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.group2[sem][18].group === 2 && _vm.row2[sem][18] === 5
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" },
+                              attrs: {
+                                colspan:
+                                  _vm.group2[sem][18].end -
+                                  _vm.group2[sem][18].start +
+                                  1
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(_vm.group2[sem][18].course_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][18].teacher_code) +
+                                  " / " +
+                                  _vm._s(_vm.group2[sem][18].room_number)
+                              )
+                            ]
+                          )
+                        : _vm.row2[sem][18] === 1
+                        ? _c(
+                            "td",
+                            {
+                              staticClass: "border-2 px-4 py-2",
+                              staticStyle: { "text-align": "center" }
+                            },
+                            [_vm._v(" ")]
+                          )
+                        : _vm._e()
+                    ])
+                  ])
+                })
+              ],
+              2
+            )
+          ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "border-2 w-1/6 px-4 py-2" }, [_vm._v("Sem")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/6 px-4 py-2" }, [
+          _vm._v("8:30-9:00")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/6 px-4 py-2" }, [
+          _vm._v("9:00-9:30")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/7 px-4 py-2" }, [
+          _vm._v("9:30-10:00")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("10:00-10:30")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("10:30-11:00")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("11:00-11:30")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("11:30-12:00")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("12:00-12:30")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("12:30-1:00")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("1:00-1:30")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("1:30-2:00")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("2:00-2:30")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("2:30-3:00")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("3:00-3:30")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("3:30-4:00")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("4:00-4:30")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("4:30-5:00")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-2 w-1/5 px-4 py-2" }, [
+          _vm._v("5:00-5:30")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/session/SelectSession.vue?vue&type=template&id=0b347066&":
 /*!************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/session/SelectSession.vue?vue&type=template&id=0b347066& ***!
@@ -45531,19 +47622,18 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c(
-                            "router-link",
+                            "button",
                             {
                               staticClass:
                                 "bg-red-500 hover:bg-orange-800 text-white font-bold py-2 px-3 rounded-full",
-                              attrs: {
-                                tag: "button",
-                                to: {
-                                  name: "assigncourse",
-                                  params: { id: _vm.select }
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.generateRoutine($event)
                                 }
                               }
                             },
-                            [_vm._v("Generate Routine")]
+                            [_vm._v("Generate Routine ")]
                           )
                         ],
                         1
@@ -61605,8 +63695,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_session_AddSemester_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/session/AddSemester.vue */ "./resources/js/components/session/AddSemester.vue");
 /* harmony import */ var _components_session_AssignCourse_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/session/AssignCourse.vue */ "./resources/js/components/session/AssignCourse.vue");
 /* harmony import */ var _components_session_ManualAssign_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/session/ManualAssign.vue */ "./resources/js/components/session/ManualAssign.vue");
-/* harmony import */ var _components_user_TeacherTable_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/user/TeacherTable.vue */ "./resources/js/components/user/TeacherTable.vue");
-/* harmony import */ var _components_user_EditUser_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/user/EditUser.vue */ "./resources/js/components/user/EditUser.vue");
+/* harmony import */ var _components_session_Routine_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/session/Routine.vue */ "./resources/js/components/session/Routine.vue");
+/* harmony import */ var _components_user_TeacherTable_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/user/TeacherTable.vue */ "./resources/js/components/user/TeacherTable.vue");
+/* harmony import */ var _components_user_EditUser_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/user/EditUser.vue */ "./resources/js/components/user/EditUser.vue");
 // App.js
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
@@ -61617,6 +63708,7 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTED_MODULE_2___default.a);
+
 
 
 
@@ -61695,13 +63787,17 @@ var routes = [{
     path: 'manualassign/:id',
     component: _components_session_ManualAssign_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
   }, {
+    name: 'routine',
+    path: 'routine/:session/:day',
+    component: _components_session_Routine_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
+  }, {
     name: 'teachers',
     path: 'teachers',
-    component: _components_user_TeacherTable_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
+    component: _components_user_TeacherTable_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
   }, {
     name: 'edituser',
     path: 'edituser/:id',
-    component: _components_user_EditUser_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
+    component: _components_user_EditUser_vue__WEBPACK_IMPORTED_MODULE_21__["default"]
   }]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
@@ -62746,6 +64842,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/session/Routine.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/session/Routine.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Routine_vue_vue_type_template_id_7d03f930___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Routine.vue?vue&type=template&id=7d03f930& */ "./resources/js/components/session/Routine.vue?vue&type=template&id=7d03f930&");
+/* harmony import */ var _Routine_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Routine.vue?vue&type=script&lang=js& */ "./resources/js/components/session/Routine.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Routine_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Routine_vue_vue_type_template_id_7d03f930___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Routine_vue_vue_type_template_id_7d03f930___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/session/Routine.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/session/Routine.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/session/Routine.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Routine_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Routine.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/session/Routine.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Routine_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/session/Routine.vue?vue&type=template&id=7d03f930&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/session/Routine.vue?vue&type=template&id=7d03f930& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Routine_vue_vue_type_template_id_7d03f930___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Routine.vue?vue&type=template&id=7d03f930& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/session/Routine.vue?vue&type=template&id=7d03f930&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Routine_vue_vue_type_template_id_7d03f930___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Routine_vue_vue_type_template_id_7d03f930___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/session/SelectSession.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/components/session/SelectSession.vue ***!
@@ -63029,8 +65194,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Jitun\Desktop\automated-routine-generator-system\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Jitun\Desktop\automated-routine-generator-system\resources\css\main.css */"./resources/css/main.css");
+__webpack_require__(/*! C:\Users\Joy\Desktop\automated-routine-generator-system\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Joy\Desktop\automated-routine-generator-system\resources\css\main.css */"./resources/css/main.css");
 
 
 /***/ })

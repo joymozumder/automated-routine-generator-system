@@ -24,6 +24,7 @@ class CreateEnrollmentsTable extends Migration
             $table->double('duration');
             $table->integer('start');
             $table->integer('end');
+            $table->integer('day');
 
             $table->foreign('session_name')
                ->references ('session_name')->on('session_data')

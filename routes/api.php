@@ -65,3 +65,5 @@ Route::post('/enrollment/update/{id}','api\EnrollmentController@update');
 Route::delete('/enrollment/delete/{id}', 'api\EnrollmentController@destroy');
 
 Route::get('/routine/generate/{session_name}','api\RoutineController@store');
+Route::get('print/{session_name}/{day}','api\EnrollmentController@dayShow');
+

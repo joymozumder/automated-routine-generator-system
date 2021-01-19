@@ -35,6 +35,7 @@ import compSelectSession from './components/session/SelectSession.vue';
 import compAddSemester from './components/session/AddSemester.vue';
 import compAssignCourse from './components/session/AssignCourse.vue';
 import compManualAssign from './components/session/ManualAssign.vue';
+import compRoutine from './components/session/Routine.vue';
 
 import compTeacherTable from './components/user/TeacherTable.vue';
 import compEditUser from './components/user/EditUser.vue';
@@ -115,6 +116,11 @@ const routes = [
                     name: 'manualassign',
                     path: 'manualassign/:id',
                     component: compManualAssign
+                },
+                 {
+                    name: 'routine',
+                    path: 'routine/:session/:day',
+                    component: compRoutine
                 },
                 {
                     name: 'teachers',

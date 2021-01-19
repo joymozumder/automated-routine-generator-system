@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Enrollment;
+use App\SemesterSection;
 use App\Http\Resources\EnrollmentResource;
 
 class EnrollmentController extends Controller
@@ -16,10 +17,19 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        $enrollments = Enrollment::paginate(15);
+        $enrollments = Enrollment::paginate(500);
         return EnrollmentResource::collection($enrollments);
     }
+    public function dayShow($session,$day)
+    {
+        $obj = Enrollment::
+                where('day','=',$day)
+                ->orderBy('semester', 'ASC')
+                ->orderBy('start', 'ASC')->get()->groupBy('semester');
+        return EnrollmentResource::collection($obj);
 
+       
+    }
     /**
      * Show the form for creating a new resource.
      *

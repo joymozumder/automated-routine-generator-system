@@ -345,7 +345,7 @@ class RoutineController extends Controller
                                             }
                                         else
                                         {
-                                            $course[$conflict[$g]["course_id"]]["start"] = max($course[$conflict[$g]["course_id"]]["start"],$tet);
+                                            $course[$conflict[$g]["course_id"]]["start"] = max($course[$conflict[$g]["course_id"]]["start"],$tet+1);
                                         }
                                     }
                                 }
@@ -371,8 +371,12 @@ for ($i = 0; $i < $dt["total"]; $i++)
         {
             $obj = Enrollment::find( $course[$i]["qid"]); 
             $obj->room_number = $course[$i]["room_number"];
-            $obj->start = $course[$i]["start"];
-            $obj->end = $course[$i]["end"];
+            $d = (int)($course[$i]["start"]/18)+1;
+            $st = $course[$i]["start"] - (($d-1)*18);
+            $et = $course[$i]["end"] - (($d-1)*18);
+            $obj->start = $st;
+            $obj->end = $et;
+            $obj->day = $d;
             $obj->save();
         }
         
