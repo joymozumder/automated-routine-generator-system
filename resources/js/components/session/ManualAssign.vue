@@ -444,7 +444,7 @@
 
 
               //console.log(this.savecourse);
-              let uri = '/api/enrollment/manual-create';
+              let uri = '/api/enrollment/manualcreate';
                 this.axios.post(uri, this.savecourse).then((response) => {
                 this.$router.push({name: 'selectsession'});
           });

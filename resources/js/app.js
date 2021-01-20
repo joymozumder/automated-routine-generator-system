@@ -31,6 +31,7 @@ import compEditRoom from './components/room/EditRoom.vue';
 import compRoomTable from './components/room/RoomTable.vue';
 
 import compCreateSession from './components/session/createSession.vue';
+import compSessionComponent from './components/session/SessionComponent.vue';
 import compSelectSession from './components/session/SelectSession.vue';
 import compAddSemester from './components/session/AddSemester.vue';
 import compAssignCourse from './components/session/AssignCourse.vue';
@@ -101,6 +102,11 @@ const routes = [
                     name: 'selectsession',
                     path: 'selectsession',
                     component: compSelectSession
+                },
+                {
+                    name: 'session',
+                    path: 'session',
+                    component: compSessionComponent
                 },
                 {
                     name: 'addsemester',

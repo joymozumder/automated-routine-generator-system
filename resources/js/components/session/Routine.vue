@@ -4,9 +4,10 @@
 				 <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                             <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
-                                Full Table
+                                {{day}}
                             </div>
                             <div class="p-3">
+								
                                 <table class="table-responsive w-full rounded">
                                     <thead>
                                       <tr>
@@ -158,6 +159,7 @@ export default {
 	},
 	created(){
 		let uri = `/api/print/${this.$route.params.session}/${this.$route.params.day}`;
+		console.log(uri);
 			this.axios.get(uri).then(response => {
 				this.enrollments = response.data.data;
 				console.log(this.enrollments);

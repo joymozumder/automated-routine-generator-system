@@ -74,7 +74,7 @@
             console.log(this.course);
             let uri = '/api/session/create';
             this.axios.post(uri, this.session).then((response) => {
-                this.$router.push({name: 'home'});
+                this.$router.push({name: 'selectsession'});
             });
       }
     }

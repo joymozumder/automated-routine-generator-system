@@ -143,7 +143,7 @@
         
          let uri = '/api/semester-section/create';
           this.axios.post(uri, this.semester).then((response) => {
-            this.$router.push({name: 'selectsession'});
+            this.$router.back();
          });
       }
          

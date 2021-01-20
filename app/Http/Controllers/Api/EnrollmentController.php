@@ -20,10 +20,11 @@ class EnrollmentController extends Controller
         $enrollments = Enrollment::paginate(500);
         return EnrollmentResource::collection($enrollments);
     }
-    public function dayShow($session,$day)
+    public function dayShow($session , $day)
     {
         $obj = Enrollment::
                 where('day','=',$day)
+                ->where('session_name','=',$session)
                 ->orderBy('semester', 'ASC')
                 ->orderBy('start', 'ASC')->get()->groupBy('semester');
         return EnrollmentResource::collection($obj);
@@ -74,6 +75,7 @@ class EnrollmentController extends Controller
                 $enrollment->group = $gr;
                 $enrollment->duration = $duration1;
                 $enrollment->start = 0;
+                $enrollment->day = 0;
                 $enrollment->end = 0;
                 $enrollment->save();
             }
@@ -129,6 +131,7 @@ class EnrollmentController extends Controller
                 $enrollment->teacher_code = $request->teacher_code;
                 $enrollment->course_code = $request->course_code;
                 $enrollment->room_number = 0;
+                $enrollment->day = 0;
                 $enrollment->group = $request->group;
                 $enrollment->duration = $duration1;
                 $enrollment->start = $request->start1;
@@ -143,6 +146,7 @@ class EnrollmentController extends Controller
                 $enrollment->teacher_code = $request->teacher_code;
                 $enrollment->course_code = $request->course_code;
                 $enrollment->room_number = 0;
+                $enrollment->day = 0;
                 $enrollment->group = $request->group;
                 $enrollment->duration = $duration2;
                 $enrollment->start = $request->start2;
