@@ -31,6 +31,7 @@ import compEditRoom from './components/room/EditRoom.vue';
 import compRoomTable from './components/room/RoomTable.vue';
 
 import compCreateSession from './components/session/createSession.vue';
+import compSessionComponent from './components/session/SessionComponent.vue';
 import compSelectSession from './components/session/SelectSession.vue';
 import compAddSemester from './components/session/AddSemester.vue';
 import compAssignCourse from './components/session/AssignCourse.vue';
@@ -103,18 +104,23 @@ const routes = [
                     component: compSelectSession
                 },
                 {
+                    name: 'session',
+                    path: 'session',
+                    component: compSessionComponent
+                },
+                {
                     name: 'addsemester',
-                    path: 'addsemester/:id',
+                    path: ':id/addsemester',
                     component: compAddSemester
                 },
                 {
                     name: 'assigncourse',
-                    path: 'assigncourse/:id',
+                    path: ':id/assigncourse',
                     component: compAssignCourse
                 },
                 {
                     name: 'manualassign',
-                    path: 'manualassign/:id',
+                    path: ':id/manualassign',
                     component: compManualAssign
                 },
                  {

@@ -35,23 +35,25 @@
                                                 </span>
                                             </label>
                                         </div>
-
+                                            
+                                            <div class="md:flex md:items-center">
+                                            <div class="md:w-1/4"></div>
+                                            
+                                            <div class="md:w-3/4" >
+                                                    
+                                                    <router-link tag="button" class=" align-middle bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full" :to="{name: 'createsession'}" v-if="select.length==0 "  >Create Session</router-link>
+                                            </div>
+                                        </div>
                                         
                                         <div class="md:flex md:items-center">
                                             <!--<div class="md:w-1/4"></div>-->
-                                            <div class="md:w-full">
-                                               
-                               
-
-                                                    <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-full" :to="{name: 'manualassign', params: { id: select }}" >ManualAssign</router-link>
-                                                    <router-link tag="button" class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-3 rounded-full" :to="{name: 'addsemester', params: { id: select }}" >Add Semester</router-link>
-                                                    <router-link tag="button" class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-3 rounded-full" :to="{name: 'assigncourse', params: { id: select }}" >Assign Course</router-link>
-                                                    <button class="bg-red-500 hover:bg-orange-800 text-white font-bold py-2 px-3 rounded-full" @click.prevent="generateRoutine" >Generate Routine </button>
-                                                   
+                                            
+                                            <div class="md:w-full" >
                                                     
-
-                                
-                                
+                                                    <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'manualassign', params: { id: select }}" v-if="sessions.status==true && select.length!=0 "  >ManualAssign</router-link>
+                                                    <router-link tag="button" class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'addsemester', params: { id: select }}" v-if="sessions.status==true && select.length!=0 " >Add Semester</router-link>
+                                                    <router-link tag="button" class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourse', params: { id: select }}" v-if="sessions.status==true && select.length!=0 " >Assign Course</router-link>
+                                                    <button class="bg-red-500 hover:bg-orange-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="generateRoutine" v-if="sessions.status==true && select.length!=0 " >Generate Routine </button>
                             
                                             </div>
                                         </div>
@@ -94,7 +96,6 @@
     },
     methods:{
           generateRoutine(){
-              console.log("hello")
              let uri = `/api/routine/generate/${this.select}`;
              console.log(uri);
         this.axios.get(uri).then(response => {
