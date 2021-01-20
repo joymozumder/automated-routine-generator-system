@@ -4277,10 +4277,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       select: "",
+      select_2: 0,
+      day: 0,
       sessions: {
         session_name: "",
         status: false
@@ -4302,6 +4343,9 @@ __webpack_require__.r(__webpack_exports__);
       var uri = "/api/routine/generate/".concat(this.select);
       console.log(uri);
       this.axios.get(uri).then(function (response) {});
+    },
+    assignSelect: function assignSelect() {
+      this.select_2 = 1; //cosole.log(this.day);
     }
   }
 });
@@ -47569,75 +47613,208 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "md:flex md:items-center" }, [
-                      _c(
-                        "div",
-                        { staticClass: "md:w-full" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass:
-                                "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-full",
-                              attrs: {
-                                tag: "button",
-                                to: {
-                                  name: "manualassign",
-                                  params: { id: _vm.select }
-                                }
-                              }
-                            },
-                            [_vm._v("ManualAssign")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "router-link",
-                            {
-                              staticClass:
-                                "bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-3 rounded-full",
-                              attrs: {
-                                tag: "button",
-                                to: {
-                                  name: "addsemester",
-                                  params: { id: _vm.select }
-                                }
-                              }
-                            },
-                            [_vm._v("Add Semester")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "router-link",
-                            {
-                              staticClass:
-                                "bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-3 rounded-full",
-                              attrs: {
-                                tag: "button",
-                                to: {
-                                  name: "assigncourse",
-                                  params: { id: _vm.select }
-                                }
-                              }
-                            },
-                            [_vm._v("Assign Course")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "bg-red-500 hover:bg-orange-800 text-white font-bold py-2 px-3 rounded-full",
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.generateRoutine($event)
-                                }
-                              }
-                            },
-                            [_vm._v("Generate Routine ")]
-                          )
-                        ],
-                        1
-                      )
+                      _c("div", { staticClass: "md:w-full" }, [
+                        _vm.select_2 == 0
+                          ? _c(
+                              "div",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "bg-blue-500 hover:bg-blue-800 text-white font-bold py-1 px-1 rounded-full",
+                                    attrs: {
+                                      tag: "button",
+                                      to: {
+                                        name: "manualassign",
+                                        params: { id: _vm.select }
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("ManualAssign")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "bg-green-500 hover:bg-green-800 text-white font-bold py-1 px-1 rounded-full",
+                                    attrs: {
+                                      tag: "button",
+                                      to: {
+                                        name: "addsemester",
+                                        params: { id: _vm.select }
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Add Semester")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "bg-orange-500 hover:bg-orange-800 text-white font-bold py-1 px-1 rounded-full",
+                                    attrs: {
+                                      tag: "button",
+                                      to: {
+                                        name: "assigncourse",
+                                        params: { id: _vm.select }
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Assign Course")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "bg-red-500 hover:bg-orange-800 text-white font-bold py-1 px-1 rounded-full",
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.generateRoutine($event)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Generate Routine ")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "bg-red-500 hover:bg-orange-800 text-white font-bold py-1 px-1 rounded-full",
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.select_2 = 1
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Show Routine ")]
+                                )
+                              ],
+                              1
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.select_2 == 1
+                          ? _c(
+                              "div",
+                              { staticClass: "inset-0 top-0 pt-6" },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "md:flex md:items-center mb-6"
+                                  },
+                                  [
+                                    _vm._m(1),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "md:w-3/4" }, [
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.day,
+                                              expression: "day"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
+                                          attrs: { id: "grid-state" },
+                                          on: {
+                                            change: function($event) {
+                                              var $$selectedVal = Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function(o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function(o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                              _vm.day = $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "1" } },
+                                            [_vm._v("Saturday")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "2" } },
+                                            [_vm._v("Sunday")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "3" } },
+                                            [_vm._v("Monday")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "4" } },
+                                            [_vm._v("Tuesday")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "5" } },
+                                            [_vm._v("Wednesday")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "6" } },
+                                            [_vm._v("Thursday")]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "bg-blue-500 hover:bg-blue-800 text-white font-bold py-1 px-1 rounded-full",
+                                    attrs: {
+                                      tag: "button",
+                                      to: {
+                                        name: "routine",
+                                        params: {
+                                          session: _vm.select,
+                                          day: _vm.day
+                                        }
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Show")]
+                                )
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ])
                     ])
                   ])
                 ])
@@ -47665,6 +47842,26 @@ var staticRenderFns = [
         [
           _vm._v(
             "\n                                                Session Name\n                                            "
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/4" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
+          attrs: { for: "inline-course-code" }
+        },
+        [
+          _vm._v(
+            "\n                                                            Select Day\n                                                        "
           )
         ]
       )
@@ -63776,15 +63973,15 @@ var routes = [{
     component: _components_session_SelectSession_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
   }, {
     name: 'addsemester',
-    path: 'addsemester/:id',
+    path: ':id/addsemester',
     component: _components_session_AddSemester_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
   }, {
     name: 'assigncourse',
-    path: 'assigncourse/:id',
+    path: ':id/assigncourse',
     component: _components_session_AssignCourse_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
   }, {
     name: 'manualassign',
-    path: 'manualassign/:id',
+    path: ':id/manualassign',
     component: _components_session_ManualAssign_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
   }, {
     name: 'routine',
@@ -65194,8 +65391,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Joy\Desktop\automated-routine-generator-system\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Joy\Desktop\automated-routine-generator-system\resources\css\main.css */"./resources/css/main.css");
+__webpack_require__(/*! C:\Users\Jitun\Desktop\automated-routine-generator-system\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Jitun\Desktop\automated-routine-generator-system\resources\css\main.css */"./resources/css/main.css");
 
 
 /***/ })

@@ -104,17 +104,17 @@ const routes = [
                 },
                 {
                     name: 'addsemester',
-                    path: 'addsemester/:id',
+                    path: ':id/addsemester',
                     component: compAddSemester
                 },
                 {
                     name: 'assigncourse',
-                    path: 'assigncourse/:id',
+                    path: ':id/assigncourse',
                     component: compAssignCourse
                 },
                 {
                     name: 'manualassign',
-                    path: 'manualassign/:id',
+                    path: ':id/manualassign',
                     component: compManualAssign
                 },
                  {
