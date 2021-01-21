@@ -48,7 +48,12 @@ import compSemesterTable from "./components/session/SemesterTable.vue";
 
 
 
+import compTest from './components/Test.vue';
+import compTest2 from './components/Test2.vue';
+
+
 const routes = [
+    
     {
         name: 'login',
         path: '/',
@@ -158,7 +163,17 @@ const routes = [
                     name: 'semesters',
                     path: 'semesters',
                     component: compSemesterTable
-                }
+                },
+                {
+                    name: 'test2',
+                    path: 'test2',
+                    component: compTest2
+                },
+                {
+                    name: 'test',
+                    path: 'test',
+                    component: compTest
+                },
                 
                 
 
