@@ -42,6 +42,12 @@ import compTeacherTable from './components/user/TeacherTable.vue';
 import compEditUser from './components/user/EditUser.vue';
 
 
+import compSessionTable from "./components/session/SessionTable.vue";
+import compAssignTable from "./components/session/AssignTable.vue";
+import compSemesterTable from "./components/session/SemesterTable.vue";
+
+
+
 const routes = [
     {
         name: 'login',
@@ -137,7 +143,25 @@ const routes = [
                     name: 'edituser',
                     path: 'edituser/:id',
                     component: compEditUser
+                },
+                {
+                    name: 'sessions',
+                    path: 'sessions',
+                    component: compSessionTable
+                },
+                {
+                    name: 'assigncourses',
+                    path: 'assigncourses',
+                    component: compAssignTable
+                },
+                {
+                    name: 'semesters',
+                    path: 'semesters',
+                    component: compSemesterTable
                 }
+                
+                
+
                 
 
                 
