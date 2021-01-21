@@ -43149,7 +43149,34 @@ var render = function() {
             ],
             1
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "li",
+          {
+            staticClass: "w-full h-full py-3 px-2 border-b border-light-border"
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
+                attrs: { href: "tables.html" }
+              },
+              [
+                _c("i", { staticClass: "fas fa-table float-left mx-2" }),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: "/user/rooms" } }, [
+                  _vm._v("Rooms")
+                ]),
+                _vm._v(" "),
+                _vm._m(7)
+              ],
+              1
+            )
+          ]
+        )
       ])
     ]
   )
@@ -43161,6 +43188,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", [
       _c("i", { staticClass: "fas fa-angle-right float-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("i", { staticClass: "fa fa-angle-right float-right" })
     ])
   },
   function() {

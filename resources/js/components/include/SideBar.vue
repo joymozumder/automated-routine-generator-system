@@ -73,7 +73,14 @@
                         
                     </li>
 
-                    
+                    <li class="w-full h-full py-3 px-2 border-b border-light-border">
+                        <a href="tables.html"
+                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+                            <i class="fas fa-table float-left mx-2"></i>
+                            <router-link to="/user/rooms">Rooms</router-link>
+                            <span><i class="fa fa-angle-right float-right"></i></span>
+                        </a>
+                    </li>
 
 
 
