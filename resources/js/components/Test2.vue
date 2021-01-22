@@ -13,8 +13,11 @@
                 <template slot="tbody-tr" scope="props">
                     <td>
                          <button class="btn red darken-2 waves-effect waves-light compact-btn"
-                            @click.prevent="deletePost(name)">
-                            <i class="material-icons white-text">edit</i>
+                            >
+                            <!-- <i class="material-icons white-text">
+                                edit</i> -->
+                                <router-link tag="i" class="material-icons white-text" :to="{name: 'editroom', params: { id: props.row.id }}" >edit</router-link>
+                            
                         </button> 
                         <button class="btn red darken-2 waves-effect waves-light compact-btn"
                             @click.prevent="deletePost(props.row)"> 
