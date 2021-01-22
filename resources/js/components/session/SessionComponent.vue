@@ -102,6 +102,7 @@
 
 
     <!--modal-->
+    <!---------------------------------------Manual assign(start)--------------------------------------------------------->
     <div id='manualAssignModal' class="modal-wrapper">
                 <div class="overlay close-modal"></div>
                 <div class="modal modal-centered overflow-y-auto">
@@ -395,33 +396,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-                                        
-
-                                        
-
-
-                                      
-
-
-
-
-
-
-
-
-                                        
-
-
-
                                         <div class="mt-5">
                                 <button  @click="addManually" class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'> Add </button>
                                 <span class='close-modal cursor-pointer bg-red-200 hover:bg-red-500 text-red-900 font-bold py-2 px-4 rounded'>
@@ -436,10 +410,10 @@
                 </div>
             </div>
 
+<!--------------------------------------------Manual Assign(end)------------------------------------------------------------------->
 
 
-
-
+<!-------------------------------------------create Session start------------------------------------------------------------------>
         <div id='createSessionModal' class="modal-wrapper">
                 <div class="overlay close-modal"></div>
                 <div class="modal modal-centered">
@@ -485,10 +459,10 @@
                     </div>
                 </div>
             </div>
+<!------------------------------------------Create Session(End)------------------------------------------------------------------>
 
 
-
-
+<!-----------------------------------Assign Course(start)----------------------------------------------------------------->
             <div id='assignCourseModal' class="modal-wrapper">
                 <div class="overlay close-modal"></div>
                 <div class="modal modal-centered overflow-y-auto" >
@@ -744,8 +718,9 @@
                     </div>
                 </div>
             </div>
+<!--------------------------------------------Assign Course(End)--------------------------------------------------------------->
 
-
+<!--------------------------------------Add semester(start)--------------------------------------------------->
             <div id='addSemesterModal' class="modal-wrapper">
                 <div class="overlay close-modal"></div>
                 <div class="modal modal-centered">
@@ -804,36 +779,47 @@
                                                 </label>
                                             </div>
                                             <div class="md:w-3/4">
-                                                <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                           v-model="semester.section" id="grid-state">
-                                                        <option value="a">A</option>
-                                                        <option value="b">B</option>
-                                                        <option value="c">C</option>
-                                                        <option value="d">D</option>
-                                                        <option value="e">E</option>
-                                                        
-                                                    </select>
+                                                <label class="inline-flex items-center">
+                                                    <input type="checkbox" v-model="semester.section" value="a" class="form-checkbox" >
+                                                    <span class="ml-2"> A</span>
+                                                </label>
+                                                <label class="inline-flex items-center p-2">
+                                                    
+                                                </label>
+                                                <label class="inline-flex items-center ">
+                                                    <input type="checkbox" v-model="semester.section" value="b" class="form-checkbox" >
+                                                    <span class="ml-2">  B</span>
+                                                </label>
+                                                <label class="inline-flex items-center p-2">
+                                                    
+                                                </label>
+                                                <label class="inline-flex items-center">
+                                                    <input type="checkbox" v-model="semester.section" value="c" class="form-checkbox" >
+                                                    <span class="ml-2">  C</span>
+                                                </label>
+                                                <label class="inline-flex items-center p-2">
+                                                    &nbsp;
+                                                </label>
+                                                <label class="inline-flex items-center">
+                                                    <input type="checkbox" v-model="semester.section" value="d" class="form-checkbox" >
+                                                    <span class="ml-2">  D</span>
+                                                </label>
+                                                <label class="inline-flex items-center p-2">
+                                                    
+                                                </label>
+                                                <label class="inline-flex items-center">
+                                                    <input type="checkbox" v-model="semester.section" value="e" class="form-checkbox" >
+                                                    <span class="ml-2">  E</span>
+                                                </label>
                                                     
                                             </div>
                                         </div>
                                         
-                                        <div class="md:flex md:items-center mb-6">
-                                            <div class="md:w-1/4">
-                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
-                                                    for="inline-course-code">
-                                                    Total Student
-                                                </label>
-                                            </div>
-                                            <div class="md:w-3/4">
-                                                <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                   v-model="semester.total_student" id="inline-full-name" type="number" >
-                                            </div>
-                                        </div>
-                                        
+                                       
                                         
                                         
                                         <div class="mt-5">
-                                <button  @click="addSemester" class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'> Add </button>
+                                <button  @click.prevent="addSemester" class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'> Add </button>
                                 <span class='close-modal cursor-pointer bg-red-200 hover:bg-red-500 text-red-900 font-bold py-2 px-4 rounded'>
                                     Close
                                 </span>
@@ -844,7 +830,7 @@
                 </div>
             </div>
 
-
+<!-------------------------------------------Add semester(end)-------------------------------------------------------->
 
 
 
@@ -881,7 +867,7 @@
                 },
                 semester: {
                     semester:"",
-                    section:"",
+                    section:[],
                     total_student:0,
                     session_name:"",
                     status:true
@@ -1002,6 +988,8 @@
         addSemester(){
         
         this.semester.session_name=this.selected_session;
+        console.log(this.semester);
+            
          let uri = '/api/semester-section/create';
           this.axios.post(uri, this.semester).then((response) => {
          });

@@ -15,7 +15,7 @@ class CreateSemesterSectionsTable extends Migration
     {
         Schema::create('semester_sections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('semester')->unique();
+            $table->string('semester');
             $table->integer('total_student');
             $table->boolean('status');
             $table->string('session_name');

@@ -10,7 +10,7 @@
                 <th slot="thead-tr">
                     Actions
                 </th>
-                <template slot="tbody-tr" scope="props">
+                <template slot="tbody-tr" slot-scope="props">
                     <td>
                          <button class="btn red darken-2 waves-effect waves-light compact-btn"
                             >

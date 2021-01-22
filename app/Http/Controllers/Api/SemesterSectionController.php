@@ -46,7 +46,7 @@ class SemesterSectionController extends Controller
      */
     public function store(Request $request)
     {
-
+        /*
         $sem_sec = new SemesterSection();
         $str = (String)$request->semester;
         $sem =$str . $request->section;
@@ -57,6 +57,20 @@ class SemesterSectionController extends Controller
         $sem_sec->status = $request->status;
         if($sem_sec->save()){
             return new SemesterSectionResource($sem_sec);
+        }*/
+        
+        $sec = $request->section;
+        for($i=0;$i<sizeof($sec);$i++)
+        {
+            $sem_sec = new SemesterSection();
+            $str = (String)$request->semester;
+            $sem =$str . $sec[$i];
+
+            $sem_sec->semester = $sem;
+            $sem_sec->total_student = $request->total_student;
+            $sem_sec->session_name = $request->session_name;
+            $sem_sec->status = $request->status;
+            $sem_sec->save();
         }
     }
 
