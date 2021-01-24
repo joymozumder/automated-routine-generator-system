@@ -1,94 +1,101 @@
 <template>
-     <main class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2">
-			 <div id='recipients' class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-			 
-				
-				<table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
-					<thead>
-						<tr>
-							<th data-priority="1">ID</th>
-							<th data-priority="2">Course Code</th>
-							<th data-priority="3">Course Name</th>
-							<th data-priority="4">Credit</th>
-							<th data-priority="5">Type</th>
-							<th data-priority="6">status</th>
-							<th data-priority="7">Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr  v-for="course in courses" :key="course.id">
-							<td>{{ course.id }}</td>
-              <td>{{ course.code }}</td>
-							<td>{{ course.name }}</td>
-							<td>{{ course.credit }}</td>
-							<td>{{ course.type }}</td>
-							
-							<td v-if="course.status===0">
-                                                <i class="fas fa-times text-red-500 mx-2"></i>
-                            </td>
-                            <td v-else>
-                                                <i class="fas fa-check text-green-500 mx-2"></i>
-                            </td>
-                            <td>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-eye"></i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-edit"><router-link :to="{name: 'editcourse', params: { id: course.id }}" >Edit</router-link></i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-red-500" @click.prevent="deletePost(course.id)">
-                                                        <i class="fas fa-trash"></i>
-                                                </a>
-                            </td>
-						</tr>
-						
-					
-                        
+    
+    <main>
 
-                        
-
-                       
-
-
-                   
-
-                       
-
-                       
-
-					</tbody>
-					
-				</table>
-				
-				
-			</div>
-        </main>
-			
+         <compDataTable
+            title="Courses table"
+            :columns="tableColumns1"
+            :rows="courses"
+        > 
+                <th slot="thead-tr">
+                    Actions
+                </th>
+                <template slot="tbody-tr" slot-scope="props">
+                    <td>
+                         <button class="btn red darken-2 waves-effect waves-light compact-btn"
+                            >
+                            <!-- <i class="material-icons white-text">
+                                edit</i> -->
+                                <router-link tag="i" class="material-icons white-text" :to="{name: 'editcourse', params: { id: props.row.id }}" >edit</router-link>
+                            
+                        </button> 
+                        <button class="btn red darken-2 waves-effect waves-light compact-btn"
+                            @click.prevent="deletePost(props.row.id)"> 
+                            <i class="material-icons white-text">delete</i>
+                        </button>
+                    </td>
+                    
+                </template>
+        </compDataTable>
+    </main>
+       
+    
 </template>
 
 <script>
-  export default {
-      data() {
+import compDataTable from 'vue-materialize-datatable';
+export default {
+    data() {
         return {
-          courses: []
+             tableColumns1: [
+            
+		 	{
+		 		label: "Course Code",
+		 		field: "code",
+		 		numeric: false,
+ 		        html: false
+		 	},
+		 	{
+		 		label: "Course Name",
+		 		field: "name",
+		 		numeric: false,
+		 		html: false
+		 	},
+		 	{
+		 		label: "Credit",
+		 		field: "credit",
+		 		numeric: false,
+		 		html: false
+		 	},
+		 	{
+		 		label: "Type",
+		 		field: "type",
+		 		numeric: false,
+		 		html: false
+             },
+             {
+		 		label: "Status",
+		 		field: "status",
+		 		numeric: false,
+		 		html: false
+             }
+		 ],
+		courses: []
         }
-      },
-      created() {
+        
+       
+    },
+    created() {
         let uri = '/api/courses';
         this.axios.get(uri).then(response => {
           this.courses = response.data.data;
           //console.log(response);
         });
     },
-    methods: {
+     components:{
+            compDataTable 
+     },
+     methods: {
       deletePost(id)
       {
+		
+		//console.log(id);
         let uri = `/api/course/delete/${id}`;
-        console.log(id);
-        this.axios.delete(uri).then(response => {
-          this.courses.splice(this.courses.findIndex(course => course.id === id), 1);
-        });
+        
+         this.axios.delete(uri).then(response => {
+           this.courses.splice(this.courses.findIndex(course => course.id === id), 1);
+         });
       }
     }
-  }
+}
 </script>
-
-

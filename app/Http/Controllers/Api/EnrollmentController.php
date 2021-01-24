@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Enrollment;
+use App\SemesterSection;
 use App\Http\Resources\EnrollmentResource;
 
 class EnrollmentController extends Controller
@@ -16,10 +17,20 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        $enrollments = Enrollment::paginate(15);
+        $enrollments = Enrollment::paginate(500);
         return EnrollmentResource::collection($enrollments);
     }
+    public function dayShow($session , $day)
+    {
+        $obj = Enrollment::
+                where('day','=',$day)
+                ->where('session_name','=',$session)
+                ->orderBy('semester', 'ASC')
+                ->orderBy('start', 'ASC')->get()->groupBy('semester');
+        return EnrollmentResource::collection($obj);
 
+       
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -64,6 +75,7 @@ class EnrollmentController extends Controller
                 $enrollment->group = $gr;
                 $enrollment->duration = $duration1;
                 $enrollment->start = 0;
+                $enrollment->day = 0;
                 $enrollment->end = 0;
                 $enrollment->save();
             }
@@ -95,6 +107,53 @@ class EnrollmentController extends Controller
         if($enrollment->save()){
             return new EnrollmentResource($enrollment);
         }*/
+    }
+
+    public function manualStore(Request $request)
+    {
+        $duration1 = (double)$request->duration1;
+        $duration2 = (double)$request->duration2;
+        $group = $request->group;
+        //for ($i = 1; $i <= $group; $i++)
+        {
+           /* if($group == 1 )
+                    $gr = 0;
+                else
+                    $gr = $i;*/
+
+            if($duration1 != 0)
+            {
+                
+
+                $enrollment = new Enrollment();
+                $enrollment->session_name = $request->session_name;
+                $enrollment->semester = $request->semester;
+                $enrollment->teacher_code = $request->teacher_code;
+                $enrollment->course_code = $request->course_code;
+                $enrollment->room_number = 0;
+                $enrollment->day = 0;
+                $enrollment->group = $request->group;
+                $enrollment->duration = $duration1;
+                $enrollment->start = $request->start1;
+                $enrollment->end = $request->end1;
+                $enrollment->save();
+            }
+            if($duration2!=0)
+            {
+                $enrollment = new Enrollment();
+                $enrollment->session_name = $request->session_name;
+                $enrollment->semester = $request->semester;
+                $enrollment->teacher_code = $request->teacher_code;
+                $enrollment->course_code = $request->course_code;
+                $enrollment->room_number = 0;
+                $enrollment->day = 0;
+                $enrollment->group = $request->group;
+                $enrollment->duration = $duration2;
+                $enrollment->start = $request->start2;
+                $enrollment->end = $request->end2;
+                $enrollment->save();
+            }
+        }
     }
 
     /**

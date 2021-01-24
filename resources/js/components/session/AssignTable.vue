@@ -3,9 +3,9 @@
     <main>
 
          <compDataTable
-            title="Room table"
+            title="Assign Courses"
             :columns="tableColumns1"
-            :rows="rooms"
+            :rows="enrollments"
         > 
                 <th slot="thead-tr">
                     Actions
@@ -20,7 +20,7 @@
                             
                         </button> 
                         <button class="btn red darken-2 waves-effect waves-light compact-btn"
-                            @click.prevent="deletePost(props.row)"> 
+                            @click.prevent="deletePost(props.row.id)"> 
                             <i class="material-icons white-text">delete</i>
                         </button>
                     </td>
@@ -40,52 +40,46 @@ export default {
              tableColumns1: [
             
 		 	{
-		 		label: "Room Number",
-		 		field: "number",
+		 		label: "Session Name",
+		 		field: "session_name",
 		 		numeric: false,
  		        html: false
 		 	},
 		 	{
-		 		label: "Room Name",
-		 		field: "name",
+		 		label: "Semester",
+		 		field: "semester",
 		 		numeric: false,
 		 		html: false
 		 	},
 		 	{
-		 		label: "Room Type",
-		 		field: "type",
+		 		label: "Teacher Code",
+		 		field: "teacher_code",
 		 		numeric: false,
 		 		html: false
 		 	},
-		 	{
-		 		label: "Capacity",
-		 		field: "capacity",
+            {
+		 		label: "Course Code",
+		 		field: "course_code",
 		 		numeric: false,
 		 		html: false
              },
-             {
-		 		label: "status",
-		 		field: "status",
+            {
+		 		label: "Room Number",
+		 		field: "room_number",
 		 		numeric: false,
 		 		html: false
-             },
-             {
-		 		label: "id",
-		 		field: "id",
-		 		numeric: false,
-		 		html: false
-		 	}
+             }
 		 ],
-		rooms:[]
+		enrollments: []
         }
         
        
     },
     created() {
-        let uri = '/api/rooms';
+        let uri = '/api/enrollments';
+        //console.log(this.sessions.id);
         this.axios.get(uri).then(response => {
-          this.rooms = response.data.data;
-          //console.log(this.rooms);
+          this.enrollments = response.data.data;
           
         });
     },
@@ -93,14 +87,12 @@ export default {
             compDataTable 
      },
      methods: {
-      deletePost(row)
+      deletePost(id)
       {
-        let id=row.id;
-        console.log(row);
-        let uri = `/api/room/delete/${id}`;
-        
+        let uri = `/api/enrollment/delete/${id}`;
+        //console.log(id);
         this.axios.delete(uri).then(response => {
-           this.rooms.splice(this.rooms.findIndex(room => room.id === id), 1);
+          this.enrollments.splice(this.enrollments.findIndex(enrollment => enrollment.id === id), 1);
         });
       }
     }

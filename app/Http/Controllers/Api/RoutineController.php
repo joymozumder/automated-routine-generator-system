@@ -71,6 +71,7 @@ class RoutineController extends Controller
 
         $course = array(array("qid"=>0,"session_name"=>"","semester"=>"","section"=>"","teacher_code"=>"","course_code"=>"","room_number"=>0, "group"=>0,"duration"=>0,"start"=>0,"end"=>0,"course_type"=>0));
         $conflict = array(array("course_id"=>0,"tot_conflict"=>0));
+        $course_busy = array(array());
         
         
         for ($i = 0; $i < $dt["total"]; $i++)
@@ -91,9 +92,16 @@ class RoutineController extends Controller
             //$course[$i]["conflict"]         =   0;
             //$conflict[$i]["course_id"]      =   $i;
             //$conflict[$i]["tot_conflict"]      =   0;
+            for ($ts = 0; $ts < 95; $ts++)
+                {
+                    $course_busy[$i][$ts]=0;
+                }
         }
+        //$course[3]["start"] = 3;
+        //$course[3]["end"] = 5;
        //dd($course);
        //dd($conflict);
+       //dd($course_busy);
         
         //course entry complete
         /*******************************************************************************************************/
@@ -194,6 +202,66 @@ class RoutineController extends Controller
 
        //dd($conflict);
 
+       /*********************************************************************************************************/
+       //Manual entry:
+       
+       for ($i = 0; $i < $dt["total"]; $i++)
+       {
+           if($course[$i]["start"] != 0)
+           {
+               
+               $tst=$course[$i]["start"];
+               $tet=$course[$i]["end"] ;
+               for ($j = 0; $j < sizeof($rm); $j++)
+                    {
+                        if($room[$j]["room_type"] == $course[$i]["course_type"])
+                        {
+                            $flag = false;
+
+                            for($rt=$tst; $rt<=$tet; $rt++)
+                            {
+                                if($room[$j]["status"][$rt-1]==1)
+                                {
+                                    $flag = true;
+                                    break;
+                                }
+                                
+                            }
+                            
+                            if($flag == false)
+                            {
+                               
+                                $course[$i]["room_number"] = $room[$j]["room_number"];
+                                $course[$i]["start"] = $tst;
+                                $course[$i]["end"] = $tet;
+                                
+                                for($u=$tst; $u<=$tet; $u++)
+                                {
+                                    $room[$j]["status"][$u-1] = 1;
+                                }
+
+
+                            //adjacent 0
+
+                                for($g=0; $g<$dt["total"]; $g++)
+                                {
+                                    if($graph[$i][$g] != 0 && $course[$g]["room_number"]==0)
+                                    {
+                                       
+                                                for($cb=$tst; $cb<=$tet; $cb++)
+                                                {
+                                                    $course_busy[$g][$cb-1]=1;
+                                                }
+                                        
+                                        
+                                    }
+                                }
+                            }
+                        }
+                }
+            }
+       }
+//dd($course_busy);
 
         /**********************************************************************************************************/
         //generate routine:
@@ -206,6 +274,7 @@ class RoutineController extends Controller
             {
                 if($course[$conflict[$i]["course_id"]]["room_number"]==0 && $course[$conflict[$i]["course_id"]]["start"]<=$tm)
                 {
+                    
                     for ($j = 0; $j < sizeof($rm); $j++)
                     {
                         if($room[$j]["room_type"] == $course[$conflict[$i]["course_id"]]["course_type"])
@@ -229,7 +298,7 @@ class RoutineController extends Controller
 
                             for($rt=$tst; $rt<=$tet; $rt++)
                             {
-                                if($room[$j]["status"][$rt-1]==1)
+                                if($room[$j]["status"][$rt-1]==1 || $course_busy[$conflict[$i]["course_id"]][$rt-1])
                                 {
                                     $flag = true;
                                     break;
@@ -276,7 +345,7 @@ class RoutineController extends Controller
                                             }
                                         else
                                         {
-                                            $course[$conflict[$g]["course_id"]]["start"] = max($course[$conflict[$g]["course_id"]]["start"],$tet);
+                                            $course[$conflict[$g]["course_id"]]["start"] = max($course[$conflict[$g]["course_id"]]["start"],$tet+1);
                                         }
                                     }
                                 }
@@ -302,12 +371,13 @@ for ($i = 0; $i < $dt["total"]; $i++)
         {
             $obj = Enrollment::find( $course[$i]["qid"]); 
             $obj->room_number = $course[$i]["room_number"];
-            $obj->start = $course[$i]["start"];
-            $obj->end = $course[$i]["end"];
-            if($obj->save())
-            {
-                echo "hello";
-            }
+            $d = (int)($course[$i]["start"]/18)+1;
+            $st = $course[$i]["start"] - (($d-1)*18);
+            $et = $course[$i]["end"] - (($d-1)*18);
+            $obj->start = $st;
+            $obj->end = $et;
+            $obj->day = $d;
+            $obj->save();
         }
         
 

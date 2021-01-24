@@ -29,6 +29,8 @@
     },
     "dependencies": {
         "vue-axios": "^3.2.2",
-        "vue-router": "^3.4.9"
+        "vue-materialize-datatable": "^1.0.4",
+        "vue-router": "^3.4.9",
+        "vuetable-2": "^2.0.0-beta.4"
     }
 }

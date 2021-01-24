@@ -2,7 +2,7 @@
 <main class="bg-white-500 flex-1 p-3 overflow-hidden">
         <div class="flex flex-col">
                         <!-- Card Sextion Starts Here -->
-                        <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
+                        <div class="container mx-auto h-full flex flex-1 justify-center items-center">
                             <!--Horizontal form-->
                             <div class="mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2">
                                 <div class="bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b">
@@ -18,7 +18,7 @@
                                                 </label>
                                             </div>
                                             <div class="md:w-3/4">
-                                                <input class="bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light"
+                                                <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                     id="inline-full-name" v-model="semester.session_name" readonly type="text" >
                                             </div>
                                         </div>
@@ -77,7 +77,7 @@
                                                 </label>
                                             </div>
                                             <div class="md:w-3/4">
-                                                <input class="bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light"
+                                                <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                    v-model="semester.total_student" id="inline-full-name" type="number" >
                                             </div>
                                         </div>
@@ -143,7 +143,7 @@
         
          let uri = '/api/semester-section/create';
           this.axios.post(uri, this.semester).then((response) => {
-            this.$router.push({name: 'selectsession'});
+            this.$router.back();
          });
       }
          

@@ -3,9 +3,9 @@
     <main>
 
          <compDataTable
-            title="Room table"
+            title="Sessions table"
             :columns="tableColumns1"
-            :rows="rooms"
+            :rows="sessions"
         > 
                 <th slot="thead-tr">
                     Actions
@@ -20,7 +20,7 @@
                             
                         </button> 
                         <button class="btn red darken-2 waves-effect waves-light compact-btn"
-                            @click.prevent="deletePost(props.row)"> 
+                            @click.prevent="deletePost(props.row.id)"> 
                             <i class="material-icons white-text">delete</i>
                         </button>
                     </td>
@@ -40,67 +40,41 @@ export default {
              tableColumns1: [
             
 		 	{
-		 		label: "Room Number",
-		 		field: "number",
+		 		label: "Session Name",
+		 		field: "session_name",
 		 		numeric: false,
  		        html: false
 		 	},
-		 	{
-		 		label: "Room Name",
-		 		field: "name",
-		 		numeric: false,
-		 		html: false
-		 	},
-		 	{
-		 		label: "Room Type",
-		 		field: "type",
-		 		numeric: false,
-		 		html: false
-		 	},
-		 	{
-		 		label: "Capacity",
-		 		field: "capacity",
-		 		numeric: false,
-		 		html: false
-             },
-             {
-		 		label: "status",
+            {
+		 		label: "Status",
 		 		field: "status",
 		 		numeric: false,
 		 		html: false
-             },
-             {
-		 		label: "id",
-		 		field: "id",
-		 		numeric: false,
-		 		html: false
-		 	}
+             }
 		 ],
-		rooms:[]
+		sessions: []
         }
         
        
     },
     created() {
-        let uri = '/api/rooms';
+        let uri = '/api/sessions';
+        console.log(this.sessions.id);
         this.axios.get(uri).then(response => {
-          this.rooms = response.data.data;
-          //console.log(this.rooms);
+          this.sessions = response.data.data;
           
         });
     },
      components:{
             compDataTable 
      },
-     methods: {
-      deletePost(row)
+    methods: {
+      deletePost(id)
       {
-        let id=row.id;
-        console.log(row);
-        let uri = `/api/room/delete/${id}`;
-        
+        let uri = `/api/session/delete/${id}`;
+        console.log(id);
         this.axios.delete(uri).then(response => {
-           this.rooms.splice(this.rooms.findIndex(room => room.id === id), 1);
+          this.sessions.splice(this.sessions.findIndex(session => session.id === id), 1);
         });
       }
     }
