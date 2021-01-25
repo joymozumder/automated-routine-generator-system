@@ -82,15 +82,7 @@
 
 
 
-                                   <div class="md:flex md:items-center mb-6">
-                                            <div class="md:w-1/3"></div>
-                                            <label class="md:w-2/3 block text-grey font-regular">
-                                                <input class="mr-2 leading-tight" value="true" v-model="course.status" type="checkbox">
-                                                <span class="text-sm">
-                                                    Status
-                                                </span>
-                                            </label>
-                                        </div>
+                                  
 
                                         
                                         <div class="md:flex md:items-center">

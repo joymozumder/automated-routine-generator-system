@@ -6,10 +6,46 @@
                             <!--Horizontal form-->
                             <div class="mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2">
                                 <div class="bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b">
-                                   Update Course Information
+                                    Update Enrollment
                                 </div>
                                 <div class="p-3">
                                     <form class="w-full">
+                                        <div class="md:flex md:items-center mb-6">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Session Name
+                                                </label>
+                                            </div>
+                                            <div class="md:w-3/4">
+                                                <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                           v-model="enrollment.session_name" id="grid-state">
+                                                        
+                                                        <option v-for="session in sessions" :key="session.id">{{session.session_name}}</option>
+                                                    </select>
+                                                    
+                                            </div>
+                                        </div>
+
+
+                                        <div class="md:flex md:items-center mb-6">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Teacher Code
+                                                </label>
+                                            </div>
+                                            <div class="md:w-3/4">
+                                                <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                           v-model="enrollment.teacher_code" id="grid-state">
+                                                        
+                                                        <option v-for="teacher in teachers" :key="teacher.id">{{teacher.code}}</option>
+                                                    </select>
+                                                    
+                                            </div>
+                                        </div>
+
+
                                         <div class="md:flex md:items-center mb-6">
                                             <div class="md:w-1/4">
                                                 <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
@@ -18,77 +54,27 @@
                                                 </label>
                                             </div>
                                             <div class="md:w-3/4">
-                                                <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                    id="inline-full-name" type="text" v-model="course.code">
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="md:flex md:items-center mb-6">
-                                            <div class="md:w-1/4">
-                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
-                                                    for="inline-course-code">
-                                                    Course Name
-                                                </label>
-                                            </div>
-                                            <div class="md:w-3/4">
-                                                <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                    id="inline-full-name" type="text" v-model="course.name">
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                        <div class="md:flex md:items-center mb-6">
-                                            <div class="md:w-1/4">
-                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
-                                                    for="inline-course-code">
-                                                    Credit
-                                                </label>
-                                            </div>
-                                            <div class="md:w-3/4">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                          v-model="course.credit"  id="grid-state">
-                                                        <option value=1>1</option>
-                                                        <option value=2>2</option>
-                                                        <option value=3>3</option>
-                                                        <option value=4>4</option>
-                                                        <option value=5>5</option>
-                                                        <option value=6>6</option>
+                                                           v-model="enrollment.course_code" id="grid-state">
+                                                        
+                                                        <option v-for="course in courses" :key="course.id">{{course.code}}</option>
                                                     </select>
                                                     
                                             </div>
                                         </div>
 
-                                        <div class="md:flex md:items-center mb-6">
-                                            <div class="md:w-1/4">
-                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
-                                                    for="inline-course-code">
-                                                    Course Type
-                                                </label>
-                                            </div>
-                                            <div class="md:w-3/4">
-                                                
-                                                <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                          v-model="course.type" id="grid-state">
-                                                        <option value=0>Theory Class</option>
-                                                        <option value=1>CSE LAB</option>
-                                                        <option value=2>EEE LAB</option>
-                                                        <option value=3>Communication LAB</option>
-                                                        <option value=4>Mechanical LAB</option>
-                                                        <option value=5>Physics LAB</option>
-                                                    </select>
-                                                    
-                                            </div>
-                                        </div>
-
-
+                                       
+                                        
 
                                         
+                                       
+
                                         
                                         <div class="md:flex md:items-center">
                                             <div class="md:w-1/3"></div>
                                             <div class="md:w-2/3">
-                                                <button @click.prevent="updateCourse" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
-                                                    Update Course 
+                                                <button @click.prevent="updateEnrollment" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
+                                                    Update Session 
                                                 </button>
                                             </div>
                                         </div>
@@ -105,31 +91,63 @@
 
                     
                     </div>
-    </main>      
+    </main>                
 </template>
+
 
 <script>
     export default {
 
       data() {
         return {
-          course: {}
+          enrollment: {},
+          sessions:{},
+          courses:{},
+          teachers:{},
         }
       },
       created() {
-        let uri = `/api/course/edit/${this.$route.params.id}`;
-        //console.log(this.$route.params.id);
-         this.axios.get(uri).then((response) => {
-             this.course = response.data.data; 
-         });
+
+          
+        let uri = `/api/enrollment/edit/${this.$route.params.id}`;
+        this.axios.get(uri).then((response) => {
+            this.enrollment = response.data.data; 
+            //console.log(this.enrollment);
+        });
+
+        uri = `/api/teachers`;
+            
+        this.axios.get(uri).then((response) => {
+            this.teachers = response.data.data;
+            console.log(this.teachers);
+        });
+
+        uri = `/api/sessions`;
+            
+        this.axios.get(uri).then((response) => {
+            this.sessions = response.data.data;
+            console.log(this.teachers);
+        });
+
+
+        uri = `/api/courses`;
+            
+        this.axios.get(uri).then((response) => {
+            this.courses = response.data.data;
+            //console.log(this.courses);
+        });
+
+
+
+
       },
       methods: {
-        updateCourse() {
+        updateEnrollment() {
 
-            //console.log(this.course);
-            let uri = `/api/course/update/${this.$route.params.id}`;
-            this.axios.post(uri, this.course).then((response) => {
-              this.$router.push({name: 'courses'});
+            console.log(this.enrollment);
+            let uri = `/api/enrollment/update/${this.$route.params.id}`;
+            this.axios.post(uri, this.enrollment).then((response) => {
+              this.$router.push({name: 'assigncourses'});
             });
         }
       }

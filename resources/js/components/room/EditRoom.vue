@@ -79,15 +79,7 @@
 
 
                                     
-                                    <div class="md:flex md:items-center mb-6">
-                                        <div class="md:w-1/3"></div>
-                                        <label class="md:w-2/3 block text-grey font-regular">
-                                            <input class="mr-2 leading-tight" v-model="room.status" type="checkbox">
-                                            <span class="text-sm">
-                                                Status
-                                            </span>
-                                        </label>
-                                    </div>
+                                    
                                     <div class="md:flex md:items-center">
                                         <div class="md:w-1/3"></div>
                                         <div class="md:w-2/3">

@@ -31,6 +31,9 @@ import compEditRoom from './components/room/EditRoom.vue';
 import compRoomTable from './components/room/RoomTable.vue';
 
 import compCreateSession from './components/session/createSession.vue';
+import compEditSession from './components/session/EditSession.vue';
+import compSessionTable from "./components/session/SessionTable.vue";
+
 import compSessionComponent from './components/session/SessionComponent.vue';
 import compSelectSession from './components/session/SelectSession.vue';
 import compAddSemester from './components/session/AddSemester.vue';
@@ -38,18 +41,23 @@ import compAssignCourse from './components/session/AssignCourse.vue';
 import compManualAssign from './components/session/ManualAssign.vue';
 import compRoutine from './components/session/Routine.vue';
 
+import compAddTeacher from './components/user/AddTeacher.vue';
 import compTeacherTable from './components/user/TeacherTable.vue';
-import compEditUser from './components/user/EditUser.vue';
+import compEditTeacher from './components/user/EditTeacher.vue';
 
 
-import compSessionTable from "./components/session/SessionTable.vue";
+
 import compAssignTable from "./components/session/AssignTable.vue";
+import compEditEnrollment from "./components/session/EditEnrollment.vue";
+
 import compSemesterTable from "./components/session/SemesterTable.vue";
 
 
 
 import compTest from './components/Test.vue';
 import compTest2 from './components/Test2.vue';
+import compTest3 from './components/Test3.vue';
+import compTest4 from './components/Test4.vue';
 
 
 const routes = [
@@ -110,6 +118,11 @@ const routes = [
                     component: compCreateSession
                 },
                 {
+                    name: 'editsession',
+                    path: 'editsession/:id',
+                    component: compEditSession
+                },
+                {
                     name: 'selectsession',
                     path: 'selectsession',
                     component: compSelectSession
@@ -140,14 +153,19 @@ const routes = [
                     component: compRoutine
                 },
                 {
+                    name: 'addteacher',
+                    path: 'addteacher',
+                    component: compAddTeacher
+                },
+                {
                     name: 'teachers',
                     path: 'teachers',
                     component: compTeacherTable
                 },
                 {
-                    name: 'edituser',
-                    path: 'edituser/:id',
-                    component: compEditUser
+                    name: 'editteacher',
+                    path: 'editteacher/:id',
+                    component: compEditTeacher
                 },
                 {
                     name: 'sessions',
@@ -160,19 +178,35 @@ const routes = [
                     component: compAssignTable
                 },
                 {
+                    name: 'editenrollment',
+                    path: 'editenrollment/:id',
+                    component: compEditEnrollment
+                },
+                {
                     name: 'semesters',
                     path: 'semesters',
                     component: compSemesterTable
+                },
+                {
+                    name: 'test',
+                    path: 'test',
+                    component: compTest
                 },
                 {
                     name: 'test2',
                     path: 'test2',
                     component: compTest2
                 },
+                
                 {
-                    name: 'test',
-                    path: 'test',
-                    component: compTest
+                    name: 'test3',
+                    path: 'test3',
+                    component: compTest3
+                },
+                {
+                    name: 'test4',
+                    path: 'test4',
+                    component: compTest4
                 },
                 
                 
