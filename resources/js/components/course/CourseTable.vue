@@ -9,7 +9,7 @@
 
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                                  <!-- <button class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50" data-modal='createSessionModal' >Create Session</button> -->
-                                <router-link tag="button" class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
+                                <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
                                 :to="{name: 'addcourse'}">Create Course</router-link>
                             <div class="p-3">
         <compDataTable
@@ -38,7 +38,7 @@
                          
 
 
-                        <router-link tag="button"  class="btn  bg-green-500 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editcourse', params: { id: props.row.id }}" >
+                        <router-link tag="button"  class="btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editcourse', params: { id: props.row.id }}" >
                              <i class="material-icons white-text">
                                 edit</i>
                          </router-link>
@@ -46,7 +46,7 @@
 
 
 
-                        <button class="btn  bg-red-500 darken-2 waves-effect waves-light compact-btn"
+                        <button class="btn  bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn"
                             @click.prevent="deletePost(props.row.id)"> 
                             <i class="material-icons white-text">delete</i>
                         </button>
@@ -111,6 +111,7 @@ export default {
           this.courses = response.data.data;
           //console.log(response);
           for(var i=0;i<this.courses.length;i++){
+              
                 if(this.courses[i].type==0)
                      this.courses[i].type="Theory Class";
                 else if(this.courses[i].type==1)

@@ -1,10 +1,6 @@
-
-
 <template>
-
-
-       
-            <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
+    
+    <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
 
                 <div class="flex flex-1">
                    
@@ -12,15 +8,16 @@
                     <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
 
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-                                 <router-link tag="button" class="modal-trigger bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
-                                :to="{name: 'addroom'}">Create Room</router-link>
+                                 <!-- <button class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50" data-modal='createSessionModal' >Create Session</button> -->
+                                <router-link tag="button" class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
+                                :to="{name: 'addcourse'}">Create Course</router-link>
                             <div class="p-3">
-                                 <compDataTable
+        <compDataTable
              
-            title="Room Table"
+            title="Courses Table"
             
             :columns="tableColumns1"
-            :rows="rooms"
+            :rows="courses"
             :clickable="false"
             :sortable="true"
             
@@ -33,41 +30,31 @@
 
         > 
 
-
-
-
-
-
-
-
-
-
                 <th slot="thead-tr">
                     Actions
                 </th>
                 <template slot="tbody-tr" slot-scope="props">
                     <td>
                          
-               
-                         <router-link tag="button"  class="btn  bg-green-500 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editroom', params: { id: props.row.id }}" >
+
+
+                        <router-link tag="button"  class="btn  bg-green-500 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editcourse', params: { id: props.row.id }}" >
                              <i class="material-icons white-text">
                                 edit</i>
                          </router-link>
-                       
-                         
 
-                        <button class="btn bg-red-500 darken-2 waves-effect waves-light compact-btn"
+
+
+
+                        <button class="btn  bg-red-500 darken-2 waves-effect waves-light compact-btn"
                             @click.prevent="deletePost(props.row.id)"> 
                             <i class="material-icons white-text">delete</i>
                         </button>
-
                     </td>
                     
                 </template>
         </compDataTable>
-
-       
-                            </div>
+                  </div>
                         </div>
                     </div>
                     <!--/Grid Form-->
@@ -76,15 +63,6 @@
         
         <!-- _____________________________________________ -->
             </main>
-
-           
-
-
-                                           
-
-
- 
-   
        
     
 </template>
@@ -95,66 +73,56 @@ export default {
     data() {
         return {
              tableColumns1: [
-           
+            
+		 	
 		 	{
-		 		label: "Room Number",
-		 		field: "number",
-		 		numeric: false,
- 		        html: false
-		 	},
-		 	{
-		 		label: "Room Name",
+		 		label: "Course Name",
 		 		field: "name",
 		 		numeric: false,
 		 		html: false
 		 	},
 		 	{
-		 		label: "Room Type",
+		 		label: "Type",
 		 		field: "type",
 		 		numeric: false,
 		 		html: false
-		 	},
-		 	{
-		 		label: "Capacity",
-		 		field: "capacity",
+             },
+             {
+		 		label: "Credit",
+		 		field: "credit",
 		 		numeric: false,
 		 		html: false
-             }
+		 	},
 		 ],
-        rooms:[],
-        
+		courses: []
         }
         
        
     },
     created() {
-        let uri = '/api/rooms';
+        let uri = '/api/courses';
         this.axios.get(uri).then(response => {
-          this.rooms = response.data.data;
-          
-          console.log(this.rooms);
-          for(var i=0;i<this.rooms.length;i++){
-                if(this.rooms[i].type==0)
-                     this.rooms[i].type="Theory Class";
-                else if(this.rooms[i].type==1)
-                     this.rooms[i].type="CSE LAB";
-                else if(this.rooms[i].type==2)
-                      this.rooms[i].type="EEE LAB";
-                else if(this.rooms[i].type==3)
-                     this.rooms[i].type="Communication LAB";
-                else if(this.rooms.type==4)
-                      this.rooms[i].type="Mechanical LAB";
-                else if(this.rooms[i].type==5)
-                      this.rooms[i].type="Physics LAB";
-                else    
-                      this.rooms[i].type="none";
-          }
-         
-        
-        });
+          this.courses = response.data.data;
+          //console.log(response);
+          for(var i=0;i<this.courses.length;i++){
 
-        
-        
+                this.courses[i].name=this.courses[i].name+" - "+this.courses[i].code;
+                if(this.courses[i].type==0)
+                     this.courses[i].type="Theory Class";
+                else if(this.courses[i].type==1)
+                     this.courses[i].type="CSE LAB";
+                else if(this.courses[i].type==2)
+                      this.courses[i].type="EEE LAB";
+                else if(this.courses[i].type==3)
+                     this.courses[i].type="Communication LAB";
+                else if(this.courses.type==4)
+                      this.courses[i].type="Mechanical LAB";
+                else if(this.courses[i].type==5)
+                      this.courses[i].type="Physics LAB";
+                else    
+                      this.courses[i].type="none";
+          }
+        });
     },
      components:{
             compDataTable 
@@ -162,24 +130,14 @@ export default {
      methods: {
       deletePost(id)
       {
+		
+		//console.log(id);
+        let uri = `/api/course/delete/${id}`;
         
-        console.log(id);
-        let uri = `/api/room/delete/${id}`;
-        
-        this.axios.delete(uri).then(response => {
-           this.rooms.splice(this.rooms.findIndex(room => room.id === id), 1);
-        });
-      },
-      editRoom(id){
-            
-            let uri = `/api/room/edit/${id}`;
-            this.axios.get(uri).then((response) => {
-                this.room = response.data.data;
-                console.log(this.room); 
-            });
-            
-      },
-      
+         this.axios.delete(uri).then(response => {
+           this.courses.splice(this.courses.findIndex(course => course.id === id), 1);
+         });
+      }
     }
 }
 </script>

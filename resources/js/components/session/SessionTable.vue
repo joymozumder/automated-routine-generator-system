@@ -8,12 +8,12 @@
                     <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
 
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-                                <router-link tag="button" class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
+                                <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
                                 :to="{name: 'createsession'}">Create Session</router-link>
                             <div class="p-3">
                                     <compDataTable
                                         
-                                        title="Room Table"
+                                        title="Session Table"
                                         
                                         :columns="tableColumns1"
                                         :rows="sessions"
@@ -37,12 +37,12 @@
 
 
 
-                                                    <router-link tag="button"  class="btn  bg-green-500 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editsession', params: { id: props.row.id }}" >
+                                                    <router-link tag="button"  class="btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editsession', params: { id: props.row.id }}" >
                                                         <i class="material-icons white-text">
                                                             edit</i>
                                                     </router-link>
 
-                                                    <button class="btn bg-red-500 darken-2 waves-effect waves-light compact-btn"
+                                                    <button class="btn bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn"
                                                         @click.prevent="deletePost(props.row.id)"> 
                                                         <i class="material-icons white-text">delete</i>
                                                     </button>
