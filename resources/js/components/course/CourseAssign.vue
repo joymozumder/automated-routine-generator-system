@@ -18,9 +18,15 @@
                                                     Session Name
                                                 </label>
                                             </div>
+                                            
+
                                             <div class="md:w-3/4">
-                                                <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                    id="inline-full-name" type="text" v-model="selected_session">
+                                                <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                          v-model="assigncourse.session_name"  id="grid-state">
+                                                        
+                                                        <option v-for="session in sessions" :key="session.id">{{session.session_name}}</option>
+                                                    </select>
+                                                    
                                             </div>
                                         </div>
 
@@ -439,6 +445,7 @@
                 //console.log(this.savecourse);
                 let uri = '/api/enrollment/create';
                 this.axios.post(uri, this.savecourse).then((response) => {
+                    this.$router.push({name: 'assigncourses'});
                 //this.$router.go(-1);
           });
             },

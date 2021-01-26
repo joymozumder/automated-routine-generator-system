@@ -24,6 +24,7 @@ import compHomeComponent from './components/HomeComponent.vue';
 import compAddCourse from './components/course/AddCourse.vue';
 import compCourseTable from './components/course/CourseTable.vue';
 import compEditCourse from './components/course/EditCourse.vue';
+import compCourseAssign from './components/course/CourseAssign.vue';
 
 
 import compAddRoom from './components/room/AddRoom.vue';
@@ -171,6 +172,11 @@ const routes = [
                     name: 'sessions',
                     path: 'sessions',
                     component: compSessionTable
+                },
+                {
+                    name: 'courseassign',
+                    path: 'courseassign',
+                    component: compCourseAssign
                 },
                 {
                     name: 'assigncourses',
