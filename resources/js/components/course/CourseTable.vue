@@ -110,6 +110,22 @@ export default {
         this.axios.get(uri).then(response => {
           this.courses = response.data.data;
           //console.log(response);
+          for(var i=0;i<this.courses.length;i++){
+                if(this.courses[i].type==0)
+                     this.courses[i].type="Theory Class";
+                else if(this.courses[i].type==1)
+                     this.courses[i].type="CSE LAB";
+                else if(this.courses[i].type==2)
+                      this.courses[i].type="EEE LAB";
+                else if(this.courses[i].type==3)
+                     this.courses[i].type="Communication LAB";
+                else if(this.courses.type==4)
+                      this.courses[i].type="Mechanical LAB";
+                else if(this.courses[i].type==5)
+                      this.courses[i].type="Physics LAB";
+                else    
+                      this.courses[i].type="none";
+          }
         });
     },
      components:{

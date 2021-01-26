@@ -2219,16 +2219,7 @@ __webpack_require__.r(__webpack_exports__);
         numeric: false,
         html: false
       }],
-      rooms: [],
-      newRooms: [],
-      test: {
-        number: 0,
-        name: "",
-        type: "",
-        capacity: 0,
-        id: 1,
-        status: 1
-      }
+      rooms: []
     };
   },
   created: function created() {
@@ -2238,39 +2229,10 @@ __webpack_require__.r(__webpack_exports__);
     this.axios.get(uri).then(function (response) {
       _this.rooms = response.data.data;
       console.log(_this.rooms);
-      /*for(var i=0;i<this.rooms.length;i++)
-        this.room[i] = this.test;
-      //console.log("room");
-      //console.log(this.room[0]);
-      for(var i=0;i<this.rooms.length;i++){
-            console.log(i);
-            
-            this.room[i].name = this.rooms[i].name;
-            console.log(this.room[i].name);
-            /*this.test.number=this.rooms[i].number;
-            
-            this.test.name=this.rooms[i].name;
-            this.test.capacity=this.rooms[i].capacity;
-              if(this.rooms[i].type==0)
-                 this.test.type="Theory Class";
-            else if(this.rooms[i].type==1)
-                 this.test.type="CSE LAB";
-            else if(this.rooms[i].type==2)
-                  this.test.type="EEE LAB";
-            else if(this.rooms[i].type==3)
-                  this.test.type="Communication LAB";
-            else if(this.rooms.type==4)
-                  this.test.type="Mechanical LAB";
-            else if(this.rooms[i].type==5)
-                  this.test.type="Physics LAB";
-            else    
-                  this.test.type="none";
-              console.log(this.test);
-              this.room[i]=this.test;   
-              }
-      console.log(this.room[0]);*/
 
-      _this.genRoomType();
+      for (var i = 0; i < _this.rooms.length; i++) {
+        if (_this.rooms[i].type == 0) _this.rooms[i].type = "Theory Class";else if (_this.rooms[i].type == 1) _this.rooms[i].type = "CSE LAB";else if (_this.rooms[i].type == 2) _this.rooms[i].type = "EEE LAB";else if (_this.rooms[i].type == 3) _this.rooms[i].type = "Communication LAB";else if (_this.rooms.type == 4) _this.rooms[i].type = "Mechanical LAB";else if (_this.rooms[i].type == 5) _this.rooms[i].type = "Physics LAB";else _this.rooms[i].type = "none";
+      }
     });
   },
   components: {
@@ -2296,14 +2258,6 @@ __webpack_require__.r(__webpack_exports__);
         _this3.room = response.data.data;
         console.log(_this3.room);
       });
-    },
-    genRoomType: function genRoomType() {
-      //console.log("hello");
-      for (var i = 0; i < this.rooms.length; i++) {
-        if (this.rooms[i].type == 0) this.rooms[i].type = "cse";
-      }
-
-      console.log(this.room);
     }
   }
 });
@@ -3627,6 +3581,10 @@ __webpack_require__.r(__webpack_exports__);
     var uri = '/api/courses';
     this.axios.get(uri).then(function (response) {
       _this.courses = response.data.data; //console.log(response);
+
+      for (var i = 0; i < _this.courses.length; i++) {
+        if (_this.courses[i].type == 0) _this.courses[i].type = "Theory Class";else if (_this.courses[i].type == 1) _this.courses[i].type = "CSE LAB";else if (_this.courses[i].type == 2) _this.courses[i].type = "EEE LAB";else if (_this.courses[i].type == 3) _this.courses[i].type = "Communication LAB";else if (_this.courses.type == 4) _this.courses[i].type = "Mechanical LAB";else if (_this.courses[i].type == 5) _this.courses[i].type = "Physics LAB";else _this.courses[i].type = "none";
+      }
     });
   },
   components: {
@@ -4258,6 +4216,10 @@ __webpack_require__.r(__webpack_exports__);
     var uri = '/api/rooms';
     this.axios.get(uri).then(function (response) {
       _this.rooms = response.data.data; //console.log(this.rooms);
+
+      for (var i = 0; i < _this.rooms.length; i++) {
+        if (_this.rooms[i].type == 0) _this.rooms[i].type = "Theory Class";else if (_this.rooms[i].type == 1) _this.rooms[i].type = "CSE LAB";else if (_this.rooms[i].type == 2) _this.rooms[i].type = "EEE LAB";else if (_this.rooms[i].type == 3) _this.rooms[i].type = "Communication LAB";else if (_this.rooms.type == 4) _this.rooms[i].type = "Mechanical LAB";else if (_this.rooms[i].type == 5) _this.rooms[i].type = "Physics LAB";else _this.rooms[i].type = "none";
+      }
     });
   },
   components: {

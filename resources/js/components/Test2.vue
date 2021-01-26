@@ -122,15 +122,7 @@ export default {
              }
 		 ],
         rooms:[],
-        newRooms:[],
-        test:{
-              number:0,
-              name:"",
-              type:"",
-              capacity:0,
-              id:1,
-              status:1
-        }
+        
         }
         
        
@@ -141,40 +133,24 @@ export default {
           this.rooms = response.data.data;
           
           console.log(this.rooms);
-          /*for(var i=0;i<this.rooms.length;i++)
-            this.room[i] = this.test;
-        //console.log("room");
-        //console.log(this.room[0]);
           for(var i=0;i<this.rooms.length;i++){
-                console.log(i);
-                
-                this.room[i].name = this.rooms[i].name;
-                console.log(this.room[i].name);
-                /*this.test.number=this.rooms[i].number;
-                
-                this.test.name=this.rooms[i].name;
-                this.test.capacity=this.rooms[i].capacity;
-
                 if(this.rooms[i].type==0)
-                     this.test.type="Theory Class";
+                     this.rooms[i].type="Theory Class";
                 else if(this.rooms[i].type==1)
-                     this.test.type="CSE LAB";
+                     this.rooms[i].type="CSE LAB";
                 else if(this.rooms[i].type==2)
-                      this.test.type="EEE LAB";
+                      this.rooms[i].type="EEE LAB";
                 else if(this.rooms[i].type==3)
-                      this.test.type="Communication LAB";
+                     this.rooms[i].type="Communication LAB";
                 else if(this.rooms.type==4)
-                      this.test.type="Mechanical LAB";
+                      this.rooms[i].type="Mechanical LAB";
                 else if(this.rooms[i].type==5)
-                      this.test.type="Physics LAB";
+                      this.rooms[i].type="Physics LAB";
                 else    
-                      this.test.type="none";
-                  console.log(this.test);
-                  this.room[i]=this.test;   
-
-                }
-         console.log(this.room[0]);*/
-        this.genRoomType();
+                      this.rooms[i].type="none";
+          }
+         
+        
         });
 
         
@@ -203,14 +179,7 @@ export default {
             });
             
       },
-      genRoomType(){
-          //console.log("hello");
-          for(var i=0;i<this.rooms.length;i++)
-          {
-             if(this.rooms[i].type==0) this.rooms[i].type="cse";
-          }
-          console.log(this.room);
-      }
+      
     }
 }
 </script>

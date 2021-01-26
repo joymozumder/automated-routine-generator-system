@@ -132,6 +132,22 @@ export default {
         this.axios.get(uri).then(response => {
           this.rooms = response.data.data;
           //console.log(this.rooms);
+          for(var i=0;i<this.rooms.length;i++){
+                if(this.rooms[i].type==0)
+                     this.rooms[i].type="Theory Class";
+                else if(this.rooms[i].type==1)
+                     this.rooms[i].type="CSE LAB";
+                else if(this.rooms[i].type==2)
+                      this.rooms[i].type="EEE LAB";
+                else if(this.rooms[i].type==3)
+                     this.rooms[i].type="Communication LAB";
+                else if(this.rooms.type==4)
+                      this.rooms[i].type="Mechanical LAB";
+                else if(this.rooms[i].type==5)
+                      this.rooms[i].type="Physics LAB";
+                else    
+                      this.rooms[i].type="none";
+          }
           
         });
     },
