@@ -9,7 +9,7 @@
 
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                                  <!-- <button class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50" data-modal='createSessionModal' >Create Session</button> -->
-                                <router-link tag="button" class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
+                                <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
                                 :to="{name: 'courseassign'}">Create Course</router-link>
                             <div class="p-3">
                                  <compDataTable
@@ -36,11 +36,11 @@
                     <td>
                       
 
-                        <router-link tag="button"  class="btn  bg-green-500 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editenrollment', params: { id: props.row.id }}" >
+                        <router-link tag="button"  class="btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editenrollment', params: { id: props.row.id }}" >
                              <i class="material-icons white-text">
                                 edit</i>
                          </router-link>
-                        <button class="btn bg-red-500 darken-2 waves-effect waves-light compact-btn"
+                        <button class="btn bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn"
                             @click.prevent="deletePost(props.row.id)"> 
                             <i class="material-icons white-text">delete</i>
                         </button>

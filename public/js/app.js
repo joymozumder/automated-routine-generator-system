@@ -2172,66 +2172,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       tableColumns1: [{
-        label: "Room Number",
-        field: "number",
-        numeric: false,
-        html: false
-      }, {
-        label: "Room Name",
+        label: "Course Name",
         field: "name",
         numeric: false,
         html: false
       }, {
-        label: "Room Type",
+        label: "Type",
         field: "type",
         numeric: false,
         html: false
       }, {
-        label: "Capacity",
-        field: "capacity",
+        label: "Credit",
+        field: "credit",
         numeric: false,
         html: false
       }],
-      rooms: []
+      courses: []
     };
   },
   created: function created() {
     var _this = this;
 
-    var uri = '/api/rooms';
+    var uri = '/api/courses';
     this.axios.get(uri).then(function (response) {
-      _this.rooms = response.data.data;
-      console.log(_this.rooms);
+      _this.courses = response.data.data; //console.log(response);
 
-      for (var i = 0; i < _this.rooms.length; i++) {
-        if (_this.rooms[i].type == 0) _this.rooms[i].type = "Theory Class";else if (_this.rooms[i].type == 1) _this.rooms[i].type = "CSE LAB";else if (_this.rooms[i].type == 2) _this.rooms[i].type = "EEE LAB";else if (_this.rooms[i].type == 3) _this.rooms[i].type = "Communication LAB";else if (_this.rooms.type == 4) _this.rooms[i].type = "Mechanical LAB";else if (_this.rooms[i].type == 5) _this.rooms[i].type = "Physics LAB";else _this.rooms[i].type = "none";
+      for (var i = 0; i < _this.courses.length; i++) {
+        _this.courses[i].name = _this.courses[i].name + " - " + _this.courses[i].code;
+        if (_this.courses[i].type == 0) _this.courses[i].type = "Theory Class";else if (_this.courses[i].type == 1) _this.courses[i].type = "CSE LAB";else if (_this.courses[i].type == 2) _this.courses[i].type = "EEE LAB";else if (_this.courses[i].type == 3) _this.courses[i].type = "Communication LAB";else if (_this.courses.type == 4) _this.courses[i].type = "Mechanical LAB";else if (_this.courses[i].type == 5) _this.courses[i].type = "Physics LAB";else _this.courses[i].type = "none";
       }
     });
   },
@@ -2242,21 +2215,12 @@ __webpack_require__.r(__webpack_exports__);
     deletePost: function deletePost(id) {
       var _this2 = this;
 
-      console.log(id);
-      var uri = "/api/room/delete/".concat(id);
+      //console.log(id);
+      var uri = "/api/course/delete/".concat(id);
       this.axios["delete"](uri).then(function (response) {
-        _this2.rooms.splice(_this2.rooms.findIndex(function (room) {
-          return room.id === id;
+        _this2.courses.splice(_this2.courses.findIndex(function (course) {
+          return course.id === id;
         }), 1);
-      });
-    },
-    editRoom: function editRoom(id) {
-      var _this3 = this;
-
-      var uri = "/api/room/edit/".concat(id);
-      this.axios.get(uri).then(function (response) {
-        _this3.room = response.data.data;
-        console.log(_this3.room);
       });
     }
   }
@@ -2273,7 +2237,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_materialize_datatable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-materialize-datatable */ "./node_modules/vue-materialize-datatable/src/DataTable.vue");
 //
 //
 //
@@ -2335,62 +2298,98 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tableColumns1: [{
-        label: "Session Name",
-        field: "session_name",
-        numeric: false,
-        html: false
-      }, {
-        label: "Semester",
-        field: "semester",
-        numeric: false,
-        html: false
-      }, {
-        label: "Teacher Code",
-        field: "teacher_code",
-        numeric: false,
-        html: false
-      }, {
-        label: "Course Code",
-        field: "course_code",
-        numeric: false,
-        html: false
-      }, {
-        label: "Room Number",
-        field: "room_number",
-        numeric: false,
-        html: false
-      }],
-      enrollments: []
+      enrollment: {},
+      sessions: {},
+      courses: {},
+      teachers: {}
     };
   },
   created: function created() {
     var _this = this;
 
-    var uri = '/api/enrollments'; //console.log(this.sessions.id);
-
+    var uri = "/api/enrollment/edit/".concat(this.$route.params.id);
     this.axios.get(uri).then(function (response) {
-      _this.enrollments = response.data.data;
+      _this.enrollment = response.data.data; ///console.log(this.enrollment);
+
+      console.log(_this.enrollment.session_name);
+      console.log(_this.enrollment.course_code);
+      console.log(_this.enrollment.teacher_code);
+    });
+    uri = "/api/teachers";
+    this.axios.get(uri).then(function (response) {
+      _this.teachers = response.data.data; //console.log(this.teachers);
+    });
+    uri = "/api/sessions";
+    this.axios.get(uri).then(function (response) {
+      _this.sessions = response.data.data; //console.log(this.teachers);
+    });
+    uri = "/api/courses";
+    this.axios.get(uri).then(function (response) {
+      _this.courses = response.data.data; //console.log(this.courses);
     });
   },
-  components: {
-    compDataTable: vue_materialize_datatable__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   methods: {
-    deletePost: function deletePost(id) {
+    updateEnrollment: function updateEnrollment() {
       var _this2 = this;
 
-      var uri = "/api/enrollment/delete/".concat(id); //console.log(id);
-
-      this.axios["delete"](uri).then(function (response) {
-        _this2.enrollments.splice(_this2.enrollments.findIndex(function (enrollment) {
-          return enrollment.id === id;
-        }), 1);
+      console.log(this.enrollment);
+      var uri = "/api/enrollment/update/".concat(this.$route.params.id);
+      this.axios.post(uri, this.enrollment).then(function (response) {
+        _this2.$router.push({
+          name: 'assigncourses'
+        });
       });
+    },
+    Cancel: function Cancel() {
+      this.$router.go(-1);
     }
   }
 });
@@ -3726,6 +3725,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3752,6 +3757,9 @@ __webpack_require__.r(__webpack_exports__);
           name: 'courses'
         });
       });
+    },
+    Cancel: function Cancel() {
+      this.$router.go(-1);
     }
   }
 });
@@ -4049,6 +4057,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4074,6 +4087,9 @@ __webpack_require__.r(__webpack_exports__);
           name: 'rooms'
         });
       });
+    },
+    Cancel: function Cancel() {
+      this.$router.go(-1);
     }
   }
 });
@@ -4806,6 +4822,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4820,7 +4841,8 @@ __webpack_require__.r(__webpack_exports__);
 
     var uri = "/api/enrollment/edit/".concat(this.$route.params.id);
     this.axios.get(uri).then(function (response) {
-      _this.enrollment = response.data.data; //console.log(this.enrollment);
+      _this.enrollment = response.data.data;
+      console.log(_this.enrollment);
     });
     uri = "/api/teachers";
     this.axios.get(uri).then(function (response) {
@@ -4848,6 +4870,9 @@ __webpack_require__.r(__webpack_exports__);
           name: 'assigncourses'
         });
       });
+    },
+    Cancel: function Cancel() {
+      this.$router.go(-1);
     }
   }
 });
@@ -4863,6 +4888,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4941,6 +4971,9 @@ __webpack_require__.r(__webpack_exports__);
           name: 'sessions'
         });
       });
+    },
+    Cancel: function Cancel() {
+      this.$router.go(-1);
     }
   }
 });
@@ -7289,6 +7322,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7314,6 +7352,9 @@ __webpack_require__.r(__webpack_exports__);
           name: 'teachers'
         });
       });
+    },
+    Cancel: function Cancel() {
+      this.$router.go(-1);
     }
   }
 });
@@ -47396,10 +47437,10 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "modal-trigger bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
-                    attrs: { tag: "button", to: { name: "addroom" } }
+                      "modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
+                    attrs: { tag: "button", to: { name: "addcourse" } }
                   },
-                  [_vm._v("Create Room")]
+                  [_vm._v("Create Course")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -47410,9 +47451,9 @@ var render = function() {
                       "compDataTable",
                       {
                         attrs: {
-                          title: "Room Table",
+                          title: "Courses Table",
                           columns: _vm.tableColumns1,
-                          rows: _vm.rooms,
+                          rows: _vm.courses,
                           clickable: false,
                           sortable: true,
                           exactSearch: true,
@@ -47437,7 +47478,7 @@ var render = function() {
                                         attrs: {
                                           tag: "button",
                                           to: {
-                                            name: "editroom",
+                                            name: "editcourse",
                                             params: { id: props.row.id }
                                           }
                                         }
@@ -47451,7 +47492,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                        edit"
+                                              "\n                            edit"
                                             )
                                           ]
                                         )
@@ -47462,7 +47503,7 @@ var render = function() {
                                       "button",
                                       {
                                         staticClass:
-                                          "btn bg-red-500 darken-2 waves-effect waves-light compact-btn",
+                                          "btn  bg-red-500 darken-2 waves-effect waves-light compact-btn",
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -47493,7 +47534,7 @@ var render = function() {
                         _c(
                           "th",
                           { attrs: { slot: "thead-tr" }, slot: "thead-tr" },
-                          [_vm._v("\n            Actions\n        ")]
+                          [_vm._v("\n                Actions\n            ")]
                         )
                       ]
                     )
@@ -47533,130 +47574,230 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "main",
-    { staticClass: "bg-white-500 flex-1 p-3 overflow-x-scroll" },
+    { staticClass: "bg-white-500 flex-1 p-3 overflow-hidden" },
     [
-      _c("div", { staticClass: "flex flex-1" }, [
+      _c("div", { staticClass: "flex flex-col" }, [
         _c(
           "div",
-          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
+          {
+            staticClass:
+              "container mx-auto h-full flex flex-1 justify-center items-center"
+          },
           [
             _c(
               "div",
               {
                 staticClass:
-                  "mb-2 border-solid border-gray-300 rounded border shadow-sm w-full"
+                  "mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2"
               },
               [
                 _c(
-                  "router-link",
+                  "div",
                   {
                     staticClass:
-                      "modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
-                    attrs: { tag: "button", to: { name: "addroom" } }
+                      "bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b"
                   },
-                  [_vm._v("Create Course")]
+                  [
+                    _vm._v(
+                      "\n                                Update Enrollment\n                            "
+                    )
+                  ]
                 ),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "p-3" },
-                  [
-                    _c(
-                      "compDataTable",
-                      {
-                        attrs: {
-                          title: "Enrollment Table",
-                          columns: _vm.tableColumns1,
-                          rows: _vm.enrollments,
-                          clickable: false,
-                          sortable: true,
-                          exactSearch: true,
-                          searchable: true,
-                          paginate: true,
-                          exportable: false,
-                          printable: false
-                        },
-                        scopedSlots: _vm._u([
-                          {
-                            key: "tbody-tr",
-                            fn: function(props) {
-                              return [
-                                _c(
-                                  "td",
-                                  [
-                                    _c(
-                                      "router-link",
-                                      {
-                                        staticClass:
-                                          "btn  bg-green-500 darken-2 waves-effect waves-light compact-btn",
-                                        attrs: {
-                                          tag: "button",
-                                          to: {
-                                            name: "editenrollment",
-                                            params: { id: props.row.id }
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "i",
-                                          {
-                                            staticClass:
-                                              "material-icons white-text"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                           edit"
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass:
-                                          "btn bg-red-500 darken-2 waves-effect waves-light compact-btn",
-                                        on: {
-                                          click: function($event) {
-                                            $event.preventDefault()
-                                            return _vm.deletePost(props.row.id)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "i",
-                                          {
-                                            staticClass:
-                                              "material-icons white-text"
-                                          },
-                                          [_vm._v("delete")]
-                                        )
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]
-                            }
-                          }
-                        ])
-                      },
-                      [
+                _c("div", { staticClass: "p-3" }, [
+                  _c("form", { staticClass: "w-full" }, [
+                    _c("div", { staticClass: "md:flex md:items-center mb-6" }, [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "md:w-3/4" }, [
                         _c(
-                          "th",
-                          { attrs: { slot: "thead-tr" }, slot: "thead-tr" },
-                          [_vm._v("\n               Actions\n           ")]
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.enrollment.session_name,
+                                expression: "enrollment.session_name"
+                              }
+                            ],
+                            staticClass:
+                              "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
+                            attrs: { id: "grid-state" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.enrollment,
+                                  "session_name",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          _vm._l(_vm.sessions, function(session) {
+                            return _c("option", { key: session.id }, [
+                              _vm._v(_vm._s(session.session_name))
+                            ])
+                          }),
+                          0
                         )
-                      ]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "md:flex md:items-center mb-6" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "md:w-3/4" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.enrollment.teacher_code,
+                                expression: "enrollment.teacher_code"
+                              }
+                            ],
+                            staticClass:
+                              "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
+                            attrs: { id: "grid-state" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.enrollment,
+                                  "teacher_code",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          _vm._l(_vm.teachers, function(teacher) {
+                            return _c("option", { key: teacher.id }, [
+                              _vm._v(_vm._s(teacher.code))
+                            ])
+                          }),
+                          0
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "md:flex md:items-center mb-6" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "md:w-3/4" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.enrollment.course_code,
+                                expression: "enrollment.course_code"
+                              }
+                            ],
+                            staticClass:
+                              "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
+                            attrs: { id: "grid-state" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.enrollment,
+                                  "course_code",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          _vm._l(_vm.courses, function(course) {
+                            return _c("option", { key: course.id }, [
+                              _vm._v(_vm._s(course.code))
+                            ])
+                          }),
+                          0
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "md:flex md:items-center" }, [
+                      _c("div", { staticClass: "md:w-1/3" }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "md:w-2/3" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.updateEnrollment($event)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                                Update Session \n                                            "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "md:w-2/3" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.Cancel($event)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                                Cancel \n                                            "
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ]
             )
           ]
         )
@@ -47664,7 +47805,68 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/4" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
+          attrs: { for: "inline-course-code" }
+        },
+        [
+          _vm._v(
+            "\n                                                Session Name\n                                            "
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/4" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
+          attrs: { for: "inline-course-code" }
+        },
+        [
+          _vm._v(
+            "\n                                                Teacher Code\n                                            "
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "md:w-1/4" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
+          attrs: { for: "inline-course-code" }
+        },
+        [
+          _vm._v(
+            "\n                                                Course Code\n                                            "
+          )
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -48884,7 +49086,7 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
+                              "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full",
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
@@ -49957,7 +50159,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
+                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
                     attrs: { tag: "button", to: { name: "addcourse" } }
                   },
                   [_vm._v("Create Course")]
@@ -49994,7 +50196,7 @@ var render = function() {
                                       "router-link",
                                       {
                                         staticClass:
-                                          "btn  bg-green-500 darken-2 waves-effect waves-light compact-btn",
+                                          "btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn",
                                         attrs: {
                                           tag: "button",
                                           to: {
@@ -50023,7 +50225,7 @@ var render = function() {
                                       "button",
                                       {
                                         staticClass:
-                                          "btn  bg-red-500 darken-2 waves-effect waves-light compact-btn",
+                                          "btn  bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn",
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -50340,6 +50542,27 @@ var render = function() {
                             )
                           ]
                         )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "md:w-2/3" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.Cancel($event)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                                Cancel \n                                            "
+                            )
+                          ]
+                        )
                       ])
                     ])
                   ])
@@ -50585,15 +50808,14 @@ var render = function() {
           "li",
           {
             staticClass:
-              " w-full h-full py-3 px-2 border-b border-light-border "
+              " hover:bg-white w-full h-full py-3 px-2 border-b border-light-border "
           },
           [
             _c(
               "a",
               {
                 staticClass:
-                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-                attrs: { href: "index.html" }
+                  "font-sans font-hairline hover:font-normal text-sm text-nav-item "
               },
               [
                 _c("i", {
@@ -50615,15 +50837,14 @@ var render = function() {
           "li",
           {
             staticClass:
-              "w-full h-full py-3 px-2 border-b border-light-border bg-white"
+              " hover:bg-white w-full h-full py-3 px-2 border-b border-light-border"
           },
           [
             _c(
               "a",
               {
                 staticClass:
-                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-                attrs: { href: "forms.html" }
+                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline"
               },
               [
                 _c("i", { staticClass: "fab fa-wpforms float-left mx-2" }),
@@ -50642,15 +50863,15 @@ var render = function() {
         _c(
           "li",
           {
-            staticClass: "w-full h-full py-3 px-2 border-b border-light-border"
+            staticClass:
+              " hover:bg-white w-full h-full py-3 px-2 border-b border-light-border"
           },
           [
             _c(
               "a",
               {
                 staticClass:
-                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-                attrs: { href: "buttons.html" }
+                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline"
               },
               [
                 _c("i", {
@@ -50671,15 +50892,15 @@ var render = function() {
         _c(
           "li",
           {
-            staticClass: "w-full h-full py-3 px-2 border-b border-light-border"
+            staticClass:
+              " hover:bg-white w-full h-full py-3 px-2 border-b border-light-border"
           },
           [
             _c(
               "a",
               {
                 staticClass:
-                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-                attrs: { href: "tables.html" }
+                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline"
               },
               [
                 _c("i", { staticClass: "fas fa-table float-left mx-2" }),
@@ -50698,15 +50919,15 @@ var render = function() {
         _c(
           "li",
           {
-            staticClass: "w-full h-full py-3 px-2 border-b border-light-border"
+            staticClass:
+              " hover:bg-white w-full h-full py-3 px-2 border-b border-light-border"
           },
           [
             _c(
               "a",
               {
                 staticClass:
-                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-                attrs: { href: "ui.html" }
+                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline"
               },
               [
                 _c("i", { staticClass: "fab fa-uikit float-left mx-2" }),
@@ -50724,14 +50945,16 @@ var render = function() {
         _vm._v(" "),
         _c(
           "li",
-          { staticClass: "w-full h-full py-3 px-2 border-b border-300-border" },
+          {
+            staticClass:
+              " hover:bg-white w-full h-full py-3 px-2 border-b border-300-border"
+          },
           [
             _c(
               "a",
               {
                 staticClass:
-                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-                attrs: { href: "modals.html" }
+                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline"
               },
               [
                 _c("i", { staticClass: "fas fa-square-full float-left mx-2" }),
@@ -50747,13 +50970,12 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c("li", { staticClass: "w-full h-full py-3 px-2" }, [
+        _c("li", { staticClass: " hover:bg-white w-full h-full py-3 px-2" }, [
           _c(
             "a",
             {
               staticClass:
-                "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-              attrs: { href: "#" }
+                "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline"
             },
             [
               _c("i", { staticClass: "far fa-file float-left mx-2" }),
@@ -50771,15 +50993,15 @@ var render = function() {
         _c(
           "li",
           {
-            staticClass: "w-full h-full py-3 px-2 border-b border-light-border"
+            staticClass:
+              " hover:bg-white w-full h-full py-3 px-2 border-b border-light-border"
           },
           [
             _c(
               "a",
               {
                 staticClass:
-                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline",
-                attrs: { href: "tables.html" }
+                  "font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline"
               },
               [
                 _c("i", { staticClass: "fas fa-table float-left mx-2" }),
@@ -51097,7 +51319,7 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
+                              "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full",
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
@@ -51426,7 +51648,7 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
+                              "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full",
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
@@ -51437,6 +51659,27 @@ var render = function() {
                           [
                             _vm._v(
                               "\n                                         Update Room \n                                     "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "md:w-2/3" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.Cancel($event)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                             Cancel \n                                         "
                             )
                           ]
                         )
@@ -51575,7 +51818,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
+                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
                     attrs: { tag: "button", to: { name: "addroom" } }
                   },
                   [_vm._v("Create Room")]
@@ -51612,7 +51855,7 @@ var render = function() {
                                       "router-link",
                                       {
                                         staticClass:
-                                          "btn  bg-green-500 darken-2 waves-effect waves-light compact-btn",
+                                          "btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn",
                                         attrs: {
                                           tag: "button",
                                           to: {
@@ -51641,7 +51884,7 @@ var render = function() {
                                       "button",
                                       {
                                         staticClass:
-                                          "btn bg-red-500 darken-2 waves-effect waves-light compact-btn",
+                                          "btn bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn",
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -52038,7 +52281,7 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
+                              "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full",
                             on: {
                               click: function($event) {
                                 $event.preventDefault()
@@ -52277,7 +52520,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
+                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
                     attrs: { tag: "button", to: { name: "courseassign" } }
                   },
                   [_vm._v("Create Course")]
@@ -52314,7 +52557,7 @@ var render = function() {
                                       "router-link",
                                       {
                                         staticClass:
-                                          "btn  bg-green-500 darken-2 waves-effect waves-light compact-btn",
+                                          "btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn",
                                         attrs: {
                                           tag: "button",
                                           to: {
@@ -52343,7 +52586,7 @@ var render = function() {
                                       "button",
                                       {
                                         staticClass:
-                                          "btn bg-red-500 darken-2 waves-effect waves-light compact-btn",
+                                          "btn bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn",
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -52612,6 +52855,27 @@ var render = function() {
                             )
                           ]
                         )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "md:w-2/3" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.Cancel($event)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                                Cancel \n                                            "
+                            )
+                          ]
+                        )
                       ])
                     ])
                   ])
@@ -52793,6 +53057,27 @@ var render = function() {
                           [
                             _vm._v(
                               "\n                                                Update Session \n                                            "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "md:w-2/3" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.Cancel($event)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                                Cancel \n                                            "
                             )
                           ]
                         )
@@ -59188,7 +59473,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
+                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
                     attrs: { tag: "button", to: { name: "createsession" } }
                   },
                   [_vm._v("Create Session")]
@@ -59202,7 +59487,7 @@ var render = function() {
                       "compDataTable",
                       {
                         attrs: {
-                          title: "Room Table",
+                          title: "Session Table",
                           columns: _vm.tableColumns1,
                           rows: _vm.sessions,
                           clickable: false,
@@ -59225,7 +59510,7 @@ var render = function() {
                                       "router-link",
                                       {
                                         staticClass:
-                                          "btn  bg-green-500 darken-2 waves-effect waves-light compact-btn",
+                                          "btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn",
                                         attrs: {
                                           tag: "button",
                                           to: {
@@ -59254,7 +59539,7 @@ var render = function() {
                                       "button",
                                       {
                                         staticClass:
-                                          "btn bg-red-500 darken-2 waves-effect waves-light compact-btn",
+                                          "btn bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn",
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -59876,6 +60161,27 @@ var render = function() {
                             )
                           ]
                         )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "md:w-2/3" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.Cancel($event)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                             Cancel \n                                         "
+                            )
+                          ]
+                        )
                       ])
                     ])
                   ])
@@ -59991,7 +60297,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
+                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
                     attrs: { tag: "button", to: { name: "addteacher" } }
                   },
                   [_vm._v("Add Teacher")]
@@ -60028,7 +60334,7 @@ var render = function() {
                                       "router-link",
                                       {
                                         staticClass:
-                                          "btn  bg-green-500 darken-2 waves-effect waves-light compact-btn",
+                                          "btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn",
                                         attrs: {
                                           tag: "button",
                                           to: {
@@ -60057,7 +60363,7 @@ var render = function() {
                                       "button",
                                       {
                                         staticClass:
-                                          "btn  bg-red-500 darken-2 waves-effect waves-light compact-btn",
+                                          "btn  bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn",
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -75811,7 +76117,7 @@ var routes = [{
     component: _components_Test2_vue__WEBPACK_IMPORTED_MODULE_31__["default"]
   }, {
     name: 'test3',
-    path: 'test3',
+    path: 'test3/:id',
     component: _components_Test3_vue__WEBPACK_IMPORTED_MODULE_32__["default"]
   }, {
     name: 'test4',

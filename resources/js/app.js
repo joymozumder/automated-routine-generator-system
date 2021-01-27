@@ -206,7 +206,7 @@ const routes = [
                 
                 {
                     name: 'test3',
-                    path: 'test3',
+                    path: 'test3/:id',
                     component: compTest3
                 },
                 {

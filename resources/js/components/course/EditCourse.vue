@@ -90,7 +90,13 @@
                                                 <button @click.prevent="updateCourse" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
                                                     Update Course 
                                                 </button>
+                                               
                                             </div>
+                                             <div class="md:w-2/3">
+                                                 <button @click.prevent="Cancel" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
+                                                    Cancel 
+                                                </button>
+                                            </div> 
                                         </div>
                                     </form>
                                 </div>
@@ -131,6 +137,9 @@
             this.axios.post(uri, this.course).then((response) => {
               this.$router.push({name: 'courses'});
             });
+        },
+        Cancel() {
+            this.$router.go(-1);
         }
       }
     }
