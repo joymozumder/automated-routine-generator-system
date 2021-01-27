@@ -18,9 +18,15 @@
                                                     Session Name
                                                 </label>
                                             </div>
+                                            
+
                                             <div class="md:w-3/4">
-                                                <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                    id="inline-full-name" type="text" v-model="selected_session">
+                                                <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                          v-model="assigncourse.session_name"  id="grid-state">
+                                                        
+                                                        <option v-for="session in sessions" :key="session.id">{{session.session_name}}</option>
+                                                    </select>
+                                                    
                                             </div>
                                         </div>
 
@@ -111,13 +117,16 @@
                                                 <label for="female">
                                                     <input type="radio" value="Two" v-model="numberofclass"> Two
                                                 </label>
+                                                 <label for="female">
+                                                    <input type="radio" value="Three" v-model="numberofclass"> Three
+                                                </label>
                                             </div>
                                         </div>
 
 
                                         
 
-                                        <div v-if="numberofclass=='One' || numberofclass=='Two'" class="md:flex md:items-center mb-6">
+                                        <div v-if="numberofclass=='One' || numberofclass=='Two' || numberofclass=='Three'" class="md:flex md:items-center mb-6">
                                             <div class="md:w-1/4">
                                                 <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
@@ -145,11 +154,38 @@
                                         
 
 
-                                        <div v-if="numberofclass=='Two'" class="md:flex md:items-center mb-6">
+                                        <div v-if="numberofclass=='Two' || numberofclass=='Three'" class="md:flex md:items-center mb-6">
                                             <div class="md:w-1/4">
                                                 <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
                                                     Duration 2
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="md:w-3/4">
+                                                <select  v-model="assigncourse.duration[1].hr" name="hours" class="bg-grey-200 appearance-none border-2 border-grey-200 text-grey-darker py-2 px-4 appearance-none outline-none mr-4">
+                                                <option value=1>1</option>
+                                                <option value=2>2</option>
+                                                <option value=3>3</option>
+                                                <option value=4>4</option>
+                                                <option value=5>5</option>
+                                
+                                                </select>
+                                                <span class="text-xl mr-3">:</span>
+                                                <select v-model="assigncourse.duration[1].min" name="minutes"  class="bg-grey-200 appearance-none border-2 border-grey-200 text-grey-darker py-2 px-4 appearance-none outline-none mr-4">
+                                                <option value=0.0 selected=true>00</option>
+                                                <option value=0.5>30</option>
+                                                </select>
+                                               
+                                            </div>
+                                        </div>
+
+
+                                        <div v-if="numberofclass=='Three'" class="md:flex md:items-center mb-6">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Duration 3
                                                 </label>
                                             </div>
                                             
@@ -177,7 +213,6 @@
 
 
 
-
                                         <div class="md:w-3/4">
 
                                             <div class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4">
@@ -187,11 +222,14 @@
                                                 <label for="female">
                                                     <input type="radio" value="Two" v-model="numberofgroup"> Two
                                                 </label>
+                                                 <label for="female">
+                                                    <input type="radio" value="Three" v-model="numberofgroup"> Three
+                                                </label>
                                             </div>
                                         </div>
 
 
-                                         <div v-if="numberofgroup=='One' || numberofgroup=='Two'" class="md:flex md:items-center mb-6">
+                                         <div v-if="numberofgroup=='One' || numberofgroup=='Two' || numberofgroup=='Three'" class="md:flex md:items-center mb-6">
                                             <div class="md:w-1/4">
                                                 <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
@@ -207,7 +245,7 @@
                                         
 
 
-                                        <div v-if="numberofgroup=='Two'" class="md:flex md:items-center mb-6">
+                                        <div v-if="numberofgroup=='Two' || numberofgroup=='Three'" class="md:flex md:items-center mb-6">
                                             <div class="md:w-1/4">
                                                 <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
@@ -221,7 +259,18 @@
                                         </div>
 
 
-
+                                        <div v-if="numberofgroup=='Three'" class="md:flex md:items-center mb-6">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Total Student of Group 3
+                                                </label>
+                                            </div>
+                                            <div class="md:w-3/4">
+                                                <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                  v-model="assigncourse.group[1]" id="inline-full-name" type="number" placeholder="Enter Total Student of Group 3">
+                                            </div>
+                                        </div>
 
 
 
@@ -439,6 +488,7 @@
                 //console.log(this.savecourse);
                 let uri = '/api/enrollment/create';
                 this.axios.post(uri, this.savecourse).then((response) => {
+                    this.$router.push({name: 'assigncourses'});
                 //this.$router.go(-1);
           });
             },
