@@ -16,7 +16,7 @@ class CreateEnrollmentsTable extends Migration
         Schema::create('enrollments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('session_name');
-            $table->string('semester');
+            $table->bigInteger('sem_id')->unsigned()->index();
             $table->string('teacher_code');
             $table->string('course_code');
             $table->integer('room_number');
@@ -25,13 +25,14 @@ class CreateEnrollmentsTable extends Migration
             $table->integer('start');
             $table->integer('end');
             $table->integer('day');
+            $table->boolean('entry_type')->comment('0=>normal entry, 1=>manual entry');
 
             $table->foreign('session_name')
                ->references ('session_name')->on('session_data')
                ->onDelete('cascade');
 
-            $table->foreign('semester')
-               ->references ('semester')->on('semester_sections')
+            $table->foreign('sem_id')
+               ->references ('id')->on('semester_sections')
                ->onDelete('cascade');
 
             $table->foreign('teacher_code')

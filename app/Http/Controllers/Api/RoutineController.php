@@ -48,7 +48,16 @@ class RoutineController extends Controller
         //
     }
 
-
+    public function check($session_name){
+        echo $session_name;
+        $obj = Enrollment::join('courses','enrollments.course_code','=','courses.code') //course_entry
+                ->join('semester_sections','enrollments.sem_id','=','semester_sections.id')
+                ->select('enrollments.*','courses.type as course_type','semester_sections.semester as semester')
+                ->where('enrollments.session_name','=',$session_name)
+                ->paginate(500);
+        $dt = $obj->toArray();
+        dd($dt);
+    }
    
 
 
@@ -61,7 +70,8 @@ class RoutineController extends Controller
     public function store($session_name)
     {
         $obj = Enrollment::join('courses','enrollments.course_code','=','courses.code') //course_entry
-                ->select('enrollments.*','courses.type as course_type')
+                ->join('semester_sections','enrollments.sem_id','=','semester_sections.id')
+                ->select('enrollments.*','courses.type as course_type','semester_sections.semester as semester')
                 ->where('enrollments.session_name','=',$session_name)
                 ->paginate(500);
         
@@ -99,7 +109,7 @@ class RoutineController extends Controller
         }
         //$course[3]["start"] = 3;
         //$course[3]["end"] = 5;
-       //dd($course);
+       dd($course);
        //dd($conflict);
        //dd($course_busy);
         
@@ -377,7 +387,7 @@ for ($i = 0; $i < $dt["total"]; $i++)
             $obj->start = $st;
             $obj->end = $et;
             $obj->day = $d;
-            $obj->save();
+            //$obj->save();
         }
         
 

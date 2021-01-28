@@ -1,6 +1,6 @@
 <template>
     
-              <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
+              <main class="bg-white-500 flex-1 p-3 overflow-x-scroll z-10">
 
                 <div class="flex flex-1">
                    
@@ -9,7 +9,7 @@
 
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                                  <!-- <button class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50" data-modal='createSessionModal' >Create Session</button> -->
-                                <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
+                                <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-40"
                                 :to="{name: 'courseassign'}">Create Course</router-link>
                             <div class="p-3">
                                  <compDataTable
