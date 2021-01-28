@@ -20,6 +20,13 @@ class EnrollmentController extends Controller
         $enrollments = Enrollment::paginate(500);
         return EnrollmentResource::collection($enrollments);
     }
+    public function sessionIndex($session)
+    {
+        $enrollments = Enrollment::select()
+                        ->where('session_name','=',$session)
+                        ->paginate(500);
+        return EnrollmentResource::collection($enrollments);
+    }
     public function dayShow($session , $day)
     {
         $obj = Enrollment::
