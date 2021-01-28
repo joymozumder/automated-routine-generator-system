@@ -30,7 +30,9 @@
                                             
                                             <button class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full" data-modal='createSessionModal' @click.prevent="">Create Session</button>
                                             <button class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" data-modal='manualAssignModal' @click.prevent="showSem">Manual Assign</button>
-
+                                              <router-link tag="button"  class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourses', params: { id: selected_session }}" >
+                                                    Assign Courses
+                                             </router-link>
                                         </div>
 
                                             
@@ -1055,7 +1057,7 @@
                 this.manualassigncourse.session_name=this.selected_session;
         //console.log(this.assigncourse);
         let uri = '/api/request-sections';
-            
+            //_______________________________________________________semester for session_______________________________________________
         this.axios.post(uri, this.assigncourse).then((response) => {
             this.semesters = response.data.data;
             //console.log(this.semesters);

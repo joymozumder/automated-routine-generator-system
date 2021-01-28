@@ -175,12 +175,12 @@ const routes = [
                 },
                 {
                     name: 'courseassign',
-                    path: 'courseassign',
+                    path: 'courseassign/:id',
                     component: compCourseAssign
                 },
                 {
                     name: 'assigncourses',
-                    path: 'assigncourses',
+                    path: 'assigncourses/:id',
                     component: compAssignTable
                 },
                 {

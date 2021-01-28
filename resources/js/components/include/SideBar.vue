@@ -4,21 +4,7 @@
 
                 </div>
                 <ul class="list-reset flex flex-col">
-                    <li class=" hover:bg-white w-full h-full py-3 px-2 border-b border-light-border ">
-                        <a
-                           class="font-sans font-hairline hover:font-normal text-sm text-nav-item ">
-                            <i class="fas fa-tachometer-alt float-left mx-2"></i>
-                            
-                            <router-link class="" to="/user">Dashboard</router-link>
-                            <span><i class="fas fa-angle-right float-right"></i></span>
-                        </a>
-                    </li>
-
-                    
-                    
-
-
-
+                   
 
 
                     <li class=" hover:bg-white w-full h-full py-3 px-2 border-b border-light-border">
@@ -46,7 +32,7 @@
                     <li class=" hover:bg-white w-full h-full py-3 px-2 border-b border-light-border">
                         <a
                             class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
-                            <i class="fas fa-table float-left mx-2"></i>
+                            <i class="fas fa-tachometer-alt float-left mx-2"></i>
                             <router-link to="/user/teachers">Teacher</router-link>
                             <span><i class="fa fa-angle-right float-right"></i></span>
                         </a>
@@ -64,13 +50,7 @@
                             <span><i class="fa fa-angle-right float-right"></i></span>
                         </a>
                     </li>
-                    <li class=" hover:bg-white w-full h-full py-3 px-2 border-b border-300-border">
-                        <a  class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
-                            <i class="fas fa-square-full float-left mx-2"></i>
-                            <router-link to="/user/assigncourses">Assign Courses</router-link>
-                            <span><i class="fa fa-angle-right float-right"></i></span>
-                        </a>
-                    </li>
+                    
                     <li class=" hover:bg-white w-full h-full py-3 px-2">
                         <a
                            class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">

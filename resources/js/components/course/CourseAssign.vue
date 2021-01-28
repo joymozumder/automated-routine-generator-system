@@ -23,7 +23,7 @@
                                            
                                              <div class="md:w-3/4">
                                                 <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                    id="inline-full-name" v-model="semester.assigncourse.session_name" readonly type="text" >
+                                                    id="inline-full-name" v-model="assigncourse.session_name" readonly type="text" >
                                             </div>
                                         </div>
 
@@ -45,7 +45,7 @@
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                           v-model="assigncourse.semester"  id="grid-state">
                                                         
-                                                        <option v-for="semester in semesters" :key="semester.id">{{semester.semester}}</option>
+                                                        <option v-for="semester in semesters" :key="semester.id" :value="semester.id">{{semester.semester}}</option>
                                                     </select>
                                                     
                                             </div>
@@ -258,31 +258,11 @@
     export default {
         data(){
                 return {
-                selected_session:"",
-                active_session:"",
-                sessions:{
-                        
-                        session_name:"",
-                        status:true
-                },
-                newSessions:{
-                        
-                        session_name:"",
-                        status:true
-                },
-                semester: {
-                    semester:"",
-                    section:[],
-                    total_student:0,
-                    session_name:"",
-                    status:true
-                },
-
-          //**************/
+                
           numberofclass:"select",
           numberofgroup:"select",
-          select_2:0,
-          day:0,
+          
+          //day:0,
           //session:{},
           semesters:{},
           teachers:{},
@@ -298,21 +278,30 @@
               group:[],
               duration:[]
           },
-          savecourse:{
-              session_name:"",
-              semester:"",
-              teacher_code:"",
-              course_code:"",
-              room_number:0,
-              group:0,
-              //group2:0,
-              day:0,
-              duration1:0,
-              duration2:0,
-              total_student1:0,
-              total_student2:0
-          }
+          
           /*****************/
+          //selected_session:"",
+                //active_session:"",
+                // sessions:{
+                        
+                //         session_name:"",
+                //         status:true
+                // },
+                // newSessions:{
+                        
+                //         session_name:"",
+                //         status:true
+                // },
+                // semester: {
+                //     semester:"",
+                //     section:[],
+                //     total_student:0,
+                //     session_name:"",
+                //     status:true
+                // },
+                //select_2:0,
+
+          //*************/
 
         }
         
@@ -320,7 +309,8 @@
     created() {
 
         
-        this.assigncourse.session_name = this.$route.params.id;
+       // this.assigncourse.session_name = this.$route.params.id;
+       this.assigncourse.session_name =this.$route.params.id;
 
         let uri = `/api/teachers`;
             
@@ -337,19 +327,14 @@
         });
        
 
-        uri = `/api/semester-sections`;
-            
-        this.axios.get(uri).then((response) => {
+        uri = '/api/request-sections';
+        
+        this.axios.post(uri, this.assigncourse).then((response) => {
             this.semesters = response.data.data;
             console.log(this.semesters);
         });
 
-         uri = '/api/sessions';
-        this.axios.get(uri).then(response => {
-          this.sessions = response.data.data;
-          console.log(this.sessions.length);
-          //this.checkSelectedSession();
-        });
+        
     },
     methods:{
 

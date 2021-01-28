@@ -113,7 +113,7 @@
       },
       created() {
 
-        
+        console.log(this.$route.params.id);
         let uri = `/api/enrollment/edit/${this.$route.params.id}`;
         this.axios.get(uri).then((response) => {
             this.enrollment = response.data.data; 
@@ -124,14 +124,14 @@
             
         this.axios.get(uri).then((response) => {
             this.teachers = response.data.data;
-            console.log(this.teachers);
+           // console.log(this.teachers);
         });
 
         uri = `/api/sessions`;
             
         this.axios.get(uri).then((response) => {
             this.sessions = response.data.data;
-            console.log(this.teachers);
+            //console.log(this.teachers);
         });
 
 
