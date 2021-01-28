@@ -2561,317 +2561,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      selected_session: "",
-      active_session: "",
-      sessions: {
-        session_name: "",
-        status: true
-      },
-      newSessions: {
-        session_name: "",
-        status: true
-      },
-      semester: {
-        semester: "",
-        section: [],
-        total_student: 0,
-        session_name: "",
-        status: true
-      },
-      //**************/
-      numberofclass: "select",
-      numberofgroup: "select",
-      select_2: 0,
-      day: 0,
-      //session:{},
-      semesters: {},
-      teachers: {},
-      courses: {},
-      rooms: {},
-      assigncourse: {
-        session_name: "",
-        semester: "",
-        teacher_code: "",
-        course_code: "",
-        room_number: 0,
-        day: 0,
-        group: [],
-        duration: [{
-          hr: 0,
-          min: 0.0
-        }, {
-          hr: 0,
-          min: 0.0
-        }]
-      },
-      savecourse: {
-        session_name: "",
-        semester: "",
-        teacher_code: "",
-        course_code: "",
-        room_number: 0,
-        group: 0,
-        //group2:0,
-        day: 0,
-        duration1: 0,
-        duration2: 0,
-        total_student1: 0,
-        total_student2: 0
-      },
-      manualassigncourse: {
-        session_name: "",
-        semester: "",
-        teacher_code: "",
-        course_code: "",
-        group: 0,
-        day1: 0,
-        duration1: 0,
-        hour1: 0,
-        min1: 0,
-        day2: 0,
-        duration2: 0,
-        hour2: 0,
-        min2: 0
-      },
-      manualsavecourse: {
-        session_name: "",
-        semester: "",
-        teacher_code: "",
-        course_code: "",
-        group: 1,
-        start1: 1,
-        end1: 1,
-        duration1: 0,
-        start2: 1,
-        end2: 1,
-        duration2: 0
-      }
-      /*****************/
-
+      courses: [],
+      semesters: [],
+      teachers: []
     };
   },
   created: function created() {
     var _this = this;
 
-    var uri = "/api/teachers";
-    this.axios.get(uri).then(function (response) {
-      _this.teachers = response.data.data; //console.log(this.teachers);
-    });
-    uri = "/api/courses";
+    var uri = '/api/courses';
     this.axios.get(uri).then(function (response) {
       _this.courses = response.data.data; //console.log(this.courses);
     });
-    uri = "/api/semester-sections";
+    uri = '/api/semester-sections';
     this.axios.get(uri).then(function (response) {
-      _this.semesters = response.data.data;
-      console.log(_this.semesters);
+      _this.semesters = response.data.data; //console.log(this.semesters);
     });
-    uri = '/api/sessions';
+    uri = '/api/teachers';
     this.axios.get(uri).then(function (response) {
-      _this.sessions = response.data.data;
-      console.log(_this.sessions.length); //this.checkSelectedSession();
+      _this.teachers = response.data.data;
+      console.log(_this.teachers);
     });
-  },
-  methods: {
-    assignCourse: function assignCourse() {
-      var _this2 = this;
-
-      //console.log(this.assigncourse.group[0]);
-      this.assigncourse.session_name = this.selected_session;
-      this.savecourse.session_name = this.assigncourse.session_name;
-      this.savecourse.semester = this.assigncourse.semester;
-      this.savecourse.teacher_code = this.assigncourse.teacher_code;
-      this.savecourse.course_code = this.assigncourse.course_code; //this.savecourse.room_number     =   this.assigncourse.room_number;
-      //this.savecourse.group           =   this.assigncourse.group[i]; /** */
-      //this.savecourse.duration        =   this.assigncourse.duration; /** */
-      //this.savecourse.totalstudent    =   this.assigncourse.totalstudent;
-
-      this.savecourse.group = 0;
-      this.savecourse.day = 0;
-      this.savecourse.total_student1 = 0;
-      this.savecourse.total_student2 = 0;
-      this.savecourse.duration1 = 0;
-      this.savecourse.duration2 = 0;
-
-      if (this.assigncourse.group.length == 1) {
-        this.savecourse.group = 1;
-        this.savecourse.total_student1 = Number(this.assigncourse.group[0]);
-      } else {
-        this.savecourse.group = 2;
-        this.savecourse.total_student1 = Number(this.assigncourse.group[0]);
-        this.savecourse.total_student2 = Number(this.assigncourse.group[1]);
-      }
-
-      if (this.assigncourse.duration.length == 1) {
-        this.savecourse.duration1 = Number(this.assigncourse.duration[0].hr) + Number(this.assigncourse.duration[0].min);
-        this.savecourse.duration2 = 0;
-      } else {
-        this.savecourse.duration1 = Number(this.assigncourse.duration[0].hr) + Number(this.assigncourse.duration[0].min);
-        this.savecourse.duration2 = Number(this.assigncourse.duration[1].hr) + Number(this.assigncourse.duration[1].min);
-      } //console.log(this.savecourse);
-
-
-      var uri = '/api/enrollment/create';
-      this.axios.post(uri, this.savecourse).then(function (response) {
-        _this2.$router.push({
-          name: 'assigncourses'
-        }); //this.$router.go(-1);
-
-      });
-    }
   }
 });
 
@@ -47950,956 +47663,159 @@ var render = function() {
       _c("div", { staticClass: "flex flex-col" }, [
         _c(
           "div",
-          {
-            staticClass:
-              "container mx-auto h-full flex flex-1 justify-center items-center"
-          },
+          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
           [
             _c(
               "div",
               {
                 staticClass:
-                  "mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2"
+                  "mb-2 border-solid border-gray-300 rounded border shadow-sm w-full"
               },
               [
                 _c(
                   "div",
                   {
                     staticClass:
-                      "bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b"
+                      "bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b"
                   },
                   [
                     _vm._v(
-                      "\n                                Course Assign\n                            "
+                      "\n                            Full Table\n                        "
                     )
                   ]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "p-3" }, [
-                  _c("form", { staticClass: "max-w-xl p-1 " }, [
-                    _c("div", { staticClass: "md:flex md:items-center mb-6" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table-responsive w-full rounded" },
+                    [
                       _vm._m(0),
                       _vm._v(" "),
-                      _c("div", { staticClass: "md:w-3/4" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.assigncourse.session_name,
-                                expression: "assigncourse.session_name"
-                              }
-                            ],
-                            staticClass:
-                              "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                            attrs: { id: "grid-state" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.assigncourse,
-                                  "session_name",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          _vm._l(_vm.sessions, function(session) {
-                            return _c("option", { key: session.id }, [
-                              _vm._v(_vm._s(session.session_name))
-                            ])
-                          }),
-                          0
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "md:flex md:items-center mb-6" }, [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "md:w-3/4" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.assigncourse.semester,
-                                expression: "assigncourse.semester"
-                              }
-                            ],
-                            staticClass:
-                              "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                            attrs: { id: "grid-state" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.assigncourse,
-                                  "semester",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          _vm._l(_vm.semesters, function(semester) {
-                            return _c("option", { key: semester.id }, [
-                              _vm._v(_vm._s(semester.semester))
-                            ])
-                          }),
-                          0
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "md:flex md:items-center mb-6" }, [
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "md:w-3/4" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.assigncourse.teacher_code,
-                                expression: "assigncourse.teacher_code"
-                              }
-                            ],
-                            staticClass:
-                              "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                            attrs: { id: "grid-state" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.assigncourse,
-                                  "teacher_code",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          _vm._l(_vm.teachers, function(teacher) {
-                            return _c("option", { key: teacher.id }, [
-                              _vm._v(_vm._s(teacher.code))
-                            ])
-                          }),
-                          0
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "md:flex md:items-center mb-6" }, [
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "md:w-3/4" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.assigncourse.course_code,
-                                expression: "assigncourse.course_code"
-                              }
-                            ],
-                            staticClass:
-                              "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                            attrs: { id: "grid-state" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.assigncourse,
-                                  "course_code",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          _vm._l(_vm.courses, function(course) {
-                            return _c(
-                              "option",
-                              {
-                                key: course.id,
-                                domProps: { value: course.code }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(course.name) +
-                                    " - " +
-                                    _vm._s(course.code)
-                                )
-                              ]
-                            )
-                          }),
-                          0
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "md:w-3/4" }, [
                       _c(
-                        "div",
-                        {
-                          staticClass:
-                            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
-                        },
-                        [
-                          _c("label", { attrs: { for: "male" } }, [
-                            _vm._v(
-                              "Number of Class\n                                                "
-                            ),
-                            _c("input", {
-                              directives: [
+                        "tbody",
+                        _vm._l(_vm.courses, function(course) {
+                          return _c("tr", { key: course.id }, [
+                            _vm._m(1, true),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "border px-4 py-2" }, [
+                              _vm._v(_vm._s(course.name))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "border px-4 py-2" }, [
+                              _c(
+                                "select",
                                 {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.numberofclass,
-                                  expression: "numberofclass"
-                                }
-                              ],
-                              attrs: { type: "radio", value: "One" },
-                              domProps: {
-                                checked: _vm._q(_vm.numberofclass, "One")
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.numberofclass = "One"
-                                }
-                              }
-                            }),
-                            _vm._v(
-                              " One\n                                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("label", { attrs: { for: "female" } }, [
-                            _c("input", {
-                              directives: [
+                                  staticClass:
+                                    "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                },
+                                _vm._l(_vm.semesters, function(semester) {
+                                  return _c("option", { key: semester.id }, [
+                                    _vm._v(_vm._s(semester.semester))
+                                  ])
+                                }),
+                                0
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "border px-4 py-2" }, [
+                              _c(
+                                "select",
                                 {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.numberofclass,
-                                  expression: "numberofclass"
-                                }
-                              ],
-                              attrs: { type: "radio", value: "Two" },
-                              domProps: {
-                                checked: _vm._q(_vm.numberofclass, "Two")
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.numberofclass = "Two"
-                                }
-                              }
-                            }),
-                            _vm._v(
-                              " Two\n                                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("label", { attrs: { for: "female" } }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.numberofclass,
-                                  expression: "numberofclass"
-                                }
-                              ],
-                              attrs: { type: "radio", value: "Three" },
-                              domProps: {
-                                checked: _vm._q(_vm.numberofclass, "Three")
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.numberofclass = "Three"
-                                }
-                              }
-                            }),
-                            _vm._v(
-                              " Three\n                                            "
-                            )
+                                  staticClass:
+                                    "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                },
+                                _vm._l(_vm.teachers, function(teacher) {
+                                  return _c("option", { key: teacher.id }, [
+                                    _vm._v(_vm._s(teacher.code))
+                                  ])
+                                }),
+                                0
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(2, true),
+                            _vm._v(" "),
+                            _vm._m(3, true),
+                            _vm._v(" "),
+                            _vm._m(4, true),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "border px-4 py-2" }, [
+                              course.type == 0
+                                ? _c("input", {
+                                    staticClass:
+                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
+                                    attrs: {
+                                      id: "",
+                                      type: "number",
+                                      readonly: "",
+                                      placeholder: "No group"
+                                    }
+                                  })
+                                : _c("input", {
+                                    staticClass:
+                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
+                                    attrs: {
+                                      id: "",
+                                      type: "number",
+                                      placeholder: "group 1"
+                                    }
+                                  })
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "border px-4 py-2" }, [
+                              course.type == 0
+                                ? _c("input", {
+                                    staticClass:
+                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
+                                    attrs: {
+                                      id: "",
+                                      type: "number",
+                                      readonly: "",
+                                      placeholder: "No group"
+                                    }
+                                  })
+                                : _c("input", {
+                                    staticClass:
+                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
+                                    attrs: {
+                                      id: "",
+                                      type: "number",
+                                      placeholder: "group 2"
+                                    }
+                                  })
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "border px-4 py-2" }, [
+                              course.type == 0
+                                ? _c("input", {
+                                    staticClass:
+                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
+                                    attrs: {
+                                      id: "",
+                                      type: "number",
+                                      readonly: "",
+                                      placeholder: "No group"
+                                    }
+                                  })
+                                : _c("input", {
+                                    staticClass:
+                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
+                                    attrs: {
+                                      id: "",
+                                      type: "number",
+                                      placeholder: "group 3"
+                                    }
+                                  })
+                            ])
                           ])
-                        ]
+                        }),
+                        0
                       )
-                    ]),
-                    _vm._v(" "),
-                    _vm.numberofclass == "One" ||
-                    _vm.numberofclass == "Two" ||
-                    _vm.numberofclass == "Three"
-                      ? _c(
-                          "div",
-                          { staticClass: "md:flex md:items-center mb-6" },
-                          [
-                            _vm._m(4),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "md:w-3/4" }, [
-                              _c(
-                                "select",
-                                {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.assigncourse.duration[0].hr,
-                                      expression: "assigncourse.duration[0].hr"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "bg-grey-200 appearance-none border-2 border-grey-200 text-grey-darker py-2 px-4 appearance-none outline-none mr-4",
-                                  attrs: { name: "hours" },
-                                  on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        _vm.assigncourse.duration[0],
-                                        "hr",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("option", { attrs: { value: "1" } }, [
-                                    _vm._v("1")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "2" } }, [
-                                    _vm._v("2")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "3" } }, [
-                                    _vm._v("3")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "4" } }, [
-                                    _vm._v("4")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "5" } }, [
-                                    _vm._v("5")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "text-xl mr-3" }, [
-                                _vm._v(":")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "select",
-                                {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.assigncourse.duration[0].min,
-                                      expression: "assigncourse.duration[0].min"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "bg-grey-200 appearance-none border-2 border-grey-200 text-grey-darker py-2 px-4 appearance-none outline-none mr-4",
-                                  attrs: { name: "minutes" },
-                                  on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        _vm.assigncourse.duration[0],
-                                        "min",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "option",
-                                    {
-                                      attrs: { value: "0.0", selected: "true" }
-                                    },
-                                    [_vm._v("00")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "0.5" } }, [
-                                    _vm._v("30")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.numberofclass == "Two" || _vm.numberofclass == "Three"
-                      ? _c(
-                          "div",
-                          { staticClass: "md:flex md:items-center mb-6" },
-                          [
-                            _vm._m(5),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "md:w-3/4" }, [
-                              _c(
-                                "select",
-                                {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.assigncourse.duration[1].hr,
-                                      expression: "assigncourse.duration[1].hr"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "bg-grey-200 appearance-none border-2 border-grey-200 text-grey-darker py-2 px-4 appearance-none outline-none mr-4",
-                                  attrs: { name: "hours" },
-                                  on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        _vm.assigncourse.duration[1],
-                                        "hr",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("option", { attrs: { value: "1" } }, [
-                                    _vm._v("1")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "2" } }, [
-                                    _vm._v("2")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "3" } }, [
-                                    _vm._v("3")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "4" } }, [
-                                    _vm._v("4")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "5" } }, [
-                                    _vm._v("5")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "text-xl mr-3" }, [
-                                _vm._v(":")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "select",
-                                {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.assigncourse.duration[1].min,
-                                      expression: "assigncourse.duration[1].min"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "bg-grey-200 appearance-none border-2 border-grey-200 text-grey-darker py-2 px-4 appearance-none outline-none mr-4",
-                                  attrs: { name: "minutes" },
-                                  on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        _vm.assigncourse.duration[1],
-                                        "min",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "option",
-                                    {
-                                      attrs: { value: "0.0", selected: "true" }
-                                    },
-                                    [_vm._v("00")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "0.5" } }, [
-                                    _vm._v("30")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.numberofclass == "Three"
-                      ? _c(
-                          "div",
-                          { staticClass: "md:flex md:items-center mb-6" },
-                          [
-                            _vm._m(6),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "md:w-3/4" }, [
-                              _c(
-                                "select",
-                                {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.assigncourse.duration[1].hr,
-                                      expression: "assigncourse.duration[1].hr"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "bg-grey-200 appearance-none border-2 border-grey-200 text-grey-darker py-2 px-4 appearance-none outline-none mr-4",
-                                  attrs: { name: "hours" },
-                                  on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        _vm.assigncourse.duration[1],
-                                        "hr",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("option", { attrs: { value: "1" } }, [
-                                    _vm._v("1")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "2" } }, [
-                                    _vm._v("2")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "3" } }, [
-                                    _vm._v("3")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "4" } }, [
-                                    _vm._v("4")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "5" } }, [
-                                    _vm._v("5")
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "text-xl mr-3" }, [
-                                _vm._v(":")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "select",
-                                {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.assigncourse.duration[1].min,
-                                      expression: "assigncourse.duration[1].min"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "bg-grey-200 appearance-none border-2 border-grey-200 text-grey-darker py-2 px-4 appearance-none outline-none mr-4",
-                                  attrs: { name: "minutes" },
-                                  on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        _vm.assigncourse.duration[1],
-                                        "min",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "option",
-                                    {
-                                      attrs: { value: "0.0", selected: "true" }
-                                    },
-                                    [_vm._v("00")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "0.5" } }, [
-                                    _vm._v("30")
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "md:w-3/4" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
-                        },
-                        [
-                          _c("label", { attrs: { for: "male" } }, [
-                            _vm._v(
-                              "Number of Group\n                                                "
-                            ),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.numberofgroup,
-                                  expression: "numberofgroup"
-                                }
-                              ],
-                              attrs: { type: "radio", value: "One" },
-                              domProps: {
-                                checked: _vm._q(_vm.numberofgroup, "One")
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.numberofgroup = "One"
-                                }
-                              }
-                            }),
-                            _vm._v(
-                              " One\n                                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("label", { attrs: { for: "female" } }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.numberofgroup,
-                                  expression: "numberofgroup"
-                                }
-                              ],
-                              attrs: { type: "radio", value: "Two" },
-                              domProps: {
-                                checked: _vm._q(_vm.numberofgroup, "Two")
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.numberofgroup = "Two"
-                                }
-                              }
-                            }),
-                            _vm._v(
-                              " Two\n                                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("label", { attrs: { for: "female" } }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.numberofgroup,
-                                  expression: "numberofgroup"
-                                }
-                              ],
-                              attrs: { type: "radio", value: "Three" },
-                              domProps: {
-                                checked: _vm._q(_vm.numberofgroup, "Three")
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.numberofgroup = "Three"
-                                }
-                              }
-                            }),
-                            _vm._v(
-                              " Three\n                                            "
-                            )
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _vm.numberofgroup == "One" ||
-                    _vm.numberofgroup == "Two" ||
-                    _vm.numberofgroup == "Three"
-                      ? _c(
-                          "div",
-                          { staticClass: "md:flex md:items-center mb-6" },
-                          [
-                            _vm._m(7),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "md:w-3/4" }, [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.assigncourse.group[0],
-                                    expression: "assigncourse.group[0]"
-                                  }
-                                ],
-                                staticClass:
-                                  "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                                attrs: {
-                                  id: "inline-full-name",
-                                  type: "number",
-                                  placeholder: "Enter Total Student of group 1"
-                                },
-                                domProps: { value: _vm.assigncourse.group[0] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.assigncourse.group,
-                                      0,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.numberofgroup == "Two" || _vm.numberofgroup == "Three"
-                      ? _c(
-                          "div",
-                          { staticClass: "md:flex md:items-center mb-6" },
-                          [
-                            _vm._m(8),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "md:w-3/4" }, [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.assigncourse.group[1],
-                                    expression: "assigncourse.group[1]"
-                                  }
-                                ],
-                                staticClass:
-                                  "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                                attrs: {
-                                  id: "inline-full-name",
-                                  type: "number",
-                                  placeholder: "Enter Total Student of Group 2"
-                                },
-                                domProps: { value: _vm.assigncourse.group[1] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.assigncourse.group,
-                                      1,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.numberofgroup == "Three"
-                      ? _c(
-                          "div",
-                          { staticClass: "md:flex md:items-center mb-6" },
-                          [
-                            _vm._m(9),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "md:w-3/4" }, [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.assigncourse.group[1],
-                                    expression: "assigncourse.group[1]"
-                                  }
-                                ],
-                                staticClass:
-                                  "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                                attrs: {
-                                  id: "inline-full-name",
-                                  type: "number",
-                                  placeholder: "Enter Total Student of Group 3"
-                                },
-                                domProps: { value: _vm.assigncourse.group[1] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.assigncourse.group,
-                                      1,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "md:flex md:items-center" }, [
-                      _c("div", { staticClass: "md:w-1/3" }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "md:w-2/3" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.assignCourse($event)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                                Add Semester \n                                            "
-                            )
-                          ]
-                        )
-                      ])
-                    ])
-                  ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(5)
                 ])
               ]
             )
@@ -48914,197 +47830,137 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
-        },
-        [
-          _vm._v(
-            "\n                                                Session Name\n                                            "
-          )
-        ]
-      )
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "border " }, [_vm._v("Select")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border " }, [_vm._v("Course Name")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border " }, [_vm._v("Semester-section")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border " }, [_vm._v("Teacher")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border " }, [_vm._v("Time 1")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border " }, [_vm._v("Time 2")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border " }, [_vm._v("Time 3")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border " }, [_vm._v("Gourp 1")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border " }, [_vm._v("Gourp 2")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border " }, [_vm._v("Gourp 3")])
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
-        },
-        [
-          _vm._v(
-            "\n                                                Semester\n                                            "
-          )
-        ]
-      )
+    return _c("td", { staticClass: "border px-4 py-2" }, [
+      _c("input", { attrs: { type: "checkbox", id: "", name: "", value: "" } })
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
-        },
-        [
-          _vm._v(
-            "\n                                                Teacher Code\n                                            "
-          )
-        ]
-      )
+    return _c("td", { staticClass: "border px-4 py-2" }, [
+      _c("select", {}, [
+        _c("option", { attrs: { value: "0.00" } }, [_vm._v("0.00")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "1.00" } }, [_vm._v("1.00")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "1.50" } }, [_vm._v("1.30")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2.00" } }, [_vm._v("2.00")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2.50" } }, [_vm._v("2.30")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3.00" } }, [_vm._v("3.00")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3.50" } }, [_vm._v("3.30")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "4.00" } }, [_vm._v("4.00")])
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
-        },
-        [
-          _vm._v(
-            "\n                                                Course\n                                            "
-          )
-        ]
-      )
+    return _c("td", { staticClass: "border px-4 py-2" }, [
+      _c("select", {}, [
+        _c("option", { attrs: { value: "0.00" } }, [_vm._v("0.00")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "1.00" } }, [_vm._v("1.00")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "1.50" } }, [_vm._v("1.30")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2.00" } }, [_vm._v("2.00")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2.50" } }, [_vm._v("2.30")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3.00" } }, [_vm._v("3.00")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3.50" } }, [_vm._v("3.30")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "4.00" } }, [_vm._v("4.00")])
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
-        },
-        [
-          _vm._v(
-            "\n                                                Duration 1\n                                            "
-          )
-        ]
-      )
+    return _c("td", { staticClass: "border px-4 py-2" }, [
+      _c("select", {}, [
+        _c("option", { attrs: { value: "0.00" } }, [_vm._v("0.00")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "1.00" } }, [_vm._v("1.00")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "1.50" } }, [_vm._v("1.30")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2.00" } }, [_vm._v("2.00")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2.50" } }, [_vm._v("2.30")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3.00" } }, [_vm._v("3.00")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3.50" } }, [_vm._v("3.30")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "4.00" } }, [_vm._v("4.00")])
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
+    return _c("div", { staticClass: "p-3" }, [
       _c(
-        "label",
+        "button",
         {
           staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
+            "bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full"
         },
         [
           _vm._v(
-            "\n                                                Duration 2\n                                            "
+            "\n                                Save\n                            "
           )
         ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
+      ),
+      _vm._v(" "),
       _c(
-        "label",
+        "button",
         {
           staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
+            "bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full"
         },
         [
           _vm._v(
-            "\n                                                Duration 3\n                                            "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
-        },
-        [
-          _vm._v(
-            "\n                                                Total Student of group 1\n                                            "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
-        },
-        [
-          _vm._v(
-            "\n                                                Total Student of Group 2\n                                            "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
-        },
-        [
-          _vm._v(
-            "\n                                                Total Student of Group 3\n                                            "
+            "\n                                Cancel\n                            "
           )
         ]
       )
