@@ -113,7 +113,7 @@
       },
       created() {
 
-          
+        
         let uri = `/api/enrollment/edit/${this.$route.params.id}`;
         this.axios.get(uri).then((response) => {
             this.enrollment = response.data.data; 
