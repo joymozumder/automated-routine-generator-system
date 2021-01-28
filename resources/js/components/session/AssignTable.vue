@@ -107,7 +107,7 @@ export default {
     },
     created() {
         this.session=this.$route.params.id;
-        let uri = '/api/enrollments';
+        let uri = `/api/enrollments/${this.$route.params.id}`;
         //console.log(this.sessions.id);
         this.axios.get(uri).then(response => {
           this.enrollments = response.data.data;

@@ -1,6 +1,6 @@
 <template>
     
-    <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
+              <main class="bg-white-500 flex-1 p-3 overflow-x-scroll z-10">
 
                 <div class="flex flex-1">
                    
@@ -9,15 +9,15 @@
 
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                                  <!-- <button class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50" data-modal='createSessionModal' >Create Session</button> -->
-                                <router-link tag="button" class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
-                                :to="{name: 'addcourse'}">Create Course</router-link>
+                                <!-- <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-40"
+                                :to="{name: 'courseassign', params: { id: session }}">Create Course</router-link> -->
                             <div class="p-3">
-        <compDataTable
+                                 <compDataTable
              
-            title="Courses Table"
+            title="Semester Table"
             
             :columns="tableColumns1"
-            :rows="courses"
+            :rows="newsemesters"
             :clickable="false"
             :sortable="true"
             
@@ -29,24 +29,18 @@
             
 
         > 
-
                 <th slot="thead-tr">
                     Actions
                 </th>
                 <template slot="tbody-tr" slot-scope="props">
                     <td>
-                         
+                      
 
-
-                        <router-link tag="button"  class="btn  bg-green-500 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editcourse', params: { id: props.row.id }}" >
+                        <!-- <router-link tag="button"  class="btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editenrollment', params: { id: props.row.id }}" >
                              <i class="material-icons white-text">
                                 edit</i>
-                         </router-link>
-
-
-
-
-                        <button class="btn  bg-red-500 darken-2 waves-effect waves-light compact-btn"
+                         </router-link> -->
+                        <button class="btn bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn"
                             @click.prevent="deletePost(props.row.id)"> 
                             <i class="material-icons white-text">delete</i>
                         </button>
@@ -54,90 +48,153 @@
                     
                 </template>
         </compDataTable>
-                  </div>
+     </div>
                         </div>
                     </div>
                     <!--/Grid Form-->
                 </div>
-                 <!-- ___________________________________________ -->
-        
-        <!-- _____________________________________________ -->
+               
             </main>
        
     
 </template>
 
+
 <script>
 import compDataTable from 'vue-materialize-datatable';
 export default {
-    data() {
-        return {
+    
+    data(){
+        return{
              tableColumns1: [
             
-		 	
 		 	{
-		 		label: "Course Name",
-		 		field: "name",
+		 		label: "Semester name",
+		 		field: "semester",
 		 		numeric: false,
-		 		html: false
+ 		        html: false
 		 	},
 		 	{
-		 		label: "Type",
-		 		field: "type",
+		 		label: "Section",
+		 		field: "section",
 		 		numeric: false,
 		 		html: false
              },
              {
-		 		label: "Credit",
-		 		field: "credit",
+		 		label: "Total Student",
+		 		field: "total_student",
 		 		numeric: false,
 		 		html: false
 		 	},
+		 	
 		 ],
-		courses: []
+             semesters:[],
+             newsemesters:[
+                 {
+                    semester:"1st",
+                    total_student:0,
+                    section:""
+                },
+                {
+                    semester:"2nd",
+                    total_student:0,
+                    section:""
+                },
+                {
+                    semester:"3rd",
+                    total_student:0,
+                    section:""
+                },
+                {
+                    semester:"4th",
+                    total_student:0,
+                    section:""
+                },
+                {
+                    semester:"5th",
+                    total_student:0,
+                    section:""
+                },
+                {
+                    semester:"6th",
+                    total_student:0,
+                    section:""
+                },
+                {
+                    semester:"7th",
+                    total_student:0,
+                    section:""
+                },
+                {
+                    semester:"8th",
+                    total_student:0,
+                    section:""
+                },
+                
+             ]
+             
+
         }
-        
-       
     },
     created() {
-        let uri = '/api/courses';
+        
+        let uri = '/api/semester-sections';
         this.axios.get(uri).then(response => {
-          this.courses = response.data.data;
-          //console.log(response);
-          for(var i=0;i<this.courses.length;i++){
+            this.semesters = response.data.data;
+            //console.log(this.semesters);
 
-                this.courses[i].name=this.courses[i].name+" - "+this.courses[i].code;
-                if(this.courses[i].type==0)
-                     this.courses[i].type="Theory Class";
-                else if(this.courses[i].type==1)
-                     this.courses[i].type="CSE LAB";
-                else if(this.courses[i].type==2)
-                      this.courses[i].type="EEE LAB";
-                else if(this.courses[i].type==3)
-                     this.courses[i].type="Communication LAB";
-                else if(this.courses.type==4)
-                      this.courses[i].type="Mechanical LAB";
-                else if(this.courses[i].type==5)
-                      this.courses[i].type="Physics LAB";
-                else    
-                      this.courses[i].type="none";
-          }
+            for(var i=0;i<8;i++){
+                // this.newsemesters[i]={
+                //     semester:"",
+                //     total_student:0,
+                //     section:""
+                // };
+               
+               //this.newsemesters[i].semester=i+1;
+                // this.newsemesters[i].total_student=this.semesters[i].total_student;
+                var count=0,total_student;
+
+                this.newsemesters[i].total_student=this.semesters[i].total_student;
+                for(var j=0;j<this.semesters.length;j++){
+                    if(this.semesters[j].semester[0]==i+1)
+                    {
+                        count=count+1;
+                        this.newsemesters[i].total_student=this.newsemesters[i].total_student+this.semesters[j].total_student;
+                    }    
+                          
+                }
+                if(count==0)
+                    this.newsemesters[i].section="None";
+                else if(count==1)
+                        this.newsemesters[i].section="A";
+                else if(count==2)
+                        this.newsemesters[i].section="A,B";
+                else if(count==3)
+                        this.newsemesters[i].section="A,B,C";
+                else if(count==4)
+                        this.newsemesters[i].section="A,B,C,D";
+                else if(count==5)
+                        this.newsemesters[i].section="A,B,C,D,E";
+                else
+                        this.newsemesters[i].section="invalid";
+
+        
+
+                            
+
+                    
+                
+                
+            }
+            console.log(this.newsemesters);
+          
         });
+
+        
     },
      components:{
             compDataTable 
      },
-     methods: {
-      deletePost(id)
-      {
-		
-		//console.log(id);
-        let uri = `/api/course/delete/${id}`;
-        
-         this.axios.delete(uri).then(response => {
-           this.courses.splice(this.courses.findIndex(course => course.id === id), 1);
-         });
-      }
-    }
+   
 }
 </script>

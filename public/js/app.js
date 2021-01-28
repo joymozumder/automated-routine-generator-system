@@ -3169,64 +3169,96 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       tableColumns1: [{
-        label: "Course Name",
-        field: "name",
+        label: "Semester name",
+        field: "semester",
         numeric: false,
         html: false
       }, {
-        label: "Type",
-        field: "type",
+        label: "Section",
+        field: "section",
         numeric: false,
         html: false
       }, {
-        label: "Credit",
-        field: "credit",
+        label: "Total Student",
+        field: "total_student",
         numeric: false,
         html: false
       }],
-      courses: []
+      semesters: [],
+      newsemesters: [{
+        semester: "1st",
+        total_student: 0,
+        section: ""
+      }, {
+        semester: "2nd",
+        total_student: 0,
+        section: ""
+      }, {
+        semester: "3rd",
+        total_student: 0,
+        section: ""
+      }, {
+        semester: "4th",
+        total_student: 0,
+        section: ""
+      }, {
+        semester: "5th",
+        total_student: 0,
+        section: ""
+      }, {
+        semester: "6th",
+        total_student: 0,
+        section: ""
+      }, {
+        semester: "7th",
+        total_student: 0,
+        section: ""
+      }, {
+        semester: "8th",
+        total_student: 0,
+        section: ""
+      }]
     };
   },
   created: function created() {
     var _this = this;
 
-    var uri = '/api/courses';
+    var uri = '/api/semester-sections';
     this.axios.get(uri).then(function (response) {
-      _this.courses = response.data.data; //console.log(response);
+      _this.semesters = response.data.data; //console.log(this.semesters);
 
-      for (var i = 0; i < _this.courses.length; i++) {
-        _this.courses[i].name = _this.courses[i].name + " - " + _this.courses[i].code;
-        if (_this.courses[i].type == 0) _this.courses[i].type = "Theory Class";else if (_this.courses[i].type == 1) _this.courses[i].type = "CSE LAB";else if (_this.courses[i].type == 2) _this.courses[i].type = "EEE LAB";else if (_this.courses[i].type == 3) _this.courses[i].type = "Communication LAB";else if (_this.courses.type == 4) _this.courses[i].type = "Mechanical LAB";else if (_this.courses[i].type == 5) _this.courses[i].type = "Physics LAB";else _this.courses[i].type = "none";
+      for (var i = 0; i < 8; i++) {
+        // this.newsemesters[i]={
+        //     semester:"",
+        //     total_student:0,
+        //     section:""
+        // };
+        //this.newsemesters[i].semester=i+1;
+        // this.newsemesters[i].total_student=this.semesters[i].total_student;
+        var count = 0,
+            total_student;
+        _this.newsemesters[i].total_student = _this.semesters[i].total_student;
+
+        for (var j = 0; j < _this.semesters.length; j++) {
+          if (_this.semesters[j].semester[0] == i + 1) {
+            count = count + 1;
+            _this.newsemesters[i].total_student = _this.newsemesters[i].total_student + _this.semesters[j].total_student;
+          }
+        }
+
+        if (count == 0) _this.newsemesters[i].section = "None";else if (count == 1) _this.newsemesters[i].section = "A";else if (count == 2) _this.newsemesters[i].section = "A,B";else if (count == 3) _this.newsemesters[i].section = "A,B,C";else if (count == 4) _this.newsemesters[i].section = "A,B,C,D";else if (count == 5) _this.newsemesters[i].section = "A,B,C,D,E";else _this.newsemesters[i].section = "invalid";
       }
+
+      console.log(_this.newsemesters);
     });
   },
   components: {
     compDataTable: vue_materialize_datatable__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  methods: {
-    deletePost: function deletePost(id) {
-      var _this2 = this;
-
-      //console.log(id);
-      var uri = "/api/course/delete/".concat(id);
-      this.axios["delete"](uri).then(function (response) {
-        _this2.courses.splice(_this2.courses.findIndex(function (course) {
-          return course.id === id;
-        }), 1);
-      });
-    }
   }
 });
 
@@ -5367,7 +5399,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.session = this.$route.params.id;
-    var uri = '/api/enrollments'; //console.log(this.sessions.id);
+    var uri = "/api/enrollments/".concat(this.$route.params.id); //console.log(this.sessions.id);
 
     this.axios.get(uri).then(function (response) {
       _this.enrollments = response.data.data;
@@ -6497,11 +6529,136 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       semesters: [],
-      newsemesters: []
+      newsemesters: [{
+        semester: "1st",
+        total_student: 0,
+        section: 0
+      }, {
+        semester: "2nd",
+        total_student: 0,
+        section: 0
+      }, {
+        semester: "3rd",
+        total_student: 0,
+        section: 0
+      }, {
+        semester: "4th",
+        total_student: 0,
+        section: 0
+      }, {
+        semester: "5th",
+        total_student: 0,
+        section: 0
+      }, {
+        semester: "6th",
+        total_student: 0,
+        section: 0
+      }, {
+        semester: "7th",
+        total_student: 0,
+        section: 0
+      }, {
+        semester: "8th",
+        total_student: 0,
+        section: 0
+      }]
     };
   },
   created: function created() {
@@ -6510,19 +6667,21 @@ __webpack_require__.r(__webpack_exports__);
     var uri = '/api/semester-sections';
     this.axios.get(uri).then(function (response) {
       _this.semesters = response.data.data; //console.log(this.semesters);
-    });
 
-    for (var i = 0; i < 8; i++) {
-      this.newsemesters[i] = {};
-      this.newsemesters[i].semester = i + 1; // this.newsemesters[i].total_student=this.semesters[i].total_student;
+      for (var i = 0; i < 8; i++) {
+        // var count=0,total_student;
+        _this.newsemesters[i].total_student = _this.semesters[i].total_student;
 
-      var pos = 0;
-
-      for (var j = 0; j < this.semesters.length; j++) {//if(this.semesters[i].semester[0]=='1')
-        //this.
+        for (var j = 0; j < _this.semesters.length; j++) {
+          if (_this.semesters[j].semester[0] == i + 1) {
+            _this.newsemesters[i].section = _this.newsemesters[i].section + 1;
+            _this.newsemesters[i].total_student = _this.newsemesters[i].total_student + _this.semesters[j].total_student;
+          }
+        }
       }
-    } // console.log(this.newsemester);
 
+      console.log(_this.newsemesters);
+    });
   }
 });
 
@@ -51028,7 +51187,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "main",
-    { staticClass: "bg-white-500 flex-1 p-3 overflow-x-scroll" },
+    { staticClass: "bg-white-500 flex-1 p-3 overflow-x-scroll z-10" },
     [
       _c("div", { staticClass: "flex flex-1" }, [
         _c(
@@ -51043,16 +51202,6 @@ var render = function() {
               },
               [
                 _c(
-                  "router-link",
-                  {
-                    staticClass:
-                      "modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
-                    attrs: { tag: "button", to: { name: "addcourse" } }
-                  },
-                  [_vm._v("Create Course")]
-                ),
-                _vm._v(" "),
-                _c(
                   "div",
                   { staticClass: "p-3" },
                   [
@@ -51060,9 +51209,9 @@ var render = function() {
                       "compDataTable",
                       {
                         attrs: {
-                          title: "Courses Table",
+                          title: "Semester Table",
                           columns: _vm.tableColumns1,
-                          rows: _vm.courses,
+                          rows: _vm.newsemesters,
                           clickable: false,
                           sortable: true,
                           exactSearch: true,
@@ -51076,64 +51225,31 @@ var render = function() {
                             key: "tbody-tr",
                             fn: function(props) {
                               return [
-                                _c(
-                                  "td",
-                                  [
-                                    _c(
-                                      "router-link",
-                                      {
-                                        staticClass:
-                                          "btn  bg-green-500 darken-2 waves-effect waves-light compact-btn",
-                                        attrs: {
-                                          tag: "button",
-                                          to: {
-                                            name: "editcourse",
-                                            params: { id: props.row.id }
-                                          }
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn",
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.deletePost(props.row.id)
                                         }
-                                      },
-                                      [
-                                        _c(
-                                          "i",
-                                          {
-                                            staticClass:
-                                              "material-icons white-text"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                            edit"
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass:
-                                          "btn  bg-red-500 darken-2 waves-effect waves-light compact-btn",
-                                        on: {
-                                          click: function($event) {
-                                            $event.preventDefault()
-                                            return _vm.deletePost(props.row.id)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "i",
-                                          {
-                                            staticClass:
-                                              "material-icons white-text"
-                                          },
-                                          [_vm._v("delete")]
-                                        )
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                )
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "i",
+                                        {
+                                          staticClass:
+                                            "material-icons white-text"
+                                        },
+                                        [_vm._v("delete")]
+                                      )
+                                    ]
+                                  )
+                                ])
                               ]
                             }
                           }
@@ -51143,15 +51259,14 @@ var render = function() {
                         _c(
                           "th",
                           { attrs: { slot: "thead-tr" }, slot: "thead-tr" },
-                          [_vm._v("\n                Actions\n            ")]
+                          [_vm._v("\n               Actions\n           ")]
                         )
                       ]
                     )
                   ],
                   1
                 )
-              ],
-              1
+              ]
             )
           ]
         )
@@ -59438,9 +59553,191 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    semester table \n")])
+  return _c(
+    "main",
+    { staticClass: "bg-white-500 flex-1 p-3 overflow-x-scroll z-10" },
+    [
+      _c("div", { staticClass: "flex flex-col" }, [
+        _c(
+          "div",
+          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "mb-2 border-solid border-gray-300 rounded border shadow-sm w-full"
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b"
+                  },
+                  [_vm._v("\n                    Full Table\n                ")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "p-3" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table-responsive w-full rounded" },
+                    [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.newsemesters, function(semester) {
+                          return _c("tr", { key: semester.id }, [
+                            _c("td", { staticClass: "border px-4 py-2" }, [
+                              _vm._v(_vm._s(semester.semester))
+                            ]),
+                            _vm._v(" "),
+                            semester.section > 0
+                              ? _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-check text-green-500 mx-2"
+                                  })
+                                ])
+                              : _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-times text-red-500 mx-2"
+                                  })
+                                ]),
+                            _vm._v(" "),
+                            semester.section > 1
+                              ? _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-check text-green-500 mx-2"
+                                  })
+                                ])
+                              : _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-times text-red-500 mx-2"
+                                  })
+                                ]),
+                            _vm._v(" "),
+                            semester.section > 2
+                              ? _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-check text-green-500 mx-2"
+                                  })
+                                ])
+                              : _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-times text-red-500 mx-2"
+                                  })
+                                ]),
+                            _vm._v(" "),
+                            semester.section > 3
+                              ? _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-check text-green-500 mx-2"
+                                  })
+                                ])
+                              : _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-times text-red-500 mx-2"
+                                  })
+                                ]),
+                            _vm._v(" "),
+                            semester.section > 4
+                              ? _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-check text-green-500 mx-2"
+                                  })
+                                ])
+                              : _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-times text-red-500 mx-2"
+                                  })
+                                ]),
+                            _vm._v(" "),
+                            _vm._m(1, true)
+                          ])
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
+      ])
+    ]
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [
+          _vm._v("Semester Name")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [
+          _vm._v("Section-A")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [
+          _vm._v("Section-B")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [
+          _vm._v("Section-C")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [
+          _vm._v("Section-D")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [
+          _vm._v("Section-E")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [_vm._v("Action")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "border px-4 py-2" }, [
+      _c(
+        "a",
+        {
+          staticClass: "bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white"
+        },
+        [_c("i", { staticClass: "fas fa-edit" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass:
+            "bg-teal-300 cursor-pointer rounded p-1 mx-1 text-red-500"
+        },
+        [_c("i", { staticClass: "fas fa-trash" })]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
