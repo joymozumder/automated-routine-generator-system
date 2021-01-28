@@ -43,8 +43,8 @@ Route::get('/semester-sections','api\SemesterSectionController@index');
 Route::post('/request-sections','api\SemesterSectionController@request_index'); //session
 Route::post('/semester-section/create','api\SemesterSectionController@store');
 Route::get('/semester-section/{id}','api\SemesterSectionController@show');
-Route::get('/semester-section/edit/{id}','api\SemesterSectionController@edit');
-Route::post('/semester-section/update/{id}','api\SemesterSectionController@update');
+Route::get('/semester-section/edit/{session}/{semester}','api\SemesterSectionController@edit'); //only semester
+Route::post('/semester-section/update/{session}/{semester}','api\SemesterSectionController@update'); //only semester
 Route::delete('/semester-section/delete/{id}', 'api\SemesterSectionController@destroy');
 
 
