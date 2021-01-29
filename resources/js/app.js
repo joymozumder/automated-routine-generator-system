@@ -37,7 +37,7 @@ import compSessionTable from "./components/session/SessionTable.vue";
 
 import compSessionComponent from './components/session/SessionComponent.vue';
 import compSelectSession from './components/session/SelectSession.vue';
-import compAddSemester from './components/session/AddSemester.vue';
+//import compAddSemester from './components/session/AddSemester.vue';
 import compAssignCourse from './components/session/AssignCourse.vue';
 import compManualAssign from './components/session/ManualAssign.vue';
 import compRoutine from './components/session/Routine.vue';
@@ -52,6 +52,9 @@ import compAssignTable from "./components/session/AssignTable.vue";
 import compEditEnrollment from "./components/session/EditEnrollment.vue";
 
 import compSemesterTable from "./components/session/SemesterTable.vue";
+
+import compAddSemester from "./components/semester/AddSemester.vue";
+import compEditSemester from "./components/semester/EditSemester.vue";
 
 
 
@@ -133,11 +136,11 @@ const routes = [
                     path: 'session',
                     component: compSessionComponent
                 },
-                {
-                    name: 'addsemester',
-                    path: ':id/addsemester',
-                    component: compAddSemester
-                },
+                // {
+                //     name: 'addsemester',
+                //     path: ':id/addsemester',
+                //     component: compAddSemester
+                // },
                 {
                     name: 'assigncourse',
                     path: ':id/assigncourse',
@@ -190,7 +193,7 @@ const routes = [
                 },
                 {
                     name: 'semesters',
-                    path: 'semesters',
+                    path: 'semesters/:session',
                     component: compSemesterTable
                 },
                 {
@@ -214,6 +217,16 @@ const routes = [
                     path: 'test4',
                     component: compTest4
                 },
+                {
+                    name: 'editsemester',
+                    path: 'editsemester/:session/:id',
+                    component: compEditSemester
+                },
+                {
+                    name: 'addsemester',
+                    path: 'addsemester/:session',
+                    component: compAddSemester
+                }
                 
                 
 

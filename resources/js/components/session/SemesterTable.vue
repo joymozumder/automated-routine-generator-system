@@ -75,8 +75,13 @@
 
                                             <td class="border px-4 py-2">
                                                
-                                       <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-edit"></i></a>
+                                      
+
+                                            <router-link tag="a"  class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white" :to="{name: 'editsemester', params: { session: session,id:semester.semester[0] }}" >
+                                                    <i class="fas fa-edit"></i>
+                                             </router-link>
+
+
                                                 <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-red-500">
                                                         <i class="fas fa-trash"></i>
                                                 </a>
@@ -103,47 +108,47 @@ export default {
     
     data(){
         return{
-            
-             semesters:[],
+             session:"",
+             semesters:{},
              newsemesters:[
                  {
                     semester:"1st",
-                    total_student:0,
+                    //total_student:0,
                     section:0
                 },
                 {
                     semester:"2nd",
-                    total_student:0,
+                    //total_student:0,
                     section:0
                 },
                 {
                     semester:"3rd",
-                    total_student:0,
+                    //total_student:0,
                     section:0
                 },
                 {
                     semester:"4th",
-                    total_student:0,
+                    //total_student:0,
                     section:0
                 },
                 {
                     semester:"5th",
-                    total_student:0,
+                    //total_student:0,
                     section:0
                 },
                 {
                     semester:"6th",
-                    total_student:0,
+                    //total_student:0,
                     section:0
                 },
                 {
                     semester:"7th",
-                    total_student:0,
+                    //total_student:0,
                     section:0
                 },
                 {
                     semester:"8th",
-                    total_student:0,
+                    //total_student:0,
                     section:0
                 },
                 
@@ -153,38 +158,52 @@ export default {
         }
     },
     created() {
+        this.session=this.$route.params.session;
+        console.log(this.$route.params.session);
+        this.semesters.session_name = this.session;
         
-        let uri = '/api/semester-sections';
-        this.axios.get(uri).then(response => {
+         console.log(this.semesters);
+
+         let uri = '/api/request-sections';
+         this.axios.post(uri, this.semesters).then((response) => {
             this.semesters = response.data.data;
-            //console.log(this.semesters);
+            console.log(this.semesters);
 
-            for(var i=0;i<8;i++){
+              for(var i=0;i<8;i++){
+                    for(var j=0;j<this.semesters.length;j++){
+                        if(this.semesters[j].semester[0]==i+1)
+                        {
+                            this.newsemesters[i].section=this.newsemesters[i].section+1;
+                        } 
+                    }
+                    console.log(this.newsemesters[i].section);
+              }
+        });
+
+
+        
+      
+          /*
+          for(var i=0;i<8;i++){
                
-               // var count=0,total_student;
+                // var count=0,total_student;
 
-                this.newsemesters[i].total_student=this.semesters[i].total_student;
-                for(var j=0;j<this.semesters.length;j++){
-                    if(this.semesters[j].semester[0]==i+1)
-                    {
-                        this.newsemesters[i].section=this.newsemesters[i].section+1;
-                        this.newsemesters[i].total_student=this.newsemesters[i].total_student+this.semesters[j].total_student;
+                // this.newsemesters[i].total_student=this.semesters[i].total_student;
+                 for(var j=0;j<this.semesters.length;j++){
+                   if(this.semesters[j].semester[0]==i+1)
+                     {
+                         this.newsemesters[i].section=this.newsemesters[i].section+1;
+                        //this.newsemesters[i].total_student=this.newsemesters[i].total_student+this.semesters[j].total_student;
                     }    
                           
-                }
+                 }
                 
 
-        
-
-                            
-
-                    
                 
-                
-            }
-            console.log(this.newsemesters);
+             }
+             console.log(this.newsemesters);*/
           
-        });
+         
 
         
     },

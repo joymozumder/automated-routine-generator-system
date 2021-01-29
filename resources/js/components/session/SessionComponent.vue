@@ -33,6 +33,12 @@
                                               <router-link tag="button"  class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourses', params: { id: selected_session }}" >
                                                     Assign Courses
                                              </router-link>
+                                             <router-link tag="button"  class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'semesters', params: { session: selected_session }}" >
+                                                    Semesters
+                                             </router-link>
+                                             <router-link tag="button"  class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'addsemester', params: { session: selected_session }}" >
+                                                    Add Semester
+                                             </router-link>
                                         </div>
 
                                             
@@ -997,7 +1003,7 @@
          });
       },
       addSession(){
-            console.log(this.newSessions);
+            //console.log(this.newSessions);
             let uri = '/api/session/create';
             this.selected_session = this.newSessions.session_name;
             this.axios.post(uri, this.newSessions).then((response) => {
