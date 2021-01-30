@@ -3545,82 +3545,85 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      courses: [],
-      semesters: [],
-      teachers: []
+      session: "",
+      semesters: {},
+      newsemesters: [{
+        semester: "1st",
+        //total_student:0,
+        section: 0
+      }, {
+        semester: "2nd",
+        //total_student:0,
+        section: 0
+      }, {
+        semester: "3rd",
+        //total_student:0,
+        section: 0
+      }, {
+        semester: "4th",
+        //total_student:0,
+        section: 0
+      }, {
+        semester: "5th",
+        //total_student:0,
+        section: 0
+      }, {
+        semester: "6th",
+        //total_student:0,
+        section: 0
+      }, {
+        semester: "7th",
+        //total_student:0,
+        section: 0
+      }, {
+        semester: "8th",
+        //total_student:0,
+        section: 0
+      }]
     };
   },
   created: function created() {
     var _this = this;
 
-    var uri = '/api/courses';
-    this.axios.get(uri).then(function (response) {
-      _this.courses = response.data.data; //console.log(this.courses);
+    this.session = this.$route.params.session;
+    console.log(this.$route.params.session);
+    this.semesters.session_name = this.session;
+    console.log(this.semesters);
+    var uri = '/api/request-sections';
+    this.axios.post(uri, this.semesters).then(function (response) {
+      _this.semesters = response.data.data;
+      console.log(_this.semesters);
+
+      for (var i = 0; i < 8; i++) {
+        for (var j = 0; j < _this.semesters.length; j++) {
+          if (_this.semesters[j].semester[0] == i + 1) {
+            _this.newsemesters[i].section = _this.newsemesters[i].section + 1;
+          }
+        }
+
+        console.log(_this.newsemesters[i].section);
+      }
     });
-    uri = '/api/semester-sections';
-    this.axios.get(uri).then(function (response) {
-      _this.semesters = response.data.data; //console.log(this.semesters);
-    });
-    uri = '/api/teachers';
-    this.axios.get(uri).then(function (response) {
-      _this.teachers = response.data.data;
-      console.log(_this.teachers);
-    });
+    /*
+    for(var i=0;i<8;i++){
+         
+          // var count=0,total_student;
+            // this.newsemesters[i].total_student=this.semesters[i].total_student;
+           for(var j=0;j<this.semesters.length;j++){
+             if(this.semesters[j].semester[0]==i+1)
+               {
+                   this.newsemesters[i].section=this.newsemesters[i].section+1;
+                  //this.newsemesters[i].total_student=this.newsemesters[i].total_student+this.semesters[j].total_student;
+              }    
+                    
+           }
+          
+            
+       }
+       console.log(this.newsemesters);*/
   }
 });
 
@@ -6803,36 +6806,76 @@ __webpack_require__.r(__webpack_exports__);
       semesters: {},
       newsemesters: [{
         semester: "1st",
-        //total_student:0,
-        section: 0
+        section: {
+          a: 0,
+          b: 0,
+          c: 0,
+          d: 0,
+          e: 0
+        }
       }, {
         semester: "2nd",
-        //total_student:0,
-        section: 0
+        section: {
+          a: 0,
+          b: 0,
+          c: 0,
+          d: 0,
+          e: 0
+        }
       }, {
         semester: "3rd",
-        //total_student:0,
-        section: 0
+        section: {
+          a: 0,
+          b: 0,
+          c: 0,
+          d: 0,
+          e: 0
+        }
       }, {
         semester: "4th",
-        //total_student:0,
-        section: 0
+        section: {
+          a: 0,
+          b: 0,
+          c: 0,
+          d: 0,
+          e: 0
+        }
       }, {
         semester: "5th",
-        //total_student:0,
-        section: 0
+        section: {
+          a: 0,
+          b: 0,
+          c: 0,
+          d: 0,
+          e: 0
+        }
       }, {
         semester: "6th",
-        //total_student:0,
-        section: 0
+        section: {
+          a: 0,
+          b: 0,
+          c: 0,
+          d: 0,
+          e: 0
+        }
       }, {
         semester: "7th",
-        //total_student:0,
-        section: 0
+        section: {
+          a: 0,
+          b: 0,
+          c: 0,
+          d: 0,
+          e: 0
+        }
       }, {
         semester: "8th",
-        //total_student:0,
-        section: 0
+        section: {
+          a: 0,
+          b: 0,
+          c: 0,
+          d: 0,
+          e: 0
+        }
       }]
     };
   },
@@ -6842,39 +6885,18 @@ __webpack_require__.r(__webpack_exports__);
     this.session = this.$route.params.session;
     console.log(this.$route.params.session);
     this.semesters.session_name = this.session;
-    console.log(this.semesters);
     var uri = '/api/request-sections';
     this.axios.post(uri, this.semesters).then(function (response) {
       _this.semesters = response.data.data;
-      console.log(_this.semesters);
 
       for (var i = 0; i < 8; i++) {
         for (var j = 0; j < _this.semesters.length; j++) {
           if (_this.semesters[j].semester[0] == i + 1) {
-            _this.newsemesters[i].section = _this.newsemesters[i].section + 1;
+            if (_this.semesters[j].semester[1] == "a") _this.newsemesters[i].section.a = 1;else if (_this.semesters[j].semester[1] == "b") _this.newsemesters[i].section.b = 1;else if (_this.semesters[j].semester[1] == "c") _this.newsemesters[i].section.c = 1;else if (_this.semesters[j].semester[1] == "d") _this.newsemesters[i].section.d = 1;else _this.newsemesters[i].section.e = 1;
           }
         }
-
-        console.log(_this.newsemesters[i].section);
       }
     });
-    /*
-    for(var i=0;i<8;i++){
-         
-          // var count=0,total_student;
-            // this.newsemesters[i].total_student=this.semesters[i].total_student;
-           for(var j=0;j<this.semesters.length;j++){
-             if(this.semesters[j].semester[0]==i+1)
-               {
-                   this.newsemesters[i].section=this.newsemesters[i].section+1;
-                  //this.newsemesters[i].total_student=this.newsemesters[i].total_student+this.semesters[j].total_student;
-              }    
-                    
-           }
-          
-            
-       }
-       console.log(this.newsemesters);*/
   }
 });
 
@@ -51813,7 +51835,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "main",
-    { staticClass: "bg-white-500 flex-1 p-3 overflow-hidden" },
+    { staticClass: "bg-white-500 flex-1 p-3 overflow-x-scroll z-10" },
     [
       _c("div", { staticClass: "flex flex-col" }, [
         _c(
@@ -51833,11 +51855,7 @@ var render = function() {
                     staticClass:
                       "bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b"
                   },
-                  [
-                    _vm._v(
-                      "\n                            Full Table\n                        "
-                    )
-                  ]
+                  [_vm._v("\n                    Full Table\n                ")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "p-3" }, [
@@ -51849,128 +51867,115 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "tbody",
-                        _vm._l(_vm.courses, function(course) {
-                          return _c("tr", { key: course.id }, [
-                            _vm._m(1, true),
-                            _vm._v(" "),
+                        _vm._l(_vm.newsemesters, function(semester) {
+                          return _c("tr", { key: semester.id }, [
                             _c("td", { staticClass: "border px-4 py-2" }, [
-                              _vm._v(_vm._s(course.name))
+                              _vm._v(_vm._s(semester.semester))
                             ]),
                             _vm._v(" "),
-                            _c("td", { staticClass: "border px-4 py-2" }, [
-                              _c(
-                                "select",
-                                {
-                                  staticClass:
-                                    "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                },
-                                _vm._l(_vm.semesters, function(semester) {
-                                  return _c("option", { key: semester.id }, [
-                                    _vm._v(_vm._s(semester.semester))
-                                  ])
-                                }),
-                                0
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "border px-4 py-2" }, [
-                              _c(
-                                "select",
-                                {
-                                  staticClass:
-                                    "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                },
-                                _vm._l(_vm.teachers, function(teacher) {
-                                  return _c("option", { key: teacher.id }, [
-                                    _vm._v(_vm._s(teacher.code))
-                                  ])
-                                }),
-                                0
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _vm._m(2, true),
-                            _vm._v(" "),
-                            _vm._m(3, true),
-                            _vm._v(" "),
-                            _vm._m(4, true),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "border px-4 py-2" }, [
-                              course.type == 0
-                                ? _c("input", {
+                            semester.section > 0
+                              ? _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
                                     staticClass:
-                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                                    attrs: {
-                                      id: "",
-                                      type: "number",
-                                      readonly: "",
-                                      placeholder: "No group"
-                                    }
+                                      "fas fa-check text-green-500 mx-2"
                                   })
-                                : _c("input", {
+                                ])
+                              : _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
                                     staticClass:
-                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                                    attrs: {
-                                      id: "",
-                                      type: "number",
-                                      placeholder: "group 1"
-                                    }
+                                      "fas fa-times text-red-500 mx-2"
                                   })
-                            ]),
+                                ]),
                             _vm._v(" "),
-                            _c("td", { staticClass: "border px-4 py-2" }, [
-                              course.type == 0
-                                ? _c("input", {
+                            semester.section > 1
+                              ? _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
                                     staticClass:
-                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                                    attrs: {
-                                      id: "",
-                                      type: "number",
-                                      readonly: "",
-                                      placeholder: "No group"
-                                    }
+                                      "fas fa-check text-green-500 mx-2"
                                   })
-                                : _c("input", {
+                                ])
+                              : _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
                                     staticClass:
-                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                                    attrs: {
-                                      id: "",
-                                      type: "number",
-                                      placeholder: "group 2"
-                                    }
+                                      "fas fa-times text-red-500 mx-2"
                                   })
-                            ]),
+                                ]),
                             _vm._v(" "),
-                            _c("td", { staticClass: "border px-4 py-2" }, [
-                              course.type == 0
-                                ? _c("input", {
+                            semester.section > 2
+                              ? _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
                                     staticClass:
-                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                                    attrs: {
-                                      id: "",
-                                      type: "number",
-                                      readonly: "",
-                                      placeholder: "No group"
-                                    }
+                                      "fas fa-check text-green-500 mx-2"
                                   })
-                                : _c("input", {
+                                ])
+                              : _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
                                     staticClass:
-                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                                    attrs: {
-                                      id: "",
-                                      type: "number",
-                                      placeholder: "group 3"
-                                    }
+                                      "fas fa-times text-red-500 mx-2"
                                   })
-                            ])
+                                ]),
+                            _vm._v(" "),
+                            semester.section > 3
+                              ? _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-check text-green-500 mx-2"
+                                  })
+                                ])
+                              : _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-times text-red-500 mx-2"
+                                  })
+                                ]),
+                            _vm._v(" "),
+                            semester.section > 4
+                              ? _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-check text-green-500 mx-2"
+                                  })
+                                ])
+                              : _c("td", { staticClass: "border px-4 py-2" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-times text-red-500 mx-2"
+                                  })
+                                ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticClass: "border px-4 py-2" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white",
+                                    attrs: {
+                                      tag: "a",
+                                      to: {
+                                        name: "editsemester",
+                                        params: {
+                                          session: _vm.session,
+                                          id: semester.semester[0]
+                                        }
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fas fa-edit" })]
+                                ),
+                                _vm._v(" "),
+                                _vm._m(1, true)
+                              ],
+                              1
+                            )
                           ])
                         }),
                         0
                       )
                     ]
-                  ),
-                  _vm._v(" "),
-                  _vm._m(5)
+                  )
                 ])
               ]
             )
@@ -51987,25 +51992,31 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "border " }, [_vm._v("Select")]),
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [
+          _vm._v("Semester Name")
+        ]),
         _vm._v(" "),
-        _c("th", { staticClass: "border " }, [_vm._v("Course Name")]),
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [
+          _vm._v("Section-A")
+        ]),
         _vm._v(" "),
-        _c("th", { staticClass: "border " }, [_vm._v("Semester-section")]),
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [
+          _vm._v("Section-B")
+        ]),
         _vm._v(" "),
-        _c("th", { staticClass: "border " }, [_vm._v("Teacher")]),
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [
+          _vm._v("Section-C")
+        ]),
         _vm._v(" "),
-        _c("th", { staticClass: "border " }, [_vm._v("Time 1")]),
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [
+          _vm._v("Section-D")
+        ]),
         _vm._v(" "),
-        _c("th", { staticClass: "border " }, [_vm._v("Time 2")]),
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [
+          _vm._v("Section-E")
+        ]),
         _vm._v(" "),
-        _c("th", { staticClass: "border " }, [_vm._v("Time 3")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "border " }, [_vm._v("Gourp 1")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "border " }, [_vm._v("Gourp 2")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "border " }, [_vm._v("Gourp 3")])
+        _c("th", { staticClass: "border w-1/7 px-12 py-3" }, [_vm._v("Action")])
       ])
     ])
   },
@@ -52013,113 +52024,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "border px-4 py-2" }, [
-      _c("input", { attrs: { type: "checkbox", id: "", name: "", value: "" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "border px-4 py-2" }, [
-      _c("select", {}, [
-        _c("option", { attrs: { value: "0.00" } }, [_vm._v("0.00")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "1.00" } }, [_vm._v("1.00")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "1.50" } }, [_vm._v("1.30")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "2.00" } }, [_vm._v("2.00")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "2.50" } }, [_vm._v("2.30")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "3.00" } }, [_vm._v("3.00")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "3.50" } }, [_vm._v("3.30")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "4.00" } }, [_vm._v("4.00")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "border px-4 py-2" }, [
-      _c("select", {}, [
-        _c("option", { attrs: { value: "0.00" } }, [_vm._v("0.00")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "1.00" } }, [_vm._v("1.00")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "1.50" } }, [_vm._v("1.30")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "2.00" } }, [_vm._v("2.00")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "2.50" } }, [_vm._v("2.30")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "3.00" } }, [_vm._v("3.00")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "3.50" } }, [_vm._v("3.30")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "4.00" } }, [_vm._v("4.00")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "border px-4 py-2" }, [
-      _c("select", {}, [
-        _c("option", { attrs: { value: "0.00" } }, [_vm._v("0.00")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "1.00" } }, [_vm._v("1.00")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "1.50" } }, [_vm._v("1.30")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "2.00" } }, [_vm._v("2.00")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "2.50" } }, [_vm._v("2.30")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "3.00" } }, [_vm._v("3.00")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "3.50" } }, [_vm._v("3.30")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "4.00" } }, [_vm._v("4.00")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-3" }, [
-      _c(
-        "button",
-        {
-          staticClass:
-            "bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full"
-        },
-        [
-          _vm._v(
-            "\n                                Save\n                            "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass:
-            "bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full"
-        },
-        [
-          _vm._v(
-            "\n                                Cancel\n                            "
-          )
-        ]
-      )
-    ])
+    return _c(
+      "a",
+      {
+        staticClass: "bg-teal-300 cursor-pointer rounded p-1 mx-1 text-red-500"
+      },
+      [_c("i", { staticClass: "fas fa-trash" })]
+    )
   }
 ]
 render._withStripped = true
@@ -60439,7 +60350,7 @@ var render = function() {
                               _vm._v(_vm._s(semester.semester))
                             ]),
                             _vm._v(" "),
-                            semester.section > 0
+                            semester.section.a == 1
                               ? _c("td", { staticClass: "border px-4 py-2" }, [
                                   _c("i", {
                                     staticClass:
@@ -60453,7 +60364,7 @@ var render = function() {
                                   })
                                 ]),
                             _vm._v(" "),
-                            semester.section > 1
+                            semester.section.b == 1
                               ? _c("td", { staticClass: "border px-4 py-2" }, [
                                   _c("i", {
                                     staticClass:
@@ -60467,7 +60378,7 @@ var render = function() {
                                   })
                                 ]),
                             _vm._v(" "),
-                            semester.section > 2
+                            semester.section.c == 1
                               ? _c("td", { staticClass: "border px-4 py-2" }, [
                                   _c("i", {
                                     staticClass:
@@ -60481,7 +60392,7 @@ var render = function() {
                                   })
                                 ]),
                             _vm._v(" "),
-                            semester.section > 3
+                            semester.section.d == 1
                               ? _c("td", { staticClass: "border px-4 py-2" }, [
                                   _c("i", {
                                     staticClass:
@@ -60495,7 +60406,7 @@ var render = function() {
                                   })
                                 ]),
                             _vm._v(" "),
-                            semester.section > 4
+                            semester.section.e == 1
                               ? _c("td", { staticClass: "border px-4 py-2" }, [
                                   _c("i", {
                                     staticClass:

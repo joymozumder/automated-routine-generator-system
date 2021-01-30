@@ -24,11 +24,11 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="semester in newsemesters" :key="semester.id">
+                                         <tr v-for="semester in newsemesters" :key="semester.id">
                                             <td class="border px-4 py-2">{{semester.semester}}</td>
                                             
                                            
-                                            <td v-if="semester.section>0" class="border px-4 py-2">
+                                            <td v-if="semester.section.a==1" class="border px-4 py-2">
                                                 <i class="fas fa-check text-green-500 mx-2"></i>
                                                 
                                             </td>
@@ -37,7 +37,7 @@
                                                 <i class="fas fa-times text-red-500 mx-2"></i>
                                             </td>
 
-                                            <td v-if="semester.section>1" class="border px-4 py-2">
+                                            <td v-if="semester.section.b==1" class="border px-4 py-2">
                                                 <i class="fas fa-check text-green-500 mx-2"></i>
                                                 
                                             </td>
@@ -46,16 +46,7 @@
                                                 <i class="fas fa-times text-red-500 mx-2"></i>
                                             </td>
                                              
-                                            <td v-if="semester.section>2" class="border px-4 py-2">
-                                                <i class="fas fa-check text-green-500 mx-2"></i>
-                                                
-                                            </td>
-                                             
-                                            <td v-else class="border px-4 py-2">
-                                                <i class="fas fa-times text-red-500 mx-2"></i>
-                                            </td>
-
-                                            <td v-if="semester.section>3" class="border px-4 py-2">
+                                            <td v-if="semester.section.c==1" class="border px-4 py-2">
                                                 <i class="fas fa-check text-green-500 mx-2"></i>
                                                 
                                             </td>
@@ -64,7 +55,16 @@
                                                 <i class="fas fa-times text-red-500 mx-2"></i>
                                             </td>
 
-                                             <td v-if="semester.section>4" class="border px-4 py-2">
+                                            <td v-if="semester.section.d==1" class="border px-4 py-2">
+                                                <i class="fas fa-check text-green-500 mx-2"></i>
+                                                
+                                            </td>
+                                             
+                                            <td v-else class="border px-4 py-2">
+                                                <i class="fas fa-times text-red-500 mx-2"></i>
+                                            </td>
+
+                                             <td v-if="semester.section.e==1" class="border px-4 py-2">
                                                 <i class="fas fa-check text-green-500 mx-2"></i>
                                                 
                                             </td>
@@ -86,8 +86,8 @@
                                                         <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
-                                        </tr>
-                                        
+                                        </tr> 
+                                       
                                     </tbody>
                                 </table>
                             </div>
@@ -113,43 +113,91 @@ export default {
              newsemesters:[
                  {
                     semester:"1st",
-                    //total_student:0,
-                    section:0
+                    section:{
+                        a:0,
+                        b:0,
+                        c:0,
+                        d:0,
+                        e:0,
+                        
+                    }
                 },
                 {
                     semester:"2nd",
-                    //total_student:0,
-                    section:0
+                    section:{
+                        a:0,
+                        b:0,
+                        c:0,
+                        d:0,
+                        e:0,
+                       
+                    }
                 },
                 {
                     semester:"3rd",
-                    //total_student:0,
-                    section:0
+                    section:{
+                        a:0,
+                        b:0,
+                        c:0,
+                        d:0,
+                        e:0,
+                        
+                    }
                 },
                 {
                     semester:"4th",
-                    //total_student:0,
-                    section:0
+                    section:{
+                        a:0,
+                        b:0,
+                        c:0,
+                        d:0,
+                        e:0,
+                        
+                    }
                 },
                 {
                     semester:"5th",
-                    //total_student:0,
-                    section:0
+                    section:{
+                        a:0,
+                        b:0,
+                        c:0,
+                        d:0,
+                        e:0,
+                        
+                    }
                 },
                 {
                     semester:"6th",
-                    //total_student:0,
-                    section:0
+                    section:{
+                        a:0,
+                        b:0,
+                        c:0,
+                        d:0,
+                        e:0,
+                        
+                    }
                 },
                 {
                     semester:"7th",
-                    //total_student:0,
-                    section:0
+                    section:{
+                        a:0,
+                        b:0,
+                        c:0,
+                        d:0,
+                        e:0,
+                        
+                    }
                 },
                 {
                     semester:"8th",
-                    //total_student:0,
-                    section:0
+                    section:{
+                        a:0,
+                        b:0,
+                        c:0,
+                        d:0,
+                        e:0,
+                        
+                    }
                 },
                 
              ]
@@ -162,50 +210,38 @@ export default {
         console.log(this.$route.params.session);
         this.semesters.session_name = this.session;
         
-         console.log(this.semesters);
 
          let uri = '/api/request-sections';
          this.axios.post(uri, this.semesters).then((response) => {
             this.semesters = response.data.data;
-            console.log(this.semesters);
-
+           
               for(var i=0;i<8;i++){
+                    
                     for(var j=0;j<this.semesters.length;j++){
+                        
+                        
                         if(this.semesters[j].semester[0]==i+1)
                         {
-                            this.newsemesters[i].section=this.newsemesters[i].section+1;
+                            
+                            if(this.semesters[j].semester[1]=="a")
+                                 this.newsemesters[i].section.a=1;
+                            else if(this.semesters[j].semester[1]=="b")
+                                 this.newsemesters[i].section.b=1; 
+                            else if(this.semesters[j].semester[1]=="c")
+                                 this.newsemesters[i].section.c=1; 
+                            else if(this.semesters[j].semester[1]=="d")
+                                 this.newsemesters[i].section.d=1;  
+                            else
+                                this.newsemesters[i].section.e=1; 
+
                         } 
+                        
                     }
-                    console.log(this.newsemesters[i].section);
+                  
               }
+                
         });
-
-
-        
-      
-          /*
-          for(var i=0;i<8;i++){
-               
-                // var count=0,total_student;
-
-                // this.newsemesters[i].total_student=this.semesters[i].total_student;
-                 for(var j=0;j<this.semesters.length;j++){
-                   if(this.semesters[j].semester[0]==i+1)
-                     {
-                         this.newsemesters[i].section=this.newsemesters[i].section+1;
-                        //this.newsemesters[i].total_student=this.newsemesters[i].total_student+this.semesters[j].total_student;
-                    }    
-                          
-                 }
-                
-
-                
-             }
-             console.log(this.newsemesters);*/
-          
-         
-
-        
+    
     },
     
    
