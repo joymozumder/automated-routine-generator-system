@@ -56,115 +56,248 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        $duration1 = (double)$request->duration1;
-        $duration2 = (double)$request->duration2;
-        $group = $request->group;
-
+        //echo $request;
+        $d = sizeof($request->duration);
+        $g = sizeof($request->group);
+        $req_duration   = $request->duration;
+        $req_group      = $request->group;
+        $gr=0;
         
-        for ($i = 1; $i <= $group; $i++)
+        for($i=0 ; $i<$d ; $i++)
         {
-           
-            if($duration1 != 0)
+            for($j=0 ; $j<$g ; $j++)
             {
-               
-                if($group == 1 )
+                if($g==1)
+                {
                     $gr = 0;
+                }
                 else
-                    $gr = $i;
-               
-
+                {
+                    $gr = $j+1;
+                }
                 $enrollment = new Enrollment();
                 $enrollment->session_name = $request->session_name;
-                $enrollment->semester = $request->semester;
+                $enrollment->sem_id = $request->sem_id;
                 $enrollment->teacher_code = $request->teacher_code;
                 $enrollment->course_code = $request->course_code;
                 $enrollment->room_number = 0;
                 $enrollment->group = $gr;
-                $enrollment->duration = $duration1;
+                $enrollment->duration = $req_duration[$i];
+                $enrollment->total_student = $req_group[$j];
                 $enrollment->start = 0;
                 $enrollment->day = 0;
                 $enrollment->end = 0;
+                $enrollment->entry_type = 0;
                 $enrollment->save();
+                
             }
-            if($duration2!=0)
-            {
-                $enrollment = new Enrollment();
-                $enrollment->session_name = $request->session_name;
-                $enrollment->semester = $request->semester;
-                $enrollment->teacher_code = $request->teacher_code;
-                $enrollment->course_code = $request->course_code;
-                $enrollment->room_number = 0;
-                $enrollment->group = $i;
-                $enrollment->duration = $duration2;
-                $enrollment->start = 0;
-                $enrollment->end = 0;
-                $enrollment->save();
-            }
+            
         }
-        /*$enrollment = new Enrollment();
-        $enrollment->session_name = $request->session_name;
-        $enrollment->semester = $request->semester;
-        $enrollment->teacher_code = $request->teacher_code;
-        $enrollment->course_code = $request->course_code;
-        $enrollment->room_number = 0;
-        $enrollment->group = $request->group;
-        $enrollment->duration = $request->duration;
-        $enrollment->start = 0;
-        $enrollment->end = 0;
-        if($enrollment->save()){
-            return new EnrollmentResource($enrollment);
-        }*/
+        
     }
 
     public function manualStore(Request $request)
     {
-        $duration1 = (double)$request->duration1;
-        $duration2 = (double)$request->duration2;
-        $group = $request->group;
-        //for ($i = 1; $i <= $group; $i++)
+        $duration1 = $request->duration1;
+        $duration2 = $request->duration2;
+
+        $day1 = $request->day1;
+        $day2 = $request->day2;
+
+        $start1 = $request->start1;
+        $start2 = $request->start2;
+
+        $end1 = $request->end1;
+        $end2 = $request->end2;
+
+        $total_student = $request->total_student;
+
+        $grp = $request->group;
+        
+        if($grp != 2)
         {
-           /* if($group == 1 )
-                    $gr = 0;
-                else
-                    $gr = $i;*/
-
-            if($duration1 != 0)
-            {
-                
-
-                $enrollment = new Enrollment();
-                $enrollment->session_name = $request->session_name;
-                $enrollment->semester = $request->semester;
-                $enrollment->teacher_code = $request->teacher_code;
-                $enrollment->course_code = $request->course_code;
-                $enrollment->room_number = 0;
-                $enrollment->day = 0;
-                $enrollment->group = $request->group;
-                $enrollment->duration = $duration1;
-                $enrollment->start = $request->start1;
-                $enrollment->end = $request->end1;
-                $enrollment->save();
-            }
-            if($duration2!=0)
+            for($i=0; $i<sizeof($duration1); $i++)
             {
                 $enrollment = new Enrollment();
                 $enrollment->session_name = $request->session_name;
-                $enrollment->semester = $request->semester;
+                $enrollment->sem_id = $request->sem_id;
                 $enrollment->teacher_code = $request->teacher_code;
                 $enrollment->course_code = $request->course_code;
                 $enrollment->room_number = 0;
-                $enrollment->day = 0;
-                $enrollment->group = $request->group;
-                $enrollment->duration = $duration2;
-                $enrollment->start = $request->start2;
-                $enrollment->end = $request->end2;
+                $enrollment->group = 0;
+                $enrollment->duration = $duration1[$i];
+                $enrollment->total_student = $total_student[0];
+                $enrollment->start = $start1[$i];
+                $enrollment->day = $day1[$i];
+                $enrollment->end = $end1[$i];
+                $enrollment->entry_type = 1;
                 $enrollment->save();
+                /*{
+                        echo "group 0 : ";
+                        echo "\n"; 
+                        echo "session= ";
+                        echo $enrollment->session_name ;
+                        echo "\t";
+                        echo "sem_id= ";
+                        echo $enrollment->sem_id;
+                        echo "\t";
+                        echo "teacher= ";
+                        echo $enrollment->teacher_code ;
+                        echo "\t";
+                        echo "course= ";
+                        echo $enrollment->course_code;
+                        echo "\t";
+                        echo "room= ";
+                        echo $enrollment->room_number;
+                        echo "\t";
+                        echo "group= ";
+                        echo $enrollment->group;
+                        echo "\t";
+                        echo "duration= ";
+                        echo $enrollment->duration;
+                        echo "\t";
+                        echo "tot_student= ";
+                        echo $enrollment->total_student;
+                        echo "\t";
+                        echo "day= ";
+                        echo $enrollment->day;
+                        echo "\t";
+                        echo "start= ";
+                        echo $enrollment->start ;
+                        echo "\t";
+                        echo "end= ";
+                        echo $enrollment->end ;
+                        echo "\t";
+                        echo "en_type= ";
+                        echo $enrollment->entry_type;
+                        echo "\n";
+                }*/
             }
         }
+        else 
+        {
+            
+            for($i=0; $i<sizeof($duration1); $i++)
+            {
+                $enrollment = new Enrollment();
+                $enrollment->session_name = $request->session_name;
+                $enrollment->sem_id = $request->sem_id;
+                $enrollment->teacher_code = $request->teacher_code;
+                $enrollment->course_code = $request->course_code;
+                $enrollment->room_number = 0;
+                $enrollment->group = 1;
+                $enrollment->duration = $duration1[$i];
+                $enrollment->total_student = $total_student[0];
+                $enrollment->start = $start1[$i];
+                $enrollment->day = $day1[$i];
+                $enrollment->end = $end1[$i];
+                $enrollment->entry_type = 1;
+                $enrollment->save();
+                /*{
+                        echo "group 1 : ";
+                        echo "\n"; 
+                        echo "session= ";
+                        echo $enrollment->session_name ;
+                        echo "\t";
+                        echo "sem_id= ";
+                        echo $enrollment->sem_id;
+                        echo "\t";
+                        echo "teacher= ";
+                        echo $enrollment->teacher_code ;
+                        echo "\t";
+                        echo "course= ";
+                        echo $enrollment->course_code;
+                        echo "\t";
+                        echo "room= ";
+                        echo $enrollment->room_number;
+                        echo "\t";
+                        echo "group= ";
+                        echo $enrollment->group;
+                        echo "\t";
+                        echo "duration= ";
+                        echo $enrollment->duration;
+                        echo "\t";
+                        echo "tot_student= ";
+                        echo $enrollment->total_student;
+                        echo "\t";
+                        echo "day= ";
+                        echo $enrollment->day;
+                        echo "\t";
+                        echo "start= ";
+                        echo $enrollment->start ;
+                        echo "\t";
+                        echo "end= ";
+                        echo $enrollment->end ;
+                        echo "\t";
+                        echo "en_type= ";
+                        echo $enrollment->entry_type;
+                        echo "\n";
+                }*/
+            }
+            for($i=0; $i<sizeof($duration2); $i++)
+            {
+                $enrollment = new Enrollment();
+                $enrollment->session_name = $request->session_name;
+                $enrollment->sem_id = $request->sem_id;
+                $enrollment->teacher_code = $request->teacher_code;
+                $enrollment->course_code = $request->course_code;
+                $enrollment->room_number = 0;
+                $enrollment->group = 2;
+                $enrollment->duration = $duration2[$i];
+                $enrollment->total_student = $total_student[1];
+                $enrollment->start = $start2[$i];
+                $enrollment->day = $day2[$i];
+                $enrollment->end = $end2[$i];
+                $enrollment->entry_type = 1;
+                $enrollment->save();
+                /*{
+                        echo "group 2 : ";
+                        echo "\n"; 
+                        echo "session= ";
+                        echo $enrollment->session_name ;
+                        echo "\t";
+                        echo "sem_id= ";
+                        echo $enrollment->sem_id;
+                        echo "\t";
+                        echo "teacher= ";
+                        echo $enrollment->teacher_code ;
+                        echo "\t";
+                        echo "course= ";
+                        echo $enrollment->course_code;
+                        echo "\t";
+                        echo "room= ";
+                        echo $enrollment->room_number;
+                        echo "\t";
+                        echo "group= ";
+                        echo $enrollment->group;
+                        echo "\t";
+                        echo "duration= ";
+                        echo $enrollment->duration;
+                        echo "\t";
+                        echo "tot_student= ";
+                        echo $enrollment->total_student;
+                        echo "\t";
+                        echo "day= ";
+                        echo $enrollment->day;
+                        echo "\t";
+                        echo "start= ";
+                        echo $enrollment->start ;
+                        echo "\t";
+                        echo "end= ";
+                        echo $enrollment->end ;
+                        echo "\t";
+                        echo "en_type= ";
+                        echo $enrollment->entry_type;
+                        echo "\n";
+                }*/
+            }
+        }
+
     }
 
     /**
-     * Display the specified resource.
+
+    * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -198,7 +331,7 @@ class EnrollmentController extends Controller
     {
         $enrollment = Enrollment::find($id);
         $enrollment->session_name = $request->session_name;
-        $enrollment->semester = $request->semester;
+        $enrollment->sem_id = $request->sem_id;
         $enrollment->teacher_code = $request->teacher_code;
         $enrollment->course_code = $request->course_code;
         $enrollment->room_number = $request->room_number;
