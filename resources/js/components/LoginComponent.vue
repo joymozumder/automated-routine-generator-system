@@ -6,23 +6,17 @@
         <p class="text-gray-800 font-medium text-center text-lg font-bold">Login</p>
         <div class="">
           <label class="block text-sm text-gray-00" for="username">Username</label>
-          <input v-model="username" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="username"  type="text" required="" placeholder="User Name" aria-label="username">
+          <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="username" name="username" type="text" required="" placeholder="User Name" aria-label="username" v-model="user.user_name">
         </div>
         <div class="mt-2">
           <label class="block text-sm text-gray-600" for="password">Password</label>
-          <input v-model="pass" class="w-full px-5  py-1 text-gray-700 bg-gray-200 rounded" id="password"  type="text" required="" placeholder="*******" aria-label="password">
+          <input class="w-full px-5  py-1 text-gray-700 bg-gray-200 rounded" id="password" name="password" type="password" required="" placeholder="*******" aria-label="password" v-model="user.password">
         </div>
         <div class="mt-4 items-center justify-between">
-          <button @click.prevent="Loggedin"  class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Login</button>
-         
-         
-          <a class="inline-block right-0 align-baseline  font-bold text-sm text-500 hover:text-blue-800" href="#">
-            Forgot Password?
-          </a>
+          <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit" @click.prevent="logIn">Login</button>
+          
         </div>
-        <a class="inline-block right-0 align-baseline font-bold text-sm text-500 hover:text-blue-800" href="#">
-          Not registered ?
-        </a>
+        
       </form>
 
     </div>
@@ -31,21 +25,37 @@
 </template>
 
 <script>
-
 export default {
   data(){
-    return{
-        
-        //username:"",
-        pass:""
+    return {
+      user:{
+        user_name :"",
+        password :""
+      }
     }
   },
-  methods:{
-    Loggedin(){
-        console.log(this.username);
-        //this.$router.push({name: 'courses'});
-    }
-  }
+  created(){
+    //console.log(this.book);
+  },
   
+  methods:{
+    logIn(){
+        let uri = '/api/login';
+           this.axios.post(uri, this.user).then((response) => {
+             window.localStorage.setItem("userid", response.data.code);
+             
+             this.$router.push({name: 'session'});
+          }).catch((e) => {
+            if(e.response.status === 401)
+              this.$router.go(0);
+          })
+    }
+  },
+  computed:{
+        book(){
+          console.log("hello");
+            console.log( this.store);
+        }
+  }
 }
 </script>

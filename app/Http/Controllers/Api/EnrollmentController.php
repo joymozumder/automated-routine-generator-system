@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Enrollment;
 use App\SemesterSection;
+
 use App\Http\Resources\EnrollmentResource;
 
 class EnrollmentController extends Controller
@@ -29,11 +30,12 @@ class EnrollmentController extends Controller
     }
     public function dayShow($session , $day)
     {
-        $obj = Enrollment::
-                where('day','=',$day)
-                ->where('session_name','=',$session)
+        $obj = Enrollment::join('semester_sections','enrollments.sem_id','=','semester_sections.id')
+                ->select('enrollments.*','semester_sections.semester as semester')
+               -> where('enrollments.day','=',$day)
+                ->where('enrollments.session_name','=',$session)
                 ->orderBy('semester', 'ASC')
-                ->orderBy('start', 'ASC')->get()->groupBy('semester');
+                ->orderBy('enrollments.start', 'ASC')->get()->groupBy('semester');
         return EnrollmentResource::collection($obj);
 
        

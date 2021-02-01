@@ -8,13 +8,13 @@
                     <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                             <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
-                                Full Table
+                            Semesters of session : {{session}}
                             </div>
                             <div class="p-3">
                                 <table class="table-responsive w-full rounded">
                                     <thead>
                                       <tr>
-                                        <th class="border w-1/7 px-12 py-3">Semester Name</th>
+                                        <th class="border w-1/7 px-12 py-3">Semester</th>
                                         <th class="border w-1/7 px-12 py-3">Section-A</th>
                                         <th class="border w-1/7 px-12 py-3">Section-B</th>
                                         <th class="border w-1/7 px-12 py-3">Section-C</th>
@@ -82,9 +82,9 @@
                                              </router-link>
 
 
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-red-500">
+                                                <!-- <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-red-500">
                                                         <i class="fas fa-trash"></i>
-                                                </a>
+                                                </a> -->
                                             </td>
                                         </tr> 
                                        
