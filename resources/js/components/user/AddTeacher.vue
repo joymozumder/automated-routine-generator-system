@@ -15,7 +15,7 @@
                                         <div class="md:w-1/4">
                                             <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                    for="inline-course-code">
-                                                User Name
+                                                Name
                                             </label>
                                         </div>
                                         <div class="md:w-3/4">
@@ -92,7 +92,7 @@
           teacher:{
                 name:"",
                 email:"",
-                password:"",
+                password:"123456",
                 code:""
                 
           }

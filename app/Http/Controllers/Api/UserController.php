@@ -3,11 +3,48 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Http\Resources\UserResource;
 class UserController extends Controller
 {
+
+    public function postLogin(Request $request)
+    {
+        //echo $request;
+        $user = User::select()
+                    ->where('code','=',$request->user_name)
+                    ->where('password','=',md5($request->password))
+                    ->where('role','=',0)
+                    ->first();
+        if($user)
+        {
+            Session::put('userid',$user->code);
+            //echo Session::get('userid');
+            //$request->session()->flush();
+            return response()->json($user);
+        }            
+        else
+            return response()->json('failed', 401);
+    }
+
+     public function getUser()
+    {
+        $user = Session::get('userid');
+        if($user)
+        {
+            return response()->json($user);
+        }
+        else
+            return response()->json('failed', 401);
+    }
+
+    public function logOut(Request $request)
+    {
+        echo Session::get('userid');
+    }
     /**
      * Display a listing of the resource.
      *

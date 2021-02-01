@@ -38,12 +38,12 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        $room = new Room();
-        $room->number = $request->number;
-        $room->name = $request->name;
-        $room->type = $request->type;
+        $room           = new Room();
+        $room->number   = $request->number;
+        $room->name     = $request->name;
+        $room->type     = $request->type;
         $room->capacity = $request->capacity;
-        $room->status = $request->status;
+        $room->status   = $request->status;
         if($room->save()){
             return new RoomResource($room);
         }

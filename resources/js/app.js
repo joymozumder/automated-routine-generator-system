@@ -61,11 +61,14 @@ import compTest3 from './components/Test3.vue';
 import compTest4 from './components/Test4.vue';
 
 
+
+
+
 const routes = [
     
     {
         name: 'login',
-        path: '/',
+        path: '/login',
         component: compLoginComponent
     },
     {
@@ -229,6 +232,18 @@ const routes = [
 
 
 const router = new VueRouter({ mode: 'history', routes: routes});
+
+router.beforeEach((to,from,next) => {
+    if (to.fullPath !== "/login") {
+        if(window.localStorage.getItem("userid")=="")
+            router.push('/login');
+        else next();
+    }
+    else {
+        next();
+    }
+})
+
 const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app');
 
 
