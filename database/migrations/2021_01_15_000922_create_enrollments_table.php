@@ -22,6 +22,7 @@ class CreateEnrollmentsTable extends Migration
             $table->integer('room_number');
             $table->integer('group');
             $table->double('duration');
+            $table->integer('total_student');
             $table->integer('start');
             $table->integer('end');
             $table->integer('day');

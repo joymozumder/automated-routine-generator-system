@@ -19,7 +19,7 @@
                                             </div>
                                             <div class="md:w-3/4">
                                                 <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                    id="inline-full-name" type="text" v-model="assigncourse.session_name" readonly>
+                                                    id="inline-full-name" type="text" v-model="temp_assign_course.session_name" readonly>
                                             </div>
                                         </div>
 
@@ -32,9 +32,9 @@
                                             </div>
                                             <div class="md:w-3/4">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                          v-model="assigncourse.semester"  id="grid-state">
+                                                          v-model="temp_assign_course.sem_id"  id="grid-state">
                                                         
-                                                        <option v-for="semester in semesters" :key="semester.id">{{semester.semester}}</option>
+                                                        <option v-for="semester in semesters" :key="semester.id " :value="semester.id" >{{semester.semester}}</option>
                                                     </select>
                                                     
                                             </div>
@@ -51,7 +51,7 @@
                                             </div>
                                             <div class="md:w-3/4">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                           v-model="assigncourse.teacher_code" id="grid-state">
+                                                           v-model="temp_assign_course.teacher_code" id="grid-state">
                                                         
                                                         <option v-for="teacher in teachers" :key="teacher.id">{{teacher.code}}</option>
                                                     </select>
@@ -74,7 +74,7 @@
                                             </div>
                                             <div class="md:w-3/4">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                          v-model="assigncourse.course_code"  id="grid-state">
+                                                          v-model="temp_assign_course.course_code"  id="grid-state">
                                                         
                                                         <option v-for="course in courses" :value="course.code" :key="course.id">{{course.name}} - {{course.code}}</option>
                                                     </select>
@@ -84,7 +84,7 @@
 
 
 
-                                        <div class="md:flex md:items-center mb-6">
+                                    <!--<div class="md:flex md:items-center mb-6">
                                             <div class="md:w-1/4">
                                                 <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
@@ -92,7 +92,7 @@
                                                 </label>
                                             </div>
                                             <div class="md:w-3/4">
-                                                <select v-model="assigncourse.group" class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                <select v-model="temp_assign_course.group" class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                           id="grid-state">
                                                         <option value=0>Zero</option>
                                                         <option value=1>One</option>
@@ -100,75 +100,325 @@
                                                 </select>
                                                     
                                             </div>
-                                        </div>
+                                    </div>-->
 
+                                    
 
-
-
-
-
-
-
-
-                                        <div class="md:w-3/4">
-
-                                            <div class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4">
-                                                <label for="male">Number of Class
-                                                    <input type="radio" value="One" v-model="numberofclass"> One
-                                                </label>
-                                                <label for="female">
-                                                    <input type="radio" value="Two" v-model="numberofclass"> Two
+                                   
+                                        <div class="md:flex md:items-center mb-6" v-if="course_type[temp_assign_course.course_code]!=0 && temp_assign_course.course_code!='' ">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Number of Group
                                                 </label>
                                             </div>
+                                            <div class="md:w-3/4">
+                                                 <input type="radio"  value="One"  v-model="numberofgroup" > One
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                 
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input type="radio" value="Two" v-model="numberofgroup"> Two
+                                                    
+                                            </div>
                                         </div>
+
+                                      
+                                     <!-----------------------------group 0------------------------->
+                                        <div v-if="course_type[temp_assign_course.course_code]==0 || temp_assign_course.course_code=='' ">
+                                                <div  class="md:flex md:items-center mb-6" >
+                                                    <div class="md:w-1/4">
+                                                        <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                            for="inline-course-code">
+                                                            Total Student
+                                                        </label>
+                                                    </div>
+                                                    <div class="md:w-3/4">
+                                                        <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                        v-model="temp_assign_course.total_student[0]" id="inline-full-name" type="number" >
+                                                    </div>
+                                                </div>
+
+                                                <div >
+                                                    <div class="md:flex md:items-center mb-6">
+                                                        <div class="md:w-1/4">
+                                                            <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                                for="inline-course-code">
+                                                                Number of Class
+                                                            </label>
+                                                    </div>
+                                                    <div class="md:w-3/4">
+                                                        <input type="radio"  value="One"  v-model="numberofclass" > One
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                 
+                                                        <input type="radio" value="Two" v-model="numberofclass"> Two
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input type="radio" value="Three" v-model="numberofclass"> Three
+                                                            
+                                                    </div>
+                                                </div>
+                                                <div class="md:flex md:items-center mb-6" v-if="numberofclass=='One' || numberofclass=='Two' || numberofclass=='Three' ">
+                                                    <div class="md:w-1/4">
+                                                        <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                            for="inline-course-code">
+                                                            Day 1
+                                                        </label>
+                                                    </div >
+                                                            <div>
+                                                                <select v-model="temp_assign_course.day[0][0]" class="block appearance-none bg-grey-200 border border-grey-200 text-grey-darker py-3 px-0.5 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                    id="grid-state">
+                                                                    <option value=1>Saturday</option>
+                                                                    <option value=2>Sunday</option>
+                                                                    <option value=3>Monday</option>
+                                                                    <option value=4>Tuesday</option>
+                                                                    <option value=5>Wednesday</option>
+                                                                    
+                                                                </select>
+                                                            </div>&nbsp;
+                                                            <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                            for="inline-course-code"> Duration 1</label>
+                                                            <div>
+                                                                <select class="block appearance-none  bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2  rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                        v-model="temp_assign_course.duration[0][0]"  id="grid-state" >
+                                                                        <option value=1     >01 : 00</option>
+                                                                        <option value=1.5   >01 : 30</option>
+                                                                        <option value=2     >02 : 00</option>
+                                                                        <option value=2.5   >02 : 30</option>
+                                                                        <option value=3     >03 : 00</option>
+                                                                        <option value=3.5   >03 : 30</option>
+                                                                        <option value=4     >04 : 00</option>
+
+                                                                </select>
+                                                            </div>&nbsp;
+                                                            <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                            for="inline-course-code"> Time 1</label>
+                                                            <div class="flex">
+                                                            <select v-model="temp_assign_course.hour[0][0]" name="hours" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 py-3 appearance-none outline-none">
+                                                            <option value=8>8</option>
+                                                            <option value=9>9</option>
+                                                            <option value=10>10</option>
+                                                            <option value=11>11</option>
+                                                            <option value=12>12</option>
+                                                            <option value=13>1</option>
+                                                            <option value=14>2</option>
+                                                            <option value=15>3</option>
+                                                            <option value=16>4</option>
+                                                            <option value=17>5</option>
+                                                            <option value=18>6</option>
+                                                            </select>
+                                                            <span class="text-xl py-3 mr-1">:</span>
+                                                            
+                                                            <select v-model="temp_assign_course.min[0][0]" name="minutes" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 appearance-none outline-none mr-2">
+                                                            <option value=0>00</option>
+                                                            <option value=30>30</option>
+                                                            </select>
+                                                            <select name="ampm" class="bg-grey-200 text-grey-darker border border-grey-200 appearance-none outline-none">
+                                                            <option value="am">AM</option>
+                                                            <option value="pm">PM</option>
+                                                            </select>
+                                                        </div>
+
+                                                </div>
+                                                <div class="md:flex md:items-center mb-6" v-if="numberofclass=='Two' || numberofclass=='Three' ">
+                                                    <div class="md:w-1/4">
+                                                        <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                            for="inline-course-code">
+                                                            Day 2
+                                                        </label>
+                                                    </div>
+                                                            <div>
+                                                                <select v-model="temp_assign_course.day[0][1]" class="block appearance-none bg-grey-200 border border-grey-200 text-grey-darker py-3 px-0.5 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                    id="grid-state">
+                                                                    <option value=1>Saturday</option>
+                                                                    <option value=2>Sunday</option>
+                                                                    <option value=3>Monday</option>
+                                                                    <option value=4>Tuesday</option>
+                                                                    <option value=5>Wednesday</option>
+                                                                    
+                                                                </select>
+                                                            </div>&nbsp;
+                                                            <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                            for="inline-course-code"> Duration 2</label>
+                                                            <div>
+                                                                <select class="block appearance-none  bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2  rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                        v-model="temp_assign_course.duration[0][1]"  id="grid-state" >
+                                                                        <option value=1     >01 : 00</option>
+                                                                        <option value=1.5   >01 : 30</option>
+                                                                        <option value=2     >02 : 00</option>
+                                                                        <option value=2.5   >02 : 30</option>
+                                                                        <option value=3     >03 : 00</option>
+                                                                        <option value=3.5   >03 : 30</option>
+                                                                        <option value=4     >04 : 00</option>
+
+                                                                </select>
+                                                            </div>&nbsp;
+                                                            <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                            for="inline-course-code"> Time 2</label>
+                                                            <div class="flex">
+                                                            <select v-model="temp_assign_course.hour[0][1]" name="hours" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 py-3 appearance-none outline-none">
+                                                            <option value=8>8</option>
+                                                            <option value=9>9</option>
+                                                            <option value=10>10</option>
+                                                            <option value=11>11</option>
+                                                            <option value=12>12</option>
+                                                            <option value=13>1</option>
+                                                            <option value=14>2</option>
+                                                            <option value=15>3</option>
+                                                            <option value=16>4</option>
+                                                            <option value=17>5</option>
+                                                            <option value=18>6</option>
+                                                            </select>
+                                                            <span class="text-xl py-3 mr-1">:</span>
+                                                            
+                                                            <select v-model="temp_assign_course.min[0][1]" name="minutes" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 appearance-none outline-none mr-2">
+                                                            <option value=0>00</option>
+                                                            <option value=30>30</option>
+                                                            </select>
+                                                            <select name="ampm" class="bg-grey-200 text-grey-darker border border-grey-200 appearance-none outline-none">
+                                                            <option value="am">AM</option>
+                                                            <option value="pm">PM</option>
+                                                            </select>
+                                                        </div>
+
+                                                </div>
+                                                <div class="md:flex md:items-center mb-6" v-if="numberofclass=='Three' ">
+                                                    <div class="md:w-1/4">
+                                                        <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                            for="inline-course-code">
+                                                            Day 3
+                                                        </label>
+                                                    </div>
+                                                            <div>
+                                                                <select v-model="temp_assign_course.day[0][2]" class="block appearance-none bg-grey-200 border border-grey-200 text-grey-darker py-3 px-0.5 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                    id="grid-state">
+                                                                    <option value=1>Saturday</option>
+                                                                    <option value=2>Sunday</option>
+                                                                    <option value=3>Monday</option>
+                                                                    <option value=4>Tuesday</option>
+                                                                    <option value=5>Wednesday</option>
+                                                                    
+                                                                </select>
+                                                            </div>&nbsp;
+                                                            <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                            for="inline-course-code"> Duration 3</label>
+                                                            <div>
+                                                                <select class="block appearance-none  bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2  rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                        v-model="temp_assign_course.duration[0][2]"  id="grid-state" >
+                                                                        <option value=1     >01 : 00</option>
+                                                                        <option value=1.5   >01 : 30</option>
+                                                                        <option value=2     >02 : 00</option>
+                                                                        <option value=2.5   >02 : 30</option>
+                                                                        <option value=3     >03 : 00</option>
+                                                                        <option value=3.5   >03 : 30</option>
+                                                                        <option value=4     >04 : 00</option>
+
+                                                                </select>
+                                                            </div>&nbsp;
+                                                            <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                            for="inline-course-code"> Time 3</label>
+                                                            <div class="flex">
+                                                            <select v-model="temp_assign_course.hour[0][2]" name="hours" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 py-3 appearance-none outline-none">
+                                                            <option value=8>8</option>
+                                                            <option value=9>9</option>
+                                                            <option value=10>10</option>
+                                                            <option value=11>11</option>
+                                                            <option value=12>12</option>
+                                                            <option value=13>1</option>
+                                                            <option value=14>2</option>
+                                                            <option value=15>3</option>
+                                                            <option value=16>4</option>
+                                                            <option value=17>5</option>
+                                                            <option value=18>6</option>
+                                                            </select>
+                                                            <span class="text-xl py-3 mr-1">:</span>
+                                                            
+                                                            <select v-model="temp_assign_course.min[0][2]" name="minutes" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 appearance-none outline-none mr-2">
+                                                            <option value=0>00</option>
+                                                            <option value=30>30</option>
+                                                            </select>
+                                                            <select name="ampm" class="bg-grey-200 text-grey-darker border border-grey-200 appearance-none outline-none">
+                                                            <option value="am">AM</option>
+                                                            <option value="pm">PM</option>
+                                                            </select>
+                                                        </div>
                                         
-                                        <div v-if="numberofclass=='One' || numberofclass=='Two'" > 
-                                             <div class="md:flex md:items-center mb-6">
+                                                    </div>
+                                                
+                                                    <br>
+                                                </div>
+                                        </div>
+                                    <!--------------------------end group 0------------------------->
+
+
+
+                                    <!-----------------------------group 1------------------------->
+                                        <div v-if=" (numberofgroup=='One' || numberofgroup=='Two') && (course_type[temp_assign_course.course_code]!=0 && temp_assign_course.course_code!='' ) ">
+                                            <hr>
+                                            <br> <!--111-->
+                                             <div class="md:flex md:items-center mb-6" >
+                                                <div class="md:w-1/4">
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                        for="inline-course-code">
+                                                        Total Student
+                                                    </label>
+                                                </div>
+                                                <div class="md:w-3/4">
+                                                    <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                    v-model="temp_assign_course.total_student[0]" id="inline-full-name" type="number" >
+                                                </div>
+                                            
+                                          
+                                            </div>
+                                            <div class="md:flex md:items-center mb-6">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Number of Class
+                                                </label>
+                                            </div>
+                                            <div class="md:w-3/4">
+                                                 <input type="radio"  value="One"  v-model="numberofclass" > One
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                 
+                                                <input type="radio" value="Two" v-model="numberofclass"> Two
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input type="radio" value="Three" v-model="numberofclass"> Three
+                                                    
+                                            </div>
+                                        </div>
+                                        <div class="md:flex md:items-center mb-6" v-if="numberofclass=='One' || numberofclass=='Two' || numberofclass=='Three' ">
                                             <div class="md:w-1/4">
                                                 <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
                                                     Day 1
                                                 </label>
-                                            </div>
-                                            <div class="md:w-3/4">
-                                                <select v-model="assigncourse.day1" class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                          id="grid-state">
-                                                        <option value=1>Saturday</option>
-                                                        <option value=2>Sunday</option>
-                                                        <option value=3>Monday</option>
-                                                        <option value=4>Tuesday</option>
-                                                        <option value=5>Wednesday</option>
-                                                        
-                                                </select>
-                                                    
-                                            </div>
-                                        </div>
+                                            </div >
+                                                    <div>
+                                                        <select v-model="temp_assign_course.day[0][0]" class="block appearance-none bg-grey-200 border border-grey-200 text-grey-darker py-3 px-0.5 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                            id="grid-state">
+                                                            <option value=1>Saturday</option>
+                                                            <option value=2>Sunday</option>
+                                                            <option value=3>Monday</option>
+                                                            <option value=4>Tuesday</option>
+                                                            <option value=5>Wednesday</option>
+                                                            
+                                                        </select>
+                                                    </div>&nbsp;
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                    for="inline-course-code"> Duration 1</label>
+                                                    <div>
+                                                        <select class="block appearance-none  bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2  rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                v-model="temp_assign_course.duration[0][0]"  id="grid-state" >
+                                                                <option value=1     >01 : 00</option>
+                                                                <option value=1.5   >01 : 30</option>
+                                                                <option value=2     >02 : 00</option>
+                                                                <option value=2.5   >02 : 30</option>
+                                                                <option value=3     >03 : 00</option>
+                                                                <option value=3.5   >03 : 30</option>
+                                                                <option value=4     >04 : 00</option>
 
-
-
-
-                                            <div class="md:flex md:items-center mb-6">
-                                                <div class="md:w-1/4">
-                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
-                                                        for="inline-course-code">
-                                                        Duration 1
-                                                    </label>
-                                                </div>
-                                                <div class="md:w-3/4">
-                                                    <input class="bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light"
-                                                        v-model="assigncourse.duration1" id="inline-full-name" type="number" placeholder="Enter Duration 1">
-                                                </div>
-
-                                                <div class="md:w-1/4">
-                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
-                                                        for="inline-course-code">
-                                                        Time 1
-                                                    </label>
-                                                </div>
-                                                
-
-                                                <div class="flex">
-                                                    <select v-model="assigncourse.hour1" name="hours" class="bg-grey-200 text-grey-darker border border-grey-200 appearance-none outline-none">
+                                                        </select>
+                                                    </div>&nbsp;
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                    for="inline-course-code"> Time 1</label>
+                                                     <div class="flex">
+                                                    <select v-model="temp_assign_course.hour[0][0]" name="hours" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 py-3 appearance-none outline-none">
                                                     <option value=8>8</option>
                                                     <option value=9>9</option>
                                                     <option value=10>10</option>
@@ -181,8 +431,9 @@
                                                     <option value=17>5</option>
                                                     <option value=18>6</option>
                                                     </select>
-                                                    <span class="text-xl mr-3">:</span>
-                                                    <select v-model="assigncourse.min1" name="minutes" class="bg-grey-200 text-grey-darker border border-grey-200 appearance-none outline-none mr-4">
+                                                    <span class="text-xl py-3 mr-1">:</span>
+                                                    
+                                                    <select v-model="temp_assign_course.min[0][0]" name="minutes" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 appearance-none outline-none mr-2">
                                                     <option value=0>00</option>
                                                     <option value=30>30</option>
                                                     </select>
@@ -192,69 +443,44 @@
                                                     </select>
                                                 </div>
 
-
-
-
-
-
-                                            </div>
                                         </div>
-
-
-
-
-
-
-
-                                        <div v-if="numberofclass=='Two'">
-
-                                            <div v-if="numberofclass=='One' || numberofclass=='Two'" > 
-                                             <div class="md:flex md:items-center mb-6">
+                                        <div class="md:flex md:items-center mb-6" v-if="numberofclass=='Two' || numberofclass=='Three' ">
                                             <div class="md:w-1/4">
                                                 <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
                                                     Day 2
                                                 </label>
                                             </div>
-                                            <div class="md:w-3/4">
-                                                <select v-model="assigncourse.day2" class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                          id="grid-state">
-                                                        <option value=1>Saturday</option>
-                                                        <option value=2>Sunday</option>
-                                                        <option value=3>Monday</option>
-                                                        <option value=4>Tuesday</option>
-                                                        <option value=5>Wednesday</option>
-                                                        
-                                                </select>
-                                                    
-                                            </div>
-                                        </div>
+                                                    <div>
+                                                        <select v-model="temp_assign_course.day[0][1]" class="block appearance-none bg-grey-200 border border-grey-200 text-grey-darker py-3 px-0.5 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                            id="grid-state">
+                                                            <option value=1>Saturday</option>
+                                                            <option value=2>Sunday</option>
+                                                            <option value=3>Monday</option>
+                                                            <option value=4>Tuesday</option>
+                                                            <option value=5>Wednesday</option>
+                                                            
+                                                        </select>
+                                                    </div>&nbsp;
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                    for="inline-course-code"> Duration 2</label>
+                                                    <div>
+                                                        <select class="block appearance-none  bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2  rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                v-model="temp_assign_course.duration[0][1]"  id="grid-state" >
+                                                                <option value=1     >01 : 00</option>
+                                                                <option value=1.5   >01 : 30</option>
+                                                                <option value=2     >02 : 00</option>
+                                                                <option value=2.5   >02 : 30</option>
+                                                                <option value=3     >03 : 00</option>
+                                                                <option value=3.5   >03 : 30</option>
+                                                                <option value=4     >04 : 00</option>
 
-
-                                        </div>
-
-                                            <div   class="md:flex md:items-center mb-6">
-                                                <div class="md:w-1/4">
-                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
-                                                        for="inline-course-code">
-                                                        Duration 2
-                                                    </label>
-                                                </div>
-                                                <div class="md:w-3/4">
-                                                    <input class="bg-grey-200 appearance-none border-1 border-grey-200 rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple-light"
-                                                        v-model="assigncourse.duration2" id="inline-full-name" type="number" placeholder="Enter Duration 2">
-                                                </div>
-
-                                                <div class="md:w-1/4">
-                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
-                                                        for="inline-course-code">
-                                                        Time 2
-                                                    </label>
-                                                </div>
-                                                
-
-                                                <div  class="flex">
-                                                    <select v-model="assigncourse.hour2" name="hours" class="bg-grey-200 text-grey-darker border border-grey-200 appearance-none outline-none">
+                                                        </select>
+                                                    </div>&nbsp;
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                    for="inline-course-code"> Time 2</label>
+                                                     <div class="flex">
+                                                    <select v-model="temp_assign_course.hour[0][1]" name="hours" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 py-3 appearance-none outline-none">
                                                     <option value=8>8</option>
                                                     <option value=9>9</option>
                                                     <option value=10>10</option>
@@ -266,10 +492,10 @@
                                                     <option value=16>4</option>
                                                     <option value=17>5</option>
                                                     <option value=18>6</option>
-                                                
                                                     </select>
-                                                    <span class="text-xl mr-3">:</span>
-                                                    <select v-model="assigncourse.min2" name="minutes" class="bg-grey-200 text-grey-darker border border-grey-200 appearance-none outline-none mr-4">
+                                                    <span class="text-xl py-3 mr-1">:</span>
+                                                    
+                                                    <select v-model="temp_assign_course.min[0][1]" name="minutes" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 appearance-none outline-none mr-2">
                                                     <option value=0>00</option>
                                                     <option value=30>30</option>
                                                     </select>
@@ -279,45 +505,300 @@
                                                     </select>
                                                 </div>
 
+                                        </div>
+                                        <div class="md:flex md:items-center mb-6" v-if="numberofclass=='Three' ">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Day 3
+                                                </label>
+                                            </div>
+                                                    <div>
+                                                        <select v-model="temp_assign_course.day[0][2]" class="block appearance-none bg-grey-200 border border-grey-200 text-grey-darker py-3 px-0.5 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                            id="grid-state">
+                                                            <option value=1>Saturday</option>
+                                                            <option value=2>Sunday</option>
+                                                            <option value=3>Monday</option>
+                                                            <option value=4>Tuesday</option>
+                                                            <option value=5>Wednesday</option>
+                                                            
+                                                        </select>
+                                                    </div>&nbsp;
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                    for="inline-course-code"> Duration 3</label>
+                                                    <div>
+                                                        <select class="block appearance-none  bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2  rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                v-model="temp_assign_course.duration[0][2]"  id="grid-state" >
+                                                                <option value=1     >01 : 00</option>
+                                                                <option value=1.5   >01 : 30</option>
+                                                                <option value=2     >02 : 00</option>
+                                                                <option value=2.5   >02 : 30</option>
+                                                                <option value=3     >03 : 00</option>
+                                                                <option value=3.5   >03 : 30</option>
+                                                                <option value=4     >04 : 00</option>
 
+                                                        </select>
+                                                    </div>&nbsp;
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                    for="inline-course-code"> Time 3</label>
+                                                     <div class="flex">
+                                                    <select v-model="temp_assign_course.hour[0][2]" name="hours" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 py-3 appearance-none outline-none">
+                                                    <option value=8>8</option>
+                                                    <option value=9>9</option>
+                                                    <option value=10>10</option>
+                                                    <option value=11>11</option>
+                                                    <option value=12>12</option>
+                                                    <option value=13>1</option>
+                                                    <option value=14>2</option>
+                                                    <option value=15>3</option>
+                                                    <option value=16>4</option>
+                                                    <option value=17>5</option>
+                                                    <option value=18>6</option>
+                                                    </select>
+                                                    <span class="text-xl py-3 mr-1">:</span>
+                                                    
+                                                    <select v-model="temp_assign_course.min[0][2]" name="minutes" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 appearance-none outline-none mr-2">
+                                                    <option value=0>00</option>
+                                                    <option value=30>30</option>
+                                                    </select>
+                                                    <select name="ampm" class="bg-grey-200 text-grey-darker border border-grey-200 appearance-none outline-none">
+                                                    <option value="am">AM</option>
+                                                    <option value="pm">PM</option>
+                                                    </select>
+                                                </div>
+                                
+                                            </div>
+                                            <hr>
+                                            <br>
+                                        </div>
+                                    <!--------------------------end group 1------------------------->   
 
+                                    <!-----------------------------group 2------------------------->
+                                         <div v-if="numberofgroup=='Two'  && (course_type[temp_assign_course.course_code]!=0 && temp_assign_course.course_code!='' )">
+                                           
+                                            <div class="md:flex md:items-center mb-6" >
+                                                <div class="md:w-1/4">
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                        for="inline-course-code">
+                                                        Total Student
+                                                    </label>
+                                                </div>
+                                                <div class="md:w-3/4">
+                                                    <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                    v-model="temp_assign_course.total_student[1]" id="inline-full-name" type="number" >
+                                                </div>
+                                            
+                                          
+                                            </div>
 
-
-
+                                            <div class="md:flex md:items-center mb-6">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Number of Class
+                                                </label>
+                                            </div>
+                                            <div class="md:w-3/4">
+                                                 <input type="radio"  value="One"  v-model="numberofclass2" > One
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                 
+                                                <input type="radio" value="Two" v-model="numberofclass2"> Two
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input type="radio" value="Three" v-model="numberofclass2"> Three
+                                                    
                                             </div>
                                         </div>
+                                        <div class="md:flex md:items-center mb-6" v-if="numberofclass2=='One' || numberofclass2=='Two' || numberofclass2=='Three' ">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Day 1
+                                                </label>
+                                            </div >
+                                                    <div>
+                                                        <select v-model="temp_assign_course.day[1][0]" class="block appearance-none bg-grey-200 border border-grey-200 text-grey-darker py-3 px-0.5 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                            id="grid-state">
+                                                            <option value=1>Saturday</option>
+                                                            <option value=2>Sunday</option>
+                                                            <option value=3>Monday</option>
+                                                            <option value=4>Tuesday</option>
+                                                            <option value=5>Wednesday</option>
+                                                            
+                                                        </select>
+                                                    </div>&nbsp;
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                    for="inline-course-code"> Duration 1</label>
+                                                    <div>
+                                                        <select class="block appearance-none  bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2  rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                v-model="temp_assign_course.duration[1][0]"  id="grid-state" >
+                                                                <option value=1     >01 : 00</option>
+                                                                <option value=1.5   >01 : 30</option>
+                                                                <option value=2     >02 : 00</option>
+                                                                <option value=2.5   >02 : 30</option>
+                                                                <option value=3     >03 : 00</option>
+                                                                <option value=3.5   >03 : 30</option>
+                                                                <option value=4     >04 : 00</option>
 
+                                                        </select>
+                                                    </div>&nbsp;
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                    for="inline-course-code"> Time 1</label>
+                                                     <div class="flex">
+                                                    <select v-model="temp_assign_course.hour[1][0]" name="hours" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 py-3 appearance-none outline-none">
+                                                    <option value=8>8</option>
+                                                    <option value=9>9</option>
+                                                    <option value=10>10</option>
+                                                    <option value=11>11</option>
+                                                    <option value=12>12</option>
+                                                    <option value=13>1</option>
+                                                    <option value=14>2</option>
+                                                    <option value=15>3</option>
+                                                    <option value=16>4</option>
+                                                    <option value=17>5</option>
+                                                    <option value=18>6</option>
+                                                    </select>
+                                                    <span class="text-xl py-3 mr-1">:</span>
+                                                    
+                                                    <select v-model="temp_assign_course.min[1][0]" name="minutes" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 appearance-none outline-none mr-2">
+                                                    <option value=0>00</option>
+                                                    <option value=30>30</option>
+                                                    </select>
+                                                    <select name="ampm" class="bg-grey-200 text-grey-darker border border-grey-200 appearance-none outline-none">
+                                                    <option value="am">AM</option>
+                                                    <option value="pm">PM</option>
+                                                    </select>
+                                                </div>
 
+                                        </div>
+                                        <div class="md:flex md:items-center mb-6" v-if="numberofclass2=='Two' || numberofclass2=='Three' ">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Day 2
+                                                </label>
+                                            </div>
+                                                    <div>
+                                                        <select v-model="temp_assign_course.day[1][1]" class="block appearance-none bg-grey-200 border border-grey-200 text-grey-darker py-3 px-0.5 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                            id="grid-state">
+                                                            <option value=1>Saturday</option>
+                                                            <option value=2>Sunday</option>
+                                                            <option value=3>Monday</option>
+                                                            <option value=4>Tuesday</option>
+                                                            <option value=5>Wednesday</option>
+                                                            
+                                                        </select>
+                                                    </div>&nbsp;
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                    for="inline-course-code"> Duration 2</label>
+                                                    <div>
+                                                        <select class="block appearance-none  bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2  rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                v-model="temp_assign_course.duration[1][1]"  id="grid-state" >
+                                                                <option value=1     >01 : 00</option>
+                                                                <option value=1.5   >01 : 30</option>
+                                                                <option value=2     >02 : 00</option>
+                                                                <option value=2.5   >02 : 30</option>
+                                                                <option value=3     >03 : 00</option>
+                                                                <option value=3.5   >03 : 30</option>
+                                                                <option value=4     >04 : 00</option>
 
+                                                        </select>
+                                                    </div>&nbsp;
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                    for="inline-course-code"> Time 2</label>
+                                                     <div class="flex">
+                                                    <select v-model="temp_assign_course.hour[1][1]" name="hours" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 py-3 appearance-none outline-none">
+                                                    <option value=8>8</option>
+                                                    <option value=9>9</option>
+                                                    <option value=10>10</option>
+                                                    <option value=11>11</option>
+                                                    <option value=12>12</option>
+                                                    <option value=13>1</option>
+                                                    <option value=14>2</option>
+                                                    <option value=15>3</option>
+                                                    <option value=16>4</option>
+                                                    <option value=17>5</option>
+                                                    <option value=18>6</option>
+                                                    </select>
+                                                    <span class="text-xl py-3 mr-1">:</span>
+                                                    
+                                                    <select v-model="temp_assign_course.min[1][1]" name="minutes" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 appearance-none outline-none mr-2">
+                                                    <option value=0>00</option>
+                                                    <option value=30>30</option>
+                                                    </select>
+                                                    <select name="ampm" class="bg-grey-200 text-grey-darker border border-grey-200 appearance-none outline-none">
+                                                    <option value="am">AM</option>
+                                                    <option value="pm">PM</option>
+                                                    </select>
+                                                </div>
 
+                                        </div>
+                                        <div class="md:flex md:items-center mb-6" v-if="numberofclass2=='Three' ">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Day 3
+                                                </label>
+                                            </div>
+                                                    <div>
+                                                        <select v-model="temp_assign_course.day[1][2]" class="block appearance-none bg-grey-200 border border-grey-200 text-grey-darker py-3 px-0.5 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                            id="grid-state">
+                                                            <option value=1>Saturday</option>
+                                                            <option value=2>Sunday</option>
+                                                            <option value=3>Monday</option>
+                                                            <option value=4>Tuesday</option>
+                                                            <option value=5>Wednesday</option>
+                                                            
+                                                        </select>
+                                                    </div>&nbsp;
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                    for="inline-course-code"> Duration 3</label>
+                                                    <div>
+                                                        <select class="block appearance-none  bg-grey-200 border border-grey-200 text-grey-darker py-3 px-2  rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                v-model="temp_assign_course.duration[1][2]"  id="grid-state" >
+                                                                <option value=1     >01 : 00</option>
+                                                                <option value=1.5   >01 : 30</option>
+                                                                <option value=2     >02 : 00</option>
+                                                                <option value=2.5   >02 : 30</option>
+                                                                <option value=3     >03 : 00</option>
+                                                                <option value=3.5   >03 : 30</option>
+                                                                <option value=4     >04 : 00</option>
 
-
-
-
-
-
-
-
-                                        
-
-                                        
-
-
-                                      
-
-
-
-
-
-
-
-
-                                        
-
-
-
-
-
+                                                        </select>
+                                                    </div>&nbsp;
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-2"
+                                                    for="inline-course-code"> Time 3</label>
+                                                     <div class="flex">
+                                                    <select v-model="temp_assign_course.hour[1][2]" name="hours" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 py-3 appearance-none outline-none">
+                                                    <option value=8>8</option>
+                                                    <option value=9>9</option>
+                                                    <option value=10>10</option>
+                                                    <option value=11>11</option>
+                                                    <option value=12>12</option>
+                                                    <option value=13>1</option>
+                                                    <option value=14>2</option>
+                                                    <option value=15>3</option>
+                                                    <option value=16>4</option>
+                                                    <option value=17>5</option>
+                                                    <option value=18>6</option>
+                                                    </select>
+                                                    <span class="text-xl py-3 mr-1">:</span>
+                                                    
+                                                    <select v-model="temp_assign_course.min[1][2]" name="minutes" class="bg-grey-200 text-grey-darker border border-grey-200 px-1 appearance-none outline-none mr-2">
+                                                    <option value=0>00</option>
+                                                    <option value=30>30</option>
+                                                    </select>
+                                                    <select name="ampm" class="bg-grey-200 text-grey-darker border border-grey-200 appearance-none outline-none">
+                                                    <option value="am">AM</option>
+                                                    <option value="pm">PM</option>
+                                                    </select>
+                                                </div>
+                                
+                                            </div>
+                                            <hr>
+                                            <br>
+                                        </div>
+                                    <!--------------------------end group 2------------------------->
+                                    
+                                   
                                         
                                         <div class="md:flex md:items-center">
                                             <div class="md:w-1/3"></div>
@@ -350,50 +831,61 @@
 
       data() {
         return {
-          numberofclass:"select",          
-          session:{},
+          numberofclass:"select",
+          numberofclass2:"select",
+          numberofgroup:"select",          
           semesters:{},
           teachers:{},
           courses:{},
-          assigncourse:{
+          temp_assign_course:{
               session_name:"",
-              semester:"",
+              sem_id:"",
               teacher_code:"",
               course_code:"",
-              group:0,
-              day1:0,
+              total_student:[],
+              day:[[],[]],
+              hour: [[],[]],
+              min : [[],[]],
+              duration:[[],[]],
+              
+              /*day1:0,
               duration1:0,
               hour1:0,
               min1:0,
               day2:0,
               duration2:0,
               hour2:0,
-              min2:0
+              min2:0*/
           },
-          savecourse:{
-              session_name  :   "",
-              semester      :   "",
-              teacher_code  :   "",
-              course_code   :   "",
-              group         :   1,
-              start1        :   1,
-              end1          :   1,
-              duration1     :   0,
-              start2        :   1,
-              end2          :   1,
-              duration2     :   0
-            
-          }
+          assign_course:{
+              session_name:"",
+              sem_id:0,
+              teacher_code:"",
+              course_code:"",
+              group:0,
+              total_student:[],
+              duration1:[],
+              start1:[],
+              end1:[],
+              day1:[],
+              duration2:[],
+              start2:[],
+              end2:[],
+              day2:[],
+          },
+          course_type:[],
         }
       },
       created() {
+          
 
-        this.assigncourse.session_name=this.$route.params.id;
        
+        this.temp_assign_course.session_name=this.$route.params.id;
+        console.log(this.temp_assign_course.session_name);
 
         let uri = '/api/request-sections';
             
-        this.axios.post(uri, this.assigncourse).then((response) => {
+        this.axios.post(uri, this.temp_assign_course).then((response) => {
             this.semesters = response.data.data;
             //console.log(this.semesters);
         });
@@ -409,45 +901,65 @@
             
         this.axios.get(uri).then((response) => {
             this.courses = response.data.data;
+            this.courseTypeCheck();
             //console.log(this.courses);
         });
+        //this.gen2d();
       },
 
-      methods:{
-          addManually(){
-              var hr1,hr2,mn1,mn2,dy1,dy2;
-              //console.log(this.assigncourse);
-              this.savecourse.session_name    =   this.assigncourse.session_name;
-              this.savecourse.semester        =   this.assigncourse.semester;
-              this.savecourse.teacher_code    =   this.assigncourse.teacher_code;
-              this.savecourse.course_code     =   this.assigncourse.course_code;
-              //this.savecourse.room_number     =   this.assigncourse.room_number;
-              //this.savecourse.group           =   this.assigncourse.group[i]; /** */
-              //this.savecourse.duration        =   this.assigncourse.duration; /** */
-              //this.savecourse.totalstudent    =   this.assigncourse.totalstudent;
-              this.savecourse.group             =    Number(this.assigncourse.group) ;
-              this.savecourse.duration1         =    Number(this.assigncourse.duration1);
-              this.savecourse.duration2         =    Number(this.assigncourse.duration2);
-              hr1 = Number(this.assigncourse.hour1);
-              mn1 = Number(this.assigncourse.min1);
-              dy1 = Number(this.assigncourse.day1);
+        methods:{
+            addManually(){
+                var hour1=[],hour2=[],min1=[],min2=[];
+                this.assign_course.session_name   =   this.temp_assign_course.session_name;
+                this.assign_course.sem_id         =   this.temp_assign_course.sem_id;
+                this.assign_course.teacher_code   =   this.temp_assign_course.teacher_code;
+                this.assign_course.course_code    =   this.temp_assign_course.course_code;
+                this.assign_course.total_student =   this.temp_assign_course.total_student;
+                if(this.numberofgroup!="Two" || this.course_type[this.temp_assign_course.course_code]=='') //group=0
+                {
+                    this.assign_course.group      =   0;
+                }
+                else
+                {
+                    this.assign_course.group      =   2;
+                }
+                this.assign_course.day1            =    this.temp_assign_course.day[0];
+                this.assign_course.day2            =    this.temp_assign_course.day[1];
+                hour1            =    this.temp_assign_course.hour[0];
+                hour2            =    this.temp_assign_course.hour[1];
 
-              this.savecourse.start1            =   this.convert_time(hr1,mn1)+((dy1-1)*18);
-              this.savecourse.end1              =   this.savecourse.start1+this.savecourse.duration1+this.savecourse.duration1-1;
+                min1            =    this.temp_assign_course.min[0];
+                min2            =    this.temp_assign_course.min[1];
+                this.assign_course.duration1            =    this.temp_assign_course.duration[0];
+                this.assign_course.duration2            =    this.temp_assign_course.duration[1];
+                for(var i=0;i< this.assign_course.duration1.length;i++)
+                {
+                    var hr = Number(hour1[i]);
+                    var mn = Number(min1[i]);
+                    var dy = Number(this.assign_course.day1[i]);
+                    var dn = Number(this.assign_course.duration1[i]);
+                    this.assign_course.start1[i]   =   this.convert_time(hr,mn)+((dy-1)*18);
+                    this.assign_course.end1[i]     =   this.assign_course.start1[i]+dn+dn-1;
 
-              hr2 = Number(this.assigncourse.hour2);
-              mn2 = Number(this.assigncourse.min2);
-              dy2 = Number(this.assigncourse.day2);
-            
-              this.savecourse.start2            =   this.convert_time(hr2,mn2)+((dy2-1)*18);
-              this.savecourse.end2              =   this.savecourse.start2+this.savecourse.duration2+this.savecourse.duration2-1;
+                }
+                for(var i=0;i< this.assign_course.duration2.length;i++)
+                {
+                    var hr = Number(hour2[i]);
+                    var mn = Number(min2[i]);
+                    var dy = Number(this.assign_course.day2[i]);
+                    var dn = Number(this.assign_course.duration2[i]);
+                    this.assign_course.start2[i]   =   this.convert_time(hr,mn)+((dy-1)*18);
+                    console.log( this.assign_course.start2[i]);
+                    this.assign_course.end2[i]     =   this.assign_course.start2[i]+dn+dn-1;
 
+                }
 
-              //console.log(this.savecourse);
-              let uri = '/api/enrollment/manualcreate';
-                this.axios.post(uri, this.savecourse).then((response) => {
-                this.$router.push({name: 'selectsession'});
+                console.log(this.assign_course);
+                let uri = '/api/enrollment/manual-create';
+                this.axios.post(uri, this.assign_course).then((response) => {
+                //this.$router.push({name: 'selectsession'});
           });
+              
              
           },
 
@@ -473,7 +985,15 @@
               else if(h==17 && m==0) return 18;
               else if(h==17 && m==30) return 19;
               
-          }
+          },
+          courseTypeCheck(){
+            console.log("courses:");
+            console.log(this.courses);
+            for(var i=0;i<this.courses.length;i++)
+            {
+                this.course_type[this.courses[i].code]=this.courses[i].type;
+            }
+        }
       }
 
     //   methods: {

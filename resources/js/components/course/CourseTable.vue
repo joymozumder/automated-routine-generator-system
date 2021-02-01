@@ -69,8 +69,11 @@
 
 <script>
 import compDataTable from 'vue-materialize-datatable';
+ 
 export default {
+    
     data() {
+        
         return {
              tableColumns1: [
             
@@ -109,7 +112,9 @@ export default {
         let uri = '/api/courses';
         this.axios.get(uri).then(response => {
           this.courses = response.data.data;
-          //console.log(response);
+
+        
+          
           for(var i=0;i<this.courses.length;i++){
               
                 if(this.courses[i].type==0)

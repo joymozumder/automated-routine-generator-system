@@ -43,7 +43,7 @@
                                             </div>
                                             <div class="md:w-3/4">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                          v-model="assigncourse.semester"  id="grid-state">
+                                                          v-model="assigncourse.sem_id"  id="grid-state">
                                                         
                                                         <option v-for="semester in semesters" :key="semester.id" :value="semester.id">{{semester.semester}}</option>
                                                     </select>
@@ -162,7 +162,20 @@
 
 
 
-                                        <div class="md:flex md:items-center mb-6">
+                                        <div  class="md:flex md:items-center mb-6" v-if="course_type[assigncourse.course_code]==0 || assigncourse.course_code=='' ">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Total Student
+                                                </label>
+                                            </div>
+                                            <div class="md:w-3/4">
+                                                <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                  v-model="assigncourse.group[0]" id="inline-full-name" type="number" >
+                                            </div>
+                                        </div>
+
+                                        <div class="md:flex md:items-center mb-6" v-if="course_type[assigncourse.course_code]!=0 && assigncourse.course_code!='' ">
                                             <div class="md:w-1/4">
                                                 <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
@@ -197,6 +210,7 @@
                                           
                                         </div>
                                        
+
 
 
 
@@ -261,47 +275,21 @@
                 
           numberofclass:"select",
           numberofgroup:"select",
-          
-          //day:0,
-          //session:{},
           semesters:{},
           teachers:{},
           courses:{},
           rooms:{},
           assigncourse:{
               session_name:"",
-              semester:"",
+              sem_id:"",
               teacher_code:"",
               course_code:"",
-              room_number:0,
-              day:0,
               group:[],
               duration:[]
           },
+          course_type:[],
           
-          /*****************/
-          //selected_session:"",
-                //active_session:"",
-                // sessions:{
-                        
-                //         session_name:"",
-                //         status:true
-                // },
-                // newSessions:{
-                        
-                //         session_name:"",
-                //         status:true
-                // },
-                // semester: {
-                //     semester:"",
-                //     section:[],
-                //     total_student:0,
-                //     session_name:"",
-                //     status:true
-                // },
-                //select_2:0,
-
-          //*************/
+          
 
         }
         
@@ -309,7 +297,6 @@
     created() {
 
         
-       // this.assigncourse.session_name = this.$route.params.id;
        this.assigncourse.session_name =this.$route.params.id;
 
         let uri = `/api/teachers`;
@@ -324,6 +311,7 @@
         this.axios.get(uri).then((response) => {
             this.courses = response.data.data;
             //console.log(this.courses);
+            this.courseTypeCheck();
         });
        
 
@@ -341,16 +329,24 @@
       
       
       assignCourse()
-          {
+        {
               
-                console.log(this.assigncourse);
-                let uri = '/api/enrollment/create';
-                this.axios.post(uri, this.savecourse).then((response) => {
+            console.log(this.assigncourse);
+            let uri = '/api/enrollment/create';
+            this.axios.post(uri, this.assigncourse).then((response) => {
                     //this.$router.push({name: 'assigncourses'});
-                //this.$router.go(-1);
-          });
-            },
-           
+                    //console.log(response);
+                    this.$router.go(-1);
+                    });
+        },
+        courseTypeCheck(){
+            console.log("courses:");
+            console.log(this.courses);
+            for(var i=0;i<this.courses.length;i++)
+            {
+                this.course_type[this.courses[i].code]=this.courses[i].type;
+            }
+        }
         
           
 
