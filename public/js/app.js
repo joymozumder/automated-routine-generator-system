@@ -80031,7 +80031,7 @@ Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTE
 
 var routes = [{
   name: 'login',
-  path: '/login',
+  path: '/',
   component: _components_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
   name: 'register',
@@ -80156,8 +80156,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   routes: routes
 });
 router.beforeEach(function (to, from, next) {
-  if (to.fullPath !== "/login") {
-    if (window.localStorage.getItem("userid") == "") router.push('/login');else next();
+  if (to.fullPath !== "/") {
+    if (window.localStorage.getItem("userid") == "") router.push('/');else next();
   } else {
     next();
   }

@@ -56,7 +56,7 @@ class RoutineController extends Controller
                 ->where('enrollments.session_name','=',$session_name)
                 ->paginate(500);
         $dt = $obj->toArray();
-        dd($dt);
+        //dd($dt);
     }
    
 
@@ -109,7 +109,7 @@ class RoutineController extends Controller
         }
         //$course[3]["start"] = 3;
         //$course[3]["end"] = 5;
-       dd($course);
+       //dd($course);
        //dd($conflict);
        //dd($course_busy);
         
@@ -387,7 +387,7 @@ for ($i = 0; $i < $dt["total"]; $i++)
             $obj->start = $st;
             $obj->end = $et;
             $obj->day = $d;
-            //$obj->save();
+            $obj->save();
         }
         
 
