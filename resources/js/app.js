@@ -24,6 +24,7 @@ import compHomeComponent from './components/HomeComponent.vue';
 import compAddCourse from './components/course/AddCourse.vue';
 import compCourseTable from './components/course/CourseTable.vue';
 import compEditCourse from './components/course/EditCourse.vue';
+import compCourseAssign from './components/course/CourseAssign.vue';
 
 
 import compAddRoom from './components/room/AddRoom.vue';
@@ -31,6 +32,9 @@ import compEditRoom from './components/room/EditRoom.vue';
 import compRoomTable from './components/room/RoomTable.vue';
 
 import compCreateSession from './components/session/createSession.vue';
+import compEditSession from './components/session/EditSession.vue';
+import compSessionTable from "./components/session/SessionTable.vue";
+
 import compSessionComponent from './components/session/SessionComponent.vue';
 import compSelectSession from './components/session/SelectSession.vue';
 import compAddSemester from './components/session/AddSemester.vue';
@@ -38,25 +42,33 @@ import compAssignCourse from './components/session/AssignCourse.vue';
 import compManualAssign from './components/session/ManualAssign.vue';
 import compRoutine from './components/session/Routine.vue';
 
+import compAddTeacher from './components/user/AddTeacher.vue';
 import compTeacherTable from './components/user/TeacherTable.vue';
-import compEditUser from './components/user/EditUser.vue';
+import compEditTeacher from './components/user/EditTeacher.vue';
 
 
-import compSessionTable from "./components/session/SessionTable.vue";
+
 import compAssignTable from "./components/session/AssignTable.vue";
+import compEditEnrollment from "./components/session/EditEnrollment.vue";
+
 import compSemesterTable from "./components/session/SemesterTable.vue";
 
 
 
 import compTest from './components/Test.vue';
 import compTest2 from './components/Test2.vue';
+import compTest3 from './components/Test3.vue';
+import compTest4 from './components/Test4.vue';
+
+
+
 
 
 const routes = [
     
     {
         name: 'login',
-        path: '/',
+        path: '/login',
         component: compLoginComponent
     },
     {
@@ -110,6 +122,11 @@ const routes = [
                     component: compCreateSession
                 },
                 {
+                    name: 'editsession',
+                    path: 'editsession/:id',
+                    component: compEditSession
+                },
+                {
                     name: 'selectsession',
                     path: 'selectsession',
                     component: compSelectSession
@@ -140,14 +157,19 @@ const routes = [
                     component: compRoutine
                 },
                 {
+                    name: 'addteacher',
+                    path: 'addteacher',
+                    component: compAddTeacher
+                },
+                {
                     name: 'teachers',
                     path: 'teachers',
                     component: compTeacherTable
                 },
                 {
-                    name: 'edituser',
-                    path: 'edituser/:id',
-                    component: compEditUser
+                    name: 'editteacher',
+                    path: 'editteacher/:id',
+                    component: compEditTeacher
                 },
                 {
                     name: 'sessions',
@@ -155,9 +177,19 @@ const routes = [
                     component: compSessionTable
                 },
                 {
+                    name: 'courseassign',
+                    path: 'courseassign/:id',
+                    component: compCourseAssign
+                },
+                {
                     name: 'assigncourses',
-                    path: 'assigncourses',
+                    path: 'assigncourses/:id',
                     component: compAssignTable
+                },
+                {
+                    name: 'editenrollment',
+                    path: 'editenrollment/:id',
+                    component: compEditEnrollment
                 },
                 {
                     name: 'semesters',
@@ -165,14 +197,25 @@ const routes = [
                     component: compSemesterTable
                 },
                 {
+                    name: 'test',
+                    path: 'test',
+                    component: compTest
+                },
+                {
                     name: 'test2',
                     path: 'test2',
                     component: compTest2
                 },
+                
                 {
-                    name: 'test',
-                    path: 'test',
-                    component: compTest
+                    name: 'test3',
+                    path: 'test3/:id',
+                    component: compTest3
+                },
+                {
+                    name: 'test4',
+                    path: 'test4',
+                    component: compTest4
                 },
                 
                 
@@ -189,6 +232,18 @@ const routes = [
 
 
 const router = new VueRouter({ mode: 'history', routes: routes});
+
+router.beforeEach((to,from,next) => {
+    if (to.fullPath !== "/login") {
+        if(window.localStorage.getItem("userid")=="")
+            router.push('/login');
+        else next();
+    }
+    else {
+        next();
+    }
+})
+
 const app = new Vue(Vue.util.extend({ router }, App)).$mount('#app');
 
 

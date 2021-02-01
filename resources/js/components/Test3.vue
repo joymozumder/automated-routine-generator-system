@@ -1,93 +1,170 @@
 <template>
-     <main class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2">
-			 <div id='recipients' class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-			 
-				
-				<table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
-					<thead>
-						<tr>
-							<th data-priority="1">ID</th>
-							<th data-priority="2">Session Name</th>
-							<th data-priority="3">status</th>
-							<th data-priority="4">Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr  v-for="session in sessions" :key="session.id">
-							<td>{{ session.id }}</td>
-              				<td>{{ session.session_name }}</td>
-							
+    <main class="bg-white-500 flex-1 p-3 overflow-hidden">
+        <div class="flex flex-col">
+                        <!-- Card Sextion Starts Here -->
+                        <div class="container mx-auto h-full flex flex-1 justify-center items-center">
+                            <!--Horizontal form-->
+                            <div class="mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2">
+                                <div class="bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b">
+                                    Update Enrollment
+                                </div>
+                                <div class="p-3">
+                                    <form class="w-full">
+                                        <div class="md:flex md:items-center mb-6">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Session Name
+                                                </label>
+                                            </div>
+                                            <div class="md:w-3/4">
+                                                <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                           v-model="enrollment.session_name" id="grid-state">
+                                                        
+                                                        <option v-for="session in sessions" :key="session.id">{{session.session_name}}</option>
+                                                    </select>
+                                                    
+                                            </div>
+                                        </div>
 
-							<td v-if="session.status===0">
-                                                <i class="fas fa-times text-red-500 mx-2"></i>
-                            </td>
-                            <td v-else>
-                                                <i class="fas fa-check text-green-500 mx-2"></i>
-                            </td>
-                            <td>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-eye"></i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white">
-                                                        <i class="fas fa-edit">
-                                                           <!-- <router-link :to="{name: 'editroom', params: { id: room.id }}" >Edit</router-link>--> 
-                                                        </i></a>
-                                                <a class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-red-500" @click.prevent="deletePost(session.id)">
-                                                        <i class="fas fa-trash"></i>
-                                                </a>
-                            </td>
-						</tr>
-						
-					
+
+                                        <div class="md:flex md:items-center mb-6">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Teacher Code
+                                                </label>
+                                            </div>
+                                            <div class="md:w-3/4">
+                                                <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                           v-model="enrollment.teacher_code" id="grid-state">
+                                                        
+                                                        <option v-for="teacher in teachers" :key="teacher.id">{{teacher.code}}</option>
+                                                    </select>
+                                                    
+                                            </div>
+                                        </div>
+
+
+
+
+                                    <div class="md:flex md:items-center mb-6">
+                                            <div class="md:w-1/4">
+                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                    for="inline-course-code">
+                                                    Course Code
+                                                </label>
+                                            </div>
+                                            <div class="md:w-3/4">
+                                                <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                           v-model="enrollment.course_code" id="grid-state">
+                                                        
+                                                        <option v-for="course in courses" :key="course.id">{{course.code}}</option> 
+                                                    </select>
+                                                    
+                                            </div>
+                                        </div>
+
+                                        
+
+                                       
+                                        
+
+                                        
+                                       
+
+                                        
+                                        <div class="md:flex md:items-center">
+                                            <div class="md:w-1/3"></div>
+                                            <div class="md:w-2/3">
+                                                <button @click.prevent="updateEnrollment" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
+                                                    Update Session 
+                                                </button>
+                                            </div>
+                                            <div class="md:w-2/3">
+                                                 <button @click.prevent="Cancel" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
+                                                    Cancel 
+                                                </button>
+                                            </div> 
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!--/Horizontal form-->
+
                         
-
-                        
-
-                       
+                        </div>
 
 
-                   
+                        <!-- /Cards Section Ends Here -->
 
-                       
-
-                       
-
-					</tbody>
-					
-				</table>
-				
-				
-			</div>
-        </main>
+                    
+                    </div>
+    </main>                
 </template>
 
 
-
-
-
 <script>
-  export default {
+    export default {
+
       data() {
         return {
-          sessions: []
+          enrollment: {},
+          sessions:{},
+          courses:{},
+          teachers:{},
         }
       },
       created() {
-        let uri = '/api/sessions';
-        console.log(this.sessions.id);
-        this.axios.get(uri).then(response => {
-          this.sessions = response.data.data;
+
           
+        let uri = `/api/enrollment/edit/${this.$route.params.id}`;
+        this.axios.get(uri).then((response) => {
+            this.enrollment = response.data.data; 
+            ///console.log(this.enrollment);
+            console.log(this.enrollment.session_name);
+            console.log(this.enrollment.course_code);
+            console.log(this.enrollment.teacher_code);
         });
-    },
-    methods: {
-      deletePost(id)
-      {
-        let uri = `/api/session/delete/${id}`;
-        console.log(id);
-        this.axios.delete(uri).then(response => {
-          this.sessions.splice(this.sessions.findIndex(session => session.id === id), 1);
+
+        uri = `/api/teachers`;
+            
+        this.axios.get(uri).then((response) => {
+            this.teachers = response.data.data;
+            //console.log(this.teachers);
         });
+
+        uri = `/api/sessions`;
+            
+        this.axios.get(uri).then((response) => {
+            this.sessions = response.data.data;
+            //console.log(this.teachers);
+        });
+
+
+        uri = `/api/courses`;
+            
+        this.axios.get(uri).then((response) => {
+            this.courses = response.data.data;
+            //console.log(this.courses);
+        });
+
+
+
+
+      },
+      methods: {
+        updateEnrollment() {
+
+            console.log(this.enrollment);
+            let uri = `/api/enrollment/update/${this.$route.params.id}`;
+            this.axios.post(uri, this.enrollment).then((response) => {
+              this.$router.push({name: 'assigncourses'});
+            });
+        },
+        Cancel() {
+            this.$router.go(-1);
+        }
       }
     }
-  }
 </script>

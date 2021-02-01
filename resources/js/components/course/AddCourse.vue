@@ -82,21 +82,13 @@
 
 
 
-                                   <div class="md:flex md:items-center mb-6">
-                                            <div class="md:w-1/3"></div>
-                                            <label class="md:w-2/3 block text-grey font-regular">
-                                                <input class="mr-2 leading-tight" value="true" v-model="course.status" type="checkbox">
-                                                <span class="text-sm">
-                                                    Status
-                                                </span>
-                                            </label>
-                                        </div>
+                                  
 
                                         
                                         <div class="md:flex md:items-center">
                                             <div class="md:w-1/3"></div>
                                             <div class="md:w-2/3">
-                                                <button @click.prevent="addCourse" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
+                                                <button @click.prevent="addCourse" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                                                     Save Course 
                                                 </button>
                                             </div>

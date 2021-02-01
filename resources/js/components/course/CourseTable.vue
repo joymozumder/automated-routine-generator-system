@@ -1,25 +1,52 @@
 <template>
     
-    <main>
+    <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
 
-         <compDataTable
-            title="Courses table"
+                <div class="flex flex-1">
+                   
+
+                    <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
+
+                        <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
+                                 <!-- <button class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50" data-modal='createSessionModal' >Create Session</button> -->
+                                <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-20"
+                                :to="{name: 'addcourse'}">Create Course</router-link>
+                            <div class="p-3">
+        <compDataTable
+             
+            title="Courses Table"
+            
             :columns="tableColumns1"
             :rows="courses"
+            :clickable="false"
+            :sortable="true"
+            
+            :exactSearch="true"
+            :searchable="true"
+            :paginate="true"
+            :exportable="false"
+            :printable="false"
+            
+
         > 
+
                 <th slot="thead-tr">
                     Actions
                 </th>
                 <template slot="tbody-tr" slot-scope="props">
                     <td>
-                         <button class="btn red darken-2 waves-effect waves-light compact-btn"
-                            >
-                            <!-- <i class="material-icons white-text">
-                                edit</i> -->
-                                <router-link tag="i" class="material-icons white-text" :to="{name: 'editcourse', params: { id: props.row.id }}" >edit</router-link>
-                            
-                        </button> 
-                        <button class="btn red darken-2 waves-effect waves-light compact-btn"
+                         
+
+
+                        <router-link tag="button"  class="btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editcourse', params: { id: props.row.id }}" >
+                             <i class="material-icons white-text">
+                                edit</i>
+                         </router-link>
+
+
+
+
+                        <button class="btn  bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn"
                             @click.prevent="deletePost(props.row.id)"> 
                             <i class="material-icons white-text">delete</i>
                         </button>
@@ -27,7 +54,15 @@
                     
                 </template>
         </compDataTable>
-    </main>
+                  </div>
+                        </div>
+                    </div>
+                    <!--/Grid Form-->
+                </div>
+                 <!-- ___________________________________________ -->
+        
+        <!-- _____________________________________________ -->
+            </main>
        
     
 </template>
@@ -63,12 +98,7 @@ export default {
 		 		numeric: false,
 		 		html: false
              },
-             {
-		 		label: "Status",
-		 		field: "status",
-		 		numeric: false,
-		 		html: false
-             }
+             
 		 ],
 		courses: []
         }
@@ -80,6 +110,23 @@ export default {
         this.axios.get(uri).then(response => {
           this.courses = response.data.data;
           //console.log(response);
+          for(var i=0;i<this.courses.length;i++){
+              
+                if(this.courses[i].type==0)
+                     this.courses[i].type="Theory Class";
+                else if(this.courses[i].type==1)
+                     this.courses[i].type="CSE LAB";
+                else if(this.courses[i].type==2)
+                      this.courses[i].type="EEE LAB";
+                else if(this.courses[i].type==3)
+                     this.courses[i].type="Communication LAB";
+                else if(this.courses.type==4)
+                      this.courses[i].type="Mechanical LAB";
+                else if(this.courses[i].type==5)
+                      this.courses[i].type="Physics LAB";
+                else    
+                      this.courses[i].type="none";
+          }
         });
     },
      components:{

@@ -1,33 +1,64 @@
 <template>
     
-    <main>
+        <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
 
-         <compDataTable
-            title="Sessions table"
-            :columns="tableColumns1"
-            :rows="sessions"
-        > 
-                <th slot="thead-tr">
-                    Actions
-                </th>
-                <template slot="tbody-tr" slot-scope="props">
-                    <td>
-                         <button class="btn red darken-2 waves-effect waves-light compact-btn"
-                            >
-                            <!-- <i class="material-icons white-text">
-                                edit</i> -->
-                                <router-link tag="i" class="material-icons white-text" :to="{name: 'editroom', params: { id: props.row.id }}" >edit</router-link>
-                            
-                        </button> 
-                        <button class="btn red darken-2 waves-effect waves-light compact-btn"
-                            @click.prevent="deletePost(props.row.id)"> 
-                            <i class="material-icons white-text">delete</i>
-                        </button>
-                    </td>
+                <div class="flex flex-1">
+                   
+
+                    <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
+
+                        <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
+                                <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
+                                :to="{name: 'createsession'}">Create Session</router-link>
+                            <div class="p-3">
+                                    <compDataTable
+                                        
+                                        title="Session Table"
+                                        
+                                        :columns="tableColumns1"
+                                        :rows="sessions"
+                                        :clickable="false"
+                                        :sortable="true"
+                                        
+                                        :exactSearch="true"
+                                        :searchable="true"
+                                        :paginate="true"
+                                        :exportable="false"
+                                        :printable="false"
+                                        
+
+                                    > 
+                                            <th slot="thead-tr">
+                                                Actions
+                                            </th>
+                                            <template slot="tbody-tr" slot-scope="props">
+                                                <td>
+                                                    
+
+
+
+                                                    <router-link tag="button"  class="btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editsession', params: { id: props.row.id }}" >
+                                                        <i class="material-icons white-text">
+                                                            edit</i>
+                                                    </router-link>
+
+                                                    <button class="btn bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn"
+                                                        @click.prevent="deletePost(props.row.id)"> 
+                                                        <i class="material-icons white-text">delete</i>
+                                                    </button>
+                                                </td>
+                                                
+                                            </template>
+                                    </compDataTable>
+            
+                            </div>
+                        </div>
+                    </div>
                     
-                </template>
-        </compDataTable>
-    </main>
+                </div>
+             
+        </main>
+
        
     
 </template>
@@ -45,12 +76,7 @@ export default {
 		 		numeric: false,
  		        html: false
 		 	},
-            {
-		 		label: "Status",
-		 		field: "status",
-		 		numeric: false,
-		 		html: false
-             }
+            
 		 ],
 		sessions: []
         }

@@ -67,9 +67,9 @@ class SemesterSectionController extends Controller
             $sem =$str . $sec[$i];
 
             $sem_sec->semester = $sem;
-            $sem_sec->total_student = $request->total_student;
+            $sem_sec->total_student = 0;
             $sem_sec->session_name = $request->session_name;
-            $sem_sec->status = $request->status;
+            $sem_sec->status = 1;
             $sem_sec->save();
         }
     }
@@ -92,9 +92,12 @@ class SemesterSectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($session,$semester)
     {
-        $sem_sec = SemesterSection::find($id);
+        $sem_sec = SemesterSection::select()
+                    ->where('session_name','=',$session)
+                    ->where('semester','LIKE',"{$semester}%")
+                    ->paginate(500);
         return new SemesterSectionResource($sem_sec);
     }
 
@@ -105,9 +108,9 @@ class SemesterSectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $session,$semester)
     {
-        $sem_sec = SemesterSection::find($id);
+        /*$sem_sec = SemesterSection::find($id);
         
         $str = (String)$request->semester;
         $sem =$str . $request->section;
@@ -119,7 +122,57 @@ class SemesterSectionController extends Controller
         $sem_sec->status = $request->status;
         if($sem_sec->save()){
             return new SemesterSectionResource($sem_sec);
+        }*/
+       
+        $sec = $request->section;
+        $reqSemSec = array();
+        $dbSemSec = array();
+        for($i=0;$i<sizeof($sec);$i++)
+        {
+            $reqSemSec[$i] = $request->semester . $sec[$i];
         }
+        //$req_sem = $request->semester . $sec;
+        
+        $sem_sec = SemesterSection::select('semester')
+                    ->where('session_name','=',$session)
+                    ->where('semester','LIKE',"{$semester}%")
+                    ->paginate(500);
+        for($i=0;$i<sizeof($sem_sec);$i++)
+        {
+            $dbSemSec[$i] = $sem_sec[$i]->semester;
+        }
+        
+        
+        sort($reqSemSec);
+        sort($dbSemSec);
+        for($i=0;$i<sizeof($reqSemSec);$i++)
+        {
+            if(!in_array($reqSemSec[$i],$dbSemSec))
+            {
+                $sem_sec = new SemesterSection();
+                $sem_sec->semester = $reqSemSec[$i];
+                $sem_sec->total_student = 0;
+                $sem_sec->session_name = $session;
+                $sem_sec->status = 1;
+                $sem_sec->save();
+            }
+            
+        }
+        echo "\n";
+        for($i=0;$i<sizeof($dbSemSec);$i++)
+        {
+            if(!in_array($dbSemSec[$i],$reqSemSec))
+            {
+                $sem_sec = SemesterSection::select()
+                        ->where('session_name','=',$session)
+                        ->where('semester','=',$dbSemSec[$i])
+                        ->first();
+                $sem_sec->delete();
+            }
+           
+        }
+            
+        //return new SemesterSectionResource($sem_sec);
     }
 
     /**
