@@ -36,10 +36,10 @@
                                             
                                             
                                         
-                                        <div class="md:flex md:items-center">
-                                            <!--<div class="md:w-1/4"></div>-->
+                                        <!-- <div class="md:flex md:items-center"> -->
                                             
-                                            <div class="md:w-full space-x-2" >
+                                            
+                                            <div class="md:flex md:items-center mb-6 justify-center space-x-2" >
 
 
                                                   
@@ -50,7 +50,7 @@
                                                     <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="generateRoutine" >Generate Routine</button>
                                                      <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="assignSelect" >Print Routine </button>
                                             </div>
-                                        </div>
+                                        <!-- </div> -->
 
                                        
                                         
@@ -80,9 +80,11 @@
                                                             </div>
                                                         </div>
                                         
+                                                        <div class="md:flex md:items-center mb-6 justify-center space-x-2">
+                                                          <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full" :to="{name: 'routine', params: { session: selected_session,day:day }}" >Show</router-link>
+                                                       
+                                                        </div>
 
-
-                                                        <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-1 px-1 rounded-full" :to="{name: 'routine', params: { session: selected_session,day:day }}" >Show</router-link>
                                                         </div>
                                     </form>
                                 </div>

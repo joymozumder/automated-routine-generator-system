@@ -7705,6 +7705,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -63967,176 +63969,179 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "md:flex md:items-center" }, [
-                      _c(
-                        "div",
-                        { staticClass: "md:w-full space-x-2" },
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass:
-                                " bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full",
-                              attrs: {
-                                tag: "button",
-                                to: {
-                                  name: "semesters",
-                                  params: { session: _vm.selected_session }
-                                }
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "md:flex md:items-center mb-6 justify-center space-x-2"
+                      },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass:
+                              " bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full",
+                            attrs: {
+                              tag: "button",
+                              to: {
+                                name: "semesters",
+                                params: { session: _vm.selected_session }
                               }
-                            },
-                            [_vm._v("Add Semester")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "router-link",
-                            {
-                              staticClass:
-                                "bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-2 rounded-full",
-                              attrs: {
-                                tag: "button",
-                                to: {
-                                  name: "assigncourses",
-                                  params: { id: _vm.selected_session }
-                                }
+                            }
+                          },
+                          [_vm._v("Add Semester")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass:
+                              "bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-2 rounded-full",
+                            attrs: {
+                              tag: "button",
+                              to: {
+                                name: "assigncourses",
+                                params: { id: _vm.selected_session }
                               }
-                            },
-                            [_vm._v("Assign Courses")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-2 rounded-full",
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.generateRoutine($event)
-                                }
+                            }
+                          },
+                          [_vm._v("Assign Courses")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-2 rounded-full",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.generateRoutine($event)
                               }
-                            },
-                            [_vm._v("Generate Routine")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full",
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.assignSelect($event)
-                                }
+                            }
+                          },
+                          [_vm._v("Generate Routine")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.assignSelect($event)
                               }
-                            },
-                            [_vm._v("Print Routine ")]
-                          )
-                        ],
-                        1
-                      )
-                    ]),
+                            }
+                          },
+                          [_vm._v("Print Routine ")]
+                        )
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _vm.select_2 == 1
-                      ? _c(
-                          "div",
-                          { staticClass: "inset-0 top-0 pt-6" },
-                          [
-                            _c(
-                              "div",
-                              { staticClass: "md:flex md:items-center mb-6" },
-                              [
-                                _vm._m(1),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "md:w-3/4" }, [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.day,
-                                          expression: "day"
-                                        }
-                                      ],
-                                      staticClass:
-                                        "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                                      attrs: { id: "grid-state" },
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.day = $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        }
+                      ? _c("div", { staticClass: "inset-0 top-0 pt-6" }, [
+                          _c(
+                            "div",
+                            { staticClass: "md:flex md:items-center mb-6" },
+                            [
+                              _vm._m(1),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "md:w-3/4" }, [
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.day,
+                                        expression: "day"
                                       }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "1" } }, [
-                                        _vm._v("Saturday")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "2" } }, [
-                                        _vm._v("Sunday")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "3" } }, [
-                                        _vm._v("Monday")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "4" } }, [
-                                        _vm._v("Tuesday")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "5" } }, [
-                                        _vm._v("Wednesday")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "6" } }, [
-                                        _vm._v("Thursday")
-                                      ])
-                                    ]
-                                  )
-                                ])
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "router-link",
-                              {
-                                staticClass:
-                                  "bg-blue-500 hover:bg-blue-800 text-white font-bold py-1 px-1 rounded-full",
-                                attrs: {
-                                  tag: "button",
-                                  to: {
-                                    name: "routine",
-                                    params: {
-                                      session: _vm.selected_session,
-                                      day: _vm.day
+                                    ],
+                                    staticClass:
+                                      "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
+                                    attrs: { id: "grid-state" },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.day = $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "1" } }, [
+                                      _vm._v("Saturday")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "2" } }, [
+                                      _vm._v("Sunday")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "3" } }, [
+                                      _vm._v("Monday")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "4" } }, [
+                                      _vm._v("Tuesday")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "5" } }, [
+                                      _vm._v("Wednesday")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "6" } }, [
+                                      _vm._v("Thursday")
+                                    ])
+                                  ]
+                                )
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "md:flex md:items-center mb-6 justify-center space-x-2"
+                            },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
+                                  attrs: {
+                                    tag: "button",
+                                    to: {
+                                      name: "routine",
+                                      params: {
+                                        session: _vm.selected_session,
+                                        day: _vm.day
+                                      }
                                     }
                                   }
-                                }
-                              },
-                              [_vm._v("Show")]
-                            )
-                          ],
-                          1
-                        )
+                                },
+                                [_vm._v("Show")]
+                              )
+                            ],
+                            1
+                          )
+                        ])
                       : _vm._e()
                   ])
                 ])
