@@ -75,7 +75,7 @@
       methods: {
         updateSession() {
 
-            console.log(this.session);
+            //console.log(this.session);
             let uri = `/api/session/update/${this.$route.params.id}`;
             this.axios.post(uri, this.session).then((response) => {
               this.$router.push({name: 'sessions'});

@@ -28,7 +28,9 @@
                                         
                                        <div class="md:flex md:items-center mb-6">
                                             
-                                            <button class=" bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full"  @click.prevent="">Create Session</button>
+                                            <!-- <button class=" bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full"  @click.prevent="">Create Session</button> -->
+                                            <router-link tag="button" class=" bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full"
+                                            :to="{name: 'createsession'}">Create Session</router-link>
                                             <!--<button class=" bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full"  @click.prevent="showSem">Manual Assign</button>-->
                                             
                                              <router-link tag="button"  class="bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'manualassign', params: { id: selected_session }}" >

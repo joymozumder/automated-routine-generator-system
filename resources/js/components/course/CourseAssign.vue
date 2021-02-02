@@ -244,7 +244,7 @@
                                             <div class="md:w-1/3"></div>
                                             <div class="md:w-2/3">
                                                 <button @click.prevent="assignCourse" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
-                                                    Add Semester 
+                                                    Assign Course 
                                                 </button>
                                             </div>
                                         </div>

@@ -8,7 +8,7 @@
                     <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
 
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-                                <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
+                                <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-32 right-32 z-50"
                                 :to="{name: 'addteacher'}">Add Teacher</router-link>
                             <div class="p-3">
                                  <compDataTable

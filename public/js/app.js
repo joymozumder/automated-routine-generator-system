@@ -5691,7 +5691,7 @@ __webpack_require__.r(__webpack_exports__);
         html: false
       }, {
         label: "Semester",
-        field: "semester",
+        field: "sem_id",
         numeric: false,
         html: false
       }, {
@@ -5721,7 +5721,7 @@ __webpack_require__.r(__webpack_exports__);
     var uri = "/api/enrollments/".concat(this.$route.params.id); //console.log(this.sessions.id);
 
     this.axios.get(uri).then(function (response) {
-      _this.enrollments = response.data.data;
+      _this.enrollments = response.data.data; // console.log(this.enrollments);
     });
   },
   components: {
@@ -5991,7 +5991,7 @@ __webpack_require__.r(__webpack_exports__);
     updateSession: function updateSession() {
       var _this2 = this;
 
-      console.log(this.session);
+      //console.log(this.session);
       var uri = "/api/session/update/".concat(this.$route.params.id);
       this.axios.post(uri, this.session).then(function (response) {
         _this2.$router.push({
@@ -6915,6 +6915,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addManually: function addManually() {
+      var _this2 = this;
+
       var hour1 = [],
           hour2 = [],
           min1 = [],
@@ -6962,7 +6964,13 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log(this.assign_course);
       var uri = '/api/enrollment/manual-create';
-      this.axios.post(uri, this.assign_course).then(function (response) {//this.$router.push({name: 'selectsession'});
+      this.axios.post(uri, this.assign_course).then(function (response) {
+        _this2.$router.push({
+          name: 'assigncourses',
+          params: {
+            id: _this2.$route.params.id
+          }
+        });
       });
     },
     convert_time: function convert_time(h, m) {
@@ -7698,6 +7706,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7926,7 +7936,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       session: {
         session_name: "",
-        status: false
+        status: 1
       }
     };
   },
@@ -7934,7 +7944,7 @@ __webpack_require__.r(__webpack_exports__);
     addSession: function addSession() {
       var _this = this;
 
-      console.log(this.course);
+      console.log(this.session);
       var uri = '/api/session/create';
       this.axios.post(uri, this.session).then(function (response) {
         _this.$router.push({
@@ -52996,7 +53006,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                                Add Semester \n                                            "
+                              "\n                                                Assign Course \n                                            "
                             )
                           ]
                         )
@@ -53235,7 +53245,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-20",
+                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-32 right-32 z-20",
                     attrs: { tag: "button", to: { name: "addcourse" } }
                   },
                   [_vm._v("Create Course")]
@@ -54759,7 +54769,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
+                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-32 right-32 z-50",
                     attrs: { tag: "button", to: { name: "addroom" } }
                   },
                   [_vm._v("Create Room")]
@@ -56025,7 +56035,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                                   Assign Course\n                               "
+                      "\n                                Assign Course\n                               "
                     )
                   ]
                 ),
@@ -56108,7 +56118,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-40",
+                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-32 right-32 z-40",
                     attrs: {
                       tag: "button",
                       to: { name: "courseassign", params: { id: _vm.session } }
@@ -63760,7 +63770,11 @@ var render = function() {
                                       }
                                     }
                                   },
-                                  [_c("i", { staticClass: "fas fa-edit" })]
+                                  [
+                                    _c("i", { staticClass: "fas fa-edit" }, [
+                                      _vm._v(" Edit ")
+                                    ])
+                                  ]
                                 )
                               ],
                               1
@@ -63920,14 +63934,13 @@ var render = function() {
                       { staticClass: "md:flex md:items-center mb-6" },
                       [
                         _c(
-                          "button",
+                          "router-link",
                           {
                             staticClass:
                               " bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                              }
+                            attrs: {
+                              tag: "button",
+                              to: { name: "createsession" }
                             }
                           },
                           [_vm._v("Create Session")]
@@ -64224,7 +64237,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
+                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-32 right-32 z-50",
                     attrs: { tag: "button", to: { name: "createsession" } }
                   },
                   [_vm._v("Create Session")]
@@ -64390,7 +64403,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                                Create Session\n                            "
+                      "\n                            Create Session\n                            "
                     )
                   ]
                 ),
@@ -65048,7 +65061,7 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50",
+                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-32 right-32 z-50",
                     attrs: { tag: "button", to: { name: "addteacher" } }
                   },
                   [_vm._v("Add Teacher")]
@@ -83218,8 +83231,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Joy\Desktop\for 1-2\automated-routine-generator-system\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Joy\Desktop\for 1-2\automated-routine-generator-system\resources\css\main.css */"./resources/css/main.css");
+__webpack_require__(/*! C:\Users\Jitun\Desktop\automated-routine-generator-system\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Jitun\Desktop\automated-routine-generator-system\resources\css\main.css */"./resources/css/main.css");
 
 
 /***/ })

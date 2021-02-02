@@ -78,7 +78,7 @@
                                       
 
                                             <router-link tag="a"  class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white" :to="{name: 'editsemester', params: { session: session,id:semester.semester[0] }}" >
-                                                    <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-edit"> Edit </i>
                                              </router-link>
 
 
