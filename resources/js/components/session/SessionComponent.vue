@@ -26,16 +26,11 @@
                                             </div>
                                         </div>
                                         
-                                       <div class="md:flex md:items-center mb-6">
+                                       <div class="md:flex md:items-center mb-6 justify-center space-x-2 ">
                                             
-                                            <!-- <button class=" bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full"  @click.prevent="">Create Session</button> -->
-                                            <router-link tag="button" class=" bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full"
-                                            :to="{name: 'createsession'}">Create Session</router-link>
-                                            <!--<button class=" bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full"  @click.prevent="showSem">Manual Assign</button>-->
+                                            <router-link tag="button" class=" bg-yellow-900 hover:bg-yellow-500 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'createsession'}">Create Session</router-link>
                                             
-                                             <router-link tag="button"  class="bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'manualassign', params: { id: selected_session }}" >
-                                                    Manual Assign
-                                             </router-link>
+                                             <router-link tag="button"  class="bg-blue-900 hover:bg-blue-300 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'manualassign', params: { id: selected_session }}" >Manual Assign</router-link>
                                         </div>
 
                                             
@@ -44,14 +39,16 @@
                                         <div class="md:flex md:items-center">
                                             <!--<div class="md:w-1/4"></div>-->
                                             
-                                            <div class="md:w-full" >
-                                                    <router-link tag="button" class=" bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full"  :to="{name: 'semesters', params: { session: selected_session }}">Add Semester</router-link>
-                                                    <router-link tag="button"  class="bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourses', params: { id: selected_session }}" >
-                                                        Assign Courses
-                                                    </router-link>
+                                            <div class="md:w-full space-x-2" >
 
-                                                    <button class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="generateRoutine" >Generate Routine 2 </button>
-                                                     <button class="bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="assignSelect" >Print Routine </button>
+
+                                                  
+
+                                                    <router-link tag="button" class=" bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full"  :to="{name: 'semesters', params: { session: selected_session }}">Add Semester</router-link>
+                                                    <router-link tag="button" class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourses', params: { id: selected_session }}" >Assign Courses</router-link>
+
+                                                    <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="generateRoutine" >Generate Routine</button>
+                                                     <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="assignSelect" >Print Routine </button>
                                             </div>
                                         </div>
 

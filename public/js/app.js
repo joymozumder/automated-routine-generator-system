@@ -7705,9 +7705,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -52261,7 +52258,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                                Course Assign\n                            "
+                      "\n                                Assign Course\n                            "
                     )
                   ]
                 ),
@@ -56126,7 +56123,7 @@ var render = function() {
                       to: { name: "courseassign", params: { id: _vm.session } }
                     }
                   },
-                  [_vm._v("Create Course")]
+                  [_vm._v("Assign Course")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -60895,7 +60892,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                                   Assign Course \n                                               "
+                              "\n                                                   Assign Course Manually\n                                               "
                             )
                           ]
                         )
@@ -61180,7 +61177,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                                                       Total Student\n                                                   "
+            "\n                                                       Total Student Group 1\n                                                   "
           )
         ]
       )
@@ -61334,7 +61331,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                                                       Total Student\n                                                   "
+            "\n                                                       Total Student Group 2\n                                                   "
           )
         ]
       )
@@ -63656,11 +63653,11 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b"
+                      "bg-gray-200  text-lg px-2 py-3 border-solid border-gray-200 border-b"
                   },
                   [
                     _vm._v(
-                      "\n                Semesters of session : " +
+                      "\n                Semesters of Session : " +
                         _vm._s(_vm.session) +
                         "\n                "
                     )
@@ -63933,13 +63930,16 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "md:flex md:items-center mb-6" },
+                      {
+                        staticClass:
+                          "md:flex md:items-center mb-6 justify-center space-x-2 "
+                      },
                       [
                         _c(
                           "router-link",
                           {
                             staticClass:
-                              " bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full",
+                              " bg-yellow-900 hover:bg-yellow-500 text-white font-bold py-2 px-2 rounded-full",
                             attrs: {
                               tag: "button",
                               to: { name: "createsession" }
@@ -63952,7 +63952,7 @@ var render = function() {
                           "router-link",
                           {
                             staticClass:
-                              "bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full",
+                              "bg-blue-900 hover:bg-blue-300 text-white font-bold py-2 px-2 rounded-full",
                             attrs: {
                               tag: "button",
                               to: {
@@ -63961,11 +63961,7 @@ var render = function() {
                               }
                             }
                           },
-                          [
-                            _vm._v(
-                              "\n                                                Manual Assign\n                                         "
-                            )
-                          ]
+                          [_vm._v("Manual Assign")]
                         )
                       ],
                       1
@@ -63974,7 +63970,7 @@ var render = function() {
                     _c("div", { staticClass: "md:flex md:items-center" }, [
                       _c(
                         "div",
-                        { staticClass: "md:w-full" },
+                        { staticClass: "md:w-full space-x-2" },
                         [
                           _c(
                             "router-link",
@@ -63996,7 +63992,7 @@ var render = function() {
                             "router-link",
                             {
                               staticClass:
-                                "bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full",
+                                "bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-2 rounded-full",
                               attrs: {
                                 tag: "button",
                                 to: {
@@ -64005,18 +64001,14 @@ var render = function() {
                                 }
                               }
                             },
-                            [
-                              _vm._v(
-                                "\n                                                    Assign Courses\n                                                "
-                              )
-                            ]
+                            [_vm._v("Assign Courses")]
                           ),
                           _vm._v(" "),
                           _c(
                             "button",
                             {
                               staticClass:
-                                "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full",
+                                "bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-2 rounded-full",
                               on: {
                                 click: function($event) {
                                   $event.preventDefault()
@@ -64024,14 +64016,14 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Generate Routine 2 ")]
+                            [_vm._v("Generate Routine")]
                           ),
                           _vm._v(" "),
                           _c(
                             "button",
                             {
                               staticClass:
-                                "bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full",
+                                "bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full",
                               on: {
                                 click: function($event) {
                                   $event.preventDefault()
