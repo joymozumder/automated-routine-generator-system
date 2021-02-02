@@ -53772,7 +53772,9 @@ var render = function() {
           on: { click: _vm.sidebarToggle }
         }),
         _vm._v(" "),
-        _c("h1", { staticClass: "text-white p-2" }, [_vm._v("Logo")])
+        _c("h1", { staticClass: "text-white p-2" }, [
+          _vm._v("Automated Routine System")
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "p-1 flex flex-row items-center" }, [
