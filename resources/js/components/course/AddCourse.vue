@@ -48,6 +48,7 @@
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                           v-model="course.credit"  id="grid-state">
                                                         <option value=1>1</option>
+                                                        <option value=1.5>1.5</option>
                                                         <option value=2>2</option>
                                                         <option value=3>3</option>
                                                         <option value=4>4</option>
