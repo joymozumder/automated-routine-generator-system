@@ -71,9 +71,10 @@ const routes = [
     
     {
         name: 'login',
-        path: '/',
+        path: '/login',
         component: compLoginComponent
     },
+   
     {
         name: 'register',
         path: '/register',
@@ -247,9 +248,9 @@ const routes = [
 const router = new VueRouter({ mode: 'history', routes: routes});
 
 router.beforeEach((to,from,next) => {
-    if (to.fullPath !== "/") {
+    if (to.fullPath !== "/login") {
         if(window.localStorage.getItem("userid")=="")
-            router.push('/');
+            router.push('/login');
         else next();
     }
     else {
