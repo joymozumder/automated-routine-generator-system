@@ -188,6 +188,7 @@ class EnrollmentController extends Controller
                 $enrollment->sem_id = $request->sem_id;
                 $enrollment->teacher_code = $request->teacher_code;
                 $enrollment->course_code = $request->course_code;
+                $enrollment->course_type = $request->course_type;
                 $enrollment->room_number = 0;
                 $enrollment->group = 1;
                 $enrollment->duration = $duration1[$i];
@@ -245,6 +246,7 @@ class EnrollmentController extends Controller
                 $enrollment->sem_id = $request->sem_id;
                 $enrollment->teacher_code = $request->teacher_code;
                 $enrollment->course_code = $request->course_code;
+                $enrollment->course_type = $request->course_type;
                 $enrollment->room_number = 0;
                 $enrollment->group = 2;
                 $enrollment->duration = $duration2[$i];
