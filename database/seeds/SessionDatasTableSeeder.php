@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\SessionData;
+
 class SessionDatasTableSeeder extends Seeder
 {
     /**
@@ -11,7 +12,6 @@ class SessionDatasTableSeeder extends Seeder
      */
     public function run()
     {
-        //factory(App\SessionData::Class, 1)->create();
         SessionData::create([
             'session_name' => 'august2019',
             'status' => true,
@@ -20,7 +20,5 @@ class SessionDatasTableSeeder extends Seeder
             'session_name' => 'august2018',
             'status' => false,
         ]);
-       
-        
     }
 }
