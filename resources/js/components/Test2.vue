@@ -1,200 +1,234 @@
 <template>
-    
-              <main class="bg-white-500 flex-1 p-3 overflow-x-scroll z-10">
+        <main class="bg-white-500 flex-1 p-3 overflow-hidden">
+            <div class="flex flex-1">
+                            <!-- Card Sextion Starts Here -->
+                            <div class="container mx-auto h-full flex flex-1 justify-center items-center">
+                                <!--Horizontal form-->
+                                <div class="mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2">
+                                    <div class="bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b">
+                                        Select Session
+                                    </div>
+                                    <div class="p-3">
+                                        <form class="w-full">
+                                            <div class="md:flex md:items-center mb-6">
+                                                <div class="md:w-1/4">
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                        for="inline-course-code">
+                                                        Session Name
+                                                    </label>
+                                                </div>
+                                                <div class="md:w-3/4">
+                                                    <select  class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                id="grid-state">
+                                                            <option>123</option>
+                                                        
+                                                        </select>
+                                                </div>
+                                            </div>
+                                            
+                                        
 
-                <div class="flex flex-1">
-                   
+                                                
+                                            <div class="md:flex md:items-center mb-6 justify-center space-x-2" >
 
-                    <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
+                                                <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="addSet" >Print Routine </button>
+                                            </div>
+                                            
 
-                        <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-                                 <!-- <button class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50" data-modal='createSessionModal' >Create Session</button> -->
-                                <!-- <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-40"
-                                :to="{name: 'courseassign', params: { id: session }}">Create Course</router-link> -->
-                            <div class="p-3">
-                                 <compDataTable
-             
-            title="Semester Table"
-            
-            :columns="tableColumns1"
-            :rows="newsemesters"
-            :clickable="false"
-            :sortable="true"
-            
-            :exactSearch="true"
-            :searchable="true"
-            :paginate="true"
-            :exportable="false"
-            :printable="false"
-            
+                                        
+                                            
+                                        
+                                        
+                                        </form>
+                                    </div>
+                                </div>
 
-        > 
-                <th slot="thead-tr">
-                    Actions
-                </th>
-                <template slot="tbody-tr" slot-scope="props">
-                    <td>
-                      
+                                <div v-if="set>0" class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2"> </div>
 
-                        <!-- <router-link tag="button"  class="btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editenrollment', params: { id: props.row.id }}" >
-                             <i class="material-icons white-text">
-                                edit</i>
-                         </router-link> -->
-                        <button class="btn bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn"
-                            @click.prevent="deletePost(props.row.id)"> 
-                            <i class="material-icons white-text">delete</i>
-                        </button>
-                    </td>
-                    
-                </template>
-        </compDataTable>
-     </div>
-                        </div>
-                    </div>
-                    <!--/Grid Form-->
-                </div>
-               
-            </main>
-       
-    
-</template>
+                                <!-- ___________ -->
+                                <div  v-if="set>0" class="mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2">
+                                    <div class="bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b">
+                                        Select Session
+                                    </div>
+                                    <div class="p-3">
+                                        <form class="w-full">
+                                            <div class="md:flex md:items-center mb-6">
+                                                <div class="md:w-1/4">
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                        for="inline-course-code">
+                                                        Session Name
+                                                    </label>
+                                                </div>
+                                                <div class="md:w-3/4">
+                                                    <select  class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                id="grid-state">
+                                                            <option>123</option>
+                                                        
+                                                        </select>
+                                                </div>
+                                            </div>
+                                            
+                                        
 
+                                                
+                                            <div class="md:flex md:items-center mb-6 justify-center space-x-2" >
 
-<script>
-import compDataTable from 'vue-materialize-datatable';
-export default {
-    
-    data(){
-        return{
-             tableColumns1: [
-            
-		 	{
-		 		label: "Semester name",
-		 		field: "semester",
-		 		numeric: false,
- 		        html: false
-		 	},
-		 	{
-		 		label: "Section",
-		 		field: "section",
-		 		numeric: false,
-		 		html: false
-             },
-             {
-		 		label: "Total Student",
-		 		field: "total_student",
-		 		numeric: false,
-		 		html: false
-		 	},
-		 	
-		 ],
-             semesters:[],
-             newsemesters:[
-                 {
-                    semester:"1st",
-                    total_student:0,
-                    section:""
-                },
-                {
-                    semester:"2nd",
-                    total_student:0,
-                    section:""
-                },
-                {
-                    semester:"3rd",
-                    total_student:0,
-                    section:""
-                },
-                {
-                    semester:"4th",
-                    total_student:0,
-                    section:""
-                },
-                {
-                    semester:"5th",
-                    total_student:0,
-                    section:""
-                },
-                {
-                    semester:"6th",
-                    total_student:0,
-                    section:""
-                },
-                {
-                    semester:"7th",
-                    total_student:0,
-                    section:""
-                },
-                {
-                    semester:"8th",
-                    total_student:0,
-                    section:""
-                },
-                
-             ]
-             
+                                                <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="" >Print Routine </button>
+                                            </div>
+                                            
 
-        }
-    },
-    created() {
-        
-        let uri = '/api/semester-sections';
-        this.axios.get(uri).then(response => {
-            this.semesters = response.data.data;
-            //console.log(this.semesters);
-
-            for(var i=0;i<8;i++){
-                // this.newsemesters[i]={
-                //     semester:"",
-                //     total_student:0,
-                //     section:""
-                // };
-               
-               //this.newsemesters[i].semester=i+1;
-                // this.newsemesters[i].total_student=this.semesters[i].total_student;
-                var count=0,total_student;
-
-                this.newsemesters[i].total_student=this.semesters[i].total_student;
-                for(var j=0;j<this.semesters.length;j++){
-                    if(this.semesters[j].semester[0]==i+1)
-                    {
-                        count=count+1;
-                        this.newsemesters[i].total_student=this.newsemesters[i].total_student+this.semesters[j].total_student;
-                    }    
-                          
-                }
-                if(count==0)
-                    this.newsemesters[i].section="None";
-                else if(count==1)
-                        this.newsemesters[i].section="A";
-                else if(count==2)
-                        this.newsemesters[i].section="A,B";
-                else if(count==3)
-                        this.newsemesters[i].section="A,B,C";
-                else if(count==4)
-                        this.newsemesters[i].section="A,B,C,D";
-                else if(count==5)
-                        this.newsemesters[i].section="A,B,C,D,E";
-                else
-                        this.newsemesters[i].section="invalid";
-
-        
-
+                                        
+                                            
+                                        
+                                        
+                                        </form>
+                                    </div>
+                                </div>
                             
 
-                    
-                
-                
-            }
-            console.log(this.newsemesters);
-          
-        });
+                            
+                            </div>
 
+
+            </div>
+
+
+
+
+
+             <div class="flex flex-1">
+                            <!-- Card Sextion Starts Here -->
+                            <div class="container mx-auto h-full flex flex-1 justify-center items-center">
+                                <!--Horizontal form-->
+                                <div class="mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2">
+                                    <div class="bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b">
+                                        Select Session
+                                    </div>
+                                    <div class="p-3">
+                                        <form class="w-full">
+                                            <div class="md:flex md:items-center mb-6">
+                                                <div class="md:w-1/4">
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                        for="inline-course-code">
+                                                        Session Name
+                                                    </label>
+                                                </div>
+                                                <div class="md:w-3/4">
+                                                    <select  class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                id="grid-state">
+                                                            <option>123</option>
+                                                        
+                                                        </select>
+                                                </div>
+                                            </div>
+                                            
+                                        
+
+                                                
+                                            <div class="md:flex md:items-center mb-6 justify-center space-x-2" >
+
+                                                <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="addSet" >Print Routine </button>
+                                            </div>
+                                            
+
+                                        
+                                            
+                                        
+                                        
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div v-if="set>0" class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2"> </div>
+
+                                <!-- ___________ -->
+                                <div  v-if="set>0" class="mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2">
+                                    <div class="bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b">
+                                        Select Session
+                                    </div>
+                                    <div class="p-3">
+                                        <form class="w-full">
+                                            <div class="md:flex md:items-center mb-6">
+                                                <div class="md:w-1/4">
+                                                    <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                        for="inline-course-code">
+                                                        Session Name
+                                                    </label>
+                                                </div>
+                                                <div class="md:w-3/4">
+                                                    <select  class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                id="grid-state">
+                                                            <option>123</option>
+                                                        
+                                                        </select>
+                                                </div>
+                                            </div>
+                                            
+                                        
+
+                                                
+                                            <div class="md:flex md:items-center mb-6 justify-center space-x-2" >
+
+                                                <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="" >Print Routine </button>
+                                            </div>
+                                            
+
+                                        
+                                            
+                                        
+                                        
+                                        </form>
+                                    </div>
+                                </div>
+                            
+
+                            
+                            </div>
+
+
+            </div>
+
+
+
+
+
+
+                    
+
+
+   
+
+
+
+
+
+
+    </main>
+
+</template>
+
+<script>
+    export default {
+        data(){
+        return {
+            set:0
+        
+        }
         
     },
-     components:{
-            compDataTable 
-     },
+    created() {
+       console.log(this.set);
+    },
+    methods:{
+        addSet(){
+            console.log(this.set);
+            
+            this.set=1;
+            console.log(this.set);
+        }
+    
+    }
    
-}
+  }
 </script>
+
