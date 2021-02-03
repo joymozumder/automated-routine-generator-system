@@ -4519,6 +4519,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -53525,6 +53526,10 @@ var render = function() {
                               _vm._v("1")
                             ]),
                             _vm._v(" "),
+                            _c("option", { attrs: { value: "1.5" } }, [
+                              _vm._v("1.5")
+                            ]),
+                            _vm._v(" "),
                             _c("option", { attrs: { value: "2" } }, [
                               _vm._v("2")
                             ]),
@@ -83241,8 +83246,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! I:\extra\final project\automated-routine-generator-system\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! I:\extra\final project\automated-routine-generator-system\resources\css\main.css */"./resources/css/main.css");
+__webpack_require__(/*! C:\Users\Jitun\Desktop\automated-routine-generator-system\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Jitun\Desktop\automated-routine-generator-system\resources\css\main.css */"./resources/css/main.css");
 
 
 /***/ })
