@@ -26,6 +26,7 @@ class CreateEnrollmentsTable extends Migration
             $table->integer('start');
             $table->integer('end');
             $table->integer('day');
+            $table->integer('course_type');
             $table->boolean('entry_type')->comment('0=>normal entry, 1=>manual entry');
 
             $table->foreign('session_name')

@@ -62164,7 +62164,7 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][11].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group11[sem][11].room_number)
+                                  _vm._s(_vm.group1[sem][11].room_number)
                               )
                             ]
                           )
@@ -83218,8 +83218,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Joy\Desktop\for 1-2\automated-routine-generator-system\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Joy\Desktop\for 1-2\automated-routine-generator-system\resources\css\main.css */"./resources/css/main.css");
+__webpack_require__(/*! I:\extra\final project\automated-routine-generator-system\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! I:\extra\final project\automated-routine-generator-system\resources\css\main.css */"./resources/css/main.css");
 
 
 /***/ })
