@@ -7170,7 +7170,9 @@ __webpack_require__.r(__webpack_exports__);
       row1: [],
       row2: [],
       day: "",
-      dayspan: 0
+      dayspan: 0,
+      rooms: {},
+      room_name: []
     };
   },
   created: function created() {
@@ -7184,7 +7186,13 @@ __webpack_require__.r(__webpack_exports__);
 
       _this.checkTd();
 
+      _this.checkRoomName();
+
       _this.checkDay();
+    });
+    uri = '/api/rooms';
+    this.axios.get(uri).then(function (response) {
+      _this.rooms = response.data.data;
     });
   },
   methods: {
@@ -7242,13 +7250,24 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log(this.row1);
       console.log(this.row2);
-      console.log("vai");
       console.log(this.group1);
       console.log(this.group2);
     },
     checkDay: function checkDay() {
       var dy = this.$route.params.day;
       if (dy == 1) this.day = "Saturday";else if (dy == 2) this.day = "Sunday";else if (dy == 3) this.day = "Monday";else if (dy == 4) this.day = "Tuesday";else if (dy == 5) this.day = "Wednesday"; //console.log("day name = "+this.day);
+    },
+    checkRoomName: function checkRoomName() {
+      for (var i = 0; i < this.rooms.length; i++) {
+        if (this.rooms[i].number == Number(this.rooms[i].name)) this.room_name[this.rooms[i].number] = "";else this.room_name[this.rooms[i].number] = "-" + this.rooms[i].name;
+        console.log(this.room_name[this.rooms[i].number]);
+      }
+
+      console.log("room name:"); //console.log(this.room_name);
+
+      for (var i = 0; i < this.rooms.length; i++) {
+        console.log(this.room_name[this.rooms[i].number]);
+      }
     }
   }
 });
@@ -61577,7 +61596,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][1].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][1].room_number)
+                                  _vm._s(_vm.group1[sem][1].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][1].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61601,7 +61625,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][1].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][1].room_number)
+                                  _vm._s(_vm.group1[sem][1].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][1].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61636,7 +61665,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][2].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][2].room_number)
+                                  _vm._s(_vm.group1[sem][2].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][2].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61660,7 +61694,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][2].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][2].room_number)
+                                  _vm._s(_vm.group1[sem][2].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][2].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61695,7 +61734,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][3].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][3].room_number)
+                                  _vm._s(_vm.group1[sem][3].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][3].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61719,7 +61763,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][3].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][3].room_number)
+                                  _vm._s(_vm.group1[sem][3].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][3].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61754,7 +61803,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][4].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][4].room_number)
+                                  _vm._s(_vm.group1[sem][4].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][4].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61778,7 +61832,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][4].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][4].room_number)
+                                  _vm._s(_vm.group1[sem][4].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][4].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61813,7 +61872,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][5].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][5].room_number)
+                                  _vm._s(_vm.group1[sem][5].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][5].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61837,7 +61901,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][5].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][5].room_number)
+                                  _vm._s(_vm.group1[sem][5].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][5].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61872,7 +61941,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][6].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][6].room_number)
+                                  _vm._s(_vm.group1[sem][6].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][6].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61896,7 +61970,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][6].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][6].room_number)
+                                  _vm._s(_vm.group1[sem][6].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][6].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61931,7 +62010,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][7].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][7].room_number)
+                                  _vm._s(_vm.group1[sem][7].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][7].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61955,7 +62039,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][7].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][7].room_number)
+                                  _vm._s(_vm.group1[sem][7].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][7].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -61990,7 +62079,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][8].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][8].room_number)
+                                  _vm._s(_vm.group1[sem][8].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][8].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62014,7 +62108,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][8].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][8].room_number)
+                                  _vm._s(_vm.group1[sem][8].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][8].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62049,7 +62148,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][9].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][9].room_number)
+                                  _vm._s(_vm.group1[sem][9].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][9].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62073,7 +62177,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][9].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][9].room_number)
+                                  _vm._s(_vm.group1[sem][9].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][9].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62108,7 +62217,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][10].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][10].room_number)
+                                  _vm._s(_vm.group1[sem][10].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][10].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62132,7 +62246,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][10].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][10].room_number)
+                                  _vm._s(_vm.group1[sem][10].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][10].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62167,7 +62286,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][11].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][11].room_number)
+                                  _vm._s(_vm.group1[sem][11].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][11].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62191,7 +62315,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][11].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][11].room_number)
+                                  _vm._s(_vm.group1[sem][11].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][11].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62226,7 +62355,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][12].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][12].room_number)
+                                  _vm._s(_vm.group1[sem][12].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][12].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62250,7 +62384,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][12].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][12].room_number)
+                                  _vm._s(_vm.group1[sem][12].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][12].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62285,7 +62424,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][13].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][13].room_number)
+                                  _vm._s(_vm.group1[sem][13].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][13].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62309,7 +62453,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][13].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][13].room_number)
+                                  _vm._s(_vm.group1[sem][13].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][13].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62344,7 +62493,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][14].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][14].room_number)
+                                  _vm._s(_vm.group1[sem][14].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][14].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62368,7 +62522,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][14].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][14].room_number)
+                                  _vm._s(_vm.group1[sem][14].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][14].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62403,7 +62562,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][15].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][15].room_number)
+                                  _vm._s(_vm.group1[sem][15].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][15].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62427,7 +62591,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][15].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][15].room_number)
+                                  _vm._s(_vm.group1[sem][15].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][15].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62462,7 +62631,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][16].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][16].room_number)
+                                  _vm._s(_vm.group1[sem][16].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][16].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62486,7 +62660,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][16].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][16].room_number)
+                                  _vm._s(_vm.group1[sem][16].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][16].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62521,7 +62700,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][17].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][17].room_number)
+                                  _vm._s(_vm.group1[sem][17].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][17].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62545,7 +62729,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][17].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][17].room_number)
+                                  _vm._s(_vm.group1[sem][17].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][17].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62580,7 +62769,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][18].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][18].room_number)
+                                  _vm._s(_vm.group1[sem][18].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][18].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62604,7 +62798,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group1[sem][18].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group1[sem][18].room_number)
+                                  _vm._s(_vm.group1[sem][18].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group1[sem][18].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62640,7 +62839,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][1].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][1].room_number)
+                                  _vm._s(_vm.group2[sem][1].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][1].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62674,7 +62878,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][2].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][2].room_number)
+                                  _vm._s(_vm.group2[sem][2].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][2].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62708,7 +62917,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][3].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][3].room_number)
+                                  _vm._s(_vm.group2[sem][3].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][3].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62742,7 +62956,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][4].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][4].room_number)
+                                  _vm._s(_vm.group2[sem][4].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][4].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62776,7 +62995,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][5].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][5].room_number)
+                                  _vm._s(_vm.group2[sem][5].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][5].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62810,7 +63034,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][6].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][6].room_number)
+                                  _vm._s(_vm.group2[sem][6].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][6].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62844,7 +63073,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][7].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][7].room_number)
+                                  _vm._s(_vm.group2[sem][7].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][7].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62878,7 +63112,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][8].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][8].room_number)
+                                  _vm._s(_vm.group2[sem][8].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][8].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62912,7 +63151,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][9].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][9].room_number)
+                                  _vm._s(_vm.group2[sem][9].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][9].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62946,7 +63190,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][10].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][10].room_number)
+                                  _vm._s(_vm.group2[sem][10].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][10].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -62980,7 +63229,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][11].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][11].room_number)
+                                  _vm._s(_vm.group2[sem][11].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][11].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -63014,7 +63268,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][12].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][12].room_number)
+                                  _vm._s(_vm.group2[sem][12].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][12].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -63048,7 +63307,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][13].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][13].room_number)
+                                  _vm._s(_vm.group2[sem][13].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][13].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -63082,7 +63346,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][14].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][14].room_number)
+                                  _vm._s(_vm.group2[sem][14].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][14].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -63116,7 +63385,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][15].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][15].room_number)
+                                  _vm._s(_vm.group2[sem][15].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][15].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -63150,7 +63424,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][16].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][16].room_number)
+                                  _vm._s(_vm.group2[sem][16].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][16].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -63184,7 +63463,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][17].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][17].room_number)
+                                  _vm._s(_vm.group2[sem][17].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][17].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
@@ -63218,7 +63502,12 @@ var render = function() {
                                   " / " +
                                   _vm._s(_vm.group2[sem][18].teacher_code) +
                                   " / " +
-                                  _vm._s(_vm.group2[sem][18].room_number)
+                                  _vm._s(_vm.group2[sem][18].room_number) +
+                                  _vm._s(
+                                    _vm.room_name[
+                                      _vm.group2[sem][18].room_number
+                                    ]
+                                  )
                               )
                             ]
                           )
