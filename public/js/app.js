@@ -4202,7 +4202,8 @@ __webpack_require__.r(__webpack_exports__);
         teacher_code: "",
         course_code: "",
         group: [],
-        duration: []
+        duration: [],
+        course_type: ""
       },
       course_type: []
     };
@@ -4231,6 +4232,7 @@ __webpack_require__.r(__webpack_exports__);
     assignCourse: function assignCourse() {
       var _this2 = this;
 
+      this.assigncourse.course_type = this.course_type[this.assigncourse.course_code];
       console.log(this.assigncourse);
       var uri = '/api/enrollment/create';
       this.axios.post(uri, this.assigncourse).then(function (response) {
@@ -6923,6 +6925,7 @@ __webpack_require__.r(__webpack_exports__);
       this.assign_course.sem_id = this.temp_assign_course.sem_id;
       this.assign_course.teacher_code = this.temp_assign_course.teacher_code;
       this.assign_course.course_code = this.temp_assign_course.course_code;
+      this.assigncourse.course_type = this.course_type[this.assigncourse.course_code];
       this.assign_course.total_student = this.temp_assign_course.total_student;
 
       if (this.numberofgroup != "Two" || this.course_type[this.temp_assign_course.course_code] == '') //group=0

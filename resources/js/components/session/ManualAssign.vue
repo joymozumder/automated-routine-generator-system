@@ -910,10 +910,12 @@
         methods:{
             addManually(){
                 var hour1=[],hour2=[],min1=[],min2=[];
+                
                 this.assign_course.session_name   =   this.temp_assign_course.session_name;
                 this.assign_course.sem_id         =   this.temp_assign_course.sem_id;
                 this.assign_course.teacher_code   =   this.temp_assign_course.teacher_code;
                 this.assign_course.course_code    =   this.temp_assign_course.course_code;
+                this.assigncourse.course_type = this.course_type[this.assigncourse.course_code];
                 this.assign_course.total_student =   this.temp_assign_course.total_student;
                 if(this.numberofgroup!="Two" || this.course_type[this.temp_assign_course.course_code]=='') //group=0
                 {
