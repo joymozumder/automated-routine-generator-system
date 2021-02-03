@@ -6,7 +6,7 @@
                             <!--Horizontal form-->
                             <div class="mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2">
                                 <div class="bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b">
-                                    Create Session
+                                Create Session
                                 </div>
                                 <div class="p-3">
                                     <form class="w-full">
@@ -57,15 +57,16 @@
         return {
           session:{
               session_name:"",
-              status:false
+              status:1
           }
         }
     },
     methods: {
       addSession(){
-            console.log(this.course);
+            console.log(this.session);
             let uri = '/api/session/create';
             this.axios.post(uri, this.session).then((response) => {
+                
                 this.$router.push({name: 'sessions'});
             });
       }

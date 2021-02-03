@@ -38,12 +38,13 @@ class SessionDataController extends Controller
      */
     public function store(Request $request)
     {
-         $ses = SessionData::select()
+        $ses = SessionData::select()
                     ->where('status','=',1)
                     ->first();
        
         $ses->status = false;
-        $ses->save();
+        if($ses)
+         $ses->save();
          
         
         

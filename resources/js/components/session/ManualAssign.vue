@@ -356,7 +356,7 @@
                                                 <div class="md:w-1/4">
                                                     <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                         for="inline-course-code">
-                                                        Total Student
+                                                        Total Student Group 1
                                                     </label>
                                                 </div>
                                                 <div class="md:w-3/4">
@@ -580,7 +580,7 @@
                                                 <div class="md:w-1/4">
                                                     <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                         for="inline-course-code">
-                                                        Total Student
+                                                        Total Student Group 2
                                                     </label>
                                                 </div>
                                                 <div class="md:w-3/4">
@@ -804,7 +804,7 @@
                                             <div class="md:w-1/3"></div>
                                             <div class="md:w-2/3">
                                                 <button @click.prevent="addManually" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
-                                                    Assign Course 
+                                                    Assign Course Manually
                                                 </button>
                                             </div>
                                         </div>
@@ -959,7 +959,7 @@
                 console.log(this.assign_course);
                 let uri = '/api/enrollment/manual-create';
                 this.axios.post(uri, this.assign_course).then((response) => {
-                //this.$router.push({name: 'selectsession'});
+                this.$router.push({name: 'assigncourses', params: { id: this.$route.params.id }});
           });
               
              

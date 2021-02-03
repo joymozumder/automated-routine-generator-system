@@ -7,8 +7,8 @@
 
                     <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-                            <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
-                            Semesters of session : {{session}}
+                            <div class="bg-gray-200  text-lg px-2 py-3 border-solid border-gray-200 border-b">
+                            Semesters of Session : {{session}}
                             </div>
                             <div class="p-3">
                                 <table class="table-responsive w-full rounded">
@@ -78,7 +78,7 @@
                                       
 
                                             <router-link tag="a"  class="bg-teal-300 cursor-pointer rounded p-1 mx-1 text-white" :to="{name: 'editsemester', params: { session: session,id:semester.semester[0] }}" >
-                                                    <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-edit"> Edit </i>
                                              </router-link>
 
 
