@@ -16,8 +16,7 @@ class UserController extends Controller
         //echo $request;
         $user = User::select()
                     ->where('code','=',$request->user_name)
-                   // ->where('password','=',md5($request->password))
-                    ->where('password','=',$request->password)
+                    ->where('password','=',md5($request->password))
                     ->where('role','=',0)
                     ->first();
         if($user)

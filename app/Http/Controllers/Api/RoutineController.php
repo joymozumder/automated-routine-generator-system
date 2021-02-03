@@ -52,6 +52,7 @@ class RoutineController extends Controller
         echo $session_name;
         $obj = Enrollment::join('courses','enrollments.course_code','=','courses.code') //course_entry
                 ->join('semester_sections','enrollments.sem_id','=','semester_sections.id')
+                //->select('enrollments.*','courses.type as course_type','semester_sections.semester as semester')
                 ->select('enrollments.*','courses.type as course_type','semester_sections.semester as semester')
                 ->where('enrollments.session_name','=',$session_name)
                 ->paginate(500);
@@ -71,7 +72,8 @@ class RoutineController extends Controller
     {
         $obj = Enrollment::join('courses','enrollments.course_code','=','courses.code') //course_entry
                 ->join('semester_sections','enrollments.sem_id','=','semester_sections.id')
-                ->select('enrollments.*','courses.type as course_type','semester_sections.semester as semester')
+                //->select('enrollments.*','courses.type as course_type','semester_sections.semester as semester')
+                ->select('enrollments.*','semester_sections.semester as semester')
                 ->where('enrollments.session_name','=',$session_name)
                 ->paginate(500);
         
@@ -142,7 +144,7 @@ class RoutineController extends Controller
             $graph[$row] = array();
             for($col = 0; $col < $graph_size; $col++)
             {
-                $graph[$row][$col]=$indx++;
+                $graph[$row][$col]=0;
             }
         }
         /*graph array complete*/
@@ -166,14 +168,14 @@ class RoutineController extends Controller
                         print $course1["group"];
                         print $course2["group"];
                         print "**";*/
-                        $cnt = $cnt + 2;
+                        $cnt = $cnt + 1;
                     }
                     elseif($course1["semester"] == $course2["semester"] && $course1["section"] == $course2["section"]  && $course1["group"]==$course2["group"]) //group bad dilam
                     {
                         
-                        $cnt = $cnt + 2;
+                        $cnt = $cnt + 1;
                     }
-                    if($course1["teacher_code"] == $course2["teacher_code"])
+                    else if($course1["teacher_code"] == $course2["teacher_code"])
                     {
                         $cnt = $cnt +1;
                     }
@@ -186,6 +188,7 @@ class RoutineController extends Controller
                 }
             }
             //$course[$i]["conflict"] = $con_count ;
+            //if($course[$i]["course_type"]!=0) $con_count = $con_count+1000;
             $conflict[$i]["course_id"] = $i;
             $conflict[$i]["tot_conflict"] = $con_count;
             $con_count = 0;
@@ -277,95 +280,112 @@ class RoutineController extends Controller
         //generate routine:
 
 
-        $tst=0;$tet=0;$tm=1;
-        while($tm<=90)
+        $tst=0;$tet=0;$tm=1;$chk_tm=1;
+        for($hh=1;$hh<=18;$hh++)
         {
-            for ($i = 0; $i < $dt["total"]; $i++)
+            for($dy=1;$dy<=5;$dy++)
             {
-                if($course[$conflict[$i]["course_id"]]["room_number"]==0 && $course[$conflict[$i]["course_id"]]["start"]<=$tm)
+                $tm= $hh+($dy-1)*18;
                 {
-                    
-                    for ($j = 0; $j < sizeof($rm); $j++)
+                    for ($i = 0; $i < $dt["total"]; $i++)
                     {
-                        if($room[$j]["room_type"] == $course[$conflict[$i]["course_id"]]["course_type"])
+                        if($course[$conflict[$i]["course_id"]]["room_number"]==0 && $course[$conflict[$i]["course_id"]]["start"]<=$tm)
                         {
-                            $dn = $course[$conflict[$i]["course_id"]]["duration"]/0.5;
-                            /*print $course[$conflict[$i]["course_id"]]["duration"];
-                            print " => ";
-                            print $dn;
-                            print "***\n";*/
-                            $tst = $tm;
-                            $tet = $tm+$dn-1;
-
-                            $tst = (int)$tst;
-                            $tet = (int)$tet;
-
-                            $vtst = $tst/18;
-                            $vtet = $tet/18;
-                            $vtst = (int)$vtst;
-                            $vtet = (int)$vtet;
-                            $flag = false;
-
-                            for($rt=$tst; $rt<=$tet; $rt++)
-                            {
-                                if($room[$j]["status"][$rt-1]==1 || $course_busy[$conflict[$i]["course_id"]][$rt-1])
-                                {
-                                    $flag = true;
-                                    break;
-                                }
-                                
-                            }
                             
-
-                            if($vtst!=$vtet || $tet>90 || $tst%18==0)
+                            for ($j = 0; $j < sizeof($rm); $j++)
                             {
-                                $flag = true;
-                            }
-                            
-                            if($flag == false)
-                            {
-                                $course[$conflict[$i]["course_id"]]["room_number"] = $room[$j]["room_number"];
-                                $course[$conflict[$i]["course_id"]]["start"] = $tst;
-                                $course[$conflict[$i]["course_id"]]["end"] = $tet;
-
-                                for($u=$tst; $u<=$tet; $u++)
+                                if($room[$j]["room_type"] == $course[$conflict[$i]["course_id"]]["course_type"])
                                 {
-                                    $room[$j]["status"][$u-1] = 1;
-                                }
+                                    $dn = $course[$conflict[$i]["course_id"]]["duration"]/0.5;
+                                    /*print $course[$conflict[$i]["course_id"]]["duration"];
+                                    print " => ";
+                                    print $dn;
+                                    print "***\n";*/
+                                    $tst = $tm;
+                                    $tet = $tm+$dn-1;
 
+                                    $tst = (int)$tst;
+                                    $tet = (int)$tet;
 
-                            //adjacent 0
+                                    $vtst = $tst/18;
+                                    $vtet = $tet/18;
+                                    $vtst = (int)$vtst;
+                                    $vtet = (int)$vtet;
+                                    $flag = false;
 
-                                for($g=0; $g<$dt["total"]; $g++)
-                                {
-                                    if($graph[$conflict[$i]["course_id"]][$conflict[$g]["course_id"]] != 0 && $course[$conflict[$g]["course_id"]]["room_number"]==0)
+                                    for($rt=$tst; $rt<=$tet; $rt++)
                                     {
-                                        if($course[$conflict[$i]["course_id"]]["course_code"] == $course[$conflict[$g]["course_id"]]["course_code"]  && 
-                                            $course[$conflict[$i]["course_id"]]["section"] == $course[$conflict[$g]["course_id"]]["section"]  && 
-                                            $course[$conflict[$i]["course_id"]]["semester"] == $course[$conflict[$g]["course_id"]]["semester"] &&
-                                            $course[$conflict[$i]["course_id"]]["group"] == $course[$conflict[$g]["course_id"]]["group"] )
-                                            {
-                                                $sm_tet =$tet/18;
-                                                $sm_tet = (int)$sm_tet;
-                                                if( $sm_tet*18 != $tet)
-                                                {
-                                                    $sm_tet = $sm_tet + 1;
-                                                }
-                                                $course[$conflict[$g]["course_id"]]["start"] = ($sm_tet*18)+1;
-                                            }
-                                        else
+                                        if($room[$j]["status"][$rt-1]==1 || $course_busy[$conflict[$i]["course_id"]][$rt-1])
                                         {
-                                            $course[$conflict[$g]["course_id"]]["start"] = max($course[$conflict[$g]["course_id"]]["start"],$tet+1);
+                                            $flag = true;
+                                            break;
                                         }
+                                        
+                                    }
+                                    
+
+                                    if($vtst!=$vtet || $tet>90 || $tst%18==0)
+                                    {
+                                        $flag = true;
+                                    }
+                                    
+                                    if($flag == false)
+                                    {
+                                        $course[$conflict[$i]["course_id"]]["room_number"] = $room[$j]["room_number"];
+                                        $course[$conflict[$i]["course_id"]]["start"] = $tst;
+                                        $course[$conflict[$i]["course_id"]]["end"] = $tet;
+
+                                        for($u=$tst; $u<=$tet; $u++)
+                                        {
+                                            $room[$j]["status"][$u-1] = 1;
+                                        }
+
+
+                                    //adjacent 0
+
+                                        for($g=0; $g<$dt["total"]; $g++)
+                                        {
+                                            if($graph[$conflict[$i]["course_id"]][$conflict[$g]["course_id"]] != 0 && $course[$conflict[$g]["course_id"]]["room_number"]==0)
+                                            {
+                                                if($course[$conflict[$i]["course_id"]]["course_code"] == $course[$conflict[$g]["course_id"]]["course_code"]  && 
+                                                    $course[$conflict[$i]["course_id"]]["section"] == $course[$conflict[$g]["course_id"]]["section"]  && 
+                                                    $course[$conflict[$i]["course_id"]]["semester"] == $course[$conflict[$g]["course_id"]]["semester"] &&
+                                                    $course[$conflict[$i]["course_id"]]["group"] == $course[$conflict[$g]["course_id"]]["group"] )
+                                                    {
+                                                        $sm_tet =$tet/18;
+                                                        $sm_tet = (int)$sm_tet;
+                                                        if( $sm_tet*18 != $tet)
+                                                        {
+                                                            $sm_tet = $sm_tet + 1;
+                                                        }
+                                                        $ct_start =  1+($sm_tet-1)*18;
+                                                        $ct_end =  $ct_start+18-1;
+                                                        for($ct = $ct_start ; $ct<=$ct_end ; $ct++)
+                                                        {
+                                                            $course_busy[$conflict[$g]["course_id"]][$ct]=1;
+                                                        }
+                                                        //$course[$conflict[$g]["course_id"]]["start"] = ($sm_tet*18)+1;
+
+                                                    }
+                                                else
+                                                {
+                                                    for($ct = $tst ; $ct<=$tet ; $ct++)
+                                                        {
+                                                            $course_busy[$conflict[$g]["course_id"]][$ct]=1;
+                                                        }
+                                                    //$course[$conflict[$g]["course_id"]]["start"] = max($course[$conflict[$g]["course_id"]]["start"],$tet+1);
+                                                }
+                                            }
+                                        }
+                                        break;
                                     }
                                 }
-                                break;
                             }
                         }
                     }
+                    //$tm++;
                 }
             }
-            $tm++;
         }
 
 

@@ -285,7 +285,8 @@
               teacher_code:"",
               course_code:"",
               group:[],
-              duration:[]
+              duration:[],
+              course_type:"",
           },
           course_type:[],
           
@@ -330,7 +331,7 @@
       
       assignCourse()
         {
-              
+            this.assigncourse.course_type = this.course_type[this.assigncourse.course_code];
             console.log(this.assigncourse);
             let uri = '/api/enrollment/create';
             this.axios.post(uri, this.assigncourse).then((response) => {
