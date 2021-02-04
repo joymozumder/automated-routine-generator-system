@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Routine;
-use App\Http\Resources\RoutineResource;
+use App\SemesterCourse;
+use App\Http\Resources\SemesterCourseResource;
 
-class RoutineController extends Controller
+class SemesterCourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,23 @@ class RoutineController extends Controller
      */
     public function index()
     {
-        $obj = Routine::all();
-        return RoutineResource::collection($ses);
+        $obj = SemesterCourse::all();
+        return SemesterCourseResource::collection($obj);
+    }
+    public function session_index($session_id)
+    {
+        $obj = SemesterCourse::select()
+                ->where('session_id','=',$session_id)
+                ->get();
+        return SemesterCourseResource::collection($obj);
+    }
+    public function session_semester_index($session_id,$semester)
+    {
+        $obj = SemesterCourse::select()
+                ->where('session_id','=',$session_id)
+                ->where('semester_section','LIKE',"{$semester}%")
+                ->get();
+        return SemesterCourseResource::collection($obj);
     }
 
     /**
@@ -38,7 +53,26 @@ class RoutineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $sections= $request->section;
+        for($i =0 ;$i<sizeof($sections);$i++)
+        {
+            $obj = new SemesterCourse();
+            $obj->session_id = $request->session_id;
+            $obj->course_id = $request->course_id;
+            if(strlen($sections[$i])!=1)
+            {
+                $obj->semester_section = strval($request->semester) . $sections[$i][0];
+                $obj->group = $sections[$i][1];
+            }
+            else
+            {
+                $obj->semester_section = strval($request->semester) . $sections[$i];
+                $obj->group = 0;
+            }
+            $obj->status = true;
+            $obj->save();
+        }
     }
 
     /**
