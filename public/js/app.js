@@ -62243,11 +62243,7 @@ var render = function() {
                                           }
                                         ],
                                         staticClass: "form-checkbox",
-                                        attrs: {
-                                          type: "checkbox",
-                                          checked: "",
-                                          value: "a"
-                                        },
+                                        attrs: { type: "checkbox", value: "a" },
                                         domProps: {
                                           checked: Array.isArray(
                                             _vm.assign_semester.section
@@ -62328,11 +62324,7 @@ var render = function() {
                                           }
                                         ],
                                         staticClass: "form-checkbox",
-                                        attrs: {
-                                          type: "checkbox",
-                                          checked: "",
-                                          value: "b"
-                                        },
+                                        attrs: { type: "checkbox", value: "b" },
                                         domProps: {
                                           checked: Array.isArray(
                                             _vm.assign_semester.section
@@ -62411,11 +62403,7 @@ var render = function() {
                                           }
                                         ],
                                         staticClass: "form-checkbox",
-                                        attrs: {
-                                          type: "checkbox",
-                                          checked: "",
-                                          value: "c"
-                                        },
+                                        attrs: { type: "checkbox", value: "c" },
                                         domProps: {
                                           checked: Array.isArray(
                                             _vm.assign_semester.section
@@ -62494,11 +62482,7 @@ var render = function() {
                                           }
                                         ],
                                         staticClass: "form-checkbox",
-                                        attrs: {
-                                          type: "checkbox",
-                                          checked: "",
-                                          value: "d"
-                                        },
+                                        attrs: { type: "checkbox", value: "d" },
                                         domProps: {
                                           checked: Array.isArray(
                                             _vm.assign_semester.section
@@ -62577,11 +62561,7 @@ var render = function() {
                                           }
                                         ],
                                         staticClass: "form-checkbox",
-                                        attrs: {
-                                          type: "checkbox",
-                                          checked: "",
-                                          value: "e"
-                                        },
+                                        attrs: { type: "checkbox", value: "e" },
                                         domProps: {
                                           checked: Array.isArray(
                                             _vm.assign_semester.section
@@ -62690,7 +62670,6 @@ var render = function() {
                                         staticClass: "form-checkbox",
                                         attrs: {
                                           type: "checkbox",
-                                          checked: "",
                                           value: "a1"
                                         },
                                         domProps: {
@@ -62773,7 +62752,6 @@ var render = function() {
                                         staticClass: "form-checkbox",
                                         attrs: {
                                           type: "checkbox",
-                                          checked: "",
                                           value: "a2"
                                         },
                                         domProps: {
@@ -62858,7 +62836,6 @@ var render = function() {
                                         staticClass: "form-checkbox",
                                         attrs: {
                                           type: "checkbox",
-                                          checked: "",
                                           value: "b1"
                                         },
                                         domProps: {
@@ -62943,7 +62920,6 @@ var render = function() {
                                         staticClass: "form-checkbox",
                                         attrs: {
                                           type: "checkbox",
-                                          checked: "",
                                           value: "b2"
                                         },
                                         domProps: {
@@ -63026,7 +63002,6 @@ var render = function() {
                                         staticClass: "form-checkbox",
                                         attrs: {
                                           type: "checkbox",
-                                          checked: "",
                                           value: "c1"
                                         },
                                         domProps: {
@@ -63109,7 +63084,6 @@ var render = function() {
                                         staticClass: "form-checkbox",
                                         attrs: {
                                           type: "checkbox",
-                                          checked: "",
                                           value: "c2"
                                         },
                                         domProps: {
@@ -63192,7 +63166,6 @@ var render = function() {
                                         staticClass: "form-checkbox",
                                         attrs: {
                                           type: "checkbox",
-                                          checked: "",
                                           value: "d1"
                                         },
                                         domProps: {
@@ -63275,7 +63248,6 @@ var render = function() {
                                         staticClass: "form-checkbox",
                                         attrs: {
                                           type: "checkbox",
-                                          checked: "",
                                           value: "d2"
                                         },
                                         domProps: {
@@ -63358,7 +63330,6 @@ var render = function() {
                                         staticClass: "form-checkbox",
                                         attrs: {
                                           type: "checkbox",
-                                          checked: "",
                                           value: "e1"
                                         },
                                         domProps: {
@@ -63441,7 +63412,6 @@ var render = function() {
                                         staticClass: "form-checkbox",
                                         attrs: {
                                           type: "checkbox",
-                                          checked: "",
                                           value: "e2"
                                         },
                                         domProps: {
@@ -71797,7 +71767,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Assign Course")]
+                          [_vm._v("Assign Semester with Course")]
                         )
                       ],
                       1
