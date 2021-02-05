@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\SemesterCourse;
+
+use App\Course;
+use App\Room;
+use App\SessionData;
+use App\User;
 use App\Http\Resources\SemesterCourseResource;
 
 class SemesterCourseController extends Controller
@@ -16,22 +21,29 @@ class SemesterCourseController extends Controller
      */
     public function index()
     {
-        $obj = SemesterCourse::all();
+        $obj = SemesterCourse::join('session_data','semester_courses.session_id','=','session_data.id')
+                             ->join('courses','semester_courses.course_id','=','courses.id')
+                             ->select('semester_courses.*','session_data.*','courses.code as course_code')
+                             ->get();
         return SemesterCourseResource::collection($obj);
     }
     public function session_index($session_id)
     {
-        $obj = SemesterCourse::select()
-                ->where('session_id','=',$session_id)
-                ->get();
+        $obj = SemesterCourse::join('session_data','semester_courses.session_id','=','session_data.id')
+                             ->join('courses','semester_courses.course_id','=','courses.id')
+                             ->select('semester_courses.*','session_data.*','courses.code as course_code')
+                             ->where('semester_courses.session_id','=',$session_id)
+                             ->paginate(10);
         return SemesterCourseResource::collection($obj);
     }
     public function session_semester_index($session_id,$semester)
     {
-        $obj = SemesterCourse::select()
-                ->where('session_id','=',$session_id)
-                ->where('semester_section','LIKE',"{$semester}%")
-                ->get();
+        $obj = SemesterCourse::join('session_data','semester_courses.session_id','=','session_data.id')
+                             ->join('courses','semester_courses.course_id','=','courses.id')
+                             ->select('semester_courses.*','session_data.*','courses.code as course_code')
+                             ->where('semester_courses.session_id','=',$session_id)
+                             ->where('semester_courses.semester_section','LIKE',"{$semester}%")
+                             ->get();
         return SemesterCourseResource::collection($obj);
     }
 

@@ -5,6 +5,13 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Routine;
+use App\Course;
+use App\Enrollment;
+use App\Room;
+use App\SemesterCourse;
+use App\SemesterSection;
+use App\SessionData;
+use App\User;
 use App\Http\Resources\RoutineResource;
 
 class RoutineController extends Controller
@@ -84,5 +91,23 @@ class RoutineController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     *generate rotine
+
+    */
+    public function check($session_id)
+    {
+        $obj = Routine::join('semester_courses','routines.semester_course_id','=','semester_courses.id') //course_entry
+                ->join('users','routines.teacher_id','=','users.id')
+                ->join('courses','semester_courses.course_id','=','courses.id')
+                ->select('routines.*','semester_courses.*','courses.*','users.*')
+               
+                ->paginate(500);
+        
+        
+        $dt = $obj->toArray();
+        dd($dt);
     }
 }
