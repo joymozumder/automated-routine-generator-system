@@ -23,7 +23,7 @@ class SemesterCourseController extends Controller
     {
         $obj = SemesterCourse::join('session_data','semester_courses.session_id','=','session_data.id')
                              ->join('courses','semester_courses.course_id','=','courses.id')
-                             ->select('semester_courses.*','session_data.*','courses.code as course_code')
+                             ->select('semester_courses.*','session_data.*','courses.code as course_code','courses.name as course_name')
                              ->get();
         return SemesterCourseResource::collection($obj);
     }
@@ -31,7 +31,7 @@ class SemesterCourseController extends Controller
     {
         $obj = SemesterCourse::join('session_data','semester_courses.session_id','=','session_data.id')
                              ->join('courses','semester_courses.course_id','=','courses.id')
-                             ->select('semester_courses.*','session_data.*','courses.code as course_code')
+                             ->select('semester_courses.*','session_data.*','courses.code as course_code','courses.name as course_name')
                              ->where('semester_courses.session_id','=',$session_id)
                              ->paginate(10);
         return SemesterCourseResource::collection($obj);
@@ -40,7 +40,7 @@ class SemesterCourseController extends Controller
     {
         $obj = SemesterCourse::join('session_data','semester_courses.session_id','=','session_data.id')
                              ->join('courses','semester_courses.course_id','=','courses.id')
-                             ->select('semester_courses.*','session_data.*','courses.code as course_code')
+                             ->select('semester_courses.*','session_data.*','courses.code as course_code','courses.name as course_name')
                              ->where('semester_courses.session_id','=',$session_id)
                              ->where('semester_courses.semester_section','LIKE',"{$semester}%")
                              ->get();
