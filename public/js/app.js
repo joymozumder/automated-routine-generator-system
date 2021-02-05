@@ -3416,6 +3416,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_materialize_datatable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-materialize-datatable */ "./node_modules/vue-materialize-datatable/src/DataTable.vue");
 //
 //
 //
@@ -3474,103 +3475,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      enrollment: {},
-      sessions: {},
-      courses: {},
-      teachers: {}
+      tableColumns1: [{
+        label: "Session Name",
+        field: "session_name",
+        numeric: false,
+        html: false
+      }, {
+        label: "Semester Section",
+        field: "semester_section",
+        numeric: false,
+        html: false
+      }, {
+        label: "Course Name",
+        field: "course_name",
+        numeric: false,
+        html: false
+      }],
+      semester_courses: [],
+      teachers: []
     };
   },
   created: function created() {
     var _this = this;
 
-    var uri = "/api/enrollment/edit/".concat(this.$route.params.id);
+    var uri = "/api/semester-courses/".concat(this.$route.params.session, "/").concat(this.$route.params.id);
     this.axios.get(uri).then(function (response) {
-      _this.enrollment = response.data.data; ///console.log(this.enrollment);
-
-      console.log(_this.enrollment.session_name);
-      console.log(_this.enrollment.course_code);
-      console.log(_this.enrollment.teacher_code);
+      _this.semester_courses = response.data.data;
+      console.log(_this.semester_courses);
     });
-    uri = "/api/teachers";
+    uri = '/api/teachers';
     this.axios.get(uri).then(function (response) {
-      _this.teachers = response.data.data; //console.log(this.teachers);
-    });
-    uri = "/api/sessions";
-    this.axios.get(uri).then(function (response) {
-      _this.sessions = response.data.data; //console.log(this.teachers);
-    });
-    uri = "/api/courses";
-    this.axios.get(uri).then(function (response) {
-      _this.courses = response.data.data; //console.log(this.courses);
+      _this.teachers = response.data.data;
+      console.log(_this.teachers);
     });
   },
-  methods: {
-    updateEnrollment: function updateEnrollment() {
-      var _this2 = this;
-
-      console.log(this.enrollment);
-      var uri = "/api/enrollment/update/".concat(this.$route.params.id);
-      this.axios.post(uri, this.enrollment).then(function (response) {
-        _this2.$router.push({
-          name: 'assigncourses'
-        });
-      });
-    },
-    Cancel: function Cancel() {
-      this.$router.go(-1);
-    }
-  }
+  components: {
+    compDataTable: vue_materialize_datatable__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -6630,11 +6576,14 @@ __webpack_require__.r(__webpack_exports__);
       test: "",
       session_name: "",
       number_of_section: 0,
+      session_id: 0,
+      course_id: 0,
       courses: [],
+      sessions: [],
       assign_semester: {
-        session_name: "",
+        session_id: "",
         semester: "",
-        course_code: "",
+        course_id: "",
         section: []
       }
     };
@@ -6642,25 +6591,36 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.assign_semester.session_name = this.$route.params.id;
+    //this.assign_semester.session_name=this.$route.params.id;
+    this.session_name = this.$route.params.id;
     var uri = '/api/courses';
     this.axios.get(uri).then(function (response) {
-      _this.courses = response.data.data;
-      console.log(_this.courses);
+      _this.courses = response.data.data; //console.log(this.courses);
+    });
+    uri = '/api/sessions';
+    this.axios.get(uri).then(function (response) {
+      _this.sessions = response.data.data; //console.log(this.sessions);
+
+      for (var i = 0; i < _this.sessions.length; i++) {
+        if (_this.sessions[i].session_name === _this.session_name) _this.assign_semester.session_id = _this.sessions[i].id;
+      }
     });
   },
   methods: {
     assignSemester: function assignSemester() {
-      console.log(this.assign_semester); // for(var i=0;i<)
-      // let uri = '/api/semester-course/create';
-      // this.axios.post(uri, this.assign_semester).then((response) => {
-      // //this.$router.push({name: 'sessions'});
-      // console.log("Saved");
-      //});
+      console.log(this.assign_semester);
+      var uri = '/api/semester-course/create';
+      this.axios.post(uri, this.assign_semester).then(function (response) {
+        //this.$router.push({name: 'sessions'});
+        // this.assign_semester.course_id="";
+        // this.assign_semester.section=[];
+        // this.number_of_section=0;
+        console.log("Saved");
+      });
     },
     checkCoursetype: function checkCoursetype() {
       for (var i = 0; i < this.courses.length; i++) {
-        if (this.courses[i].code == this.assign_semester.course_code && this.courses[i].type != 0) return true;
+        if (this.courses[i].id == this.assign_semester.course_id && this.courses[i].type != 0) return true;
       }
 
       return false;
@@ -52665,230 +52625,134 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "main",
-    { staticClass: "bg-white-500 flex-1 p-3 overflow-hidden" },
+    { staticClass: "bg-white-500 flex-1 p-3 overflow-x-scroll" },
     [
-      _c("div", { staticClass: "flex flex-col" }, [
+      _c("div", { staticClass: "flex flex-1" }, [
         _c(
           "div",
-          {
-            staticClass:
-              "container mx-auto h-full flex flex-1 justify-center items-center"
-          },
+          { staticClass: "flex flex-1  flex-col md:flex-row lg:flex-row mx-2" },
           [
             _c(
               "div",
               {
                 staticClass:
-                  "mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2"
+                  "mb-2 border-solid border-gray-300 rounded border shadow-sm w-full"
               },
               [
                 _c(
-                  "div",
+                  "router-link",
                   {
                     staticClass:
-                      "bg-gray-300 px-2 py-3 border-solid border-gray-400 border-b"
+                      "modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-32 right-32 z-50",
+                    attrs: { tag: "button", to: { name: "addteacher" } }
                   },
-                  [
-                    _vm._v(
-                      "\n                                Update Enrollment\n                            "
-                    )
-                  ]
+                  [_vm._v("Add Teacher")]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "p-3" }, [
-                  _c("form", { staticClass: "w-full" }, [
-                    _c("div", { staticClass: "md:flex md:items-center mb-6" }, [
-                      _vm._m(0),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "md:w-3/4" }, [
-                        _c(
-                          "select",
+                _c(
+                  "div",
+                  { staticClass: "p-3" },
+                  [
+                    _c(
+                      "compDataTable",
+                      {
+                        attrs: {
+                          title: "Teachers Table",
+                          columns: _vm.tableColumns1,
+                          rows: _vm.semester_courses,
+                          clickable: false,
+                          sortable: true,
+                          exactSearch: true,
+                          searchable: true,
+                          paginate: true,
+                          exportable: false,
+                          printable: false
+                        },
+                        scopedSlots: _vm._u([
                           {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.enrollment.session_name,
-                                expression: "enrollment.session_name"
-                              }
-                            ],
-                            staticClass:
-                              "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                            attrs: { id: "grid-state" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.enrollment,
-                                  "session_name",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
+                            key: "tbody-tr",
+                            fn: function(props) {
+                              return [
+                                _c(
+                                  "td",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn",
+                                        attrs: {
+                                          tag: "button",
+                                          to: {
+                                            name: "editteacher",
+                                            params: { id: props.row.id }
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "i",
+                                          {
+                                            staticClass:
+                                              "material-icons white-text"
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                 edit"
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn  bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn",
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.deletePost(props.row.id)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "i",
+                                          {
+                                            staticClass:
+                                              "material-icons white-text"
+                                          },
+                                          [_vm._v("delete")]
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
                                 )
-                              }
+                              ]
                             }
-                          },
-                          _vm._l(_vm.sessions, function(session) {
-                            return _c("option", { key: session.id }, [
-                              _vm._v(_vm._s(session.session_name))
-                            ])
-                          }),
-                          0
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "md:flex md:items-center mb-6" }, [
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "md:w-3/4" }, [
+                          }
+                        ])
+                      },
+                      [
                         _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.enrollment.teacher_code,
-                                expression: "enrollment.teacher_code"
-                              }
-                            ],
-                            staticClass:
-                              "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                            attrs: { id: "grid-state" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.enrollment,
-                                  "teacher_code",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          _vm._l(_vm.teachers, function(teacher) {
-                            return _c("option", { key: teacher.id }, [
-                              _vm._v(_vm._s(teacher.code))
-                            ])
-                          }),
-                          0
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "md:flex md:items-center mb-6" }, [
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "md:w-3/4" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.enrollment.course_code,
-                                expression: "enrollment.course_code"
-                              }
-                            ],
-                            staticClass:
-                              "block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey",
-                            attrs: { id: "grid-state" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.enrollment,
-                                  "course_code",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          _vm._l(_vm.courses, function(course) {
-                            return _c("option", { key: course.id }, [
-                              _vm._v(_vm._s(course.code))
-                            ])
-                          }),
-                          0
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "md:flex md:items-center" }, [
-                      _c("div", { staticClass: "md:w-1/3" }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "md:w-2/3" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.updateEnrollment($event)
-                              }
-                            }
-                          },
+                          "th",
+                          { attrs: { slot: "thead-tr" }, slot: "thead-tr" },
                           [
                             _vm._v(
-                              "\n                                                Update Session \n                                            "
+                              "\n                                     Actions\n                                 "
                             )
                           ]
                         )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "md:w-2/3" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.Cancel($event)
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                                Cancel \n                                            "
-                            )
-                          ]
-                        )
-                      ])
-                    ])
-                  ])
-                ])
-              ]
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
             )
           ]
         )
@@ -52896,68 +52760,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
-        },
-        [
-          _vm._v(
-            "\n                                                Session Name\n                                            "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
-        },
-        [
-          _vm._v(
-            "\n                                                Teacher Code\n                                            "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:w-1/4" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            "block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4",
-          attrs: { for: "inline-course-code" }
-        },
-        [
-          _vm._v(
-            "\n                                                Course Code\n                                            "
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -61985,8 +61788,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: this.assign_semester.session_name,
-                              expression: "this.assign_semester.session_name"
+                              value: _vm.session_name,
+                              expression: "session_name"
                             }
                           ],
                           staticClass:
@@ -61996,19 +61799,13 @@ var render = function() {
                             type: "text",
                             readonly: ""
                           },
-                          domProps: {
-                            value: this.assign_semester.session_name
-                          },
+                          domProps: { value: _vm.session_name },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(
-                                this.assign_semester,
-                                "session_name",
-                                $event.target.value
-                              )
+                              _vm.session_name = $event.target.value
                             }
                           }
                         })
@@ -62101,8 +61898,8 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.assign_semester.course_code,
-                                expression: "assign_semester.course_code"
+                                value: _vm.assign_semester.course_id,
+                                expression: "assign_semester.course_id"
                               }
                             ],
                             staticClass:
@@ -62120,7 +61917,7 @@ var render = function() {
                                   })
                                 _vm.$set(
                                   _vm.assign_semester,
-                                  "course_code",
+                                  "course_id",
                                   $event.target.multiple
                                     ? $$selectedVal
                                     : $$selectedVal[0]
@@ -62133,7 +61930,7 @@ var render = function() {
                               "option",
                               {
                                 key: course.id,
-                                domProps: { value: course.code }
+                                domProps: { value: course.id }
                               },
                               [
                                 _vm._v(
@@ -88693,7 +88490,7 @@ var routes = [{
     component: _components_Test2_vue__WEBPACK_IMPORTED_MODULE_32__["default"]
   }, {
     name: 'test3',
-    path: 'test3/:id',
+    path: 'test3/:session/:id',
     component: _components_Test3_vue__WEBPACK_IMPORTED_MODULE_33__["default"]
   }, {
     name: 'test4',

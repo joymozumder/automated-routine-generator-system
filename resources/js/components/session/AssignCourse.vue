@@ -20,7 +20,7 @@
                                             </div>
                                             <div class="md:w-3/4">
                                                 <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                    id="inline-full-name" type="text" v-model="this.assign_semester.session_name" readonly>
+                                                    id="inline-full-name" type="text" v-model="session_name" readonly>
                                             </div>
                                         </div>
 
@@ -59,9 +59,9 @@
                                             </div>
                                             <div class="md:w-3/4">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                        v-model="assign_semester.course_code" id="grid-state">
+                                                        v-model="assign_semester.course_id" id="grid-state">
                                                         
-                                                        <option v-for="course in courses" :key="course.id " :value="course.code">{{course.name}}-{{course.code}}</option>
+                                                        <option v-for="course in courses" :key="course.id " :value="course.id">{{course.name}}-{{course.code}}</option>
                                                         
                                                         
                                                     </select>
@@ -256,7 +256,7 @@
 
 
 
-
+                                     
                                      
                                         
                                         <div class="md:flex md:items-center">
@@ -295,12 +295,14 @@
                 test:"",
                 session_name:"",
                 number_of_section:0,
+                session_id:0,
+                course_id:0,
                 courses:[],
-                
+                sessions:[],
                 assign_semester:{
-                    session_name:"",
+                    session_id:"",
                     semester:"",
-                    course_code:"",
+                    course_id:"",
                     section:[],
                 }
             
@@ -308,14 +310,28 @@
         },
         created() {
 
-            this.assign_semester.session_name=this.$route.params.id;
+            //this.assign_semester.session_name=this.$route.params.id;
+            this.session_name=this.$route.params.id;
 
             let uri = '/api/courses';
             
             this.axios.get(uri).then((response) => {
                 this.courses = response.data.data;
                 
-                console.log(this.courses);
+                //console.log(this.courses);
+            });
+            
+            uri = '/api/sessions';
+            
+            this.axios.get(uri).then((response) => {
+                this.sessions = response.data.data;
+                
+                //console.log(this.sessions);
+
+                for(var i=0;i<this.sessions.length;i++){
+                    if(this.sessions[i].session_name===this.session_name)
+                        this.assign_semester.session_id=this.sessions[i].id;
+                }
             });
         
 
@@ -326,18 +342,22 @@
             assignSemester(){
                 console.log(this.assign_semester);
 
-               // for(var i=0;i<)
+             
 
                
-                // let uri = '/api/semester-course/create';
-                // this.axios.post(uri, this.assign_semester).then((response) => {
-                // //this.$router.push({name: 'sessions'});
-                // console.log("Saved");
-             //});
+                let uri = '/api/semester-course/create';
+                this.axios.post(uri, this.assign_semester).then((response) => {
+                 //this.$router.push({name: 'sessions'});
+                    // this.assign_semester.course_id="";
+                    // this.assign_semester.section=[];
+                    // this.number_of_section=0;
+                    console.log("Saved");
+                });
             },
+
             checkCoursetype(){
                 for(var i=0;i<this.courses.length;i++){
-                    if(this.courses[i].code==this.assign_semester.course_code && this.courses[i].type!=0)
+                    if(this.courses[i].id==this.assign_semester.course_id && this.courses[i].type!=0)
                         return true;
                             
 
