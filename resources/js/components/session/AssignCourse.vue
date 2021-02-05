@@ -325,6 +325,15 @@
         methods:{
             assignSemester(){
                 console.log(this.assign_semester);
+
+               // for(var i=0;i<)
+
+               
+                // let uri = '/api/semester-course/create';
+                // this.axios.post(uri, this.assign_semester).then((response) => {
+                // //this.$router.push({name: 'sessions'});
+                // console.log("Saved");
+             //});
             },
             checkCoursetype(){
                 for(var i=0;i<this.courses.length;i++){
