@@ -86,7 +86,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     //Route::get('print/{session_name}/{day}','api\EnrollmentController@dayShow');
 
 
-    //Route::get('check/{session_name}','api\RoutineController@check');
+    Route::get('check/{session_id}','api\RoutineController@check');
 //});
 Route::post('login','api\UserController@postLogin');
 Route::post('logout','api\UserController@logOut');
