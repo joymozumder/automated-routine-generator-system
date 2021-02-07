@@ -120,7 +120,18 @@ class SemesterCourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
+        $obj = SemesterCourse::find($id);
+        $obj->id = $request->id;
+        $obj->session_id = $request->session_id;
+        $obj->course_id = $request->course_id;
+        $obj->semester_section = $request->semester_section;
+        $obj->group = $request->group;
+        $obj->status = $request->status;
+        
+
+        if($obj->save()){
+            return new SemesterCourseResource($obj);
+        }
     }
 
     /**
