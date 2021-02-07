@@ -13,6 +13,18 @@ import axios from 'axios';
 import App from './App.vue';
 Vue.use(VueAxios, axios);
 
+//bootstrap table import start
+
+// import Vue from 'vue'
+// import { BootstrapVue} from 'bootstrap-vue'
+// Vue.use(BootstrapVue)
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+//bootstrap table import end
+
+
+
 
 import compLoginComponent from './components/LoginComponent.vue';
 import compRegisterComponent from './components/RegisterComponent.vue';
@@ -55,6 +67,8 @@ import compSemesterTable from "./components/session/SemesterTable.vue";
 
 import compAddSemester from "./components/semester/AddSemester.vue";
 import compEditSemester from "./components/semester/EditSemester.vue";
+import compSemesterCourse from "./components/semester/SemesterCourse.vue";
+import compEditSemesterCourse from "./components/semester/EditSemesterCourse.vue";
 
 
 
@@ -220,6 +234,16 @@ const routes = [
                     name: 'test4',
                     path: 'test4',
                     component: compTest4
+                },
+                {
+                    name: 'semestercourse',
+                    path: 'semestercourse/:session/:id',
+                    component: compSemesterCourse
+                },
+                {
+                    name: 'editsemestercourse',
+                    path: 'editsemestercourse/:id',
+                    component: compEditSemesterCourse
                 },
                 {
                     name: 'editsemester',

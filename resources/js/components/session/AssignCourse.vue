@@ -96,7 +96,7 @@
                                         </div>
 
 
-                                        <div v-if="number_of_section>0 && !checkCoursetype()" class="md:flex md:items-center mb-6">
+                                        <div v-if="number_of_section>0" class="md:flex md:items-center mb-6">
                                             <div class="md:w-1/4">
                                                 <label v-if="number_of_section>0"  class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
@@ -105,7 +105,7 @@
                                             </div>
                                             <div class="md:w-3/4">
                                                 <label v-if="number_of_section>0" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox"  value="a" class="form-checkbox" >
+                                                    <input  v-model="assign_semester.section" type="checkbox"  value="a" class="form-checkbox" >
                                                     <span class="ml-2"> A</span>
                                                 </label>
                                                 
@@ -144,6 +144,11 @@
                                                  <label v-if="number_of_section>4" class="inline-flex items-center p-2">
                                                     
                                                 </label>
+<!-- _________________________________________________________________________________________________________________________ -->
+                                                  <!-- <label v-if="number_of_section>1" class="inline-flex items-center">
+                                                    <input type="checkbox" @click="checkAll()"  class="form-checkbox" >
+                                                    <span class="ml-2">select all</span>
+                                                </label>  -->
 
                                                 <!-- <button v-if="number_of_section>0" @click.prevent="Reset" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
                                                     Reset
@@ -367,7 +372,32 @@
 
             Reset(){
                 this.number_of_section=0;
+            },
+            /*
+            checkAll(){
+                console.log(this.number_of_section);
+               
+                this.assign_semester.section[0]=="a";
+                this.assign_semester.section[1]=="b";
+                this.assign_semester.section[2]=="c";
+
+               console.log(this.assign_semester.section);
+                
+                   for(var i=0;i<this.number_of_section;i++){
+                        if(i==0)
+                            this.assign_semester.section[i]="a";
+                        else if(i==1)
+                            this.assign_semester.section[i]="b";
+                        else if(i==2)
+                            this.assign_semester.section[i]="c";
+                        else if(i==3)
+                            this.assign_semester.section[i]="d";
+                        else if(i==4)
+                            this.assign_semester.section[i]="e";            
+                    }
+                    
             }
+            */
         }
 
  

@@ -3,7 +3,7 @@
             <div class="flex justify-between">
                 <div class="p-1 mx-3 inline-flex items-center">
                     <i class="fas fa-bars pr-2 text-white" @click="sidebarToggle"></i>
-                    <h1 class="text-white p-2">Automated Routine System</h1>
+                    <h3 class="text-white p-2">Automated Routine System</h3>
                 </div>
                 <div class="p-1 flex flex-row items-center">
                     <img  class="inline-block h-8 w-8 rounded-full" src="https://avatars0.githubusercontent.com/u/4323180?s=460&v=4" alt="">

@@ -26,7 +26,7 @@
                    </template>
 
                     <template v-slot:cell(action)="data1">
-                   <router-link tag="button" class="btn btn-primary btn-sm"  :to="{name: 'editteacher', params: { id: data1.item.id }}" >
+                   <router-link tag="button" class="btn btn-primary btn-sm"  :to="{name: 'editsemestercourse', params: { id: data1.item.id }}" >
                              Edit
                          </router-link>
                    </template>
