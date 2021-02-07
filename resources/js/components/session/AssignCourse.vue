@@ -353,11 +353,16 @@
                 let uri = '/api/semester-course/create';
                 this.axios.post(uri, this.assign_semester).then((response) => {
                  //this.$router.push({name: 'sessions'});
-                    // this.assign_semester.course_id="";
-                    // this.assign_semester.section=[];
-                    // this.number_of_section=0;
-                    console.log("Saved");
+                     console.log("Saved");
+                     
+                     
+                    
                 });
+
+                    // this.assign_semester.course_id="";
+                    //  this.assign_semester.section=[];
+                    //  this.number_of_section=0;
+                    //  console.log(this.assign_semester);
             },
 
             checkCoursetype(){

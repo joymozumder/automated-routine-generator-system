@@ -603,27 +603,26 @@ export default {
     
     methods: {
       multipleAssign(){
-          /*
-        if(this.check==0){
+          
+        if(this.assigncourse.check==0){
             for(var i=0;i<this.courses.length;i++){
 
-                console.log(this.assigncourse.id[0]);
-                console.log(this.courses[i].id);
+                
                 if(this.assigncourse.id[0]==this.courses[i].id){
-                    if(this.courses[id].credit==1)
+                    if(this.courses[i].credit==1)
                     {
                         this.assigncourse.duration[0]=2;
                     }
-                    else if(this.courses[id].credit==1.5)
+                    else if(this.courses[i].credit==1.5)
                     {
                         this.assigncourse.duration[0]=3;
                     }
-                    else if(this.courses[id].credit==2)
+                    else if(this.courses[i].credit==2)
                     {
                         this.assigncourse.duration[0]=1;
                         this.assigncourse.duration[1]=1;
                     }
-                    else if(this.courses[id].credit==3)
+                    else if(this.courses[i].credit==3)
                     {
                         this.assigncourse.duration[0]=1.5;
                         this.assigncourse.duration[1]=1.5;
@@ -636,7 +635,7 @@ export default {
                 }
             }
         }
-        */
+        
         console.log(this.assigncourse);    
       },
     
