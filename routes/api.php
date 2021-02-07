@@ -61,8 +61,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::get('/semester-courses/{session_id}/{semester}','api\SemesterCourseController@session_semester_index'); /**nirdisto session and semester */
     Route::post('/semester-course/create','api\SemesterCourseController@store'); /**save korbe  */
     Route::get('/semester-course/{id}','api\SemesterCourseController@show');
-    Route::get('/semester-course/edit/{session}/{semester}','api\SemesterCourseController@edit'); //only semester
-    Route::post('/semester-course/update/{session}/{semester}','api\SemesterCourseController@update'); //only semester
+    Route::get('/semester-course/edit/{id}','api\SemesterCourseController@edit'); //only semester
+    Route::post('/semester-course/update/{id}','api\SemesterCourseController@update'); //only semester
     Route::delete('/semester-course/delete/{id}', 'api\SemesterCourseController@destroy');
 
     Route::get('/routines','api\RoutineController@index');
