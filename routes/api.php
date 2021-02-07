@@ -87,6 +87,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
     Route::get('check/{session_id}','api\RoutineController@check');
+    Route::get('generate-routine/{session_id}','api\RoutineController@generateRoutine');
 //});
 Route::post('login','api\UserController@postLogin');
 Route::post('logout','api\UserController@logOut');

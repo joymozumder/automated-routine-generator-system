@@ -95,7 +95,8 @@ class SemesterCourseController extends Controller
      */
     public function show($id)
     {
-        //
+        $obj = SemesterCourse::find($id);
+        return new SemesterCourseResource($obj);
     }
 
     /**
@@ -106,7 +107,8 @@ class SemesterCourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $obj = SemesterCourse::find($id);
+        return new SemesterCourseResource($obj);
     }
 
     /**
@@ -118,7 +120,7 @@ class SemesterCourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       
     }
 
     /**
