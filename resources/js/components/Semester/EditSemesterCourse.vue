@@ -282,8 +282,11 @@
           semester_course:[],
           sessions:[],
           session:"",
+          session_id:0,
+          semester:0,
           courses:[],
           check:0,
+
 
         }
       },
@@ -309,8 +312,11 @@
           this.sessions = response.data.data;
           
           for(var i=0;i<this.sessions.length;i++)
-            if(this.sessions[i].id==this.semester_course.session_id)
+            if(this.sessions[i].id==this.semester_course.session_id){
                 this.session=this.sessions[i].session_name;
+                this.session_id=this.sessions[i].id;
+            }
+                
           //console.log(this.session);
         });
 
@@ -355,9 +361,17 @@
                  
             
                       
-             
+            
            
             console.log(this.semester_course);
+            this.semester=this.semester_course.semester_section[0];
+
+            console.log(this.semester);
+             let uri = `/api/semester-course/update/${this.$route.params.id}`;
+             this.axios.post(uri, this.semester_course).then((response) => {
+            this.$router.push({name: 'semestercourse', params: { session: this.session_id,id: this.semester }});
+              console.log("saved");
+             });
             
          },
       
