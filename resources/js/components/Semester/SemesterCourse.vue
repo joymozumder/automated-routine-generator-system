@@ -603,13 +603,95 @@ export default {
     
     methods: {
       multipleAssign(){
-          
+          console.log(4/3);
         if(this.assigncourse.check==0){
             for(var i=0;i<this.courses.length;i++){
-
                 
                 if(this.assigncourse.id[0]==this.courses[i].id){
                     if(this.courses[i].credit==1)
+                    {
+                        if(this.number_of_class==1)
+                            this.assigncourse.duration[0]=2;
+                        else if(this.number_of_class==2){
+                            this.assigncourse.duration[0]=1;
+                            this.assigncourse.duration[1]=1;
+                            
+                        }    
+                    }
+                    else if(this.courses[i].credit==1.5)
+                    {
+                        if(this.number_of_class==1)
+                            this.assigncourse.duration[0]=3;
+                        
+                        else if(this.number_of_class==2){
+                            this.assigncourse.duration[0]=1.5;
+                            this.assigncourse.duration[1]=1.5;
+                            
+                        }
+                        
+                        else if(this.number_of_class==3){
+                            this.assigncourse.duration[0]=1;
+                            this.assigncourse.duration[1]=1;
+                            this.assigncourse.duration[2]=1;
+                            
+                        }
+                    }
+                    
+                    else if(this.courses[i].credit==2)
+                    {
+                         if(this.number_of_class==1)
+                            this.assigncourse.duration[0]=2;
+                         else{
+
+                             this.assigncourse.duration[0]=1;
+                             this.assigncourse.duration[1]=1;
+                         }   
+                    }
+                    else if(this.courses[i].credit==3)
+                    {
+                        if(this.number_of_class==1)
+                            this.assigncourse.duration[0]=3;
+                        
+                        else if(this.number_of_class==2){
+                            this.assigncourse.duration[0]=1.5;
+                            this.assigncourse.duration[1]=1.5;
+                            
+                        }
+                        
+                        else if(this.number_of_class==3){
+                            this.assigncourse.duration[0]=1;
+                            this.assigncourse.duration[1]=1;
+                            this.assigncourse.duration[2]=1;
+                            
+                        }
+                    }
+                    else if(this.courses[id].credit==4)
+                    {
+                        if(this.number_of_class==1)
+                            this.assigncourse.duration[0]=4;
+                        
+                        else if(this.number_of_class==2){
+                            this.assigncourse.duration[0]=2;
+                            this.assigncourse.duration[1]=2;
+                            
+                        }
+                        
+                        else if(this.number_of_class==3){
+                            this.assigncourse.duration[0]=1.5;
+                            this.assigncourse.duration[1]=1.5;
+                            this.assigncourse.duration[2]=1;
+                            
+                        }
+                    }
+                }
+            }
+        }
+        
+        console.log(this.assigncourse);    
+      },
+    
+/*
+                  if(this.courses[i].credit==1)
                     {
                         this.assigncourse.duration[0]=2;
                     }
@@ -632,14 +714,7 @@ export default {
                         this.assigncourse.duration[0]=2;
                         this.assigncourse.duration[1]=2;
                     }
-                }
-            }
-        }
-        
-        console.log(this.assigncourse);    
-      },
-    
-
+*/
      
     }
 }
