@@ -4,10 +4,10 @@
              <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
                        
 
-             <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
+             <div class="">
                <b-row>
                <b-col>
-                 <h1>table name</h1>
+                 <h1>Semester With Courses</h1>
                  
                </b-col>
                <b-col>
