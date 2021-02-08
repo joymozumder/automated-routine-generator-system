@@ -44,7 +44,7 @@
 
             </div>
       
-             <div class="justify-center">
+             <div class="flex justify-center">
                 <button data-modal='centeredFormModal'
                     class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Select
