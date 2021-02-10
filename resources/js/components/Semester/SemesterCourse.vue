@@ -642,6 +642,11 @@ export default {
        
         
         console.log(this.assigncourse);    
+        let uri = '/api/routine/create';
+                this.axios.post(uri, this.assigncourse).then((response) => {
+                //this.$router.push({name: 'assigncourses', params: { id: this.$route.params.id }});
+                console.log("saved");
+          });
       },
 
      
