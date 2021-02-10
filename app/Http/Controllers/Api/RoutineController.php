@@ -45,8 +45,81 @@ class RoutineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //echo $request;
+        if($request->entry_type==1)
+        {
+            $courses = $request->id;
+            $durations = $request->duration;
+            $teacher_id = $request->teacher_id;
+            $total_student = $request->total_student;
+            $start = $request->start;
+            $end = $request->end;
+            $day = $request->day;
+            for($i=0; $i<sizeof($day); $i++)
+            {
+                for($j=0;$j<sizeof($durations);$j++)
+                {
+                    if($durations[$j] != 0)
+                    {
+                        $Routine           = new Routine();
+                        $Routine->semester_course_id   = $courses[$i];
+                        $Routine->teacher_id   = $request->teacher_id;
+                        $Routine->total_student   = $request->total_student;
+                        $Routine->room_number   = 0;
+                        $Routine->duration   = $durations[$j];
+                        $Routine->day   = $day[$j];
+                        $Routine->start   = $start[$j];
+                        $Routine->end   = $end[$j];
+                        $Routine->course_type   = 0;
+                        $Routine->entry_type   = $request->entry_type;
+                        $Routine->status   = true;
+                        $Routine->save();
+                          
+                    }
+                }
+                
+                
+            }
+        }
+        else
+        {
+            
+            $courses = $request->id;
+            $durations = $request->duration;
+            $teacher_id = $request->teacher_id;
+            $total_student = $request->total_student;
+            $start = $request->start;
+            $end = $request->end;
+            $day = $request->day;
+            for($i=0; $i<sizeof($day); $i++)
+            {
+                for($j=0;$j<sizeof($durations);$j++)
+                {
+                    if($durations[$j] != 0)
+                    {
+                        $Routine           = new Routine();
+                        $Routine->semester_course_id   = $courses[$i];
+                        $Routine->teacher_id   = $request->teacher_id;
+                        $Routine->total_student   = $request->total_student;
+                        $Routine->room_number   = 0;
+                        $Routine->duration   = $durations[$j];
+                        $Routine->day   = 0;
+                        $Routine->start   = 0;
+                        $Routine->end   = 0;
+                        $Routine->course_type   = 0;
+                        $Routine->entry_type   = $request->entry_type;
+                        $Routine->status   = true;
+                        $Routine->save();
+                          
+                    }
+                }
+                
+                
+            
+        }
+        }
     }
+    //
 
     /**
      * Display the specified resource.
