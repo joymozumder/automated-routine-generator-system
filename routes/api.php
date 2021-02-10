@@ -83,7 +83,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::delete('/enrollment/delete/{id}', 'api\EnrollmentController@destroy');
 */
     //Route::get('/routine/generate/{session_name}','api\RoutineController@store');
-    //Route::get('print/{session_name}/{day}','api\EnrollmentController@dayShow');
+    Route::get('print/{session_id}/{day}','api\RoutineController@dayShow');
 
 
     Route::get('check/{session_id}','api\RoutineController@check');

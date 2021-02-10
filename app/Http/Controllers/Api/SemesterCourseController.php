@@ -142,6 +142,9 @@ class SemesterCourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $obj = SemesterCourse::find($id);
+        if($obj->delete()){
+            return new SemesterCourseResource($obj);
+        }
     }
 }
