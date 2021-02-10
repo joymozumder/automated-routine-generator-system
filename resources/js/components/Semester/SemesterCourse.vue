@@ -103,7 +103,18 @@
               <div class="flex flex-wrap -mx-3 mb-2">
                  <div class="w-full px-3">
                      <!-- v-if="assigncourse.check==1 || set_duration_time==1" -->
-                         <label  class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="grid-password">
+                        
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="grid-password">
+                            <!-- Number of Class -->
+                            &nbsp;
+                             
+                            
+                            
+                             <input type="radio" value=1 v-model="check"> Set Duration 
+                             <input  type="radio" value=2 v-model="check"> Set Duration And Time
+                                                
+                        </label>
+                         <label v-if="check>0"  class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="grid-password">
                             Number of Class
                             &nbsp;
                              <input type="radio"  value=1 v-model="number_of_class"> One
@@ -111,23 +122,12 @@
                              <input type="radio" value=2 v-model="number_of_class"> Two
                              &nbsp;&nbsp;
                              <input type="radio" value=3 v-model="number_of_class"> Three
-                      </label>
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="grid-password">
-                            <!-- Number of Class -->
-                            &nbsp;
-                             
-                            
-                            
-                             <input type="radio" value=1 v-model="assigncourse.check"> Set Duration 
-                             <input  type="radio" value=2 v-model="assigncourse.check"> Set Duration And Time
-                                                
                         </label>
-                    
                                                   
                 </div>
               </div>
 
-                <div v-if="number_of_class>0 && assigncourse.check==1" class="flex flex-wrap -mx-3 mb-2">
+                <div v-if="number_of_class>0 && check==1" class="flex flex-wrap -mx-3 mb-2">
                      <div v-if="number_of_class>0" class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="grid-state">
                             Duration 1
@@ -217,7 +217,7 @@
 
 
 <!-- __________________________________________________________________________________________________ -->
-     <div v-if="number_of_class>0 && assigncourse.check==2" class="flex flex-wrap -mx-3 mb-2">
+     <div v-if="number_of_class>0 && check==2" class="flex flex-wrap -mx-3 mb-2">
                      <div  class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="grid-state">
                             Day 1
@@ -311,7 +311,7 @@
                 </div>
 
 <!-- __________________________________________________________________________________________________ -->
-       <div v-if="number_of_class>1 && assigncourse.check==2" class="flex flex-wrap -mx-3 mb-2">
+       <div v-if="number_of_class>1 && check==2" class="flex flex-wrap -mx-3 mb-2">
                      <div  class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="grid-state">
                             Day 2
@@ -406,7 +406,7 @@
 <!-- __________________________________________________________________________________________________ -->
 
 <!-- __________________________________________________________________________________________________ -->
-       <div v-if="number_of_class>2 && assigncourse.check==2" class="flex flex-wrap -mx-3 mb-2">
+       <div v-if="number_of_class>2 && check==2" class="flex flex-wrap -mx-3 mb-2">
                      <div  class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="grid-state">
                             Day 3
@@ -560,12 +560,14 @@ export default {
             check_id:[],
             id_tracker:[],
             courses:[],
+            check:0,
             assigncourse:{
+              entry_type:0,
               id:[],
               teacher_code:"",
               duration:[0,0,0,],
               total_student:0,
-              check:0,
+              
               day:[0,0,0],
               time:[0,0,0]
             }
@@ -604,117 +606,38 @@ export default {
     methods: {
       multipleAssign(){
           console.log(4/3);
-        if(this.assigncourse.check==0){
-            for(var i=0;i<this.courses.length;i++){
-                
-                if(this.assigncourse.id[0]==this.courses[i].id){
-                    if(this.courses[i].credit==1)
-                    {
-                        if(this.number_of_class==1)
-                            this.assigncourse.duration[0]=2;
-                        else if(this.number_of_class==2){
-                            this.assigncourse.duration[0]=1;
-                            this.assigncourse.duration[1]=1;
-                            
-                        }    
-                    }
-                    else if(this.courses[i].credit==1.5)
-                    {
-                        if(this.number_of_class==1)
-                            this.assigncourse.duration[0]=3;
-                        
-                        else if(this.number_of_class==2){
-                            this.assigncourse.duration[0]=1.5;
+          if(this.check==2)
+            this.assigncourse.entry_type=1;
+          if(this.check==0){
+              for(var i=0;i<this.courses.length;i++){
+                  if(this.assigncourse.id[0]==this.courses[i].id){
+                      if(this.courses[i].credit==4){
+                           this.assigncourse.duration[0]=2;
+                           this.assigncourse.duration[1]=2;
+                      }
+                      else if(this.courses[i].credit==3){
+                           this.assigncourse.duration[0]=1.5;
                             this.assigncourse.duration[1]=1.5;
-                            
-                        }
-                        
-                        else if(this.number_of_class==3){
-                            this.assigncourse.duration[0]=1;
-                            this.assigncourse.duration[1]=1;
-                            this.assigncourse.duration[2]=1;
-                            
-                        }
-                    }
-                    
-                    else if(this.courses[i].credit==2)
-                    {
-                         if(this.number_of_class==1)
-                            this.assigncourse.duration[0]=2;
-                         else{
+                      }
+                      else if(this.courses[i].credit==2){
+                           this.assigncourse.duration[0]=2;
+                      }
+                      else if(this.courses[i].credit==1.5){
+                           this.assigncourse.duration[0]=3;
+                      }
+                      else if(this.courses[i].credit==1){
+                           this.assigncourse.duration[0]=2;
+                      }
+                  }
+              }
 
-                             this.assigncourse.duration[0]=1;
-                             this.assigncourse.duration[1]=1;
-                         }   
-                    }
-                    else if(this.courses[i].credit==3)
-                    {
-                        if(this.number_of_class==1)
-                            this.assigncourse.duration[0]=3;
-                        
-                        else if(this.number_of_class==2){
-                            this.assigncourse.duration[0]=1.5;
-                            this.assigncourse.duration[1]=1.5;
-                            
-                        }
-                        
-                        else if(this.number_of_class==3){
-                            this.assigncourse.duration[0]=1;
-                            this.assigncourse.duration[1]=1;
-                            this.assigncourse.duration[2]=1;
-                            
-                        }
-                    }
-                    else if(this.courses[id].credit==4)
-                    {
-                        if(this.number_of_class==1)
-                            this.assigncourse.duration[0]=4;
-                        
-                        else if(this.number_of_class==2){
-                            this.assigncourse.duration[0]=2;
-                            this.assigncourse.duration[1]=2;
-                            
-                        }
-                        
-                        else if(this.number_of_class==3){
-                            this.assigncourse.duration[0]=1.5;
-                            this.assigncourse.duration[1]=1.5;
-                            this.assigncourse.duration[2]=1;
-                            
-                        }
-                    }
-                }
-            }
-        }
+          }   
+       
         
         console.log(this.assigncourse);    
       },
-    
-/*
-                  if(this.courses[i].credit==1)
-                    {
-                        this.assigncourse.duration[0]=2;
-                    }
-                    else if(this.courses[i].credit==1.5)
-                    {
-                        this.assigncourse.duration[0]=3;
-                    }
-                    else if(this.courses[i].credit==2)
-                    {
-                        this.assigncourse.duration[0]=1;
-                        this.assigncourse.duration[1]=1;
-                    }
-                    else if(this.courses[i].credit==3)
-                    {
-                        this.assigncourse.duration[0]=1.5;
-                        this.assigncourse.duration[1]=1.5;
-                    }
-                    else if(this.courses[id].credit==4)
-                    {
-                        this.assigncourse.duration[0]=2;
-                        this.assigncourse.duration[1]=2;
-                    }
-*/
+
+     
      
     }
 }
