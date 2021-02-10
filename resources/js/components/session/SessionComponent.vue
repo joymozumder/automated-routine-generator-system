@@ -32,7 +32,7 @@
                                             
                                              <router-link tag="button"  class="bg-blue-900 hover:bg-blue-300 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'manualassign', params: { id: selected_session }}" >Manual Assign</router-link>
                                             
-                                             <router-link tag="button"  class="bg-blue-900 hover:bg-blue-300 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourse', params: { id: selected_session }}" >Assign Course</router-link>
+                                             <router-link tag="button"  class="bg-blue-900 hover:bg-blue-300 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourse', params: { id: selected_session }}" >Assign Semester with Course</router-link>
                                         </div>
 
                                             

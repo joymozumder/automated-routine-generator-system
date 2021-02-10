@@ -28,6 +28,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "bootstrap-vue": "^2.21.2",
         "vue-axios": "^3.2.2",
         "vue-materialize-datatable": "^1.0.4",
         "vue-router": "^3.4.9",

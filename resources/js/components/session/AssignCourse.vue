@@ -20,7 +20,7 @@
                                             </div>
                                             <div class="md:w-3/4">
                                                 <input class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                    id="inline-full-name" type="text" v-model="this.assign_semester.session_name" readonly>
+                                                    id="inline-full-name" type="text" v-model="session_name" readonly>
                                             </div>
                                         </div>
 
@@ -59,9 +59,9 @@
                                             </div>
                                             <div class="md:w-3/4">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                        v-model="assign_semester.course_code" id="grid-state">
+                                                        v-model="assign_semester.course_id" id="grid-state">
                                                         
-                                                        <option v-for="course in courses" :key="course.id " :value="course.code">{{course.name}}-{{course.code}}</option>
+                                                        <option v-for="course in courses" :key="course.id " :value="course.id">{{course.name}}-{{course.code}}</option>
                                                         
                                                         
                                                     </select>
@@ -96,7 +96,7 @@
                                         </div>
 
 
-                                        <div v-if="number_of_section>0 && !checkCoursetype()" class="md:flex md:items-center mb-6">
+                                        <div v-if="number_of_section>0" class="md:flex md:items-center mb-6">
                                             <div class="md:w-1/4">
                                                 <label v-if="number_of_section>0"  class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
@@ -105,7 +105,7 @@
                                             </div>
                                             <div class="md:w-3/4">
                                                 <label v-if="number_of_section>0" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="a" class="form-checkbox" >
+                                                    <input  v-model="assign_semester.section" type="checkbox"  value="a" class="form-checkbox" >
                                                     <span class="ml-2"> A</span>
                                                 </label>
                                                 
@@ -114,7 +114,7 @@
                                                 </label>
                                             
                                                 <label v-if="number_of_section>1" class="inline-flex items-center ">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="b" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="b" class="form-checkbox" >
                                                     <span class="ml-2">  B</span>
                                                 </label>
                                                 <label v-if="number_of_section>1" class="inline-flex items-center p-2">
@@ -122,7 +122,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>2" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="c" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="c" class="form-checkbox" >
                                                     <span class="ml-2">  C</span>
                                                 </label>
                                                 <label v-if="number_of_section>2" class="inline-flex items-center p-2">
@@ -130,7 +130,7 @@
                                                 </label>
                                                 
                                                 <label v-if="number_of_section>3" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="d" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="d" class="form-checkbox" >
                                                     <span class="ml-2">  D</span>
                                                 </label>
                                                 <label v-if="number_of_section>3" class="inline-flex items-center p-2">
@@ -138,12 +138,17 @@
                                                 </label>
                                                 
                                                 <label v-if="number_of_section>4" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="e" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="e" class="form-checkbox" >
                                                     <span class="ml-2">  E</span>
                                                 </label>
                                                  <label v-if="number_of_section>4" class="inline-flex items-center p-2">
                                                     
                                                 </label>
+<!-- _________________________________________________________________________________________________________________________ -->
+                                                  <!-- <label v-if="number_of_section>1" class="inline-flex items-center">
+                                                    <input type="checkbox" @click="checkAll()"  class="form-checkbox" >
+                                                    <span class="ml-2">select all</span>
+                                                </label>  -->
 
                                                 <!-- <button v-if="number_of_section>0" @click.prevent="Reset" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
                                                     Reset
@@ -164,7 +169,7 @@
                                             </div>
                                             <div class="md:w-3/4">
                                                 <label v-if="number_of_section>0" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="a1" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="a1" class="form-checkbox" >
                                                     <span class="ml-2"> A1</span>
                                                 </label>
                                                 
@@ -173,7 +178,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>0" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="a2" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="a2" class="form-checkbox" >
                                                     <span class="ml-2"> A2</span>
                                                 </label>
                                                 
@@ -182,7 +187,7 @@
                                                 </label>
                                             
                                                 <label v-if="number_of_section>1" class="inline-flex items-center ">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="b1" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="b1" class="form-checkbox" >
                                                     <span class="ml-2"> B1</span>
                                                 </label>
                                                 <label v-if="number_of_section>1" class="inline-flex items-center p-2">
@@ -190,7 +195,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>1" class="inline-flex items-center ">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="b2" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="b2" class="form-checkbox" >
                                                     <span class="ml-2"> B2</span>
                                                 </label>
                                                 <label v-if="number_of_section>1" class="inline-flex items-center p-2">
@@ -198,7 +203,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>2" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="c1" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="c1" class="form-checkbox" >
                                                     <span class="ml-2">C1</span>
                                                 </label>
                                                 <label v-if="number_of_section>2" class="inline-flex items-center p-2">
@@ -206,7 +211,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>2" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="c2" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="c2" class="form-checkbox" >
                                                     <span class="ml-2"> C2</span>
                                                 </label>
                                                 <label v-if="number_of_section>2" class="inline-flex items-center p-2">
@@ -214,7 +219,7 @@
                                                 </label>
                                                 
                                                 <label v-if="number_of_section>3" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="d1" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="d1" class="form-checkbox" >
                                                     <span class="ml-2"> D1</span>
                                                 </label>
                                                 <label v-if="number_of_section>3" class="inline-flex items-center p-2">
@@ -222,7 +227,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>3" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="d2" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="d2" class="form-checkbox" >
                                                     <span class="ml-2"> D2</span>
                                                 </label>
                                                 <label v-if="number_of_section>3" class="inline-flex items-center p-2">
@@ -230,7 +235,7 @@
                                                 </label>
                                                 
                                                 <label v-if="number_of_section>4" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="e1" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="e1" class="form-checkbox" >
                                                     <span class="ml-2">  E1</span>
                                                 </label>
                                                  <label v-if="number_of_section>4" class="inline-flex items-center p-2">
@@ -238,7 +243,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>4" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox" checked value="e2" class="form-checkbox" >
+                                                    <input v-model="assign_semester.section" type="checkbox"  value="e2" class="form-checkbox" >
                                                     <span class="ml-2">  E2</span>
                                                 </label>
                                                  <label v-if="number_of_section>4" class="inline-flex items-center p-2">
@@ -256,7 +261,7 @@
 
 
 
-
+                                     
                                      
                                         
                                         <div class="md:flex md:items-center">
@@ -295,12 +300,14 @@
                 test:"",
                 session_name:"",
                 number_of_section:0,
+                session_id:0,
+                course_id:0,
                 courses:[],
-                
+                sessions:[],
                 assign_semester:{
-                    session_name:"",
+                    session_id:"",
                     semester:"",
-                    course_code:"",
+                    course_id:"",
                     section:[],
                 }
             
@@ -308,14 +315,28 @@
         },
         created() {
 
-            this.assign_semester.session_name=this.$route.params.id;
+            //this.assign_semester.session_name=this.$route.params.id;
+            this.session_name=this.$route.params.id;
 
             let uri = '/api/courses';
             
             this.axios.get(uri).then((response) => {
                 this.courses = response.data.data;
                 
-                console.log(this.courses);
+                //console.log(this.courses);
+            });
+            
+            uri = '/api/sessions';
+            
+            this.axios.get(uri).then((response) => {
+                this.sessions = response.data.data;
+                
+                //console.log(this.sessions);
+
+                for(var i=0;i<this.sessions.length;i++){
+                    if(this.sessions[i].session_name===this.session_name)
+                        this.assign_semester.session_id=this.sessions[i].id;
+                }
             });
         
 
@@ -325,10 +346,28 @@
         methods:{
             assignSemester(){
                 console.log(this.assign_semester);
+
+             
+
+               
+                let uri = '/api/semester-course/create';
+                this.axios.post(uri, this.assign_semester).then((response) => {
+                 //this.$router.push({name: 'sessions'});
+                     console.log("Saved");
+                     
+                     
+                    
+                });
+
+                    // this.assign_semester.course_id="";
+                    //  this.assign_semester.section=[];
+                    //  this.number_of_section=0;
+                    //  console.log(this.assign_semester);
             },
+
             checkCoursetype(){
                 for(var i=0;i<this.courses.length;i++){
-                    if(this.courses[i].code==this.assign_semester.course_code && this.courses[i].type!=0)
+                    if(this.courses[i].id==this.assign_semester.course_id && this.courses[i].type!=0)
                         return true;
                             
 
@@ -338,7 +377,32 @@
 
             Reset(){
                 this.number_of_section=0;
+            },
+            /*
+            checkAll(){
+                console.log(this.number_of_section);
+               
+                this.assign_semester.section[0]=="a";
+                this.assign_semester.section[1]=="b";
+                this.assign_semester.section[2]=="c";
+
+               console.log(this.assign_semester.section);
+                
+                   for(var i=0;i<this.number_of_section;i++){
+                        if(i==0)
+                            this.assign_semester.section[i]="a";
+                        else if(i==1)
+                            this.assign_semester.section[i]="b";
+                        else if(i==2)
+                            this.assign_semester.section[i]="c";
+                        else if(i==3)
+                            this.assign_semester.section[i]="d";
+                        else if(i==4)
+                            this.assign_semester.section[i]="e";            
+                    }
+                    
             }
+            */
         }
 
  
