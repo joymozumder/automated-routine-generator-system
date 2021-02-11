@@ -536,8 +536,6 @@
 import Vue from 'vue'
  import { BootstrapVue} from 'bootstrap-vue';
  Vue.use(BootstrapVue);
-
-
 export default {
     data() {
         return {
@@ -583,20 +581,16 @@ export default {
           console.log(this.semester_courses);
           //this.initializeIdTracker();
         });
-
         uri = '/api/teachers';
         this.axios.get(uri).then(response => {
           this.teachers = response.data.data;
           console.log(this.teachers);
         });
-
          uri = '/api/courses';
          this.axios.get(uri).then(response => {
            this.courses = response.data.data;
            console.log(this.courses);
          });
-
-
     },
     
     methods: {
@@ -637,16 +631,18 @@ export default {
                       }
                   }
               }
-
           }   
        
         
         console.log(this.assigncourse);    
+        let uri = '/api/routine/create';
+                this.axios.post(uri, this.assigncourse).then((response) => {
+                //this.$router.push({name: 'assigncourses', params: { id: this.$route.params.id }});
+                console.log("saved");
+          });
       },
-
      
      
     }
 }
 </script>
-
