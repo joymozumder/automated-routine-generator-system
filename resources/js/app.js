@@ -173,7 +173,7 @@ const routes = [
                 },
                 {
                     name: 'semestercourse',
-                    path: 'semestercourse/:session/:id',
+                    path: 'semestercourse/:session',
                     component: compSemesterCourse
                 },
                 {

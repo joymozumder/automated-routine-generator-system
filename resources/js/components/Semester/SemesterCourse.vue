@@ -10,6 +10,22 @@
                  <h1>Semester With Courses</h1>
                  
                </b-col>
+               
+               <b-col>
+                        <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-2 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                      @click.prevent="SemesterSelect(semester)"     v-model="semester"                id="grid-state">
+                                                        
+                                <option value=1>1st Semester</option>
+                                <option value=2>2nd Semester</option>
+                                <option value=3>3rd Semester</option>
+                                <option value=4>4th Semester</option>
+                                <option value=5>5th Semester</option>
+                                <option value=6>6th Semester</option>
+                                <option value=7>7th Semester</option>
+                                <option value=8>8th Semester</option>
+                                                        
+                        </select>
+               </b-col>
                <b-col>
                  <b-form-input v-model="filter" type="search" placeholder="Search"></b-form-input>
                </b-col>
@@ -109,7 +125,7 @@
                             &nbsp;
                              
                             
-                            
+                             <input type="radio" value=0 v-model="check"> Not Set
                              <input type="radio" value=1 v-model="check"> Set Duration 
                              <input  type="radio" value=2 v-model="check"> Set Duration And Time
                                                 
@@ -539,6 +555,8 @@ import Vue from 'vue'
 export default {
     data() {
         return {
+            session:0,
+            semester:0,
             set_duration_time:0,
             number_of_class:0,
             indx:0,
@@ -575,11 +593,12 @@ export default {
       }
     },
     created() {
-        let uri = `/api/semester-courses/${this.$route.params.session}/${this.$route.params.id}`;
+        this.session=2;
+        let uri = `/api/semester-courses/${this.session}`;
         this.axios.get(uri).then(response => {
           this.semester_courses = response.data.data;
           console.log(this.semester_courses);
-          //this.initializeIdTracker();
+          
         });
         uri = '/api/teachers';
         this.axios.get(uri).then(response => {
@@ -594,6 +613,15 @@ export default {
     },
     
     methods: {
+      SemesterSelect(semester){
+          //console.log(semester);
+           let uri = `/api/semester-courses/${this.session}/${semester}`;
+           this.axios.get(uri).then(response => {
+                this.semester_courses = response.data.data;
+                console.log(this.semester_courses);
+          
+            });
+      },  
       multipleAssign(){
            if(this.check==2)
             this.assigncourse.entry_type=1;

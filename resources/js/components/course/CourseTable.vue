@@ -12,7 +12,7 @@
                                 <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-32 right-32 z-20"
                                 :to="{name: 'addcourse'}">Create Course</router-link>
                             <div class="p-3">
-        <compDataTable
+        <compDataTable v-if="courses.length!=0"
              
             title="Courses Table"
             
