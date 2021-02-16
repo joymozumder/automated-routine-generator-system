@@ -36,8 +36,6 @@ import compHomeComponent from './components/HomeComponent.vue';
 import compAddCourse from './components/course/AddCourse.vue';
 import compCourseTable from './components/course/CourseTable.vue';
 import compEditCourse from './components/course/EditCourse.vue';
-import compCourseAssign from './components/course/CourseAssign.vue';
-
 
 import compAddRoom from './components/room/AddRoom.vue';
 import compEditRoom from './components/room/EditRoom.vue';
@@ -46,32 +44,23 @@ import compRoomTable from './components/room/RoomTable.vue';
 import compCreateSession from './components/session/createSession.vue';
 import compEditSession from './components/session/EditSession.vue';
 import compSessionTable from "./components/session/SessionTable.vue";
-
 import compSessionComponent from './components/session/SessionComponent.vue';
-import compSelectSession from './components/session/SelectSession.vue';
-//import compAddSemester from './components/session/AddSemester.vue';
-import compAssignCourse from './components/session/AssignCourse.vue';
-import compManualAssign from './components/session/ManualAssign.vue';
-import compRoutine from './components/session/Routine.vue';
+
+
 
 import compAddTeacher from './components/user/AddTeacher.vue';
 import compTeacherTable from './components/user/TeacherTable.vue';
 import compEditTeacher from './components/user/EditTeacher.vue';
 
 
+import compRoutine from './components/session/Routine.vue';
 
-import compAssignTable from "./components/session/AssignTable.vue";
-import compEditEnrollment from "./components/session/EditEnrollment.vue";
-
-import compSemesterTable from "./components/session/SemesterTable.vue";
-
-import compAddSemester from "./components/semester/AddSemester.vue";
-import compEditSemester from "./components/semester/EditSemester.vue";
 import compSemesterCourse from "./components/semester/SemesterCourse.vue";
 import compEditSemesterCourse from "./components/semester/EditSemesterCourse.vue";
+import compAssignSemesterCourse from './components/semester/AssignSemesterCourse.vue';
 
 
-
+//test
 import compTest from './components/Test.vue';
 import compTest2 from './components/Test2.vue';
 import compTest3 from './components/Test3.vue';
@@ -144,31 +133,19 @@ const routes = [
                     path: 'editsession/:id',
                     component: compEditSession
                 },
-                {
-                    name: 'selectsession',
-                    path: 'selectsession',
-                    component: compSelectSession
-                },
+               
                 {
                     name: 'session',
                     path: 'session',
                     component: compSessionComponent
                 },
-                // {
-                //     name: 'addsemester',
-                //     path: ':id/addsemester',
-                //     component: compAddSemester
-                // },
+               
                 {
                     name: 'assigncourse',
                     path: ':id/assigncourse',
-                    component: compAssignCourse
+                    component: compAssignSemesterCourse
                 },
-                {
-                    name: 'manualassign',
-                    path: ':id/manualassign',
-                    component: compManualAssign
-                },
+               
                  {
                     name: 'routine',
                     path: 'routine/:session/:day',
@@ -195,25 +172,16 @@ const routes = [
                     component: compSessionTable
                 },
                 {
-                    name: 'courseassign',
-                    path: 'courseassign/:id',
-                    component: compCourseAssign
+                    name: 'semestercourse',
+                    path: 'semestercourse/:session/:id',
+                    component: compSemesterCourse
                 },
                 {
-                    name: 'assigncourses',
-                    path: 'assigncourses/:id',
-                    component: compAssignTable
+                    name: 'editsemestercourse',
+                    path: 'editsemestercourse/:id',
+                    component: compEditSemesterCourse
                 },
-                {
-                    name: 'editenrollment',
-                    path: 'editenrollment/:id',
-                    component: compEditEnrollment
-                },
-                {
-                    name: 'semesters',
-                    path: 'semesters/:session',
-                    component: compSemesterTable
-                },
+                // test delete
                 {
                     name: 'test',
                     path: 'test',
@@ -235,26 +203,8 @@ const routes = [
                     path: 'test4',
                     component: compTest4
                 },
-                {
-                    name: 'semestercourse',
-                    path: 'semestercourse/:session/:id',
-                    component: compSemesterCourse
-                },
-                {
-                    name: 'editsemestercourse',
-                    path: 'editsemestercourse/:id',
-                    component: compEditSemesterCourse
-                },
-                {
-                    name: 'editsemester',
-                    path: 'editsemester/:session/:id',
-                    component: compEditSemester
-                },
-                {
-                    name: 'addsemester',
-                    path: 'addsemester/:session',
-                    component: compAddSemester
-                }
+                
+                
                 
                 
 

@@ -271,6 +271,14 @@
                                                     Assign Semester 
                                                 </button>
                                             </div>
+
+                                            <div class="md:w-2/3">
+                                                <button @click.prevent="assignSemester" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
+                                                    Save and Return to table 
+                                                </button>
+                                               <!-- <router-link tag="button"  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourse', params: { id: selected_session }}" >Assign Semester with Course</router-link> -->
+                                      
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -356,13 +364,12 @@
                      console.log("Saved");
                      
                      
-                    
+                    this.assign_semester.course_id="";
+                    this.assign_semester.section=[];
+                    this.number_of_section=0;
                 });
 
-                    // this.assign_semester.course_id="";
-                    //  this.assign_semester.section=[];
-                    //  this.number_of_section=0;
-                    //  console.log(this.assign_semester);
+                    
             },
 
             checkCoursetype(){

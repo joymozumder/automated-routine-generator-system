@@ -28,11 +28,10 @@
                                         
                                        <div class="md:flex md:items-center mb-6 justify-center space-x-2 ">
                                             
-                                            <router-link tag="button" class=" bg-yellow-900 hover:bg-yellow-500 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'createsession'}">Create Session</router-link>
+                                            <router-link tag="button" class=" bg-blue-900 hover:bg-blue-500 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'createsession'}">Create Session</router-link>
                                             
-                                             <router-link tag="button"  class="bg-blue-900 hover:bg-blue-300 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'manualassign', params: { id: selected_session }}" >Manual Assign</router-link>
                                             
-                                             <router-link tag="button"  class="bg-blue-900 hover:bg-blue-300 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourse', params: { id: selected_session }}" >Assign Semester with Course</router-link>
+                                             <router-link tag="button"  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourse', params: { id: selected_session }}" >Assign Semester with Course</router-link>
                                         </div>
 
                                             
@@ -46,9 +45,7 @@
 
                                                   
 
-                                                    <router-link tag="button" class=" bg-blue-400 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full"  :to="{name: 'semesters', params: { session: selected_session }}">Add Semester</router-link>
-                                                    <router-link tag="button" class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourses', params: { id: selected_session }}" >Assign Courses</router-link>
-
+                                            
                                                     <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="generateRoutine" >Generate Routine</button>
                                                      <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="assignSelect" >Print Routine </button>
                                             </div>
@@ -111,10 +108,6 @@
 
 
    
-
-
-
-
 
 
     </main>
