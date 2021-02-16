@@ -55,7 +55,7 @@ class RoutineController extends Controller
             $start = $request->start;
             $end = $request->end;
             $day = $request->day;
-            for($i=0; $i<sizeof($day); $i++)
+            for($i=0; $i<sizeof($courses); $i++)
             {
                 for($j=0;$j<sizeof($durations);$j++)
                 {
@@ -83,7 +83,7 @@ class RoutineController extends Controller
         }
         else
         {
-            
+            echo $request;
             $courses = $request->id;
             $durations = $request->duration;
             $teacher_id = $request->teacher_id;
@@ -91,7 +91,7 @@ class RoutineController extends Controller
             $start = $request->start;
             $end = $request->end;
             $day = $request->day;
-            for($i=0; $i<sizeof($day); $i++)
+            for($i=0; $i<sizeof($courses); $i++)
             {
                 for($j=0;$j<sizeof($durations);$j++)
                 {
@@ -115,8 +115,11 @@ class RoutineController extends Controller
                 }
                 
                 
+            }
+                
+                
             
-        }
+        
         }
     }
     //
