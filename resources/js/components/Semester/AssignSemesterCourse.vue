@@ -31,10 +31,11 @@
                                                     Semester
                                                 </label>
                                             </div>
-                                            <div class="md:w-3/4">
+                                            <div class="md:w-3/4 relative">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                         v-model="assign_semester.semester"    id="grid-state">
                                                         
+                                                        <option disabled value="-1">Select Semester</option>
                                                         <option value="1">1st Semester</option>
                                                         <option value="2">2nd Semester</option>
                                                         <option value="3">3rd Semester</option>
@@ -45,7 +46,12 @@
                                                         <option value="8">8th Semester</option>
                                                         
                                                     </select>
-                                                    
+                                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-darker">
+                                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 20 20">
+                                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                                        </svg>
+                                                    </div>
                                             </div>
                                         </div>
 
@@ -57,14 +63,20 @@
                                                     Course
                                                 </label>
                                             </div>
-                                            <div class="md:w-3/4">
+                                            <div class="md:w-3/4 relative">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                         v-model="assign_semester.course_id" id="grid-state">
-                                                        
+                                                        <option disabled value="-1">Select Course</option>
                                                         <option v-for="course in courses" :key="course.id " :value="course.id">{{course.name}}-{{course.code}}</option>
                                                         
                                                         
                                                     </select>
+                                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-darker">
+                                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 20 20">
+                                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                                        </svg>
+                                                    </div>
                                                     
                                             </div>
                                         </div>
@@ -81,16 +93,23 @@
                                                     Number of Section
                                                 </label>
                                             </div>
-                                            <div class="md:w-3/4">
+                                            <div class="md:w-3/4 relative">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                           v-model="number_of_section"  id="grid-state">
                                                         
+                                                        <option disabled value=-1>Select Number of Section</option>
                                                         <option value=1>1</option>
                                                         <option value=2>2</option>
                                                         <option value=3>3</option>
                                                         <option value=4>4</option>
                                                         <option value=5>5</option>
                                                 </select>
+                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-darker">
+                                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                         viewBox="0 0 20 20">
+                                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                                    </svg>
+                                                </div>
                                                     
                                             </div>
                                         </div>
@@ -273,7 +292,7 @@
                                             </div>
 
                                             <div class="md:w-2/3">
-                                                <button @click.prevent="assignSemester" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
+                                                <button @click.prevent="assignReturn" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
                                                     Save and Return to table 
                                                 </button>
                                                <!-- <router-link tag="button"  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourse', params: { id: selected_session }}" >Assign Semester with Course</router-link> -->
@@ -307,15 +326,15 @@
             return {
                 test:"",
                 session_name:"",
-                number_of_section:0,
+                number_of_section:-1,
                 session_id:0,
                 course_id:0,
                 courses:[],
                 sessions:[],
                 assign_semester:{
                     session_id:"",
-                    semester:"",
-                    course_id:"",
+                    semester:"-1",
+                    course_id:"-1",
                     section:[],
                 }
             
@@ -354,10 +373,6 @@
         methods:{
             assignSemester(){
                 console.log(this.assign_semester);
-
-             
-
-               
                 let uri = '/api/semester-course/create';
                 this.axios.post(uri, this.assign_semester).then((response) => {
                  //this.$router.push({name: 'sessions'});
@@ -371,7 +386,20 @@
 
                     
             },
+            assignReturn(){
+                console.log(this.assign_semester);
+                let uri = '/api/semester-course/create';
+                this.axios.post(uri, this.assign_semester).then((response) => {
+                 //this.$router.push({name: 'sessions'});
+                 this.$router.push({name: 'semestercourse', params: { session: this.session_name }});
+                     console.log("Saved");
+                     
+                     
+                    
+                });
 
+                    
+            },
             checkCoursetype(){
                 for(var i=0;i<this.courses.length;i++){
                     if(this.courses[i].id==this.assign_semester.course_id && this.courses[i].type!=0)

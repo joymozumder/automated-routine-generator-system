@@ -10,7 +10,7 @@
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                                 <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-32 right-32 z-50"
                                 :to="{name: 'createsession'}">Create Session</router-link>
-                            <div class="p-3">
+                            <div class="p-3 mt-4">
                                     <compDataTable v-if="sessions.length!=0"
                                         
                                         title="Session Table"

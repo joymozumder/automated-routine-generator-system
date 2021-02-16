@@ -17,12 +17,19 @@
                                                     Session Name
                                                 </label>
                                             </div>
-                                            <div class="md:w-3/4">
+                                            <div class="md:w-3/4 relative">
                                                 <select  class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                           v-model="selected_session"  id="grid-state">
                                                         <option v-for="session in sessions" :key="session.id">{{session.session_name}}</option>
                                                        
-                                                    </select>
+                                                </select>
+                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-darker">
+                                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                         viewBox="0 0 20 20">
+                                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                                    </svg>
+                                                </div>
+                                               
                                             </div>
                                         </div>
                                         
@@ -66,9 +73,10 @@
                                                                 Select Day
                                                             </label>
                                                         </div>
-                                                        <div class="md:w-3/4">
+                                                        <div class="md:w-3/4 relative">
                                                                 <select v-model="day" class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                                         id="grid-state">
+                                                                        <option value=-1>Select Day</option>
                                                                         <option value=1>Saturday</option>
                                                                         <option value=2>Sunday</option>
                                                                         <option value=3>Monday</option>
@@ -77,6 +85,12 @@
                                                                         <option value=6>Thursday</option>
                                                                     
                                                                     </select>
+                                                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-darker">
+                                                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                                            viewBox="0 0 20 20">
+                                                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                                                        </svg>
+                                                                    </div>
                                                             </div>
                                                         </div>
                                         
@@ -127,7 +141,7 @@
                 },
                 
                 select_2:0,
-                day:0,
+                day:-1,
                 
         
        
