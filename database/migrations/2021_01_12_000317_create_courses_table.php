@@ -19,6 +19,7 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->double('credit');
             $table->integer('type')->comment('0=>Theory_Class, 1=>CSE_Lab, 2=>EEE_Lab, 3=>Communication_Lab, 4=>Mechanical_Lab, 5 => Physics_Lab');
+            $table->integer('semester');
             $table->boolean('status');
             //0->normal 1->cse lab 2->eee lab 3->com lab 4->me lab 5-> phy lab
             $table->timestamps();

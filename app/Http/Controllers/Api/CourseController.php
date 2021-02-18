@@ -21,6 +21,12 @@ class CourseController extends Controller
         return CourseResource::collection($courses);
     }
 
+    public function semesterIndex($semester){
+        $courses = Course::select()
+                -> where("semester","=",$semester)
+                ->get();
+        return CourseResource::collection($courses);
+    }
     /**
      * Show the form for creating a new resource.
      *

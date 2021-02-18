@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 //Route::group(['middleware' => 'checkloggedin'], function(){
     Route::get('/courses','api\CourseController@index');
+    Route::get('/courses/{semester}','api\CourseController@semesterIndex'); //semester = 1 /2/3/4/5/6/7/8
     Route::post('/course/create','api\CourseController@store');
     Route::get('/course/{id}','api\CourseController@show');
     Route::get('/course/edit/{id}','api\CourseController@edit');
