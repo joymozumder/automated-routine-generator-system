@@ -10,7 +10,7 @@
                  <h1>Semester With Courses</h1>
                  
                </b-col>
-               
+                 
                <b-col>
                         <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-2 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                       @click.prevent="SemesterSelect(semester)"     v-model="semester"                id="grid-state-1">
