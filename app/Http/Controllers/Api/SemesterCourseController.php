@@ -33,7 +33,7 @@ class SemesterCourseController extends Controller
                              ->join('courses','semester_courses.course_id','=','courses.id')
                              ->select('semester_courses.*','session_data.session_name as session_name','courses.code as course_code','courses.name as course_name')
                              ->where('semester_courses.session_id','=',$session_id)
-                             ->paginate(10);
+                             ->get();
         return SemesterCourseResource::collection($obj);
     }
     public function session_semester_index($session_id,$semester)

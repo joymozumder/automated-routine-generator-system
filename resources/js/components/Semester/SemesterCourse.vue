@@ -597,6 +597,15 @@ export default {
         return this.semester_courses.length;
       }
     },
+    mounted() {
+        if (localStorage.getItem('reloaded')) {
+            localStorage.removeItem('reloaded');
+        } 
+        else {
+            localStorage.setItem('reloaded', '1');
+            location.reload();
+        }
+    },
     created() {
         this.session=2;
         let uri = `/api/semester-courses/${this.session}`;
@@ -677,7 +686,9 @@ export default {
                 //this.$router.push({name: 'semestercourse', params: { session: this.$route.params.session }});
                 console.log(this.$route.params.session);
                 console.log("saved");
+                this.$router.go(this.$router.currentRoute);
           });
+          
       },
      
      
