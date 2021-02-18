@@ -851,7 +851,35 @@ export default {
              }
          }
         this.assigncourse.course_type=this.course_type;
-        //console.log(this.course_type);    
+        if(this.check==0 && this.same_type==1){
+              for(var i=0;i<this.courses.length;i++){
+                  if(this.assigncourse.id[0]==this.courses[i].id){
+                      if(this.courses[i].credit==4){
+                           this.assigncourse.duration[0]=2;
+                           this.assigncourse.duration[1]=2;
+                      }
+                      else if(this.courses[i].credit==3){
+                           this.assigncourse.duration[0]=1.5;
+                            this.assigncourse.duration[1]=1.5;
+                      }
+                      else if(this.courses[i].credit==2){
+                           this.assigncourse.duration[0]=2;
+                      }
+                      else if(this.courses[i].credit==1.5){
+                           this.assigncourse.duration[0]=3;
+                      }
+                      else if(this.courses[i].credit==1){
+                           this.assigncourse.duration[0]=2;
+                      }
+                  }
+              }
+          }   
+        
+
+
+
+
+
         console.log(this.assigncourse);    
         /*
         let uri = '/api/routine/create';
