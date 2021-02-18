@@ -63,7 +63,7 @@
       
              <div class="flex justify-center">
                 <button data-modal='centeredFormModal'
-                    class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  @click.prevent="ChackSelect"  class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Select
                     </button>
               </div>
@@ -73,7 +73,7 @@
            <div id='centeredFormModal' class="modal-wrapper">
                 <div class="overlay close-modal"></div>
                     <div class="modal modal-centered">
-                        <div class="modal-content shadow-lg p-5">
+                        <div class="modal-content shadow-2xl p-5">
                             <div class="border-b p-2 pb-3 pt-0 mb-4">
                             <div class="flex justify-between items-center">
                                     Assign
@@ -117,7 +117,8 @@
                                 </div>
 
 
-                            <div class="flex flex-wrap -mx-3 mb-2">
+                        <section v-if="same_type==1">
+                                <div class="flex flex-wrap -mx-3 mb-2">
                                 <div class="w-full px-3">
                                     <!-- v-if="assigncourse.check==1 || set_duration_time==1" -->
                                         
@@ -129,8 +130,10 @@
                                             <input type="radio" value=0 v-model="check"> Not Set
                                             <input type="radio" value=1 v-model="check"> Set Duration 
                                             <input  type="radio" value=2 v-model="check"> Set Duration And Time
+                                            
                                                                 
                                         </label>
+                                         
                                         <label v-if="check>0"  class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-2" for="grid-password">
                                             Number of Class
                                             &nbsp;
@@ -143,6 +146,8 @@
                                                                 
                                 </div>
                             </div>
+
+                           
 
                                 <div v-if="number_of_class>0 && check==1" class="flex flex-wrap -mx-3 mb-2">
                                     <div v-if="number_of_class>0" class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -169,7 +174,19 @@
                                                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
                                                 </svg>
                                             </div> 
+                                            
+                                               
+                                            
+                                                
+                                            
                                         </div>
+                                        
+                                        
+                                           <div v-if="lab==1">
+                                               <input type="checkbox" :value=1 v-model="duration_type[0]"> Theory
+                                           </div>
+                                        
+                                        
                                     </div>
 
                                     <div v-if="number_of_class>1" class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -196,7 +213,13 @@
                                                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
                                                 </svg>
                                             </div>
+                                            <div v-if="lab==1">
+                                               <input type="checkbox" :value=1 v-model="duration_type[1]"> Theory
+                                           </div>
+                                            
                                         </div>
+
+                                        
                                     </div>
 
                                     <div v-if="number_of_class>2" class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -224,6 +247,10 @@
                                                 </svg>
                                             </div> 
                                         </div>
+                                        <div v-if="lab==1">
+                                               <input type="checkbox" :value=1 v-model="duration_type[2]"> Theory
+                                        </div>
+                                        
                                     </div>
                                 </div>
 
@@ -261,6 +288,10 @@
                                                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
                                                 </svg>
                                             </div> 
+
+                                        </div>
+                                        <div v-if="lab==1">
+                                               <input type="checkbox" :value=1 v-model="duration_type[0]"> Theory
                                         </div>
                                     </div>
 
@@ -354,6 +385,10 @@
                                                 </svg>
                                             </div> 
                                         </div>
+
+                                        <div v-if="lab==1">
+                                               <input type="checkbox" :value=1 v-model="duration_type[1]"> Theory
+                                        </div>
                                     </div>
 
                                     <div  class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -380,6 +415,7 @@
                                                 </svg>
                                             </div>
                                         </div>
+                                        
                                     </div>
 
                                     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -446,6 +482,10 @@
                                                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
                                                 </svg>
                                             </div> 
+                                        </div>
+
+                                        <div v-if="lab==1">
+                                               <input type="checkbox" :value=1 v-model="duration_type[2]"> Theory
                                         </div>
                                     </div>
 
@@ -515,6 +555,7 @@
                                 </div>
                 <!-- __________________________________________________________________________________________________ -->
 
+                           </section>
 
 
 
@@ -560,6 +601,13 @@ import Vue from 'vue'
 export default {
     data() {
         return {
+            duration_type:[false,false,false],
+            same_type:1,
+            lab:0,
+            course_id:[],
+            course_type:[],
+            course_credit:[],
+            lab_theory:0,
             session:0,
             semester:0,
             set_duration_time:0,
@@ -579,10 +627,12 @@ export default {
             assigncourse:{
               entry_type:0,
               id:[],
+              course_type:[],
               teacher_id:-1,
               duration:[0,0,0,],
+              daration_manually:[],
+              duration_type:[0,0,0,],
               total_student:0,
-              
               day:[0,0,0],
               time:[0,0,0],
               start:[0,0,0],
@@ -612,8 +662,9 @@ export default {
         
         this.axios.get(uri).then(response => {
           this.semester_courses = response.data.data;
-          //console.log(this.semester_courses);
           
+        //   for(var i=0;i<5;i++)
+        //     console.log(this.semester_courses[i]);
         });
         uri = '/api/teachers';
         this.axios.get(uri).then(response => {
@@ -628,6 +679,137 @@ export default {
     },
     
     methods: {
+      ChackSelect(){
+          
+
+          for(var i=0;i<this.assigncourse.id.length;i++){
+              
+               for(var j=0;j<this.semester_courses.length;j++){
+                   
+                    
+                    if(this.semester_courses[j].id==this.assigncourse.id[i]){
+                       
+                        this.course_type[i]=this.courses[this.semester_courses[j].course_id-1].type;
+                        this.course_credit[i]=this.courses[this.semester_courses[j].course_id-1].credit;
+                        
+                    }
+        
+               }
+           }
+
+          
+
+            
+            
+           for(var i=0;i<this.course_type.length-1;i++){
+                if(this.course_type[i]!=this.course_type[i+1]){
+                    this.same_type=0;
+                }
+           }
+
+           if(this.same_type==1 && this.course_type.length>0){
+                if(this.course_type[0]!=0){
+                    this.assigncourse.duration_type[0]=this.course_type[0];
+                    this.assigncourse.duration_type[1]=this.course_type[0];
+                    this.assigncourse.duration_type[2]=this.course_type[0];
+                }
+           }
+
+           if(this.course_type.length>0){
+               if(this.course_type!=0){
+                   this.lab=1;
+                   
+               }
+           }
+           
+
+           console.log(this.course_type);
+           //console.log(this.course_credit);
+           for(var i=0;i<this.assigncourse.id.length;i++){ 
+                this.assigncourse.daration_manually[i]=[];
+           }
+           
+           if(this.same_type==0){
+               for(var i=0;i<this.assigncourse.id.length;i++){
+                        if(this.course_type[i]==0){
+                            if(this.course_credit[i]==2){
+                                this.assigncourse.daration_manually[i][0]=1;
+                                this.assigncourse.daration_manually[i][1]=1;
+                            }
+                            
+                            else if(this.course_credit[i]==3){
+                                this.assigncourse.daration_manually[i][0]=1.5;
+                                this.assigncourse.daration_manually[i][1]=1.5;
+                           
+                            }
+                            else if(this.course_credit[i]==4){
+                                this.assigncourse.daration_manually[i][0]=2;
+                                this.assigncourse.daration_manually[i][1]=2;
+                            }    
+                                
+                            
+                                  
+                        }
+                        else if(this.course_type[i]!=0){
+                            if(this.course_credit[i]==1){
+                                this.assigncourse.daration_manually[i][0]=2;
+                                
+                            }
+                            
+                            else if(this.course_credit[i]==1.5){
+                                this.assigncourse.daration_manually[i][0]=2;
+                                
+                            }
+                            else if(this.course_credit[i]==2){
+                                this.assigncourse.daration_manually[i][0]=4;
+                            }    
+                        }
+                
+                }
+           }
+           
+           
+      },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
       SemesterSelect(semester){
           //console.log(semester);
            let uri = `/api/semester-courses/${this.session}/${semester}`;
@@ -648,47 +830,36 @@ export default {
                   this.assigncourse.start[i] = Number(this.assigncourse.time[i]) + Number(( Number(this.assigncourse.day[i]) -1)*18);
                   this.assigncourse.end[i] = Number(this.assigncourse.start[i]) + Number(this.assigncourse.duration[i]) + Number(this.assigncourse.duration[i])-1;
               }
-                console.log(this.assigncourse);
+                //console.log(this.assigncourse);
           }
-          console.log(4/3);
-         
-          if(this.check==0){
-              for(var i=0;i<this.courses.length;i++){
-                  if(this.assigncourse.id[0]==this.courses[i].id){
-                      if(this.courses[i].credit==4){
-                           this.assigncourse.duration[0]=2;
-                           this.assigncourse.duration[1]=2;
-                      }
-                      else if(this.courses[i].credit==3){
-                           this.assigncourse.duration[0]=1.5;
-                            this.assigncourse.duration[1]=1.5;
-                      }
-                      else if(this.courses[i].credit==2){
-                           this.assigncourse.duration[0]=2;
-                      }
-                      else if(this.courses[i].credit==1.5){
-                           this.assigncourse.duration[0]=3;
-                      }
-                      else if(this.courses[i].credit==1){
-                           this.assigncourse.duration[0]=2;
-                      }
-                  }
-              }
-          }   
-       
+          
+           this.assigncourse.course_type=this.assigncourse.id;
+          for(var i=0;i<this.assigncourse.id.length;i++){
+               for(var j=0;j<this.courses.length;j++){
+                    if(this.courses[j].id==this.assigncourse.id[i]){
+                        this.assigncourse.course_type[i]=this.courses[j].type;
+                    }
         
+               }
+           }
+          
+         
+        //console.log(this.duration_type);
+         for(var i=0;i<3;i++){
+             if(this.duration_type[i]==true){
+                 this.assigncourse.duration_type[i]=0;
+             }
+         }
+        this.assigncourse.course_type=this.course_type;
+        //console.log(this.course_type);    
         console.log(this.assigncourse);    
+        /*
         let uri = '/api/routine/create';
                 this.axios.post(uri, this.assigncourse).then((response) => {
-                //this.$router.push({name: 'assigncourses', params: { id: this.$route.params.id }});
-                 //this.$router.push({name: 'routine', params: { session: selected_session,day:day }});
-                 //this.$router.push({name: 'semestercourse', params: { session: 2,day:1 }});
-                //this.$router.push({name: 'semestercourse', params: { session: this.$route.params.session }});
-                console.log(this.$route.params.session);
-                console.log("saved");
-                this.$router.go(this.$router.currentRoute);
+                 this.$router.go(this.$router.currentRoute);
+                
           });
-          
+          */
       },
      
      
