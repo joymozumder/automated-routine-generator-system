@@ -51,6 +51,7 @@
                                             
                                             <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                        v-model="room.type" id="grid-state">
+                                                    <option value="-1">Select Course Type</option>
                                                     <option value="0">Theory Class</option>
                                                     <option value="1">CSE LAB</option>
                                                     <option value="2">EEE LAB</option>
@@ -143,7 +144,7 @@
           room:{
               number:0,
               name:"",
-              type:0,
+              type:-1,
               capacity:0,
               status:false
           }

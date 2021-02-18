@@ -30,7 +30,7 @@
                                                     Semester-Section
                                                 </label>
                                             </div>
-                                            <div class="md:w-3/4">
+                                            <div class="md:w-3/4 relative">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                           v-model="semester_course.semester_section"  id="grid-state">
                                                         <!-- v-for="semester in semesters" :key="semester.id " :value="semester.id" -->
@@ -198,6 +198,12 @@
                                                         <option value="8E1">8E1</option>
                                                         <option value="8E2">8E2</option>
                                                     </select>
+                                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-darker">
+                                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 20 20">
+                                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                                        </svg>
+                                                    </div>
                                                     
                                             </div>
                                         </div>
@@ -211,13 +217,19 @@
                                                     Course
                                                 </label>
                                             </div>
-                                            <div class="md:w-3/4">
+                                            <div class="md:w-3/4 relative">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                          v-model="semester_course.course_id"  id="grid-state">
                                                         <!--  v-for="teacher in teachers" :key="teacher.id" -->
                                                         <option v-for="course in courses" :key="course.id" :value="course.id">{{course.name}}-{{course.code}}</option>
                                                        
                                                     </select>
+                                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-darker">
+                                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 20 20">
+                                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                                        </svg>
+                                                    </div>
                                                     
                                             </div>
                                         </div>

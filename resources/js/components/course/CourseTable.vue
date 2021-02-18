@@ -11,49 +11,49 @@
                                  <!-- <button class="modal-trigger bg-green-500 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50" data-modal='createSessionModal' >Create Session</button> -->
                                 <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-32 right-32 z-20"
                                 :to="{name: 'addcourse'}">Create Course</router-link>
-                            <div class="p-3">
-        <compDataTable
-             
-            title="Courses Table"
-            
-            :columns="tableColumns1"
-            :rows="courses"
-            :clickable="false"
-            :sortable="true"
-            
-            :exactSearch="true"
-            :searchable="true"
-            :paginate="true"
-            :exportable="false"
-            :printable="false"
-            
+                            <div class="p-3 mt-4">
+                                <compDataTable v-if="courses.length!=0"
+                                    
+                                    title="Courses Table"
+                                    
+                                    :columns="tableColumns1"
+                                    :rows="courses"
+                                    :clickable="false"
+                                    :sortable="true"
+                                    
+                                    :exactSearch="true"
+                                    :searchable="true"
+                                    :paginate="true"
+                                    :exportable="false"
+                                    :printable="false"
+                                    
 
-        > 
+                                > 
 
-                <th slot="thead-tr">
-                    Actions
-                </th>
-                <template slot="tbody-tr" slot-scope="props">
-                    <td>
-                         
-
-
-                        <router-link tag="button"  class="btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editcourse', params: { id: props.row.id }}" >
-                             <i class="material-icons white-text">
-                                edit</i>
-                         </router-link>
+                                        <th slot="thead-tr">
+                                            Actions
+                                        </th>
+                                        <template slot="tbody-tr" slot-scope="props">
+                                            <td>
+                                                
 
 
+                                                <router-link tag="button"  class="btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editcourse', params: { id: props.row.id }}" >
+                                                    <i class="material-icons white-text">
+                                                        edit</i>
+                                                </router-link>
 
 
-                        <button class="btn  bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn"
-                            @click.prevent="deletePost(props.row.id)"> 
-                            <i class="material-icons white-text">delete</i>
-                        </button>
-                    </td>
-                    
-                </template>
-        </compDataTable>
+
+
+                                                <button class="btn  bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn"
+                                                    @click.prevent="deletePost(props.row.id)"> 
+                                                    <i class="material-icons white-text">delete</i>
+                                                </button>
+                                            </td>
+                                            
+                                        </template>
+                                </compDataTable>
                   </div>
                         </div>
                     </div>
