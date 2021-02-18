@@ -663,8 +663,20 @@ export default {
         this.axios.get(uri).then(response => {
           this.semester_courses = response.data.data;
           
-        //   for(var i=0;i<5;i++)
-        //     console.log(this.semester_courses[i]);
+            for(var i=0;i<this.semester_courses.length;i++){
+                console.log(this.semester_courses[i].group);
+                if(this.semester_courses[i].group==1){
+                    this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"1";
+                }
+                else if(this.semester_courses[i].group==2){
+                    this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"2";
+                    console.log("this.semester_courses");
+                }
+                else{
+                        this.semester_courses[i].semester_section=this.semester_courses[i].semester_section;
+                }
+            }
+             console.log(this.semester_courses);
         });
         uri = '/api/teachers';
         this.axios.get(uri).then(response => {
