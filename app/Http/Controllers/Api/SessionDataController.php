@@ -68,6 +68,15 @@ class SessionDataController extends Controller
         return new SessionDataResource($ses);
     }
 
+
+    public function show_session($session_name)
+    {
+        $ses = SessionData::select()
+            ->where("session_name","=",$session_name)
+            ->first();
+        return new SessionDataResource($ses);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
