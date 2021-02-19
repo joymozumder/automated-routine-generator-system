@@ -49,6 +49,7 @@ class RoutineController extends Controller
         if($request->entry_type==1)
         {
             $courses = $request->id;
+            $course_type = $request->duration_type;
             $durations = $request->duration;
             $teacher_id = $request->teacher_id;
             $total_student = $request->total_student;
@@ -67,10 +68,10 @@ class RoutineController extends Controller
                         $Routine->total_student   = $request->total_student;
                         $Routine->room_number   = 0;
                         $Routine->duration   = $durations[$j];
-                        $Routine->day   = $day[$j];
+                        $Routine->day   = (int)$day[$j];
                         $Routine->start   = $start[$j];
                         $Routine->end   = $end[$j];
-                        $Routine->course_type   = 0;
+                        $Routine->course_type   = $course_type[$j];
                         $Routine->entry_type   = $request->entry_type;
                         $Routine->status   = true;
                         $Routine->save();
@@ -86,6 +87,7 @@ class RoutineController extends Controller
             echo $request;
             $courses = $request->id;
             $durations = $request->duration;
+            $course_type = $request->duration_type;
             $teacher_id = $request->teacher_id;
             $total_student = $request->total_student;
             $start = $request->start;
@@ -106,7 +108,7 @@ class RoutineController extends Controller
                         $Routine->day   = 0;
                         $Routine->start   = 0;
                         $Routine->end   = 0;
-                        $Routine->course_type   = 0;
+                        $Routine->course_type   = $course_type[$j];
                         $Routine->entry_type   = $request->entry_type;
                         $Routine->status   = true;
                         $Routine->save();
@@ -130,9 +132,12 @@ class RoutineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($semester_course_id)
     {
-        //
+        $obj = Routine::select()
+            ->where("semester_course_id","=",$semester_course_id)
+            ->first();
+        return new RoutineResource($obj);
     }
 
     /**
