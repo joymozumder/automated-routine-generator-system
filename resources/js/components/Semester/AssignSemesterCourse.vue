@@ -95,7 +95,7 @@
                                             </div>
                                             <div class="md:w-3/4 relative">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                          v-model="number_of_section"  id="grid-state">
+                                                          v-model="number_of_section" @change ="initializeSection" id="grid-state">
                                                         
                                                         <option disabled value=-1>Select Number of Section</option>
                                                         <option value=1>1</option>
@@ -183,12 +183,12 @@
                                             <div class="md:w-1/4">
                                                 <label v-if="number_of_section>0"  class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                     for="inline-course-code">
-                                                    Section
+                                                    Group
                                                 </label>
                                             </div>
                                             <div class="md:w-3/4">
                                                 <label v-if="number_of_section>0" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox"  value="A1" class="form-checkbox" >
+                                                    <input v-model="group" type="checkbox"  value="A1" class="form-checkbox " >
                                                     <span class="ml-2"> A1</span>
                                                 </label>
                                                 
@@ -197,7 +197,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>0" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox"  value="A2" class="form-checkbox" >
+                                                    <input v-model="group" type="checkbox"  value="A2" class="form-checkbox" >
                                                     <span class="ml-2"> A2</span>
                                                 </label>
                                                 
@@ -206,7 +206,7 @@
                                                 </label>
                                             
                                                 <label v-if="number_of_section>1" class="inline-flex items-center ">
-                                                    <input v-model="assign_semester.section" type="checkbox"  value="B1" class="form-checkbox" >
+                                                    <input v-model="group" type="checkbox"  value="B1" class="form-checkbox" >
                                                     <span class="ml-2"> B1</span>
                                                 </label>
                                                 <label v-if="number_of_section>1" class="inline-flex items-center p-2">
@@ -214,7 +214,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>1" class="inline-flex items-center ">
-                                                    <input v-model="assign_semester.section" type="checkbox"  value="B2" class="form-checkbox" >
+                                                    <input v-model="group" type="checkbox"  value="B2" class="form-checkbox" >
                                                     <span class="ml-2"> B2</span>
                                                 </label>
                                                 <label v-if="number_of_section>1" class="inline-flex items-center p-2">
@@ -222,7 +222,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>2" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox"  value="C1" class="form-checkbox" >
+                                                    <input v-model="group" type="checkbox"  value="C1" class="form-checkbox" >
                                                     <span class="ml-2">C1</span>
                                                 </label>
                                                 <label v-if="number_of_section>2" class="inline-flex items-center p-2">
@@ -230,7 +230,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>2" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox"  value="C2" class="form-checkbox" >
+                                                    <input v-model="group" type="checkbox"  value="C2" class="form-checkbox" >
                                                     <span class="ml-2"> C2</span>
                                                 </label>
                                                 <label v-if="number_of_section>2" class="inline-flex items-center p-2">
@@ -238,7 +238,7 @@
                                                 </label>
                                                 
                                                 <label v-if="number_of_section>3" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox"  value="D1" class="form-checkbox" >
+                                                    <input v-model="group" type="checkbox"  value="D1" class="form-checkbox" >
                                                     <span class="ml-2"> D1</span>
                                                 </label>
                                                 <label v-if="number_of_section>3" class="inline-flex items-center p-2">
@@ -246,7 +246,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>3" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox"  value="D2" class="form-checkbox" >
+                                                    <input v-model="group" type="checkbox"  value="D2" class="form-checkbox" >
                                                     <span class="ml-2"> D2</span>
                                                 </label>
                                                 <label v-if="number_of_section>3" class="inline-flex items-center p-2">
@@ -254,7 +254,7 @@
                                                 </label>
                                                 
                                                 <label v-if="number_of_section>4" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox"  value="E1" class="form-checkbox" >
+                                                    <input v-model="group" type="checkbox"  value="E1" class="form-checkbox" >
                                                     <span class="ml-2">  E1</span>
                                                 </label>
                                                  <label v-if="number_of_section>4" class="inline-flex items-center p-2">
@@ -262,7 +262,7 @@
                                                 </label>
 
                                                 <label v-if="number_of_section>4" class="inline-flex items-center">
-                                                    <input v-model="assign_semester.section" type="checkbox"  value="E2" class="form-checkbox" >
+                                                    <input v-model="group" type="checkbox"  value="E2" class="form-checkbox" >
                                                     <span class="ml-2">  E2</span>
                                                 </label>
                                                  <label v-if="number_of_section>4" class="inline-flex items-center p-2">
@@ -331,11 +331,13 @@
                 course_id:0,
                 courses:[],
                 sessions:[],
+                group:[],
                 assign_semester:{
                     session_id:"",
                     semester:"-1",
                     course_id:"-1",
                     section:[],
+
                 }
             
             }
@@ -383,8 +385,107 @@
                         });
                   }
             },
+            initializeSection(){
+                
+                this.assign_semester.section = [];
+                this.group = [];
+                console.log(this.group);
+                console.log(this.assign_semester.section);
+                if(this.number_of_section == 1)
+                {
+                    this.assign_semester.section.push("A");
+                    if(this.checkCoursetype())
+                    {
+                        this.group.push("A1");
+                        this.group.push("A2");
+                    }
+                }
+                else if(this.number_of_section == 2)
+                {
+                    this.assign_semester.section.push("A");
+                    this.assign_semester.section.push("B");
+                    if(this.checkCoursetype())
+                    {
+                        this.group.push("A1");
+                        this.group.push("A2");
+                        this.group.push("B1");
+                        this.group.push("B2");
+                    }
+                }
+                else if(this.number_of_section == 3)
+                {
+                    this.assign_semester.section.push("A");
+                    this.assign_semester.section.push("B");
+                    this.assign_semester.section.push("C");
+                    if(this.checkCoursetype())
+                    {
+                        this.group.push("A1");
+                        this.group.push("A2");
+                        this.group.push("B1");
+                        this.group.push("B2");
+                        this.group.push("C1");
+                        this.group.push("C2");
+                    }
+                }
+                else if(this.number_of_section == 4)
+                {
+                    this.assign_semester.section.push("A");
+                    this.assign_semester.section.push("B");
+                    this.assign_semester.section.push("C");
+                    this.assign_semester.section.push("D");
+                    if(this.checkCoursetype())
+                    {
+                        this.group.push("A1");
+                        this.group.push("A2");
+                        this.group.push("B1");
+                        this.group.push("B2");
+                        this.group.push("C1");
+                        this.group.push("C2");
+                        this.group.push("D1");
+                        this.group.push("D2");
+                    }
+                }
+                else if(this.number_of_section == 5)
+                {
+                    this.assign_semester.section.push("A");
+                    this.assign_semester.section.push("B");
+                    this.assign_semester.section.push("C");
+                    this.assign_semester.section.push("D");
+                    this.assign_semester.section.push("E");
+                    if(this.checkCoursetype())
+                    {
+                        this.group.push("A1");
+                        this.group.push("A2");
+                        this.group.push("B1");
+                        this.group.push("B2");
+                        this.group.push("C1");
+                        this.group.push("C2");
+                        this.group.push("D1");
+                        this.group.push("D2");
+                        this.group.push("E1");
+                        this.group.push("E2");
+                    }
+                }
+            },
             assignSemester(){
                 console.log(this.assign_semester);
+                for(var i = 0; i<this.number_of_section; i++)
+                {
+                    var flag = true;
+                    for(var j=0; j<this.group.length; j++)
+                    {
+                        var temp = this.group[j];
+                        if(this.assign_semester.section[i] == temp[0] )
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if(flag == true) this.group.push(this.assign_semester.section[i]);
+                }
+                this.assign_semester.section = [];
+                this.assign_semester.section = this.group;
+                console.log(this.assign_semester.section);
                 let uri = '/api/semester-course/create';
                 this.axios.post(uri, this.assign_semester).then((response) => {
                  //this.$router.push({name: 'sessions'});
@@ -400,6 +501,24 @@
             },
             assignReturn(){
                 console.log(this.assign_semester);
+                for(var i = 0; i<this.number_of_section; i++)
+                {
+                    var flag = true;
+                    for(var j=0; j<this.group.length; j++)
+                    {
+                        var temp = this.group[j];
+                        if(this.assign_semester.section[i] == temp[0] )
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if(flag == true) this.group.push(this.assign_semester.section[i]);
+                }
+                this.assign_semester.section = [];
+                this.assign_semester.section = this.group;
+                console.log(this.assign_semester.section);
+
                 let uri = '/api/semester-course/create';
                 this.axios.post(uri, this.assign_semester).then((response) => {
                  //this.$router.push({name: 'sessions'});
