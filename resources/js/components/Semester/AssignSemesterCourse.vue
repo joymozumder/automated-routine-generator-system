@@ -372,13 +372,16 @@
 
         methods:{
             SemesterSelect(semester){
-                //  let uri = `/api/semester-courses/${this.session}/${semester}`;
+                 console.log(semester);
+                  if(semester>0){
+                      let uri = `/api/courses/${semester}`;
             
-                // this.axios.get(uri).then((response) => {
-                //     this.courses = response.data.data;
-                    
-                //     //console.log(this.courses);
-                // });
+                        this.axios.get(uri).then((response) => {
+                            this.courses = response.data.data;
+                            
+                        console.log(this.courses);
+                        });
+                  }
             },
             assignSemester(){
                 console.log(this.assign_semester);

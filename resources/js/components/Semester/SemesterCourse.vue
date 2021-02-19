@@ -608,7 +608,7 @@ export default {
             course_type:[],
             course_credit:[],
             lab_theory:0,
-            session:0,
+            session:{},
             semester:0,
             set_duration_time:0,
             number_of_class:0,
@@ -657,40 +657,54 @@ export default {
         }
     },
     created() {
-        this.session=2;
-        let uri = `/api/semester-courses/${this.session}`;
+        console.log(this.$route.params.session);
+        let uri = `/api/find_session/${this.$route.params.session}`;
+        this.axios.get(uri).then(response => {
+          this.session = response.data.data;
+          //console.log(this.session);
+          this.callMethod(); 
+        });
         
-        this.axios.get(uri).then(response => {
-          this.semester_courses = response.data.data;
-          
-            for(var i=0;i<this.semester_courses.length;i++){
-                console.log(this.semester_courses[i].group);
-                if(this.semester_courses[i].group==1){
-                    this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"1";
-                }
-                else if(this.semester_courses[i].group==2){
-                    this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"2";
-                    console.log("this.semester_courses");
-                }
-                else{
-                        this.semester_courses[i].semester_section=this.semester_courses[i].semester_section;
-                }
-            }
-             console.log(this.semester_courses);
-        });
-        uri = '/api/teachers';
-        this.axios.get(uri).then(response => {
-          this.teachers = response.data.data;
-          //console.log(this.teachers);
-        });
-         uri = '/api/courses';
-         this.axios.get(uri).then(response => {
-           this.courses = response.data.data;
-           //console.log(this.courses);
-         });
+        
     },
     
+    
     methods: {
+        callMethod(){
+                console.log(this.session);
+                console.log("end");
+                let uri = `/api/semester-courses/${this.session.id}`;
+                console.log(uri);
+                this.axios.get(uri).then(response => {
+                this.semester_courses = response.data.data;
+                
+                    for(var i=0;i<this.semester_courses.length;i++){
+                        console.log(this.semester_courses[i].group);
+                        if(this.semester_courses[i].group==1){
+                            this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"1";
+                        }
+                        else if(this.semester_courses[i].group==2){
+                            this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"2";
+                            console.log("this.semester_courses");
+                        }
+                        else{
+                                this.semester_courses[i].semester_section=this.semester_courses[i].semester_section;
+                        }
+                    }
+                    console.log(this.semester_courses);
+                });
+                uri = '/api/teachers';
+                this.axios.get(uri).then(response => {
+                this.teachers = response.data.data;
+                //console.log(this.teachers);
+                });
+                uri = '/api/courses';
+                this.axios.get(uri).then(response => {
+                this.courses = response.data.data;
+                //console.log(this.courses);
+                });
+
+        },
       ChackSelect(){
           
 
@@ -824,7 +838,7 @@ export default {
       
       SemesterSelect(semester){
           //console.log(semester);
-           let uri = `/api/semester-courses/${this.session}/${semester}`;
+           let uri = `/api/semester-courses/${this.session.id}/${semester}`;
            this.axios.get(uri).then(response => {
                 this.semester_courses = response.data.data;
                 //console.log(this.semester_courses);
