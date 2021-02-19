@@ -69,7 +69,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     Route::get('/routines','api\RoutineController@index');
     Route::post('/routine/create','api\RoutineController@store');
-    Route::get('/routine/{id}','api\RoutineController@show');
+    Route::get('/routine/{semester_course_id}','api\RoutineController@show');
     Route::get('/routine/edit/{id}','api\RoutineController@edit');
     Route::post('/routine/update/{id}','api\RoutineController@update');
     Route::delete('/routine/delete/{id}', 'api\RoutineController@destroy');

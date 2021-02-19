@@ -67,7 +67,7 @@
             let uri = '/api/session/create';
             this.axios.post(uri, this.session).then((response) => {
                 
-                this.$router.push({name: 'sessions'});
+                this.$router.go(-1);
             });
       }
     }

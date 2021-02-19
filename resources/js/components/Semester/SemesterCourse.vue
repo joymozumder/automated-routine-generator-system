@@ -38,7 +38,7 @@
                  
                  <b-table responsive striped hover :items="semester_courses" :fields="fields" :filter="filter" :per-page="perPage" :current-page="currentPage">
                    
-                   <template v-slot:cell(status)="data">
+                   <template v-slot:cell(select)="data">
                      <input type="checkbox"  v-model="assigncourse.id" :value="data.item.id">
                    </template>
 
@@ -562,7 +562,7 @@
                                 
                                 
                                 <div class="mt-5">
-                                    <button @click.prevent="multipleAssign" class='bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'> Assign </button>
+                                    <button @click.prevent="multipleAssign" class='close-modal bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded'> Assign </button>
                                     <span class='close-modal cursor-pointer bg-red-200 hover:bg-red-500 text-red-900 font-bold py-2 px-4 rounded'>
                                         Close
                                     </span>
@@ -616,7 +616,7 @@ export default {
             perPage:8,
             currentPage:1,
             filter:"",
-            fields: ['status','session_name','course_name', 'semester_section','action'],
+            fields: ['select','session_name','course_name', 'semester_section','status','action'],
             semester_courses: [],
             teachers:[],
             cardopen:0,
@@ -624,6 +624,7 @@ export default {
             id_tracker:[],
             courses:[],
             check:0,
+            temp:[],
             assigncourse:{
               entry_type:0,
               id:[],
@@ -674,24 +675,42 @@ export default {
                 console.log(this.session);
                 console.log("end");
                 let uri = `/api/semester-courses/${this.session.id}`;
-                //console.log(uri);
+                console.log(uri);
                 this.axios.get(uri).then(response => {
                 this.semester_courses = response.data.data;
                 
                     for(var i=0;i<this.semester_courses.length;i++){
-                        //console.log(this.semester_courses[i].group);
+                        console.log("start");
+                        console.log(this.semester_courses[i]);
+                        console.log("ennnn");
+                        /*  */
+                        //${this.session.id}
+                        var flag = false;
+                        this.semester_courses[i].status = "not assigned";
+                        let uri2 = `/api/routine/${this.semester_courses[i].id}`;
+                                this.axios.get(uri2).then(response => {
+                                this.temp = response.data.data;
+                                console.log(this.temp);
+                                if(this.temp.length != 0 ) {
+                                    this.semester_courses[this.temp.semester_course_id-1].status = "assigned";
+                                }
+                                
+                                });
+                        /*  */
+                        
+                        console.log(this.semester_courses[i].group);
                         if(this.semester_courses[i].group==1){
                             this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"1";
                         }
                         else if(this.semester_courses[i].group==2){
                             this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"2";
-                            //console.log("this.semester_courses");
+                            console.log("this.semester_courses");
                         }
                         else{
                                 this.semester_courses[i].semester_section=this.semester_courses[i].semester_section;
                         }
                     }
-                    //console.log(this.semester_courses);
+                    console.log(this.semester_courses);
                 });
                 uri = '/api/teachers';
                 this.axios.get(uri).then(response => {
@@ -703,11 +722,9 @@ export default {
                 this.courses = response.data.data;
                 //console.log(this.courses);
                 });
-
         },
       ChackSelect(){
           
-
           for(var i=0;i<this.assigncourse.id.length;i++){
               
                for(var j=0;j<this.semester_courses.length;j++){
@@ -722,9 +739,7 @@ export default {
         
                }
            }
-
           
-
             
             
            for(var i=0;i<this.course_type.length-1;i++){
@@ -732,15 +747,13 @@ export default {
                     this.same_type=0;
                 }
            }
-
            if(this.same_type==1 && this.course_type.length>0){
-                if(this.course_type[0]!=0){
+                if(this.course_type[0] != 0){
                     this.assigncourse.duration_type[0]=this.course_type[0];
                     this.assigncourse.duration_type[1]=this.course_type[0];
                     this.assigncourse.duration_type[2]=this.course_type[0];
                 }
            }
-
            if(this.course_type.length>0){
                if(this.course_type!=0){
                    this.lab=1;
@@ -748,8 +761,7 @@ export default {
                }
            }
            
-
-           //console.log(this.course_type);
+           console.log(this.course_type);
            //console.log(this.course_credit);
            for(var i=0;i<this.assigncourse.id.length;i++){ 
                 this.assigncourse.daration_manually[i]=[];
@@ -796,45 +808,6 @@ export default {
            
            
       },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       
       SemesterSelect(semester){
           //console.log(semester);
@@ -843,13 +816,30 @@ export default {
                 this.semester_courses = response.data.data;
                 //console.log(this.semester_courses);
                 for(var i=0;i<this.semester_courses.length;i++){
+                    
+                        /*  */
+                        //${this.session.id}
+                        var flag = false;
+                        this.semester_courses[i].status = "not assigned";
+                        let uri2 = `/api/routine/${this.semester_courses[i].id}`;
+                                this.axios.get(uri2).then(response => {
+                                this.temp = response.data.data;
+                                console.log(this.temp);
+                                if(this.temp.length != 0 ) {
+                                    this.semester_courses[this.temp.semester_course_id-1].status = "assigned";
+                                }
+                                
+                                });
+                        /*  */
+                        
+                     
                         console.log(this.semester_courses[i].group);
                         if(this.semester_courses[i].group==1){
                             this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"1";
                         }
                         else if(this.semester_courses[i].group==2){
                             this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"2";
-                            //console.log("this.semester_courses");
+                            console.log("this.semester_courses");
                         }
                         else{
                                 this.semester_courses[i].semester_section=this.semester_courses[i].semester_section;
@@ -872,7 +862,7 @@ export default {
                 //console.log(this.assigncourse);
           }
           
-           this.assigncourse.course_type=this.assigncourse.id;
+           //this.assigncourse.course_type=this.assigncourse.id;
           for(var i=0;i<this.assigncourse.id.length;i++){
                for(var j=0;j<this.courses.length;j++){
                     if(this.courses[j].id==this.assigncourse.id[i]){
@@ -890,45 +880,49 @@ export default {
              }
          }
         this.assigncourse.course_type=this.course_type;
-       console.log(this.course_credit);
-
-        if(this.check==0 && this.same_type==1 && this.course_credit.length>0){
-
-              
-                      if(this.course_credit[0]==4){
+        if(this.check==0 && this.same_type==1){
+              for(var i=0;i<this.courses.length;i++){
+                  if(this.assigncourse.id[0]==this.courses[i].id){
+                      if(this.courses[i].credit==4){
                            this.assigncourse.duration[0]=2;
                            this.assigncourse.duration[1]=2;
                       }
-                      else if(this.course_credit[0]==3){
+                      else if(this.courses[i].credit==3){
                            this.assigncourse.duration[0]=1.5;
                             this.assigncourse.duration[1]=1.5;
                       }
-                      else if(this.course_credit[0]==2){
+                      else if(this.courses[i].credit==2){
                            this.assigncourse.duration[0]=2;
                       }
-                      else if(this.course_credit[0]==1.5){
+                      else if(this.courses[i].credit==1.5){
                            this.assigncourse.duration[0]=3;
                       }
-                      else if(this.course_credit[0]==1){
+                      else if(this.courses[i].credit==1){
                            this.assigncourse.duration[0]=2;
                       }
-                  
-              
+                  }
+              }
           }   
         
-
-
-
-
-
         console.log(this.assigncourse);    
-        /*
+        
         let uri = '/api/routine/create';
                 this.axios.post(uri, this.assigncourse).then((response) => {
-                 this.$router.go(this.$router.currentRoute);
+                 //this.$router.go(this.$router.currentRoute);
+                for(var i=0; i<this.assigncourse.id.length;i++)
+                 {
+                    this.semester_courses[this.assigncourse.id[i]-1].status = "assigned";
+                 }  
+                    //this.semester_courses[this.temp.semester_course_id-1].status = "assigned";
+                 this.assigncourse.id = [];
+                 this.assigncourse.teacher_id= -1;
+                 this.assigncourse.course_type = [];
+                 this.assigncourse.duration_type = [0,0,0];
+                 this.assigncourse.total_student = 0;
+              
                 
           });
-          */
+          
       },
      
      

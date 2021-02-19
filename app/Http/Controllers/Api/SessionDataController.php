@@ -42,9 +42,11 @@ class SessionDataController extends Controller
                     ->where('status','=',1)
                     ->first();
        
-        $ses->status = false;
-        if($ses)
+        
+        if($ses){
+            $ses->status = false;
          $ses->save();
+        }
          
         
         
