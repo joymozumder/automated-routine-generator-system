@@ -24,7 +24,7 @@ class RoutineController extends Controller
     public function index()
     {
         $obj = Routine::all();
-        return RoutineResource::collection($ses);
+        return RoutineResource::collection($obj);
     }
 
     /**
