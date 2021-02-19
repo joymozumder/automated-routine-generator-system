@@ -83,8 +83,18 @@
 
 
 
+                                   <div class="md:flex md:items-center mb-6">
+                                        <div class="md:w-1/4">
+                                           
+                                        </div>
+                                        <div class="md:w-3/4">
+                                            <input type="checkbox"   :value=1 v-model="room.entry_type">Set Room Schedule
+                                        </div>
+                                    </div>  
+                                 
 
-                                    <div class="md:flex md:items-center mb-6">
+                                <section v-if="room.entry_type==1">
+                                     <div class="md:flex md:items-center mb-6">
                                         <div class="md:w-1/4">
                                             <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                    for="inline-course-code">
@@ -96,11 +106,11 @@
                                             <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                        v-model="day" id="grid-state">
                                                 <option value="-1">Select Day</option>
-                                                <option value=1>Saturday</option>
-                                                <option value=2>Sunday</option>
-                                                <option value=3>Monday</option>
-                                                <option value=4>Tuesday</option>
-                                                <option value=5>Wednesday</option>
+                                                <option value=0>Saturday</option>
+                                                <option value=1>Sunday</option>
+                                                <option value=2>Monday</option>
+                                                <option value=3>Tuesday</option>
+                                                <option value=4>Wednesday</option>
                                                 </select>
                                                 
                                         </div>
@@ -110,13 +120,13 @@
                                         <div class="md:w-1/4">
                                             <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                    for="inline-course-code">
-                                                Time 
+                                                Time Start
                                             </label>
                                         </div>
                                         <div class="md:w-3/4">
                                             
                                             <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                       v-model="time" id="grid-state">
+                                                       v-model="time1" id="grid-state">
                                                 <option value="-1">Select Day</option>
                                                 <option value=1>8.30 AM</option>
                                                 <option value=2>9.00 AM</option>
@@ -142,34 +152,80 @@
                                         </div>
                                     </div>
 
-                                    <div class="md:flex md:items-center mb-6">
+
+                                     <div class="md:flex md:items-center mb-6">
                                         <div class="md:w-1/4">
                                             <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
                                                    for="inline-course-code">
-                                                Duration 
+                                                Time End
                                             </label>
                                         </div>
                                         <div class="md:w-3/4">
                                             
                                             <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                @click.prevent="SetTime(duration)"       v-model="duration" id="grid-state">
-                                                <option value="-1">Select Duration</option>
-                                               <option value=2>1.00</option>
-                                                <option value=3>1.30</option>
-                                                <option value=4>2.00</option>
-                                                <option value=5>2.30</option>
-                                                <option value=6>3.00</option>
-                                                <option value=7>3.30</option>
-                                                <option value=8>4.00</option>
+                                                @click.prevent="SetTime()" v-model="time2" id="grid-state">
+                                                <option value="-1">Select Day</option>
+                                                <option value=1>8.30 AM</option>
+                                                <option value=2>9.00 AM</option>
+                                                <option value=3>9.30 AM</option>
+                                                <option value=4>10.00 AM</option>
+                                                <option value=5>10.30 AM</option>
+                                                <option value=6>11.00 AM</option>
+                                                <option value=7>11.30 AM</option>
+                                                <option value=8>12.00 PM</option>
+                                                <option value=9>12.30 PM</option>
+                                                <option value=10>1.00 PM</option>
+                                                <option value=11>1.30 PM</option>
+                                                <option value=12>2.00 PM</option>
+                                                <option value=13>2.30 PM</option>
+                                                <option value=14>3.00 PM</option>
+                                                <option value=15>3.30 PM</option>
+                                                <option value=16>4.00 PM</option>
+                                                <option value=17>4.30 PM</option>
+                                                <option value=18>5.00 PM</option>
+                                                <option value=19>5.30 PM</option>
                                                 </select>
                                                 
                                         </div>
                                     </div>
 
+                                   
+                                   <div v-if="day!=-1" class="md:flex md:items-center mb-6">
+                                        <div class="md:w-1/4">
+                                            <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                   for="inline-course-code">
+                                                Day wise Time
+                                            </label>
+                                        </div>
+                                        <div class="md:w-3/4">
+                                           
+                                            
+                                          <input type="checkbox"   :value=1 v-model="room.duration[day][0]"> 8.30-9.00
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][1]"> 9.00-9.30
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][2]"> 9.30-10.00
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][3]"> 10.00-10.30
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][4]"> 10.30-11.00
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][5]"> 11.00-11.30
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][6]"> 11.30-12.00
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][7]"> 12.00-12.30
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][8]"> 12.30-1.00
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][9]"> 1.00-1.30
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][10]"> 1.30-2.00
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][11]"> 2.00-2.30
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][12]"> 2.30-3.00
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][13]"> 3.00-3.30
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][14]"> 3.30-4.00
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][15]"> 4.00-4.30
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][16]"> 4.30-5.00
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][17]"> 5.00-5.30
+                                           
+                                                
+                                        </div>
+                                    </div> 
 
 
-
-
+                                  
+                                </section>
 
 
 
@@ -228,10 +284,12 @@
     export default {
         data(){
         return {
-          day:0,
-          time:0,
+          day:-1,
+          time1:-1,
+          time2:-1,
           duration:0,
           room:{
+              entry_type:0,
               number:0,
               name:"",
               type:-1,
@@ -246,20 +304,51 @@
         for(var i=0;i<5;i++){ 
             this.room.duration[i]=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,];
         }
-        // this.time=-1;
-        // this.duration=-1;
     },
     methods: {
-      SetTime(duration){
-           console.log(this.time+duration);
-          for(var i=this.time;i<this.time+duration;i++){
-              this.room.duration[day][i]=1;
-              console.log(i);
-          }
+       SetCheck(i,j){
+            if(this.room.duration[i][j]==true){
+                this.room.duration[i][j]=1;
+            }
+            else if(this.room.duration[i][j]==false){
+                this.room.duration[i][j]=0;
+            }
+            else{
+                this.room.duration[i][j]=this.duration[i][j];
+            }
+       },
 
+      SetTime(){
+       
+           if(this.time1>-1 && this.time2>-1){
+               for(var i=this.time1-1;i<this.time2-1;i++){
+                    this.room.duration[this.day][i]=1;
+               
+                }
+                //this.day=-1;
+                this.time1=-1;
+                this.time2=-1;
+                    console.log(this.room.duration);
+           }
+           
+           
       },
       addRoom(){
-        console.log(this.room.duration);
+
+        // for(var i=0;i<5;i++){
+        //     console.log("end");
+        //     for(var j=0;j<18;j++){
+        //         if(this.room.duration[i][j]===true){
+        //             this.room.duration[i][j]=1;
+        //             console.log("start");
+                    
+        //         }
+        //         else{
+        //             this.room.duration[i][j]=0;
+        //         }
+        //     }
+        // }
+        console.log(this.room);
         
     //       let uri = '/api/room/create';
     //      this.axios.post(uri, this.room).then((response) => {
