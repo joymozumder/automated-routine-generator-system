@@ -11,22 +11,7 @@
                  
                </b-col>
                  
-               <b-col>
-                        <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-2 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                      @click.prevent="SemesterSelect(semester)"     v-model="semester"                id="grid-state-1">
-                                                        
-                                <option disabled  value=0>Select Semester</option>
-                                <option value=1>1st Semester</option>
-                                <option value=2>2nd Semester</option>
-                                <option value=3>3rd Semester</option>
-                                <option value=4>4th Semester</option>
-                                <option value=5>5th Semester</option>
-                                <option value=6>6th Semester</option>
-                                <option value=7>7th Semester</option>
-                                <option value=8>8th Semester</option>
-                                                        
-                        </select>
-               </b-col>
+              
                <b-col>
                  <b-form-input v-model="filter" type="search" style="margin-bottom:15px;" placeholder="Search"></b-form-input>
                </b-col>
@@ -616,7 +601,35 @@ export default {
             perPage:8,
             currentPage:1,
             filter:"",
-            fields: ['select','session_name','course_name', 'semester_section','status','action'],
+            fields: [
+                {
+                    key: 'select',
+                    sortable: false
+                },
+                {
+                    key: 'session_name',
+                    sortable: false
+                },
+                {
+                    key: 'semester_section',
+                    label: 'Semester',
+                    //sortable: true,
+                    
+                },
+                {
+                    key: 'course_name',
+                    sortable: false
+                },
+                {
+                    key: 'status',
+                    sortable: false
+                },
+                {
+                    key: 'action',
+                    sortable: false
+                },
+          
+            ],
             semester_courses: [],
             teachers:[],
             cardopen:0,
@@ -720,16 +733,26 @@ export default {
                         
                         
                         console.log(this.semester_courses[i].group);
-                        if(this.semester_courses[i].group==1){
-                            this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"1";
+                        if(this.semester_courses[i].group==0){
+                            this.semester_courses[i].course_name=this.semester_courses[i].course_name+" -Section "+this.semester_courses[i].semester_section[1];
+                                   
                         }
-                        else if(this.semester_courses[i].group==2){
-                            this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"2";
-                            console.log("this.semester_courses");
+                        else if(this.semester_courses[i].group==1){
+                            this.semester_courses[i].course_name=this.semester_courses[i].course_name+" -Section "+this.semester_courses[i].semester_section[1]+"1";
+                            //console.log("this.semester_courses");
                         }
                         else{
-                                this.semester_courses[i].semester_section=this.semester_courses[i].semester_section;
-                        }
+                                
+                            this.semester_courses[i].course_name=this.semester_courses[i].course_name+" -Section "+this.semester_courses[i].semester_section[1]+"2";
+                        }    
+                        if(this.semester_courses[i].semester_section[0]==1)
+                            this.semester_courses[i].semester_section=this.semester_courses[i].semester_section[0]+"st";
+                        else if(this.semester_courses[i].semester_section[0]==2)
+                            this.semester_courses[i].semester_section=this.semester_courses[i].semester_section[0]+"nd";
+                        else if(this.semester_courses[i].semester_section[0]==3)
+                            this.semester_courses[i].semester_section=this.semester_courses[i].semester_section[0]+"rd";
+                        else if(this.semester_courses[i].semester_section[0]>3)
+                            this.semester_courses[i].semester_section=this.semester_courses[i].semester_section[0]+"th";
                     }
                     console.log(this.semester_courses);
                 });
@@ -876,40 +899,7 @@ export default {
 
 
       
-      SemesterSelect(semester){
-          //console.log(semester);
-           let uri = `/api/semester-courses/${this.session.id}/${semester}`;
-           this.axios.get(uri).then(response => {
-                this.semester_courses = response.data.data;
-                //console.log(this.semester_courses);
-                for(var i=0;i<this.semester_courses.length;i++){
-
-
-                    
-                        
-                        if(this.assigned_check[this.semester_courses[i].id] == 1 ) {
-                                    this.semester_courses[i].status = "assigned";
-                                }
-                                else
-                                {
-                                    this.semester_courses[i].status = "not assigned";
-                                }
-                     
-                        console.log(this.semester_courses[i].group);
-                        if(this.semester_courses[i].group==1){
-                            this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"1";
-                        }
-                        else if(this.semester_courses[i].group==2){
-                            this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"2";
-                            console.log("this.semester_courses");
-                        }
-                        else{
-                                this.semester_courses[i].semester_section=this.semester_courses[i].semester_section;
-                        }
-                }
-          
-            });
-      },  
+       
       multipleAssign(){
            if(this.check==2)
             this.assigncourse.entry_type=1;
