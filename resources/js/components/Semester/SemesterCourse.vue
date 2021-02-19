@@ -625,6 +625,10 @@ export default {
             courses:[],
             check:0,
             temp:[],
+            assigned_check:[],
+            routine:{
+
+            },
             assigncourse:{
               entry_type:0,
               id:[],
@@ -658,11 +662,30 @@ export default {
         }
     },
     created() {
+        for(var i= 0; i<500;i++) this.assigned_check[i] = 0;
+        //console.log(this.assigned_check);
         console.log(this.$route.params.session);
         let uri = `/api/find_session/${this.$route.params.session}`;
         this.axios.get(uri).then(response => {
           this.session = response.data.data;
           //console.log(this.session);
+
+           /*  */
+                        //${this.session.id}
+                        
+                        
+                        let uri2 = `/api/routines`;
+                               this.axios.get(uri2).then(response => {
+                                this.routine = response.data.data;
+                                console.log(this.routine.length);
+                                for(var rl=0; rl<this.routine.length;rl++)
+                                {
+                                    this.assigned_check[this.routine[rl].semester_course_id] = 1;
+                                }
+                                
+                                });
+                        /*  */
+                        console.log(this.assigned_check);
           this.callMethod(); 
         });
         
@@ -672,6 +695,9 @@ export default {
     
     methods: {
         callMethod(){
+
+
+               
                 console.log(this.session);
                 console.log("end");
                 let uri = `/api/semester-courses/${this.session.id}`;
@@ -680,24 +706,18 @@ export default {
                 this.semester_courses = response.data.data;
                 
                     for(var i=0;i<this.semester_courses.length;i++){
-                        console.log("start");
+                        console.log("start "+ i);
                         console.log(this.semester_courses[i]);
                         console.log("ennnn");
-
-                        /*  */
-                        //${this.session.id}
-                        var flag = false;
-                        this.semester_courses[i].status = "not assigned";
-                        let uri2 = `/api/routine/${this.semester_courses[i].id}`;
-                                this.axios.get(uri2).then(response => {
-                                this.temp = response.data.data;
-                                console.log(this.temp);
-                                if(this.temp.length != 0 ) {
-                                    this.semester_courses[this.temp.semester_course_id-1].status = "assigned";
+                        
+                        if(this.assigned_check[this.semester_courses[i].id] == 1 ) {
+                                    this.semester_courses[i].status = "assigned";
                                 }
-                                
-                                });
-                        /*  */
+                                else
+                                {
+                                    this.semester_courses[i].status = "not assigned";
+                                }
+                        
                         
                         console.log(this.semester_courses[i].group);
                         if(this.semester_courses[i].group==1){
@@ -866,21 +886,14 @@ export default {
 
 
                     
-                        /*  */
-                        //${this.session.id}
-                        var flag = false;
-                        this.semester_courses[i].status = "not assigned";
-                        let uri2 = `/api/routine/${this.semester_courses[i].id}`;
-                                this.axios.get(uri2).then(response => {
-                                this.temp = response.data.data;
-                                console.log(this.temp);
-                                if(this.temp.length != 0 ) {
-                                    this.semester_courses[this.temp.semester_course_id-1].status = "assigned";
-                                }
-                                
-                                });
-                        /*  */
                         
+                        if(this.assigned_check[this.semester_courses[i].id] == 1 ) {
+                                    this.semester_courses[i].status = "assigned";
+                                }
+                                else
+                                {
+                                    this.semester_courses[i].status = "not assigned";
+                                }
                      
                         console.log(this.semester_courses[i].group);
                         if(this.semester_courses[i].group==1){
@@ -959,23 +972,32 @@ export default {
 
 
         console.log(this.assigncourse);    
-        
-        let uri = '/api/routine/create';
-                this.axios.post(uri, this.assigncourse).then((response) => {
-                 //this.$router.go(this.$router.currentRoute);
-                for(var i=0; i<this.assigncourse.id.length;i++)
+        for(var i=0; i<this.assigncourse.id.length;i++)
                  {
-                    this.semester_courses[this.assigncourse.id[i]-1].status = "assigned";
+                     console.log("this.assigncourse.id "+ this.assigncourse.id[i]);
+                     console.log(this.semester_courses[this.assigncourse.id[i]]);
+                    //this.semester_courses[this.assigncourse.id[i]].status = "assigned";
+                   
                  }  
-                    //this.semester_courses[this.temp.semester_course_id-1].status = "assigned";
-                 this.assigncourse.id = [];
-                 this.assigncourse.teacher_id= -1;
-                 this.assigncourse.course_type = [];
-                 this.assigncourse.duration_type = [0,0,0];
-                 this.assigncourse.total_student = 0;
+                   
+        // let uri = '/api/routine/create';
+        //         this.axios.post(uri, this.assigncourse).then((response) => {
+        //          //this.$router.go(this.$router.currentRoute);
+        //         for(var i=0; i<this.assigncourse.id.length;i++)
+        //          {
+        //              console.log("this.assigncourse.id "+ this.assigncourse.id[i]);
+        //             //this.semester_courses[this.assigncourse.id[i]].status = "assigned";
+                   
+        //          }  
+        //             //this.semester_courses[this.temp.semester_course_id-1].status = "assigned";
+        //          this.assigncourse.id = [];
+        //          this.assigncourse.teacher_id= -1;
+        //          this.assigncourse.course_type = [];
+        //          this.assigncourse.duration_type = [0,0,0];
+        //          this.assigncourse.total_student = 0;
               
                 
-          });
+        //   });
           
       },
      
