@@ -842,6 +842,19 @@ export default {
            this.axios.get(uri).then(response => {
                 this.semester_courses = response.data.data;
                 //console.log(this.semester_courses);
+                for(var i=0;i<this.semester_courses.length;i++){
+                        console.log(this.semester_courses[i].group);
+                        if(this.semester_courses[i].group==1){
+                            this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"1";
+                        }
+                        else if(this.semester_courses[i].group==2){
+                            this.semester_courses[i].semester_section=this.semester_courses[i].semester_section+"2";
+                            console.log("this.semester_courses");
+                        }
+                        else{
+                                this.semester_courses[i].semester_section=this.semester_courses[i].semester_section;
+                        }
+                }
           
             });
       },  
