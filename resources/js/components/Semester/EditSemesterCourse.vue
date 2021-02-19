@@ -381,8 +381,9 @@
             console.log(this.semester);
              let uri = `/api/semester-course/update/${this.$route.params.id}`;
              this.axios.post(uri, this.semester_course).then((response) => {
-            this.$router.push({name: 'semestercourse', params: { session: this.session_id,id: this.semester }});
-              console.log("saved");
+            //this.$router.push({name: 'semestercourse', params: { session: this.session_id,id: this.semester }});
+             this.$router.go(-1)
+             console.log("saved");
              });
             
          },
