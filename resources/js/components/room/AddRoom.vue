@@ -163,7 +163,7 @@
                                         <div class="md:w-3/4">
                                             
                                             <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                @click.prevent="SetTime()" v-model="time2" id="grid-state">
+                                                @change="SetTime()" v-model="time2" id="grid-state">
                                                 <option disabled value="-1">Select End Time</option>
                                                 <option value=1>8.30 AM</option>
                                                 <option value=2>9.00 AM</option>
@@ -200,25 +200,36 @@
                                         <div class="md:w-3/4">
                                            
                                             
-                                          <input type="checkbox"   :value=1 v-model="room.duration[day][0]"> 8.30-9.00
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][1]"> 9.00-9.30
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][2]"> 9.30-10.00
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][3]"> 10.00-10.30
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][4]"> 10.30-11.00
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][5]"> 11.00-11.30
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][6]"> 11.30-12.00
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][7]"> 12.00-12.30
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][8]"> 12.30-1.00
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][9]"> 1.00-1.30
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][10]"> 1.30-2.00
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][11]"> 2.00-2.30
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][12]"> 2.30-3.00
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][13]"> 3.00-3.30
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][14]"> 3.30-4.00
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][15]"> 4.00-4.30
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][16]"> 4.30-5.00
-                                           <input type="checkbox"  :value=1 v-model="room.duration[day][17]"> 5.00-5.30
-                                           
+                                            <div>
+                                                <input type="checkbox"   :value=1 v-model="room.duration[day][0]"> 08.30 - 09.00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input type="checkbox"  :value=1 v-model="room.duration[day][1]"> 09.00 - 09.30 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input type="checkbox"  :value=1 v-model="room.duration[day][2]"> 09.30 - 10.00
+                                           </div>
+                                           <div>
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][3]"> 10.00 - 10.30 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][4]"> 10.30 - 11.00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][5]"> 11.00 - 11.30
+                                           </div>
+                                           <div>
+                                            <input type="checkbox"  :value=1 v-model="room.duration[day][6]"> 11.30 - 12.00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="checkbox"  :value=1 v-model="room.duration[day][7]"> 12.00 - 12.30 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="checkbox"  :value=1 v-model="room.duration[day][8]"> 12.30 - 01.00
+                                                </div>
+                                                <div>
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][9]"> 01.00 - 01.30 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][10]"> 01.30 - 02.00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][11]"> 02.00 - 02.30
+                                                </div>
+                                                <div>
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][12]"> 02.30 - 03.00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][13]"> 03.00 - 03.30 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][14]"> 03.30 - 04.00
+                                                </div>
+                                                <div>
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][15]"> 04.00 - 04.30 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][16]"> 04.30 - 05.00 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox"  :value=1 v-model="room.duration[day][17]"> 05.00 - 05.30
+                                                </div>
                                                 
                                         </div>
                                     </div> 
@@ -294,7 +305,7 @@
               name:"",
               type:-1,
               capacity:0,
-
+              free_time:"",
               status:false,
               duration:[]
           }
@@ -335,13 +346,41 @@
       },
       addRoom(){
 
-       
+        if(this.room.entry_type!=1)
+        {
+            var temp="";
+            for(var i=0; i<90; i++)
+            {
+                temp+="0";
+            }
+            console.log(temp.length);
+            this.room.free_time = temp;
+        }
+        else
+        {
+            var temp="";
+            for(var i=0;i<5;i++){ 
+                
+                for(var j =0 ; j<this.room.duration[i].length; j++){
+                if(this.room.duration[i][j] != 0){
+                    temp+="0";
+                }
+                else
+                {
+                    temp+="1";
+                }
+                }
+            }
+            console.log(temp);
+            console.log(temp.length);
+            this.room.free_time = temp;
+        }
         console.log(this.room);
         
-    //       let uri = '/api/room/create';
-    //      this.axios.post(uri, this.room).then((response) => {
-    //      this.$router.push({name: 'rooms'});
-    //   });
+           let uri = '/api/room/create';
+          this.axios.post(uri, this.room).then((response) => {
+          this.$router.push({name: 'rooms'});
+       });
 }
     }
   }

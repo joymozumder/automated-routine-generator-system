@@ -42,6 +42,7 @@ class RoomController extends Controller
         $room->number   = $request->number;
         $room->name     = $request->name;
         $room->type     = $request->type;
+        $room->free_time     = $request->free_time;
         $room->capacity = $request->capacity;
         $room->status   = $request->status;
         if($room->save()){

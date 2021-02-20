@@ -640,7 +640,6 @@ export default {
             temp:[],
             assigned_check:[],
             routine:{
-
             },
             assigncourse:{
               entry_type:0,
@@ -682,7 +681,6 @@ export default {
         this.axios.get(uri).then(response => {
           this.session = response.data.data;
           //console.log(this.session);
-
            /*  */
                         //${this.session.id}
                         
@@ -708,8 +706,6 @@ export default {
     
     methods: {
         callMethod(){
-
-
                
                 //console.log(this.session);
                 //console.log("end");
@@ -766,11 +762,9 @@ export default {
                 this.courses = response.data.data;
                 //console.log(this.courses);
                 });
-
         },
       ChackSelect(){
           
-
           for(var i=0;i<this.assigncourse.id.length;i++){
               
                for(var j=0;j<this.semester_courses.length;j++){
@@ -785,9 +779,7 @@ export default {
         
                }
            }
-
           
-
             
             
            for(var i=0;i<this.course_type.length-1;i++){
@@ -795,7 +787,6 @@ export default {
                     this.same_type=0;
                 }
            }
-
            if(this.same_type==1 && this.course_type.length>0){
                 if(this.course_type[0] != 0){
                     this.assigncourse.duration_type[0]=this.course_type[0];
@@ -803,7 +794,6 @@ export default {
                     this.assigncourse.duration_type[2]=this.course_type[0];
                 }
            }
-
            if(this.course_type.length>0){
                if(this.course_type!=0){
                    this.lab=1;
@@ -811,7 +801,6 @@ export default {
                }
            }
            
-
            //console.log(this.course_type);
            //console.log(this.course_credit);
            for(var i=0;i<this.assigncourse.id.length;i++){ 
@@ -859,45 +848,6 @@ export default {
            
            
       },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       
        
       multipleAssign(){
@@ -956,11 +906,6 @@ export default {
                   
               
           } 
-
-
-
-
-
         console.log(this.assigncourse);    
          for(var i=0; i<this.assigncourse.id.length;i++)
                   {

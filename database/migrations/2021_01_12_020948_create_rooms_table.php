@@ -19,6 +19,7 @@ class CreateRoomsTable extends Migration
             $table->string('name');
             $table->integer('type')->comment('0=>Theory_Class, 1=>CSE_Lab, 2=>EEE_Lab, 3=>Communication_Lab, 4=>Mechanical_Lab, 5 => Physics_Lab');
             $table->integer('capacity');
+            $table->string('free_time');
             $table->boolean('status');
             $table->timestamps();
         });
