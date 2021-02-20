@@ -19,7 +19,7 @@
                                             </div>
                                             <div class="md:w-3/4 relative">
                                                 <select  class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                          v-model="selected_session"  id="grid-state">
+                                                         @change="findSession" v-model="selected_session"  id="grid-state">
                                                         <option v-for="session in sessions" :key="session.id">{{session.session_name}}</option>
                                                        
                                                 </select>
@@ -95,7 +95,7 @@
                                                         </div>
                                         
                                                         <div class="md:flex md:items-center mb-6 justify-center space-x-2">
-                                                          <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full" :to="{name: 'routine', params: { session: selected_session,day:day }}" >Show</router-link>
+                                                          <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full" :to="{name: 'routine', params: { session: ses.id,day:day }}" >Show</router-link>
                                                        
                                                         </div>
 
@@ -139,7 +139,7 @@
                         session_name:"",
                         status:true
                 },
-                
+                ses:[],
                 select_2:0,
                 day:-1,
                 
@@ -156,10 +156,19 @@
         this.sessions = response.data.data;
         console.log(this.sessions.length);
         this.checkSelectedSession();
+        this.findSession();
         });
     },
     methods:{
         
+        findSession(){
+            console.log("found");
+            let uri = `/api/find_session/${this.selected_session}`;
+        this.axios.get(uri).then(response => {
+        this.ses = response.data.data;
+        console.log(this.ses);
+        });
+        },
         checkSelectedSession(){
           for(var i=0;i<this.sessions.length;i++)
           {
@@ -171,7 +180,7 @@
           }
         },
           generateRoutine(){
-             let uri = `/api/routine/generate/${this.selected_session}`;
+             let uri = `/api/generate-routine/${this.ses.id}`;
              console.log(uri);
             this.axios.get(uri).then(response => {
           		  
