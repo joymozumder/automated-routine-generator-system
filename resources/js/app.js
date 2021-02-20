@@ -195,7 +195,7 @@ const routes = [
                 
                 {
                     name: 'test3',
-                    path: 'test3/:session/:id',
+                    path: 'test3/:session',
                     component: compTest3
                 },
                 {
