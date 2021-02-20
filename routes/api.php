@@ -66,6 +66,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::get('/semester-course/edit/{id}','api\SemesterCourseController@edit'); //only semester
     Route::post('/semester-course/update/{id}','api\SemesterCourseController@update'); //only semester
     Route::delete('/semester-course/delete/{id}', 'api\SemesterCourseController@destroy');
+    
 
     Route::get('/routines','api\RoutineController@index');
     Route::post('/routine/create','api\RoutineController@store');
@@ -90,6 +91,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     Route::get('check/{session_id}','api\RoutineController@check');
     Route::get('generate-routine/{session_id}','api\RoutineController@generateRoutine');
+    Route::get('/all-course/{session_id}','api\SemesterCourseController@allCourseIndex'); 
 //});
 Route::post('login','api\UserController@postLogin');
 Route::post('logout','api\UserController@logOut');

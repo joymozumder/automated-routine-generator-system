@@ -47,6 +47,32 @@ class SemesterCourseController extends Controller
         return SemesterCourseResource::collection($obj);
     }
 
+    
+    public function allCourseIndex($session_id)
+    {
+        $obj = SemesterCourse::join('routines','routines.semester_course_id','=','semester_courses.id') 
+                ->join('users','routines.teacher_id','=','users.id')
+                ->join('courses','semester_courses.course_id','=','courses.id')
+                ->select(
+                        'semester_courses.semester_section as semester_section',
+                        'semester_courses.group as group',
+                        'semester_courses.status as semester_courses_status',
+
+                        'courses.code as course_code',
+                        'courses.name as course_name',
+                        'courses.credit as course_credit',
+                        'courses.status as course_status',
+                        
+                        'users.name as teacher_name',
+                        'users.code as teacher_code',
+                        'users.role as user_role',
+                        'users.status as teacher_status'
+                        )
+                ->where('semester_courses.session_id','=',$session_id)
+                ->get();
+        return SemesterCourseResource::collection($obj);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
