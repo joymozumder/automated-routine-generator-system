@@ -711,17 +711,17 @@ export default {
 
 
                
-                console.log(this.session);
-                console.log("end");
+                //console.log(this.session);
+                //console.log("end");
                 let uri = `/api/semester-courses/${this.session.id}`;
-                console.log(uri);
+                //console.log(uri);
                 this.axios.get(uri).then(response => {
                 this.semester_courses = response.data.data;
                 
                     for(var i=0;i<this.semester_courses.length;i++){
-                        console.log("start "+ i);
-                        console.log(this.semester_courses[i]);
-                        console.log("ennnn");
+                        //console.log("start "+ i);
+                        //console.log(this.semester_courses[i]);
+                       // console.log("ennnn");
                         
                         if(this.assigned_check[this.semester_courses[i].id] == 1 ) {
                                     this.semester_courses[i].status = "assigned";
@@ -754,7 +754,7 @@ export default {
                         else if(this.semester_courses[i].semester_section[0]>3)
                             this.semester_courses[i].semester_section=this.semester_courses[i].semester_section[0]+"th";
                     }
-                    console.log(this.semester_courses);
+                    //console.log(this.semester_courses);
                 });
                 uri = '/api/teachers';
                 this.axios.get(uri).then(response => {
@@ -812,7 +812,7 @@ export default {
            }
            
 
-           console.log(this.course_type);
+           //console.log(this.course_type);
            //console.log(this.course_credit);
            for(var i=0;i<this.assigncourse.id.length;i++){ 
                 this.assigncourse.daration_manually[i]=[];
@@ -932,43 +932,43 @@ export default {
              }
          }
         this.assigncourse.course_type=this.course_type;
+        
         if(this.check==0 && this.same_type==1){
-              for(var i=0;i<this.courses.length;i++){
-                  if(this.assigncourse.id[0]==this.courses[i].id){
-                      if(this.courses[i].credit==4){
+              
+                 
+                      if(this.course_credit[0]==4){
                            this.assigncourse.duration[0]=2;
                            this.assigncourse.duration[1]=2;
                       }
-                      else if(this.courses[i].credit==3){
+                      else if(this.course_credit[0]==3){
                            this.assigncourse.duration[0]=1.5;
                             this.assigncourse.duration[1]=1.5;
                       }
-                      else if(this.courses[i].credit==2){
+                      else if(this.course_credit[0]==2){
                            this.assigncourse.duration[0]=2;
                       }
-                      else if(this.courses[i].credit==1.5){
+                      else if(this.course_credit[0]==1.5){
                            this.assigncourse.duration[0]=3;
                       }
-                      else if(this.courses[i].credit==1){
+                      else if(this.course_credit[0]==1){
                            this.assigncourse.duration[0]=2;
                       }
-                  }
-              }
-          }   
-        
+                  
+              
+          } 
 
 
 
 
 
         console.log(this.assigncourse);    
-        for(var i=0; i<this.assigncourse.id.length;i++)
-                 {
-                     console.log("this.assigncourse.id "+ this.assigncourse.id[i]);
-                     console.log(this.semester_courses[this.assigncourse.id[i]]);
-                    this.semester_courses[this.assigncourse.id[i]].status = "assigned";
+         for(var i=0; i<this.assigncourse.id.length;i++)
+                  {
+                      console.log("this.assigncourse.id "+ this.assigncourse.id[i]);
+                      console.log(this.semester_courses[this.assigncourse.id[i]]);
+                     this.semester_courses[this.assigncourse.id[i]].status = "assigned";
                    
-                 }  
+                  }  
                    
         // let uri = '/api/routine/create';
         //         this.axios.post(uri, this.assigncourse).then((response) => {
