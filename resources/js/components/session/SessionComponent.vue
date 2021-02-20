@@ -56,7 +56,12 @@
                                             
                                                     <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="generateRoutine" >Generate Routine</button>
                                                      <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="assignSelect" >Print Routine </button>
+<<<<<<< HEAD
                                                      <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'routine-information', params: { id: selected_session }}" >All course</button>
+=======
+                                                     <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'routine-information', params: { session: selected_session }}" >All course</router-link>
+                                                    
+>>>>>>> 3d2e9ac96df971172de4ed374d084d0c2857da97
                                             </div>
                                         <!-- </div> -->
 

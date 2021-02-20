@@ -47,6 +47,11 @@ import compSessionTable from "./components/session/SessionTable.vue";
 import compSessionComponent from './components/session/SessionComponent.vue';
 
 
+import compRoutineInformation from './components/session/RoutineInformation.vue';
+
+
+
+
 
 import compAddTeacher from './components/user/AddTeacher.vue';
 import compTeacherTable from './components/user/TeacherTable.vue';
@@ -180,6 +185,12 @@ const routes = [
                     name: 'editsemestercourse',
                     path: 'editsemestercourse/:id',
                     component: compEditSemesterCourse
+                },
+
+                {
+                    name: 'routine-information',
+                    path: 'routine-information/:session',
+                    component: compRoutineInformation
                 },
                 // test delete
                 {
