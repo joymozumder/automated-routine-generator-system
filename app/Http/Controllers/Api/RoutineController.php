@@ -251,6 +251,7 @@ class RoutineController extends Controller
             $course[$i]["course_type"]      =   $dt[$i]["course_type"];
             $course[$i]["total_student"]    =   $dt[$i]["total_student"];
             $course[$i]["colour"]           =   -1;
+            $course[$i]["entry_type"]    =   $dt[$i]["entry_type"];
 
             $sorted_course[$i]["id"]        =   $i;
             $sorted_course[$i]["type"]      =   $dt[$i]["course_type"];
@@ -374,15 +375,18 @@ class RoutineController extends Controller
                 for ($i = 0; $i < sizeof($rm); $i++)
                 {
                     //$available_room[ $rm[$i]["type"] ] ++;
+                    $temp_ft ="5555555555555";
+                    $ft = $rm[$i]["free_time"] . $temp_ft ;
+                    
                     
                     $room[$i]["room_number"]   =  $rm[$i]["number"] ;
                     $room[$i]["room_type"]   =  $rm[$i]["type"] ;
                     $room[$i]["capacity"]   =  $rm[$i]["capacity"] ;
                     for ($ts = 0; $ts < 95; $ts++)
                         {
-                            $room[$i]["status"][$ts]=0;
+                            $room[$i]["status"][$ts]=(int)$ft[$ts];
                         }
-                    
+                    //dd( $room[$i]);
                     /* available */
                     // $available_room[$i]["duration"] = 0;
                     // $available_room[$i]["type"] = $rm[$i]["type"]; 
@@ -488,6 +492,91 @@ class RoutineController extends Controller
         //dd($sorted_course);
         //dd($sorted_room);
         /* manual room assign */
+        for($crs = 0; $crs< sizeof($sorted_course); $crs++)
+        {
+            $i = $sorted_course[$crs]["id"];
+            //dd($course[$i]);
+            if($coloured[$i] == false && $course[$i]["entry_type"] == 1)
+            {
+                $dn_i = $course[$i]["duration"] / 0.5 ;
+                $tp_i = $course[$i]["course_type"];
+                $ts_i = $course[$i]["total_student"];
+                $tst = $course[$i]["start"];
+                $tet = $course[$i]["end"];
+                $room_free_i = false;
+                                        $free_room_indx = -1;
+                                        /* check free room  */
+                                            for($sr = 0; $sr< sizeof($sorted_room); $sr++)
+                                            {
+                                                if($sorted_room[$sr]["room_type"] == $tp_i)
+                                                {
+                                                    $room_free_i = true;
+
+                                                    for($ts=$tst; $ts<=$tet; $ts++)
+                                                    {
+                                                        if($sorted_room[$sr]["status"][$ts] == 1)
+                                                        {
+                                                            $room_free_i = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if($room_free_i == true)
+                                                    {
+                                                        $free_room_indx = $sr;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        /* check free room */
+
+                                        if($room_free_i == true && $free_room_indx != -1)
+                                            {
+                                                $course[$i]["room_number"] = $sorted_room[$free_room_indx]["room_number"];
+                                                $course[$i]["start"] = $tst;
+                                                $course[$i]["end"] = $tet;
+                                                //$i=5;
+                                                
+                                                
+                                                
+                                                
+                                                $coloured[$i] = true;
+                                                $course[$i]["colour"] = $colour;
+                                                
+                                                $room_free_i = false;
+                                                /* busy free room */
+                                                    for($ts=$tst; $ts<=$tet; $ts++)
+                                                    {
+                                                        $sorted_room[$free_room_indx]["status"][$ts] = 1;
+                                                    }
+                                                    //dd($sorted_room);
+                                                /* busy free room end */
+
+                                                /* same course busy */
+                                                    for($g=0; $g<sizeof($course); $g++)
+                                                    {
+                                                        if($i != $g && $graph[$i][$g] != 0 && $coloured[$g] == false)
+                                                        {
+                                                            
+                                                                
+                                                               
+                                                                for($ct = $tst ; $ct<=$tet ; $ct++)
+                                                                {
+                                                                    $course_status[ $g ][$ct] = 1;
+                                                                }
+                                                                // echo $i ." ==> ".$g."<br>";
+                                                                // echo $coloured[$i]." ==> ".(int)$coloured[$g]."<br>";
+                                                                // dd($course_status[$g]);
+                                                            
+                                                        }
+                                                    }
+                                                /* same course busy end */
+
+                                        
+                                        
+
+            }
+        }
+        }
         /* manual room assign end */
 
         /* manual course assign */
@@ -1070,7 +1159,7 @@ class RoutineController extends Controller
                 $obj->start = $st;
                 $obj->end = $et;
                 $obj->day = $d;
-                //$obj->save();
+                $obj->save();
             }
             /**generate routine end */
 
