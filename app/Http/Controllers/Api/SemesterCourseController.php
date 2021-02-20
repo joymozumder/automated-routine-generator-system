@@ -68,7 +68,11 @@ class SemesterCourseController extends Controller
                         'users.role as user_role',
                         'users.status as teacher_status'
                         )
+                ->distinct('semester_courses.id')
                 ->where('semester_courses.session_id','=',$session_id)
+                 ->orderBy('courses.id', 'ASC')
+                ->orderBy('semester_courses.semester_section', 'ASC')
+                 ->orderBy('semester_courses.group', 'ASC')
                 ->get();
         return SemesterCourseResource::collection($obj);
     }
