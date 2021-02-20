@@ -56,6 +56,7 @@
                                             
                                                     <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="generateRoutine" >Generate Routine</button>
                                                      <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="assignSelect" >Print Routine </button>
+                                                     <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'routine-information', params: { id: selected_session }}" >All course</button>
                                             </div>
                                         <!-- </div> -->
 
