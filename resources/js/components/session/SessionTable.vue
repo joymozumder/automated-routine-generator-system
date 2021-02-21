@@ -15,7 +15,7 @@
                  <b-form-input v-model="filter" type="search" style="margin-bottom:15px;" placeholder="Search"></b-form-input>
                </b-col>
                  <b-col>
-                    <router-link tag="button" align="right" type="button" class="btn btn-success" :to="{name: 'createsession'}">Add Teacher</router-link>
+                    <router-link tag="button" align="right" type="button" class="btn btn-success" :to="{name: 'createsession'}">Create Session</router-link>
                  
                 </b-col>
               
@@ -32,10 +32,10 @@
 
                     <template v-slot:cell(action)="data">
                             <router-link tag="button" class="btn btn-primary btn-sm"  :to="{name: 'editsession', params: { id: data.item.id }}" >
-                                Edit
+                                  <i class="fa fa-edit"></i>
                             </router-link>
                              <button class="btn btn btn-danger btn-sm" @click.prevent="deletePost(data.item.id)">
-                                Delete
+                                <i class="fa fa-trash"></i>
                             </button>
                    </template> 
                 

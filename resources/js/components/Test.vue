@@ -32,49 +32,15 @@
                                                
                                             </div>
                                         </div>
-
-
-
-
-                                          <div class="md:flex md:items-center mb-6">
-                                            <div class="md:w-1/4">
-                                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
-                                                    for="inline-course-code">
-                                                    Select Option
-                                                </label>
-                                            </div>
-                                            <div class="md:w-3/4 relative">
-                                                <select  class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                         @change="findSession" v-model="select_option"  id="grid-state">
-                                                        <option disabled value="-1">Select an Option</option>
-                                                        <option value="1">Create Session</option>
-                                                        <option value="2">Assign Semester with Courses</option>
-                                                        <option value="3">Show Semester With Course List</option>
-                                                        <option value="4">Generate Routine</option>
-                                                        <option value="5">Show Routine</option>
-                                                        <option value="6">Routine Information</option>
-                                                       
-                                                </select>
-                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-darker">
-                                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                                         viewBox="0 0 20 20">
-                                                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                                                    </svg>
-                                                </div>
-                                               
-                                            </div>
-                                        </div>
-
-
                                         
-                                       <!-- <div class="md:flex md:items-center mb-6 justify-center space-x-2 ">
+                                       <div class="md:flex md:items-center mb-6 justify-center space-x-2 ">
                                             
                                             <router-link tag="button" class=" bg-blue-900 hover:bg-blue-500 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'createsession'}">Create Session</router-link>
                                             
                                             
                                              <router-link tag="button"  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourse', params: { id: selected_session }}" >Assign Semester with Course</router-link>
                                              <router-link tag="button"  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'semestercourse', params: { session: selected_session }}" >Semester with Course</router-link>
-                                        </div> -->
+                                        </div>
 
                                             
                                             
@@ -82,7 +48,7 @@
                                         <!-- <div class="md:flex md:items-center"> -->
                                             
                                             
-                                            <!-- <div class="md:flex md:items-center mb-6 justify-center space-x-2" >
+                                            <div class="md:flex md:items-center mb-6 justify-center space-x-2" >
 
 
                                                   
@@ -92,15 +58,50 @@
                                                      <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'routine', params: { session: ses.id,day:day }}" >Show Routine</router-link>
                                                      <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'routine-information', params: { session: selected_session }}" >All course</router-link>
                                                     
-                                            </div> -->
+                                            </div>
                                         <!-- </div> -->
-                                        <div class="md:flex md:items-center mb-6 justify-center space-x-2" >
 
-                                                <button class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-5 rounded-full" @click.prevent="OptionSubmit" >Submit</button>
-                                                    
-                                        </div>
-                                    
                                        
+                                        
+                                    
+                                        <div v-if="select_2==1" class="inset-0 top-0 pt-6">
+
+
+
+                                                        <div class="md:flex md:items-center mb-6">
+                                                        <div class="md:w-1/4">
+                                                            <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                                                for="inline-course-code">
+                                                                Select Day
+                                                            </label>
+                                                        </div>
+                                                        <div class="md:w-3/4 relative">
+                                                                <select v-model="day" class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                                        id="grid-state">
+                                                                        <option value=-1>Select Day</option>
+                                                                        <option value=1>Saturday</option>
+                                                                        <option value=2>Sunday</option>
+                                                                        <option value=3>Monday</option>
+                                                                        <option value=4>Tuesday</option>
+                                                                        <option value=5>Wednesday</option>
+                                                                        <option value=6>Thursday</option>
+                                                                    
+                                                                    </select>
+                                                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-darker">
+                                                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                                            viewBox="0 0 20 20">
+                                                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                                                        </svg>
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                        
+                                                        <div class="md:flex md:items-center mb-6 justify-center space-x-2">
+                                                          <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full" :to="{name: 'routine', params: { session: ses.id,day:day }}" >Show</router-link>
+                                                       
+                                                        </div>
+
+                                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -136,14 +137,13 @@ import Swal from 'sweetalert2'
         data(){
                 return {
                 selected_session:"",
-                select_option:"-1",
                 sessions:{
                         
                         session_name:"",
                         status:true
                 },
                 ses:[],
-               
+                select_2:0,
                 day:1,
                 
         
@@ -163,28 +163,6 @@ import Swal from 'sweetalert2'
         });
     },
     methods:{
-        OptionSubmit(){
-
-            if(this.select_option==1){
-                this.$router.push({name: 'createsession'});
-            }
-            else if(this.select_option==2){
-                this.$router.push({name: 'assigncourse', params: { id: this.selected_session }});
-            }
-            else if(this.select_option==3){
-                this.$router.push({name: 'semestercourse', params: { session: this.selected_session }});
-            }
-            else if(this.select_option==4){
-                this.generateRoutine();
-            }
-            else if(this.select_option==5){
-                this.$router.push({name: 'routine', params: { session: this.ses.id,day:this.day }});
-            }
-            else if(this.select_option==6){
-                this.$router.push({name: 'routine-information', params: { session: this.selected_session }});
-            }
-            console.log(this.select_option);
-        },
         
         findSession(){
             console.log("found");
@@ -208,19 +186,28 @@ import Swal from 'sweetalert2'
              let uri = `/api/generate-routine/${this.ses.id}`;
              console.log(uri);
             this.axios.get(uri).then(response => {
-          		  
+          		console.log("abc");
                 Swal.fire(
                   'Success!',
                   'Successfully Generated!',
                   'success'
             )
 
-		});
+		}).catch((e) => {
+            Swal.fire({
+                  type: 'error',
+                  title: 'Oops...',
+                  text: e.response.data
+            })
+          });
              
           },
           
           
-          
+          assignSelect(){
+              this.select_2=1;
+              //cosole.log(this.day);
+          }
      
       }
    

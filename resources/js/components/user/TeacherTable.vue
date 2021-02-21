@@ -32,10 +32,10 @@
 
                     <template v-slot:cell(action)="data">
                             <router-link tag="button" class="btn btn-primary btn-sm"  :to="{name: 'editteacher', params: { id: data.item.id }}" >
-                                Edit
+                                  <i class="fa fa-edit"></i>
                             </router-link>
                              <button class="btn btn btn-danger btn-sm" @click.prevent="deletePost(data.item.id)">
-                                Delete
+                                <i class="fa fa-trash"></i>
                             </button>
                    </template> 
                 

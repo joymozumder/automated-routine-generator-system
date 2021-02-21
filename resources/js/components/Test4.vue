@@ -35,6 +35,7 @@
                                <i class="fa fa-edit"></i>
                             </router-link>
                              <button class="btn btn btn-danger btn-sm" @click.prevent="deletePost(data.item.id)">
+                                
                                  <i class="fa fa-trash"></i>
                             </button>
                    </template> 

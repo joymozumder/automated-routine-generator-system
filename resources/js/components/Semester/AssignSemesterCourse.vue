@@ -320,6 +320,7 @@
 
 
 <script>
+import Swal from 'sweetalert2'
     export default {
 
         data() {
@@ -490,6 +491,13 @@
                 this.axios.post(uri, this.assign_semester).then((response) => {
                  //this.$router.push({name: 'sessions'});
                      console.log("Saved");
+                     Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Successfully Assigned',
+                    showConfirmButton: false,
+                    timer: 1500
+                    })
                      
                       this.assign_semester.course_id="";
                       this.assign_semester.section=[];

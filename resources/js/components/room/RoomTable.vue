@@ -7,7 +7,7 @@
              <div class="">
                <b-row>
                <b-col>
-                 <h1>All Rooms</h1>
+                 <h1>Room List</h1>
                  
                </b-col>
 
@@ -32,10 +32,10 @@
 
                     <template v-slot:cell(action)="data">
                             <router-link tag="button" class="btn btn-primary btn-sm"  :to="{name: 'editroom', params: { id: data.item.id }}" >
-                                Edit
+                                <i class="fa fa-edit"></i>
                             </router-link>
                              <button class="btn btn btn-danger btn-sm" @click.prevent="deletePost(data.item.id)">
-                                Delete
+                                <i class="fa fa-trash"></i>
                             </button>
                    </template> 
                 
