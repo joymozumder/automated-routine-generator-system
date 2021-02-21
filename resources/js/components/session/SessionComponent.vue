@@ -186,14 +186,20 @@ import Swal from 'sweetalert2'
              let uri = `/api/generate-routine/${this.ses.id}`;
              console.log(uri);
             this.axios.get(uri).then(response => {
-          		  
+          		console.log("abc");
                 Swal.fire(
                   'Success!',
                   'Successfully Generated!',
                   'success'
             )
 
-		});
+		}).catch((e) => {
+            Swal.fire({
+                  type: 'error',
+                  title: 'Oops...',
+                  text: e.response.data
+            })
+          });
              
           },
           

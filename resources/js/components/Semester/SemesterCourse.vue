@@ -583,6 +583,7 @@
 import Vue from 'vue'
  import { BootstrapVue} from 'bootstrap-vue';
  Vue.use(BootstrapVue);
+ import Swal from 'sweetalert2'
 export default {
     data() {
         return {
@@ -978,6 +979,13 @@ console.log("please");
                                 this.$router.go(0);
                             }
                             console.log("saved");
+                            Swal.fire({
+                                position: 'top-center',
+                                icon: 'success',
+                                title: 'Successfully Assigned',
+                                showConfirmButton: false,
+                                timer: 1500
+                                })
                             this.semester_courses[j].status = "assigned";
                         }
                     }

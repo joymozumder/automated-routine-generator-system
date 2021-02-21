@@ -1166,7 +1166,8 @@ class RoutineController extends Controller
         }/**generated end*/
         else
         {
-            echo "routine already generated";
+            
+            return response()->json('routine already generated', 500);
         }
 
 
