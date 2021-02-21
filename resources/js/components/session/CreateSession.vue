@@ -29,7 +29,7 @@
                                         <div class="md:flex md:items-center">
                                             <div class="md:w-1/3"></div>
                                             <div class="md:w-2/3">
-                                                <button @click.prevent="addSession" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
+                                                <button @click.prevent="addSession" class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full">
                                                     Save Session 
                                                 </button>
                                             </div>
