@@ -286,14 +286,14 @@
                                         <div class="md:flex md:items-center">
                                             <div class="md:w-1/3"></div>
                                             <div class="md:w-2/3">
-                                                <button @click.prevent="assignSemester" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
+                                                <button @click.prevent="assignSemester" class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full">
                                                     Assign Semester 
                                                 </button>
                                             </div>
 
                                             <div class="md:w-2/3">
                                                 <button @click.prevent="assignReturn" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
-                                                    Save and Return to table 
+                                                    Return to table 
                                                 </button>
                                                <!-- <router-link tag="button"  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'assigncourse', params: { id: selected_session }}" >Assign Semester with Course</router-link> -->
                                       
@@ -500,35 +500,9 @@
                   
             },
             assignReturn(){
-                console.log(this.assign_semester);
-                for(var i = 0; i<this.number_of_section; i++)
-                {
-                    var flag = true;
-                    for(var j=0; j<this.group.length; j++)
-                    {
-                        var temp = this.group[j];
-                        if(this.assign_semester.section[i] == temp[0] )
-                        {
-                            flag = false;
-                            break;
-                        }
-                    }
-                    if(flag == true) this.group.push(this.assign_semester.section[i]);
-                }
-                this.assign_semester.section = [];
-                this.assign_semester.section = this.group;
-                console.log(this.assign_semester.section);
-
-                let uri = '/api/semester-course/create';
-                this.axios.post(uri, this.assign_semester).then((response) => {
-                 //this.$router.push({name: 'sessions'});
+               
                  this.$router.push({name: 'semestercourse', params: { session: this.session_name }});
-                     console.log("Saved");
-                     
-                     
-                    
-                });
-
+        
                     
             },
             checkCoursetype(){
