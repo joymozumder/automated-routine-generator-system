@@ -1,112 +1,122 @@
 <template>
+    
 
+             <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
+                       
 
-       
-            <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
+             <div class="">
+               <b-row>
+               <b-col>
+                 <h1>Routine Information</h1>
+                 
+               </b-col>
 
-                <div class="flex flex-1">
+                <b-col>
+                 <b-form-input v-model="filter" type="search" style="margin-bottom:15px;" placeholder="Search"></b-form-input>
+               </b-col>
+                
+              
+              
+             </b-row>
+
+             <b-row>
+              
+               <b-col v-if="allcourse.length>0">
+                 
+                 <b-table  responsive striped hover :items="allcourse" :fields="fields" :filter="filter" :per-page="perPage" :current-page="currentPage">
+                   
+                  
+
+                    
+                
                    
 
-                    <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
+                 </b-table>
+                 <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage"></b-pagination>
+               </b-col>
 
-                        <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-                                 <!-- <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-32 right-32 z-50"
-                                :to="{name: 'addroom'}">Create Room</router-link> -->
-                            <div class="p-3 mt-4">
-                                <compDataTable v-if="allcourse.length!=0"
-                                    
-                                    title="All Information"
-                                    
-                                    :columns="tableColumns1"
-                                    :rows="allcourse"
-                                    :clickable="false"
-                                    :sortable="true"
-                                    
-                                    :exactSearch="true"
-                                    :searchable="true"
-                                    :paginate="true"
-                                    :exportable="false"
-                                    :printable="false"
-                                    
+               <b-col v-else>
+                   <label for="">No Room Information Available</label>
+               </b-col> 
+              
 
-                                > 
+               
+             </b-row>
+
+             
+
+            </div>
+      
+         
 
 
 
-
-
-
-
-
-
-
-                                        
-                                </compDataTable>
-
-       
-                            </div>
-                        </div>
-                    </div>
-                    <!--/Grid Form-->
-                </div>
-                 <!-- ___________________________________________ -->
-        
-        <!-- _____________________________________________ -->
             </main>
 
-           
 
-
-                                           
-
-
- 
    
+
+             
+
+
+
+              
+
        
     
 </template>
 
 <script>
-import compDataTable from 'vue-materialize-datatable';
+import Vue from 'vue'
+ import { BootstrapVue} from 'bootstrap-vue';
+ Vue.use(BootstrapVue);
 export default {
     data() {
         return {
-             tableColumns1: [
-                 {
-                    label: "Session Name",
-                    field: "course_code",
-                    numeric: false,
-                    html: false
-                },
-           
+            
+            indx:0,
+            perPage:10,
+            currentPage:1,
+            filter:"",
+            fields: [
                 {
-                    label: "Semester",
-                    field: "semester_section",
-                    numeric: false,
-                    html: false
+                    key: 'course_code',
+                    label:'Session Name',
+                    sortable: false
                 },
                 {
-                    label: "Course Name",
-                    field: "course_name",
-                    numeric: false,
-                    html: false
+                    key: 'semester_section',
+                    label:'Semester',
+                    sortable: false
                 },
                 {
-                    label: "Teacher",
-                    field: "teacher_name",
-                    numeric: false,
-                    html: false
+                    key: 'course_name',
+                    label: 'Course Name',
+                    //sortable: true,
+                    
                 },
-		 	
-		 ],
-        
-         session:[],
-         allcourse:[]
+               
+                {
+                    key: 'teacher_name',
+                   label: 'Teacher',
+                },
+               
+          
+            ],
+            session:[],
+            allcourse:[]
+          
         }
         
        
     },
-    created() {
+   
+    computed:{
+      rows(){
+        return this.allcourse.length;
+      }
+    },
+     created() {
 
         
 
@@ -166,12 +176,9 @@ export default {
         
        
     },
-     components:{
-            compDataTable 
-     },
-     methods: {
-        
-     
+    
+    
+   methods: {
      
     }
 }

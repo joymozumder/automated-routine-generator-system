@@ -6,8 +6,8 @@
                     <h1 class="text-white p-2">Automated Routine System</h1>
                 </div>
                 <div class="p-1 flex flex-row items-center">
-                    <img  class="inline-block h-8 w-8 rounded-full" src="https://avatars0.githubusercontent.com/u/4323180?s=460&v=4" alt="">
-                    <a @click="profileToggle" style="cursor : pointer" class="text-white p-6 no-underline hidden md:block lg:block">{{user.userid}}</a>
+                    <img  class="inline-block h-8 w-8 rounded-full" src="https://cdn5.f-cdn.com/contestentries/1733723/43055135/5e49ec7ad607a_thumb900.jpg" alt="">
+                    <a @click="profileToggle" style="cursor : pointer" class="text-white p-6 no-underline hidden md:block lg:block">Admin</a>
                     <div id="ProfileDropDown" class="rounded hidden shadow-md bg-white absolute pin-t mt-12 mr-1 pin-r z-50">
                         <ul class="list-reset ">
                           
