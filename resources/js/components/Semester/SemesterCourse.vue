@@ -897,7 +897,6 @@ export default {
 
 
 
-
       
        
       multipleAssign(){
@@ -975,6 +974,9 @@ console.log("please");
                         if(this.semester_courses[j].id == this.assigncourse.id[i])
                         {
                             console.log(this.assigncourse.duration);
+                            if(this.assigncourse.duration[0] == 0){
+                                this.$router.go(0);
+                            }
                             console.log("saved");
                             this.semester_courses[j].status = "assigned";
                         }

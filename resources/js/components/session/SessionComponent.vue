@@ -55,13 +55,9 @@
 
                                             
                                                     <button class="bg-orange-500 hover:bg-orange-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="generateRoutine" >Generate Routine</button>
-                                                     <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" @click.prevent="assignSelect" >Print Routine </button>
-<<<<<<< HEAD
-                                                     <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'routine-information', params: { id: selected_session }}" >All course</button>
-=======
+                                                     <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'routine', params: { session: ses.id,day:day }}" >Show Routine</router-link>
                                                      <router-link tag="button" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-2 rounded-full" :to="{name: 'routine-information', params: { session: selected_session }}" >All course</router-link>
                                                     
->>>>>>> 3d2e9ac96df971172de4ed374d084d0c2857da97
                                             </div>
                                         <!-- </div> -->
 
@@ -136,6 +132,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
     export default {
         data(){
                 return {
@@ -147,7 +144,7 @@
                 },
                 ses:[],
                 select_2:0,
-                day:-1,
+                day:1,
                 
         
        
@@ -190,6 +187,12 @@
              console.log(uri);
             this.axios.get(uri).then(response => {
           		  
+                Swal.fire(
+                  'Success!',
+                  'Successfully Generated!',
+                  'success'
+            )
+
 		});
              
           },
