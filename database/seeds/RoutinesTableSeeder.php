@@ -266,7 +266,23 @@ class RoutinesTableSeeder extends Seeder
         Routine::create(['semester_course_id'=>162,'teacher_id'=>22,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
         Routine::create(['semester_course_id'=>164,'teacher_id'=>3,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
         Routine::create(['semester_course_id'=>166,'teacher_id'=>1,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
-
+        Routine::create(['semester_course_id'=>168,'teacher_id'=>31,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>168,'teacher_id'=>31,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>169,'teacher_id'=>25,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>169,'teacher_id'=>25,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>170,'teacher_id'=>36,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>170,'teacher_id'=>36,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>172,'teacher_id'=>24,'duration'=>2,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>173,'teacher_id'=>28,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>173,'teacher_id'=>28,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>174,'teacher_id'=>11,'duration'=>1.5,'total_student'=>30,'course_type'=>1,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>175,'teacher_id'=>2,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>175,'teacher_id'=>2,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>176,'teacher_id'=>6,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>176,'teacher_id'=>6,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>171,'teacher_id'=>14,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        Routine::create(['semester_course_id'=>171,'teacher_id'=>14,'duration'=>1.5,'total_student'=>60,'course_type'=>0,'room_number'=>0,'day'=>0,'start'=>0,'end'=>0,'entry_type'=>0,'status'=>true,]);
+        
     }
 }
 

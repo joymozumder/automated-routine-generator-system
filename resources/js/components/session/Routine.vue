@@ -23,9 +23,9 @@
 										Next
 									</button>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<button @click.prevent="printRoutine" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 object-right-top ">
+									<!-- <button @click.prevent="printRoutine" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 object-right-top ">
 										Print
-									</button>
+									</button> -->
 								</div>
 								<div  class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
 								<label class="block uppercase tracking-wide text-gray-800 font-bold text-right" for="grid-state-9">

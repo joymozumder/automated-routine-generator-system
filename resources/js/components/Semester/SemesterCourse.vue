@@ -75,13 +75,21 @@
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="grid-password">
                                             Teacher
                                         </label>
-                                        <select class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-2 px-2 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                            v-model="assigncourse.teacher_id" id="grid-state-2">
-                                            <option disabled  value=-1>Select Teacher</option>            
-                                            <option v-for="teacher in teachers" :key="teacher.id " :value="teacher.id">{{teacher.name}}-{{teacher.code}}</option>
-                                                                        
-                                                                        
-                                        </select>
+                                       <div class="relative">
+                                            <select class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-2 px-2 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                v-model="assigncourse.teacher_id" id="grid-state-2">
+                                                <option disabled  value=-1>Select Teacher</option>            
+                                                <option v-for="teacher in teachers" :key="teacher.id " :value="teacher.id">{{teacher.name}}-{{teacher.code}}</option>
+                                                                            
+                                                                            
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-grey-darker">
+                                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                                viewBox="0 0 20 20">
+                                                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                                            </svg>
+                                            </div>
+                                       </div>
                                     </div>
                                 </div>
 
