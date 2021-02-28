@@ -52,7 +52,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(500);
+        $users = User::select()
+                ->orderBy('code','ASC')
+                ->get(); //check
         return UserResource::collection($users);
     }
 

@@ -55,6 +55,18 @@ User::create(['name'=>'Minhajul Alam Rahat','email'=>'mmar@gmail.com','password'
 User::create(['name'=>'A.K.M. Tafzal Haque','email'=>'th@gmail.com','password'=>md5('123456'),'code'=>'TH','role'=>1,'status'=>true,]);
 User::create(['name'=>'Md. Azim Khan','email'=>'mak@gmail.com','password'=>md5('123456'),'code'=>'MAK','role'=>1,'status'=>true,]);
 User::create(['name'=>'Md. Ali Arshad Chowdhury','email'=>'aac@gmail.com','password'=>md5('123456'),'code'=>'AAC','role'=>1,'status'=>true,]);
+User::create(['name'=>'Sumana Podder','email'=>'sp@gmail.com','password'=>md5('123456'),'code'=>'SP','role'=>1,'status'=>true,]);
+User::create(['name'=>'Trapa Banik','email'=>'tb@gmail.com','password'=>md5('123456'),'code'=>'TB','role'=>1,'status'=>true,]);
+User::create(['name'=>'Sarah Ishita','email'=>'si@gmail.com','password'=>md5('123456'),'code'=>'SI','role'=>1,'status'=>true,]);
+User::create(['name'=>'Khaled Mohammed Saifuddin','email'=>'kms@gmail.com','password'=>md5('123456'),'code'=>'KMS','role'=>1,'status'=>true,]);
+User::create(['name'=>'Iftekhar Ahmed Khan','email'=>'iak@gmail.com','password'=>md5('123456'),'code'=>'IAK','role'=>1,'status'=>true,]);
+User::create(['name'=>'Rajib Karmaker','email'=>'rk@gmail.com','password'=>md5('123456'),'code'=>'RK','role'=>1,'status'=>true,]);
+User::create(['name'=>'Subrate Das','email'=>'sd@gmail.com','password'=>md5('123456'),'code'=>'SD','role'=>1,'status'=>true,]);
+User::create(['name'=>'Nadia Akter','email'=>'na@gmail.com','password'=>md5('123456'),'code'=>'NA','role'=>1,'status'=>true,]);
+User::create(['name'=>'Ms. Faria Hossain Borsha','email'=>'fhb@gmail.com','password'=>md5('123456'),'code'=>'FHB','role'=>1,'status'=>true,]);
+User::create(['name'=>'Eftekhar Hossain','email'=>'eh@gmail.com','password'=>md5('123456'),'code'=>'EH','role'=>1,'status'=>true,]);
+User::create(['name'=>'Kazi Ekramul Hoque','email'=>'keh@gmail.com','password'=>md5('123456'),'code'=>'KEH','role'=>1,'status'=>true,]);
+User::create(['name'=>'Abu Md. Atiqur Rahman','email'=>'ar@gmail.com','password'=>md5('123456'),'code'=>'AR','role'=>1,'status'=>true,]);
 User::create(['name'=>'Admin','email'=>'admin@gmail.com','password'=>md5('123456'),'code'=>'ADMIN','role'=>0,'status'=>true,]);
 
     }
