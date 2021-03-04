@@ -105,10 +105,10 @@ export default {
                     //sortable: true,
                     
                 },
-                {
-                    key: 'capacity',
-                    label: 'Capacity',
-                },
+                // {
+                //     key: 'capacity',
+                //     label: 'Capacity',
+                // },
                  {
                     key: 'type',
                     label: 'Type',
