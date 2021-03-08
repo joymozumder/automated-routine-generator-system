@@ -60,7 +60,7 @@ Course::create(['code'=>'CSE337','name'=>'Computer Organization & Architectur
 Course::create(['code'=>'CSE364','name'=>'Data Communication','credit'=>3,'semester'=>6,'type'=>0,'status'=>true,]);
 Course::create(['code'=>'CSE367','name'=>'Computer Network','credit'=>3,'semester'=>6,'type'=>0,'status'=>true,]);
 Course::create(['code'=>'CSE368','name'=>'Computer Network Laboratory','credit'=>1.5,'semester'=>6,'type'=>1,'status'=>true,]);
-Course::create(['code'=>'CSE338','name'=>'Software Development','credit'=>2,'semester'=>6,'type'=>0,'status'=>true,]);
+Course::create(['code'=>'CSE338','name'=>'Software Development','credit'=>2,'semester'=>6,'type'=>1,'status'=>true,]);
 Course::create(['code'=>'CSE309','name'=>'Theory of Computation','credit'=>2,'semester'=>7,'type'=>0,'status'=>true,]);
 Course::create(['code'=>'CSE437','name'=>'Network and Computer Security','credit'=>3,'semester'=>7,'type'=>0,'status'=>true,]);
 Course::create(['code'=>'CSE451','name'=>'Neural Network & Fuzzy Logic','credit'=>3,'semester'=>7,'type'=>0,'status'=>true,]);
@@ -78,6 +78,8 @@ Course::create(['code'=>'CSE481','name'=>'Contemporary Course of Computer Sc
 Course::create(['code'=>'CSE482','name'=>'Contemporary Course of Computer Science Laboratory‎','credit'=>1,'semester'=>8,'type'=>1,'status'=>true,]);
 Course::create(['code'=>'CSE457','name'=>'Machine Learning','credit'=>3,'semester'=>8,'type'=>0,'status'=>true,]);
 Course::create(['code'=>'CSE458','name'=>'Machine Learning Laboratory','credit'=>1,'semester'=>8,'type'=>1,'status'=>true,]);
+Course::create(['code'=>'CSE419','name'=>'Basic Multimdeia Systems','credit'=>3,'semester'=>8,'type'=>0,'status'=>true,]);
+Course::create(['code'=>'CSE420','name'=>'Basic Multimdeia Systems Laboratory','credit'=>1,'semester'=>8,'type'=>1,'status'=>true,]);
 
     }
 }
