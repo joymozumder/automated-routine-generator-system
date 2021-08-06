@@ -29,12 +29,12 @@
                                         <div class="md:flex md:items-center">
                                             <div class="md:w-1/3"></div>
                                             <div class="md:w-2/3">
-                                                <button @click.prevent="updateSession" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
+                                                <button @click.prevent="updateSession" class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full">
                                                     Update Session 
                                                 </button>
                                             </div>
                                              <div class="md:w-2/3">
-                                                 <button @click.prevent="Cancel" class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
+                                                 <button @click.prevent="Cancel" class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full">
                                                     Cancel 
                                                 </button>
                                             </div> 
@@ -75,7 +75,7 @@
       methods: {
         updateSession() {
 
-            console.log(this.session);
+            //console.log(this.session);
             let uri = `/api/session/update/${this.$route.params.id}`;
             this.axios.post(uri, this.session).then((response) => {
               this.$router.push({name: 'sessions'});

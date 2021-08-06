@@ -5,9 +5,7 @@
         <!--Header Section Starts Here-->
         <compNavBar/>
         <!--/Header-->
-        <!-- 
-            ______________________________________________________________________________________-
-         -->
+       
 
         <div class="flex flex-1">
             <!--Sidebar-->

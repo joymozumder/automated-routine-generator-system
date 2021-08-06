@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Enrollment;
 use App\SemesterSection;
+
 use App\Http\Resources\EnrollmentResource;
 
 class EnrollmentController extends Controller
@@ -29,11 +30,12 @@ class EnrollmentController extends Controller
     }
     public function dayShow($session , $day)
     {
-        $obj = Enrollment::
-                where('day','=',$day)
-                ->where('session_name','=',$session)
+        $obj = Enrollment::join('semester_sections','enrollments.sem_id','=','semester_sections.id')
+                ->select('enrollments.*','semester_sections.semester as semester')
+               -> where('enrollments.day','=',$day)
+                ->where('enrollments.session_name','=',$session)
                 ->orderBy('semester', 'ASC')
-                ->orderBy('start', 'ASC')->get()->groupBy('semester');
+                ->orderBy('enrollments.start', 'ASC')->get()->groupBy('semester');
         return EnrollmentResource::collection($obj);
 
        
@@ -80,6 +82,7 @@ class EnrollmentController extends Controller
                 $enrollment->sem_id = $request->sem_id;
                 $enrollment->teacher_code = $request->teacher_code;
                 $enrollment->course_code = $request->course_code;
+                $enrollment->course_type = $request->course_type;
                 $enrollment->room_number = 0;
                 $enrollment->group = $gr;
                 $enrollment->duration = $req_duration[$i];
@@ -123,6 +126,7 @@ class EnrollmentController extends Controller
                 $enrollment->sem_id = $request->sem_id;
                 $enrollment->teacher_code = $request->teacher_code;
                 $enrollment->course_code = $request->course_code;
+                $enrollment->course_type = $request->course_type;
                 $enrollment->room_number = 0;
                 $enrollment->group = 0;
                 $enrollment->duration = $duration1[$i];
@@ -184,6 +188,7 @@ class EnrollmentController extends Controller
                 $enrollment->sem_id = $request->sem_id;
                 $enrollment->teacher_code = $request->teacher_code;
                 $enrollment->course_code = $request->course_code;
+                $enrollment->course_type = $request->course_type;
                 $enrollment->room_number = 0;
                 $enrollment->group = 1;
                 $enrollment->duration = $duration1[$i];
@@ -241,6 +246,7 @@ class EnrollmentController extends Controller
                 $enrollment->sem_id = $request->sem_id;
                 $enrollment->teacher_code = $request->teacher_code;
                 $enrollment->course_code = $request->course_code;
+                $enrollment->course_type = $request->course_type;
                 $enrollment->room_number = 0;
                 $enrollment->group = 2;
                 $enrollment->duration = $duration2[$i];

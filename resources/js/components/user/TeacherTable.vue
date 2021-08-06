@@ -1,94 +1,129 @@
 <template>
     
-           <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
 
-                <div class="flex flex-1">
+             <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
+                       
+
+             <div class="">
+               <b-row>
+               <b-col>
+                 <h1>Teacher's List</h1>
+                 
+               </b-col>
+
+                <b-col>
+                 <b-form-input v-model="filter" type="search" style="margin-bottom:15px;" placeholder="Search"></b-form-input>
+               </b-col>
+                 <b-col>
+                    <router-link tag="button" align="right" type="button" class="btn btn-success" :to="{name: 'addteacher'}">Add Teacher</router-link>
+                 
+                </b-col>
+              
+              
+             </b-row>
+
+             <b-row>
+              
+               <b-col v-if="teachers.length>0">
+                 
+                 <b-table  responsive striped hover :items="teachers" :fields="fields" :filter="filter" :per-page="perPage" :current-page="currentPage">
+                   
+                  
+
+                    <template v-slot:cell(action)="data">
+                            <router-link tag="button" class="btn btn-primary btn-sm"  :to="{name: 'editteacher', params: { id: data.item.id }}" >
+                                  <i class="fa fa-edit"></i>
+                            </router-link>
+                             <button class="btn btn btn-danger btn-sm" @click.prevent="deletePost(data.item.id)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                   </template> 
+                
                    
 
-                    <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
+                 </b-table>
+                 <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage"></b-pagination>
+               </b-col>
 
-                        <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-                                <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
-                                :to="{name: 'addteacher'}">Add Teacher</router-link>
-                            <div class="p-3">
-                                 <compDataTable
+               <b-col v-else>
+                   <label for="">No Room Information Available</label>
+               </b-col> 
+              
+
+               
+             </b-row>
+
              
-            title="Teachers Table"
-            
-            :columns="tableColumns1"
-            :rows="teachers"
-            :clickable="false"
-            :sortable="true"
-            
-            :exactSearch="true"
-            :searchable="true"
-            :paginate="true"
-            :exportable="false"
-            :printable="false"
-            
 
-        >  
-                <th slot="thead-tr">
-                    Actions
-                </th>
-                <template slot="tbody-tr" slot-scope="props">
-                    <td>
-                         <router-link tag="button"  class="btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editteacher', params: { id: props.row.id }}" >
-                             <i class="material-icons white-text">
-                                edit</i>
-                         </router-link> 
-                        <button class="btn  bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn"
-                            @click.prevent="deletePost(props.row.id)"> 
-                            <i class="material-icons white-text">delete</i>
-                        </button>
-                    </td>
-                    
-                </template>
-        </compDataTable>
-                    </div>
-                        </div>
-                    </div>
-                    <!--/Grid Form-->
-                </div>
-                 <!-- ___________________________________________ -->
-        
-        <!-- _____________________________________________ -->
+            </div>
+      
+         
+
+
+
             </main>
+
+
+   
+
+             
+
+
+
+              
+
        
     
 </template>
 
 <script>
-import compDataTable from 'vue-materialize-datatable';
+import Vue from 'vue'
+ import { BootstrapVue} from 'bootstrap-vue';
+ Vue.use(BootstrapVue);
 export default {
     data() {
         return {
-             tableColumns1: [
             
-		 	{
-		 		label: "Teacher Name",
-		 		field: "name",
-		 		numeric: false,
- 		        html: false
-		 	},
-		 	{
-		 		label: "Teacher Email",
-		 		field: "email",
-		 		numeric: false,
-		 		html: false
-		 	},
-		 	{
-		 		label: "Teacher Code",
-		 		field: "code",
-		 		numeric: false,
-		 		html: false
-		 	},
-            
-		 ],
-		teachers: []
+            indx:0,
+            perPage:8,
+            currentPage:1,
+            filter:"",
+            fields: [
+                {
+                    key: 'name',
+                    label:'Teacher Name',
+                    sortable: false
+                },
+                {
+                    key: 'email',
+                    label:'Teacher Email',
+                    sortable: false
+                },
+                {
+                    key: 'code',
+                    label: 'Teacher Code',
+                    //sortable: true,
+                    
+                },
+                
+                {
+                    key: 'action',
+                    sortable: false
+                },
+               
+          
+            ],
+             teachers: []
+          
         }
         
        
+    },
+   
+    computed:{
+      rows(){
+        return this.teachers.length;
+      }
     },
     created() {
         let uri = '/api/teachers';
@@ -97,10 +132,9 @@ export default {
           
         });
     },
-     components:{
-            compDataTable 
-     },
-     methods: {
+    
+    
+   methods: {
       deletePost(id)
       {
         let uri = `/api/teacher/delete/${id}`;
@@ -109,6 +143,6 @@ export default {
           this.teachers.splice(this.teachers.findIndex(teacher => teacher.id === id), 1);
         });
       }
-    }
+   }
 }
 </script>

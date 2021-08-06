@@ -65,9 +65,7 @@ class SemesterSectionController extends Controller
             $sem_sec = new SemesterSection();
             $str = (String)$request->semester;
             $sem =$str . $sec[$i];
-
             $sem_sec->semester = $sem;
-            $sem_sec->total_student = 0;
             $sem_sec->session_name = $request->session_name;
             $sem_sec->status = 1;
             $sem_sec->save();
@@ -151,7 +149,6 @@ class SemesterSectionController extends Controller
             {
                 $sem_sec = new SemesterSection();
                 $sem_sec->semester = $reqSemSec[$i];
-                $sem_sec->total_student = 0;
                 $sem_sec->session_name = $session;
                 $sem_sec->status = 1;
                 $sem_sec->save();

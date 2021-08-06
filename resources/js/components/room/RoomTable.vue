@@ -1,160 +1,161 @@
-
-
 <template>
+    
 
+             <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
+                       
 
-       
-            <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
+             <div class="">
+               <b-row>
+               <b-col>
+                 <h1>Room List</h1>
+                 
+               </b-col>
 
-                <div class="flex flex-1">
+                <b-col>
+                 <b-form-input v-model="filter" type="search" style="margin-bottom:15px;" placeholder="Search"></b-form-input>
+               </b-col>
+                 <b-col>
+                    <router-link tag="button" align="right" type="button" class="btn btn-success" :to="{name: 'addroom'}">Add Room</router-link>
+                 
+                </b-col>
+              
+              
+             </b-row>
+
+             <b-row>
+              
+               <b-col v-if="rooms.length>0">
+                 
+                 <b-table  responsive striped hover :items="rooms" :fields="fields" :filter="filter" :per-page="perPage" :current-page="currentPage">
+                   
+                  
+
+                    <template v-slot:cell(action)="data">
+                            <router-link tag="button" class="btn btn-primary btn-sm"  :to="{name: 'editroom', params: { id: data.item.id }}" >
+                                <i class="fa fa-edit"></i>
+                            </router-link>
+                             <button class="btn btn btn-danger btn-sm" @click.prevent="deletePost(data.item.id)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                   </template> 
+                
                    
 
-                    <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
+                 </b-table>
+                 <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage"></b-pagination>
+               </b-col>
 
-                        <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-                                 <router-link tag="button" class="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded-full absolute top-24 right-24 z-50"
-                                :to="{name: 'addroom'}">Create Room</router-link>
-                            <div class="p-3">
-                                 <compDataTable
-             
-            title="Room Table"
-            
-            :columns="tableColumns1"
-            :rows="rooms"
-            :clickable="false"
-            :sortable="true"
-            
-            :exactSearch="true"
-            :searchable="true"
-            :paginate="true"
-            :exportable="false"
-            :printable="false"
-            
+               <b-col v-else>
+                   <label for="">No Room Information Available</label>
+               </b-col> 
+              
 
-        > 
-
-
-
-
-
-
-
-
-
-
-                <th slot="thead-tr">
-                    Actions
-                </th>
-                <template slot="tbody-tr" slot-scope="props">
-                    <td>
-                         
                
-                         <router-link tag="button"  class="btn  bg-green-500 hover:bg-green-700 darken-2 waves-effect waves-light compact-btn" :to="{name: 'editroom', params: { id: props.row.id }}" >
-                             <i class="material-icons white-text">
-                                edit</i>
-                         </router-link>
-                       
-                         
+             </b-row>
 
-                        <button class="btn bg-red-500 hover:bg-red-700 darken-2 waves-effect waves-light compact-btn"
-                            @click.prevent="deletePost(props.row.id)"> 
-                            <i class="material-icons white-text">delete</i>
-                        </button>
+             
 
-                    </td>
-                    
-                </template>
-        </compDataTable>
+            </div>
+      
+         
 
-       
-                            </div>
-                        </div>
-                    </div>
-                    <!--/Grid Form-->
-                </div>
-                 <!-- ___________________________________________ -->
-        
-        <!-- _____________________________________________ -->
+
+
             </main>
 
-           
 
-
-                                           
-
-
- 
    
+
+             
+
+
+
+              
+
        
     
 </template>
 
 <script>
-import compDataTable from 'vue-materialize-datatable';
+import Vue from 'vue'
+ import { BootstrapVue} from 'bootstrap-vue';
+ Vue.use(BootstrapVue);
 export default {
     data() {
         return {
-             tableColumns1: [
-           
-		 	{
-		 		label: "Room Number",
-		 		field: "number",
-		 		numeric: false,
- 		        html: false
-		 	},
-		 	{
-		 		label: "Room Name",
-		 		field: "name",
-		 		numeric: false,
-		 		html: false
-		 	},
-		 	{
-		 		label: "Room Type",
-		 		field: "type",
-		 		numeric: false,
-		 		html: false
-		 	},
-		 	{
-		 		label: "Capacity",
-		 		field: "capacity",
-		 		numeric: false,
-		 		html: false
-             }
-		 ],
-        rooms:[],
-        room:[]
+            
+            indx:0,
+            perPage:8,
+            currentPage:1,
+            filter:"",
+            fields: [
+                {
+                    key: 'number',
+                    label:'Room Number',
+                    sortable: false
+                },
+                {
+                    key: 'name',
+                    label:'Room Name',
+                    sortable: false
+                },
+                {
+                    key: 'type',
+                    label: 'Room Type',
+                    //sortable: true,
+                    
+                },
+                {
+                    key: 'capacity',
+                    label: 'Capacity',
+                },
+                {
+                    key: 'action',
+                    sortable: false
+                },
+               
+          
+            ],
+             rooms:[],
+             room:[]
+          
         }
         
        
     },
-    created() {
-        let uri = '/api/rooms';
-        this.axios.get(uri).then(response => {
-          this.rooms = response.data.data;
-          //console.log(this.rooms);
-          for(var i=0;i<this.rooms.length;i++){
-                if(this.rooms[i].type==0)
-                     this.rooms[i].type="Theory Class";
-                else if(this.rooms[i].type==1)
-                     this.rooms[i].type="CSE LAB";
-                else if(this.rooms[i].type==2)
-                      this.rooms[i].type="EEE LAB";
-                else if(this.rooms[i].type==3)
-                     this.rooms[i].type="Communication LAB";
-                else if(this.rooms.type==4)
-                      this.rooms[i].type="Mechanical LAB";
-                else if(this.rooms[i].type==5)
-                      this.rooms[i].type="Physics LAB";
-                else    
-                      this.rooms[i].type="none";
-          }
-          
-        });
+   
+    computed:{
+      rows(){
+        return this.rooms.length;
+      }
     },
-     components:{
-            compDataTable 
-     },
-     methods: {
+     created() {
+         let uri = '/api/rooms';
+         this.axios.get(uri).then(response => {
+           this.rooms = response.data.data;
+           console.log(this.rooms);
+           for(var i=0;i<this.rooms.length;i++){
+                 if(this.rooms[i].type==0)
+                      this.rooms[i].type="Theory Class";
+                 else if(this.rooms[i].type==1)
+                      this.rooms[i].type="CSE LAB";
+                 else if(this.rooms[i].type==2)
+                       this.rooms[i].type="EEE LAB";
+                 else if(this.rooms[i].type==3)
+                      this.rooms[i].type="Communication LAB";
+                 else if(this.rooms.type==4)
+                       this.rooms[i].type="Mechanical LAB";
+                 else if(this.rooms[i].type==5)
+                       this.rooms[i].type="Physics LAB";
+                 else    
+                       this.rooms[i].type="none";
+           }
+          
+         });
+    },
+    
+    
+   methods: {
       deletePost(id)
       {
         

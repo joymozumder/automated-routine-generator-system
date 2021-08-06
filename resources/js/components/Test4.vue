@@ -1,187 +1,181 @@
 <template>
-    <main class="bg-white-500 flex-1 p-3 overflow-hidden">
-        <div class="flex flex-col">
+    
+
+             <main class="bg-white-500 flex-1 p-3 overflow-x-scroll">
+                       
+
+             <div class="">
+               <b-row>
+               <b-col>
+                 <h1>All Rooms</h1>
+                 
+               </b-col>
+
+                <b-col>
+                 <b-form-input v-model="filter" type="search" style="margin-bottom:15px;" placeholder="Search"></b-form-input>
+               </b-col>
+                 <b-col class="margin-right: 80px">
+                    <router-link tag="button" align="right" type="button" class="btn btn-success" :to="{name: 'addroom'}">Add Room</router-link>
+                 
+                </b-col>
+              
+              
+             </b-row>
+
+             <b-row>
+              
+               <b-col v-if="rooms.length>0">
+                 
+                 <b-table  responsive striped hover :items="rooms" :fields="fields" :filter="filter" :per-page="perPage" :current-page="currentPage">
+                   
+                  
+
+                    <template v-slot:cell(action)="data">
+                            <router-link tag="button" class="btn btn-primary btn-sm"  :to="{name: 'editroom', params: { id: data.item.id }}" >
+                               <i class="fa fa-edit"></i>
+                            </router-link>
+                             <button class="btn btn btn-danger btn-sm" @click.prevent="deletePost(data.item.id)">
+                                
+                                 <i class="fa fa-trash"></i>
+                            </button>
+                   </template> 
+                
                    
 
-                    <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
-                        <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-                            <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
-                                Full Table
-                            </div>
-                            <div class="p-3">
-                                <table class="table-responsive w-full rounded">
-                                    <thead>
-                                      <tr>
-                                        <th class="border ">Select</th>
-                                        <th class="border ">Course Name</th>
-                                        <th class="border ">Semester-section</th>
-                                        <th class="border ">Teacher</th>
-                                        <th class="border ">Time 1</th>
-                                        <th class="border ">Time 2</th>
-                                        <th class="border ">Time 3</th>
-                                        <th class="border ">Gourp 1</th>
-                                        <th class="border ">Gourp 2</th>
-                                        <th class="border ">Gourp 3</th>
-                                        
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                       
-                                        <tr  v-for="course in courses" :key="course.id">
-                                            <td class="border px-4 py-2"><input type="checkbox" id="" name="" value=""></td>
-                                            
-                                            <td class="border px-4 py-2">{{ course.name }}</td>
+                 </b-table>
+                 <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage"></b-pagination>
+               </b-col>
 
-                                            <td class="border px-4 py-2">
+               <b-col v-else>
+                   <label for="">No Room Information Available</label>
+               </b-col> 
+              
 
-                                                <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey">
-                                                        <option v-for="semester in semesters" :key="semester.id">{{semester.semester}}</option>
-                                                </select>
-                                            </td>
+               
+             </b-row>
 
-                                            <td class="border px-4 py-2">
+             
 
-                                                <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey">
-                                                        <option v-for="teacher in teachers" :key="teacher.id">{{teacher.code}}</option>
-                                                </select>
-                                            </td>
-
-
-                                            <td class="border px-4 py-2">
-
-                                                <select class="">
-                                                        <option value="0.00">0.00</option>
-                                                        <option value="1.00">1.00</option>
-                                                        <option value="1.50">1.30</option>
-                                                        <option value="2.00">2.00</option>
-                                                        <option value="2.50">2.30</option>
-                                                        <option value="3.00">3.00</option>
-                                                        <option value="3.50">3.30</option>
-                                                        <option value="4.00">4.00</option>
-                                                        
-                                                        
-                                                </select>
-                                            </td>
-
-                                             <td class="border px-4 py-2">
-
-                                                <select class="">
-                                                        <option value="0.00">0.00</option>
-                                                        <option value="1.00">1.00</option>
-                                                        <option value="1.50">1.30</option>
-                                                        <option value="2.00">2.00</option>
-                                                        <option value="2.50">2.30</option>
-                                                        <option value="3.00">3.00</option>
-                                                        <option value="3.50">3.30</option>
-                                                        <option value="4.00">4.00</option>
-                                                        
-                                                        
-                                                </select>
-                                            </td>
-                                             <td class="border px-4 py-2">
-
-                                                <select class="">
-                                                        <option value="0.00">0.00</option>
-                                                        <option value="1.00">1.00</option>
-                                                        <option value="1.50">1.30</option>
-                                                        <option value="2.00">2.00</option>
-                                                        <option value="2.50">2.30</option>
-                                                        <option value="3.00">3.00</option>
-                                                        <option value="3.50">3.30</option>
-                                                        <option value="4.00">4.00</option>
-                                                        
-                                                        
-                                                </select>
-                                            </td>
+            </div>
+      
+         
 
 
 
-
-                                            <td class="border px-4 py-2">
-                                                
-                                                <input v-if="course.type==0" class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                   id="" type="number" readonly placeholder="No group">
-
-                                                <input v-else class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                   id="" type="number"  placeholder="group 1">   
-                                            
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                
-                                                <input v-if="course.type==0" class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                   id="" type="number" readonly placeholder="No group">
-
-                                                 <input v-else class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                   id="" type="number"  placeholder="group 2">   
-                                            
-                                            </td>
-                                            <td class="border px-4 py-2">
-                                                
-                                                <input v-if="course.type==0" class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                   id="" type="number" readonly  placeholder="No group">
-
-                                                <input v-else class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-1 px-1 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                   id="" type="number"  placeholder="group 3">   
-                                            
-                                            </td>
+            </main>
 
 
-                                            
-                                            
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
+   
 
-                                <div class="p-3">
-                                
-                                <button class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full">
-                                    Save
-                                </button>
-                                
-                                <button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded-full">
-                                    Cancel
-                                </button>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/Grid Form-->
-                </div>
-    </main>                
+             
+
+
+
+              
+
+       
+    
 </template>
 
-
-
-
 <script>
-  export default {
-      data() {
+import Vue from 'vue'
+ import { BootstrapVue} from 'bootstrap-vue';
+ Vue.use(BootstrapVue);
+export default {
+    data() {
         return {
-          courses: [],
-          semesters:[],
-          teachers:[]
+            
+            indx:0,
+            perPage:8,
+            currentPage:1,
+            filter:"",
+            fields: [
+                {
+                    key: 'number',
+                    label:'Room Number',
+                    sortable: false
+                },
+                {
+                    key: 'name',
+                    label:'Room Name',
+                    sortable: false
+                },
+                {
+                    key: 'type',
+                    label: 'Room Type',
+                    //sortable: true,
+                    
+                },
+                {
+                    key: 'capacity',
+                    label: 'Capacity',
+                },
+                {
+                    key: 'action',
+                    sortable: false
+                },
+               
+          
+            ],
+             rooms:[],
+             room:[]
+          
         }
-      },
-      created() {
-        let uri = '/api/courses';
-        this.axios.get(uri).then(response => {
-          this.courses = response.data.data;
-          //console.log(this.courses);
-        });
-
-        uri = '/api/semester-sections';
-        this.axios.get(uri).then(response => {
-          this.semesters = response.data.data;
-          //console.log(this.semesters);
-        });
-
-        uri = '/api/teachers';
-        this.axios.get(uri).then(response => {
-          this.teachers = response.data.data;
-          console.log(this.teachers);
-        });
+        
+       
+    },
+   
+    computed:{
+      rows(){
+        return this.rooms.length;
+      }
+    },
+     created() {
+         let uri = '/api/rooms';
+         this.axios.get(uri).then(response => {
+           this.rooms = response.data.data;
+           console.log(this.rooms);
+           for(var i=0;i<this.rooms.length;i++){
+                 if(this.rooms[i].type==0)
+                      this.rooms[i].type="Theory Class";
+                 else if(this.rooms[i].type==1)
+                      this.rooms[i].type="CSE LAB";
+                 else if(this.rooms[i].type==2)
+                       this.rooms[i].type="EEE LAB";
+                 else if(this.rooms[i].type==3)
+                      this.rooms[i].type="Communication LAB";
+                 else if(this.rooms.type==4)
+                       this.rooms[i].type="Mechanical LAB";
+                 else if(this.rooms[i].type==5)
+                       this.rooms[i].type="Physics LAB";
+                 else    
+                       this.rooms[i].type="none";
+           }
+          
+         });
     },
     
-  }
+    
+   methods: {
+      deletePost(id)
+      {
+        
+        console.log(id);
+        let uri = `/api/room/delete/${id}`;
+        
+        this.axios.delete(uri).then(response => {
+           this.rooms.splice(this.rooms.findIndex(room => room.id === id), 1);
+        });
+      },
+      editRoom(id){
+            
+            let uri = `/api/room/edit/${id}`;
+            this.axios.get(uri).then((response) => {
+                this.room = response.data.data;
+                console.log(this.room); 
+            });
+            
+      }
+    }
+}
 </script>

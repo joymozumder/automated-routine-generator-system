@@ -26,7 +26,6 @@
 
 <script>
 export default {
-
   data(){
     return {
       user:{
@@ -46,7 +45,6 @@ export default {
              window.localStorage.setItem("userid", response.data.code);
              
              this.$router.push({name: 'session'});
-
           }).catch((e) => {
             if(e.response.status === 401)
               this.$router.go(0);
